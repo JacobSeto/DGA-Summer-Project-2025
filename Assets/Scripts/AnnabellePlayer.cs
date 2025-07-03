@@ -1,4 +1,6 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class NewMonoBehaviourScript : MonoBehaviour
 {
@@ -17,12 +19,22 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && IsGrounded())
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);   
         }
 
         if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0f)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            gameObject.transform.localScale = transform.localScale * 0.1f;
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            gameObject.transform.localScale = transform.localScale * 10f;
         }
 
         Flip();
