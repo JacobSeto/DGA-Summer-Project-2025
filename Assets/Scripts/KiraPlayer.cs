@@ -4,8 +4,9 @@ public class KiraPlayer : MonoBehaviour
 {
   private float horizontal;
     private float speed = 8f;
-    private float jumpingPower = 16f;
+    private float jumpingPower = 8f;
     private bool isFacingRight = true;
+    private  bool doubleJump = false;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
@@ -15,14 +16,27 @@ public class KiraPlayer : MonoBehaviour
     {
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetButtonDown("Jump") && IsGrounded())
+        if (Input.GetButtonDown("Jump"))
         {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
+            
+            if (IsGrounded()){
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);       
+            } 
+            else{
+                if (!doubleJump){
+                    rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
+                    doubleJump = true;
+                }
+            }
         }
 
         if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0f)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
+        }
+
+        if (doubleJump && IsGrounded()){
+            doubleJump = false;
         }
 
         Flip();
