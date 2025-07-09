@@ -4,12 +4,25 @@ public class SharonPlayerController : MonoBehaviour
 {
     private float horizontal;
     private float speed = 4f;
-    private float jumpingPower = 100f;
+    private float jumpingPower = 8f;
     private bool isFacingRight = true;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Insect"))
+        {
+            speed *= 2f;
+        }
+
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            speed *= 0.5f;
+        }
+    }
 
     void Update()
     {
