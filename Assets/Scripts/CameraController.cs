@@ -19,7 +19,7 @@ public class CameraController : MonoBehaviour
     public float playerSize;
     private float smoothing =.5f;
     private float velocity=0f; // remember to ask about this 
-    private int zoomed = 1;
+    private int zoomed = 2;
     //Camera Scrolling Variables
     public float zoomScrollSize;
     public float zoomScrollSpeed;
@@ -76,8 +76,15 @@ public class CameraController : MonoBehaviour
         else 
         {
             if (Input.GetButton("Fire1"))
-            { 
-                transform.position = Vector3.Slerp(transform.position, transform.position + (zoomScrollSpeed *Input.mousePositionDelta), movementSpeed);
+            {
+                Vector3 camPos = transform.position;
+                camPos.x = transform.position.x - zoomScrollSpeed * ((Input.mousePositionDelta.x / Screen.width));
+                camPos.y = transform.position.y - zoomScrollSpeed * ((Input.mousePositionDelta.y / Screen.height));
+
+                camPos.x = Mathf.Clamp(camPos.x, levelView.x - levelSize, levelView.x + levelSize);
+                camPos.y = Mathf.Clamp(camPos.y, levelView.y - levelSize, levelView.y + levelSize);
+
+                transform.position = camPos;
             }
         }
 
