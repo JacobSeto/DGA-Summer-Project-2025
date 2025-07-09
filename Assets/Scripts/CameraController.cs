@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
     //Player Location
     public Transform player;
 
-    //Starting Parameters
+    //Starting Camera Parameters
     private Vector3 levelView;
     private float levelSize;
 
@@ -31,8 +31,10 @@ public class CameraController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //Starting main camera Size
         levelView = _camera.transform.position;
         levelSize = _camera.orthographicSize;
+        
         currentSize = levelSize;
         currentPosition = levelView;
     }
@@ -66,9 +68,10 @@ public class CameraController : MonoBehaviour
             
         }
         
-
+        //Zooming Camera
         currentSize = Mathf.Clamp(currentSize, playerSize, levelSize);
         _camera.orthographicSize = Mathf.SmoothDamp(_camera.orthographicSize, currentSize, ref velocity, smoothing);
+
         //Moving Camera to and from player (This needs to be changed to incorperate player Speed aka Zoomed=1 )
         if (zoomed != 3)
         {
@@ -76,7 +79,7 @@ public class CameraController : MonoBehaviour
         }
         else 
         {
-            //Camera Scrolling
+            //Camera Scrolling in Zoomed = 3
             if (Input.GetButton("Fire1"))
             {
                 Vector3 camPos = transform.position;
