@@ -296,7 +296,7 @@ GameObject:
   - component: {fileID: 958307466564990500}
   - component: {fileID: 6355318905139997856}
   m_Layer: 0
-  m_Name: Obstacle Palette
+  m_Name: Wall Palette
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
