@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] Rigidbody2D playerRb;
+    [SerializeField] float maxSpeed;
     Vector3 originalPos;
     // Update is called once per frame
     void Update()
@@ -26,5 +27,13 @@ public class PlayerController : MonoBehaviour
         //update the force based on location of mouse in comparison with original location
         //Camera.main.ScreenToWorldPoint()
         //when let go, do a calculation and apply the force
+    }
+
+    private void FixedUpdate()
+    {
+        if (playerRb.linearVelocity.magnitude > maxSpeed)
+        {
+            playerRb.linearVelocity = Vector2.ClampMagnitude(playerRb.linearVelocity, maxSpeed);
+        }
     }
 }
