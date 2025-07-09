@@ -14,15 +14,20 @@ public class ZookeeperController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            destroyZookeeper();
-        }
+        
     }
 
-    public void destroyZookeeper()
+    private void destroyZookeeper()
     {
         zooKeeperSprite.enabled = false;
         zooKeeperCollider.enabled = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            destroyZookeeper();
+        }
     }
 }
