@@ -22,9 +22,9 @@ public class GameManagerScript
         isFrozen();
         if (ZookeeperCount == 0)
         {
-            Console.WriteLine("No More Keepers");
+            Debug.Log("No More Keepers");
             win = true;
-            Console.WriteLine(win);
+            Debug.Log(win);
         }
     }
     //Tracks if the player has lost momentum as of now
@@ -32,12 +32,12 @@ public class GameManagerScript
     {
         if (Velocity == 0 & isLaunched == true)
         {
-            Console.WriteLine("loss");
+            Debug.Log("loss");
             loss = true;
 
             return true;
         }
-        Console.WriteLine("not loss");
+        Debug.Log("not loss");
         return false;
     }
     //Returns if the player has won.
