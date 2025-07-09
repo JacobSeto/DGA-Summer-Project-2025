@@ -2,6 +2,12 @@ using System;
 using UnityEngine;
 using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
+/*
+ * The Game Manager handles win and loss conditions alongside tracking the time elapsed in each level.
+ * Variables:
+ * Loss: boolean that tracks if the player has lost the game by losing momentum
+ * Win: boolean that tracks if the player has beaten the level.
+ */
 public class GameManagerScript
 {
     private bool loss = false;
@@ -16,23 +22,25 @@ public class GameManagerScript
         isFrozen();
         if (ZookeeperCount == 0)
         {
-            Console.WriteLine("No More Keepers");
+            Debug.Log("No More Keepers");
             win = true;
-            Console.WriteLine(win);
+            Debug.Log(win);
         }
     }
+    //Tracks if the player has lost momentum as of now
     private bool isFrozen()
     {
         if (Velocity == 0 & isLaunched == true)
         {
-            Console.WriteLine("loss");
+            Debug.Log("loss");
             loss = true;
 
             return true;
         }
-        Console.WriteLine("not loss");
+        Debug.Log("not loss");
         return false;
     }
+    //Returns if the player has won.
     public bool isWin()
     {
         if (win == true)
@@ -41,6 +49,7 @@ public class GameManagerScript
         }
         return false;
     }
+    //Returns if the player has lost.
     public bool isLose()
     {
         if (loss == true)
@@ -48,6 +57,12 @@ public class GameManagerScript
             return true;
         }
         return false;
+    }
+    //Resets key variables during level reloads or changes.
+    public void managerReset()
+    {
+        loss = false;
+        win = false;
     }
 }
 
