@@ -4,12 +4,27 @@ public class SharonPlayerController : MonoBehaviour
 {
     private float horizontal;
     private float speed = 4f;
-    private float jumpingPower = 100f;
+    private float jumpingPower = 8f;
     private bool isFacingRight = true;
 
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<InsectController>())
+        {
+            speed *= 2f;
+        }
+
+        if (collision.gameObject.GetComponent<EnemyController>())
+        {
+            speed *= 0.5f;
+        }
+        ElephantController elephant = collision.gameObject.GetComponent<ElephantController>();
+        elephant?.DecreaseHP();
+    }
 
     void Update()
     {
