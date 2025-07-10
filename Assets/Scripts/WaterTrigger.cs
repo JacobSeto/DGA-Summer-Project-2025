@@ -16,6 +16,6 @@ public class WaterTrigger : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     { // Possibly check if player is the one colliding?
-        other.attachedRigidbody.AddForce(-0.3f * other.attachedRigidbody.linearVelocity);
+        other.attachedRigidbody.AddForce(-0.75f * other.attachedRigidbody.linearVelocity);
     }
 }
