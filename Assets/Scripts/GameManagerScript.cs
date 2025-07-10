@@ -14,8 +14,9 @@ public class GameManagerScript
     private bool win = false;
     //placeholders for testing
     private int ZookeeperCount = 0;
-    private float Velocity = 0;
+    private float Velocity = 0.0f;
     private bool isLaunched = true;
+    private float timer = 0.0f;
 
     void Update()
     {
@@ -26,6 +27,8 @@ public class GameManagerScript
             win = true;
             Debug.Log(win);
         }
+        timer += Time.deltaTime;
+
     }
     //Tracks if the player has lost momentum as of now
     private bool isFrozen()
@@ -49,6 +52,7 @@ public class GameManagerScript
         }
         return false;
     }
+   
     //Returns if the player has lost.
     public bool isLose()
     {
@@ -58,11 +62,10 @@ public class GameManagerScript
         }
         return false;
     }
-    //Resets key variables during level reloads or changes.
-    public void managerReset()
+    //Returns current timer length
+    public float getTime()
     {
-        loss = false;
-        win = false;
+        return timer;
     }
 }
 
