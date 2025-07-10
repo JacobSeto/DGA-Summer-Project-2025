@@ -17,6 +17,12 @@ public class GameManagerScript
     private float Velocity = 0;
     private bool isLaunched = true;
 
+    void Start()
+    {
+        GameObject[] zooKeepers = GameObject.FindGameObjectsWithTag("Zookeeper");
+        ZookeeperCount = zooKeepers.Length;
+    }
+
     void Update()
     {
         isFrozen();
