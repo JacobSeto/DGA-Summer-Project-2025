@@ -40,7 +40,7 @@ public class GameManagerScript: MonoBehaviour
         isFrozen();
         for (int i = 0; i < zooKeepers.Count; i++)
         {
-            if (zooKeepers[i].IsDestroyed())
+            if (!zooKeepers[i].activeSelf)
             {
                 zooKeepers.Remove(zooKeepers[i]);
                 zookeeperCount--;
