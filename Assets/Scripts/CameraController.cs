@@ -8,7 +8,10 @@ public class CameraController : MonoBehaviour
    [SerializeField] private Camera _camera;
 
     //Player Location
-    public Transform player;
+    public Transform playerLoc;
+
+    //Player Body (used to check speed)
+    public Rigidbody2D playerBody;
 
     //Starting Camera Parameters
     private Vector3 levelView;
@@ -42,7 +45,7 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movementSpeed = (levelView - player.position).magnitude/2000;
+        movementSpeed = (levelView - playerLoc.position).magnitude/2000;
 
 
         if (Input.GetButtonDown("Jump"))
@@ -50,11 +53,12 @@ public class CameraController : MonoBehaviour
             Debug.Log("Clicked");
             zoomed += 1;
             if (zoomed == 4) { zoomed = 1; }
+            Debug.Log("Zoom level: " + zoomed);
         }
         if (zoomed==1) // Following Player
         {
             currentSize -= (levelSize - playerSize) / 10;
-            currentPosition = new Vector3(player.position.x, player.position.y, -10f);
+            currentPosition = new Vector3(playerLoc.position.x + (playerBody.linearVelocityX / 2.5f), playerLoc.position.y + (playerBody.linearVelocityY / 2.5f), -10f);
         }
         
         if (zoomed == 2) // Whole Level overview
