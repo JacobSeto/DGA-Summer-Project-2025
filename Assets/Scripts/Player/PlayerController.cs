@@ -5,11 +5,29 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] public Rigidbody2D playerRb;
     [SerializeField] float maxSpeed;
+    [SerializeField] public float bounceForce;
     public bool launched = false;
+    Vector2 reflectedVector;
+    RaycastHit2D ray;
+    Vector2 direction;
+    float currentSpeed;
     Vector3 originalPos;
+
+    [SerializeField] LayerMask bounceLayers;
+    
     // Update is called once per frame
     void Update()
     {
+        if(playerRb.linearVelocity.magnitude >= .05f)
+        {
+            direction = playerRb.linearVelocity.normalized;
+            currentSpeed = playerRb.linearVelocity.magnitude;
+        }
+        else
+        {
+            // Lose Game
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             originalPos = Input.mousePosition;
@@ -17,7 +35,7 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetMouseButton(0))
         {
-            
+
         }
         if (Input.GetMouseButtonUp(0))
         {
@@ -37,6 +55,20 @@ public class PlayerController : MonoBehaviour
         if (playerRb.linearVelocity.magnitude > maxSpeed)
         {
             playerRb.linearVelocity = Vector2.ClampMagnitude(playerRb.linearVelocity, maxSpeed);
+        }
+    }
+    
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if ((bounceLayers.value & (1 << collision.gameObject.layer)) > 0)
+        {
+            ray = Physics2D.Raycast(transform.position, direction, 4f, bounceLayers.value);
+            if (ray)
+            {
+                Debug.Log(currentSpeed);
+                reflectedVector = UnityEngine.Vector2.Reflect(direction * currentSpeed, ray.normal);
+                playerRb.linearVelocity = reflectedVector * bounceForce;
+            }
         }
     }
 }
