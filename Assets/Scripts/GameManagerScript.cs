@@ -1,5 +1,10 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using NUnit.Framework;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public class GameManagerScript
@@ -10,16 +15,25 @@ public class GameManagerScript
     private int ZookeeperCount = 0;
     private float Velocity = 0;
     private bool isLaunched = true;
+    private List<GameObject> zooKeepers;
 
     void Start()
     {
-        GameObject[] zooKeepers = GameObject.FindGameObjectsWithTag("Zookeeper");
-        ZookeeperCount = zooKeepers.Length;
+        zooKeepers = GameObject.FindGameObjectsWithTag("Zookeeper").ToList();
+        ZookeeperCount = zooKeepers.Count;
     }
 
     void Update()
     {
         isFrozen();
+        for (int i = 0; i < zooKeepers.Count; i++)
+        {
+            if (zooKeepers[i].IsDestroyed())
+            {
+                zooKeepers.Remove(zooKeepers[i]);
+                ZookeeperCount--;
+            }
+        }
         if (ZookeeperCount == 0)
         {
             Console.WriteLine("No More Keepers");
