@@ -19,7 +19,6 @@ public class GameManagerScript: MonoBehaviour
     private float Velocity = 0.0f;
     private bool isLaunched = true;
     private float timer = 0.0f;
-    private int count = 0;
 
     void Awake() => Instance = this;
 
@@ -34,16 +33,9 @@ public class GameManagerScript: MonoBehaviour
         isFrozen();
         if (zookeeperCount == 0)
         {
-            Debug.Log(count);
-            Debug.Log("hi");
             win = true;
         }
-        else
-        {
-            zookeeperCount -= 1;
-            count += 1;
-        }
-            timer += Time.deltaTime;
+        timer += Time.deltaTime;
 
     }
     //Tracks if the player has lost momentum as of now
