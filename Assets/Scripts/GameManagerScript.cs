@@ -32,7 +32,7 @@ public class GameManagerScript: MonoBehaviour
     void Start()
     {
         zooKeepers = GameObject.FindGameObjectsWithTag("Zookeeper").ToList();
-        ZookeeperCount = zooKeepers.Count;
+        zookeeperCount = zooKeepers.Count;
     }
 
     void Update()
@@ -43,11 +43,13 @@ public class GameManagerScript: MonoBehaviour
             if (zooKeepers[i].IsDestroyed())
             {
                 zooKeepers.Remove(zooKeepers[i]);
-                ZookeeperCount--;
+                zookeeperCount--;
             }
+            Debug.Log(zookeeperCount);
         }
-        if (ZookeeperCount == 0)
+        if (zookeeperCount == 0)
         {
+            Debug.Log("win");
             win = true;
         }
         timer += Time.deltaTime;
