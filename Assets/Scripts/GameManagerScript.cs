@@ -21,13 +21,12 @@ public class GameManagerScript: MonoBehaviour
     private bool win = false;
     //placeholders for testing
     private int zookeeperCount = 0;
-    private float Velocity = 0.0f;
-    private bool isLaunched = true;
     private float timer = 0.0f;
-
+    
     void Awake() => Instance = this;
 
     private List<GameObject> zooKeepers;
+    
 
     void Start()
     {
@@ -37,7 +36,6 @@ public class GameManagerScript: MonoBehaviour
 
     void Update()
     {
-        isFrozen();
         for (int i = 0; i < zooKeepers.Count; i++)
         {
             if (!zooKeepers[i].activeSelf)
@@ -53,37 +51,29 @@ public class GameManagerScript: MonoBehaviour
         timer += Time.deltaTime;
 
     }
-    //Tracks if the player has lost momentum as of now
-    private bool isFrozen()
+    
+    /// <summary>
+    /// Sets up win condition
+    /// </summary>
+    public void WinGame()
     {
-        if (Velocity == 0 & isLaunched == true)
-        {
-            loss = true;
-            return true;
-        }
-        return false;
-    }
-    //Returns if the player has won.
-    public bool isWin()
-    {
-        if (win == true)
-        {
-            return true;
-        }
-        return false;
+        win = true;
+        //pull up menu
     }
 
-    //Returns if the player has lost.
-    public bool isLose()
+    /// <summary>
+    /// Sets up loss condition
+    /// </summary>
+    public void LoseGame()
     {
-        if (loss == true)
-        {
-            return true;
-        }
-        return false;
+        loss = true;
+        //pull up loss menu
     }
-    //Returns current timer length
-    public float getTime()
+    /// <summary>
+    /// Returns current timer length
+    /// </summary>
+    /// <returns></returns>
+    public float GetTime()
     {
         return timer;
     }
