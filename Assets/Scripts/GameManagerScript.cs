@@ -15,28 +15,35 @@ public class GameManagerScript: MonoBehaviour
     private bool loss = false;
     private bool win = false;
     //placeholders for testing
-    private int ZookeeperCount = 0;
+    private int zookeeperCount = 0;
     private float Velocity = 0.0f;
     private bool isLaunched = true;
     private float timer = 0.0f;
+    private int count = 0;
 
     void Awake() => Instance = this;
 
     void Start()
     {
         GameObject[] zooKeepers = GameObject.FindGameObjectsWithTag("Zookeeper");
-        ZookeeperCount = zooKeepers.Length;
-        Debug.Log(ZookeeperCount);
+        zookeeperCount = zooKeepers.Length;
     }
 
     void Update()
     {
         isFrozen();
-        if (ZookeeperCount == 0)
+        if (zookeeperCount == 0)
         {
+            Debug.Log(count);
+            Debug.Log("hi");
             win = true;
         }
-        timer += Time.deltaTime;
+        else
+        {
+            zookeeperCount -= 1;
+            count += 1;
+        }
+            timer += Time.deltaTime;
 
     }
     //Tracks if the player has lost momentum as of now
