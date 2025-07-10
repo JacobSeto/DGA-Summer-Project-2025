@@ -1,8 +1,11 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] Rigidbody2D playerRb;
+    [SerializeField] public Rigidbody2D playerRb;
+    [SerializeField] float maxSpeed;
+    public bool launched = false;
     Vector3 originalPos;
     // Update is called once per frame
     void Update()
@@ -21,10 +24,19 @@ public class PlayerController : MonoBehaviour
             float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
             float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
             playerRb.linearVelocity = new Vector2(xChange, yChange);
+            launched = true;
         }
         //get if the mouse was clicked down
         //update the force based on location of mouse in comparison with original location
         //Camera.main.ScreenToWorldPoint()
         //when let go, do a calculation and apply the force
+    }
+
+    private void FixedUpdate()
+    {
+        if (playerRb.linearVelocity.magnitude > maxSpeed)
+        {
+            playerRb.linearVelocity = Vector2.ClampMagnitude(playerRb.linearVelocity, maxSpeed);
+        }
     }
 }
