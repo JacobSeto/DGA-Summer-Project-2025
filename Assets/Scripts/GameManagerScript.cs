@@ -5,11 +5,13 @@ using static UnityEditor.Searcher.SearcherWindow.Alignment;
 /*
  * The Game Manager handles win and loss conditions alongside tracking the time elapsed in each level.
  * Variables:
- * Loss: boolean that tracks if the player has lost the game by losing momentum
+ * Loss: boolean that tracks if the player has lost the game by losing momentum.
  * Win: boolean that tracks if the player has beaten the level.
+ * Timer: float showing time elapsed in a level.
  */
-public class GameManagerScript
+public class GameManagerScript: MonoBehaviour
 {
+    public static GameManagerScript Instance;
     private bool loss = false;
     private bool win = false;
     //placeholders for testing
@@ -17,6 +19,8 @@ public class GameManagerScript
     private float Velocity = 0.0f;
     private bool isLaunched = true;
     private float timer = 0.0f;
+
+    void Awake() => Instance = this;
 
     void Update()
     {
