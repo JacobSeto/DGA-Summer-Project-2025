@@ -13,12 +13,12 @@ public class SharonPlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Insect"))
+        if (collision.gameObject.GetComponent<InsectController>())
         {
             speed *= 2f;
         }
 
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.GetComponent<EnemyController>())
         {
             speed *= 0.5f;
         }
