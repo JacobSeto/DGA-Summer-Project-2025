@@ -147,5 +147,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c21da6ad89d8dde4d97846a9df5262d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zooKeeperSprite: {fileID: 6726011900699392325}
-  zooKeeperCollider: {fileID: 7993442931419546026}
+  zooKeeper: {fileID: 3194259576899802323}
