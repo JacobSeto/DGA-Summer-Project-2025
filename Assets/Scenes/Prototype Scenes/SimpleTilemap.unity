@@ -3420,6 +3420,11 @@ Transform:
   - {fileID: 1504338639}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &1062687764 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: -1464496374494826900, guid: 33ab23f5c1400c74bae73e2161dc02d2, type: 3}
+  m_PrefabInstance: {fileID: 2041764156}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1308120399
 GameObject:
   m_ObjectHideFlags: 0
@@ -3571,8 +3576,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 1308120401}
-  player: {fileID: 136488105}
-  playerSize: 2
+  playerLoc: {fileID: 136488105}
+  playerBody: {fileID: 1062687764}
+  playerSize: 4
   zoomScrollSize: 0
   zoomScrollSpeed: 0
 --- !u!1 &1504338638
