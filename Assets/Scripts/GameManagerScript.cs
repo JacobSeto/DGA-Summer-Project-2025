@@ -26,6 +26,7 @@ public class GameManagerScript: MonoBehaviour
     {
         GameObject[] zooKeepers = GameObject.FindGameObjectsWithTag("Zookeeper");
         ZookeeperCount = zooKeepers.Length;
+        Debug.Log(ZookeeperCount);
     }
 
     void Update()
@@ -33,9 +34,7 @@ public class GameManagerScript: MonoBehaviour
         isFrozen();
         if (ZookeeperCount == 0)
         {
-            Debug.Log("No More Keepers");
             win = true;
-            Debug.Log(win);
         }
         timer += Time.deltaTime;
 
@@ -45,12 +44,9 @@ public class GameManagerScript: MonoBehaviour
     {
         if (Velocity == 0 & isLaunched == true)
         {
-            Debug.Log("loss");
             loss = true;
-
             return true;
         }
-        Debug.Log("not loss");
         return false;
     }
     //Returns if the player has won.
