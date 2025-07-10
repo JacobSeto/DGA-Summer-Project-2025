@@ -3,14 +3,29 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     Vector2 reflectedVector;
-    Vector2 normal;
+    RaycastHit2D ray;
+    Vector2 direction;
+    float currentSpeed;
+
     [SerializeField] public float bounceForce;
     [SerializeField] Rigidbody2D playerRb;
     Vector3 originalPos;
+
+    [SerializeField] LayerMask bounceLayers;
     
     // Update is called once per frame
     void Update()
     {
+        if(playerRb.linearVelocity.magnitude >= .05f)
+        {
+            direction = playerRb.linearVelocity.normalized;
+            currentSpeed = playerRb.linearVelocity.magnitude;
+        }
+        else
+        {
+            // Lose Game
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             originalPos = Input.mousePosition;
@@ -34,11 +49,15 @@ public class PlayerController : MonoBehaviour
     
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Wall"))
+        if ((bounceLayers.value & (1 << collision.gameObject.layer)) > 0)
         {
-            normal = collision.contacts[0].normal;
-            reflectedVector = UnityEngine.Vector2.Reflect(playerRb.linearVelocity, normal);
-            playerRb.linearVelocity = reflectedVector * bounceForce;
+            ray = Physics2D.Raycast(transform.position, direction, 4f, bounceLayers.value);
+            if (ray)
+            {
+                Debug.Log(currentSpeed);
+                reflectedVector = UnityEngine.Vector2.Reflect(direction * currentSpeed, ray.normal);
+                playerRb.linearVelocity = reflectedVector * bounceForce;
+            }
         }
     }
 }
