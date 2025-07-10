@@ -10,23 +10,29 @@ using static UnityEditor.Searcher.SearcherWindow.Alignment;
 /*
  * The Game Manager handles win and loss conditions alongside tracking the time elapsed in each level.
  * Variables:
- * Loss: boolean that tracks if the player has lost the game by losing momentum
+ * Loss: boolean that tracks if the player has lost the game by losing momentum.
  * Win: boolean that tracks if the player has beaten the level.
+ * Timer: float showing time elapsed in a level.
  */
-public class GameManagerScript
+public class GameManagerScript: MonoBehaviour
 {
+    public static GameManagerScript Instance;
     private bool loss = false;
     private bool win = false;
     //placeholders for testing
-    private int ZookeeperCount = 0;
-    private float Velocity = 0;
+    private int zookeeperCount = 0;
+    private float Velocity = 0.0f;
     private bool isLaunched = true;
+    private float timer = 0.0f;
+
+    void Awake() => Instance = this;
+
     private List<GameObject> zooKeepers;
 
     void Start()
     {
         zooKeepers = GameObject.FindGameObjectsWithTag("Zookeeper").ToList();
-        ZookeeperCount = zooKeepers.Count;
+        zookeeperCount = zooKeepers.Count;
     }
 
     void Update()
@@ -34,30 +40,29 @@ public class GameManagerScript
         isFrozen();
         for (int i = 0; i < zooKeepers.Count; i++)
         {
-            if (zooKeepers[i].IsDestroyed())
+            if (!zooKeepers[i].activeSelf)
             {
                 zooKeepers.Remove(zooKeepers[i]);
-                ZookeeperCount--;
+                zookeeperCount--;
             }
+            Debug.Log(zookeeperCount);
         }
-        if (ZookeeperCount == 0)
+        if (zookeeperCount == 0)
         {
-            Debug.Log("No More Keepers");
+            Debug.Log("win");
             win = true;
-            Debug.Log(win);
         }
+        timer += Time.deltaTime;
+
     }
     //Tracks if the player has lost momentum as of now
     private bool isFrozen()
     {
         if (Velocity == 0 & isLaunched == true)
         {
-            Debug.Log("loss");
             loss = true;
-
             return true;
         }
-        Debug.Log("not loss");
         return false;
     }
     //Returns if the player has won.
@@ -69,6 +74,7 @@ public class GameManagerScript
         }
         return false;
     }
+
     //Returns if the player has lost.
     public bool isLose()
     {
@@ -78,12 +84,9 @@ public class GameManagerScript
         }
         return false;
     }
-    //Resets key variables during level reloads or changes.
-    public void managerReset()
+    //Returns current timer length
+    public float getTime()
     {
-        loss = false;
-        win = false;
+        return timer;
     }
 }
-
-
