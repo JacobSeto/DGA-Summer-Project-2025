@@ -22,6 +22,8 @@ public class SharonPlayerController : MonoBehaviour
         {
             speed *= 0.5f;
         }
+        ElephantController elephant = collision.gameObject.GetComponent<ElephantController>();
+        elephant?.DecreaseHP();
     }
 
     void Update()

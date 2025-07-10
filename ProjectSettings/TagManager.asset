@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Insect
+  - Elephant
   layers:
   - Default
   - TransparentFX
