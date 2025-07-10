@@ -1,5 +1,10 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using NUnit.Framework;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 /*
@@ -22,16 +27,26 @@ public class GameManagerScript: MonoBehaviour
 
     void Awake() => Instance = this;
 
+    private List<GameObject> zooKeepers;
+
     void Start()
     {
-        GameObject[] zooKeepers = GameObject.FindGameObjectsWithTag("Zookeeper");
-        zookeeperCount = zooKeepers.Length;
+        zooKeepers = GameObject.FindGameObjectsWithTag("Zookeeper").ToList();
+        ZookeeperCount = zooKeepers.Count;
     }
 
     void Update()
     {
         isFrozen();
-        if (zookeeperCount == 0)
+        for (int i = 0; i < zooKeepers.Count; i++)
+        {
+            if (zooKeepers[i].IsDestroyed())
+            {
+                zooKeepers.Remove(zooKeepers[i]);
+                ZookeeperCount--;
+            }
+        }
+        if (ZookeeperCount == 0)
         {
             win = true;
         }
@@ -57,7 +72,7 @@ public class GameManagerScript: MonoBehaviour
         }
         return false;
     }
-   
+
     //Returns if the player has lost.
     public bool isLose()
     {
@@ -73,5 +88,3 @@ public class GameManagerScript: MonoBehaviour
         return timer;
     }
 }
-
-
