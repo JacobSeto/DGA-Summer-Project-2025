@@ -28,13 +28,18 @@ public class GameManagerScript
         isFrozen();
         for (int i = 0; i < zooKeepers.Count; i++)
         {
-            if (zooKeepers[i].IsDestroyed())
+            if (!zooKeepers[i].activeSelf)
             {
                 zooKeepers.Remove(zooKeepers[i]);
                 ZookeeperCount--;
             }
         }
+<<<<<<< Updated upstream
         if (ZookeeperCount == 0)
+=======
+        Debug.Log(zookeeperCount);
+        if (zookeeperCount == 0)
+>>>>>>> Stashed changes
         {
             Console.WriteLine("No More Keepers");
             win = true;
