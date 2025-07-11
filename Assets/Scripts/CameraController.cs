@@ -84,13 +84,13 @@ public class CameraController : MonoBehaviour
         else 
         {
             //Camera Scrolling in Zoomed = 3
-            if (Input.GetButton("Fire1"))
+            if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
             {
                 Vector3 camPos = transform.position;
-                camPos.x = transform.position.x - zoomScrollSpeed * ((Input.mousePositionDelta.x / Screen.width));
-                camPos.y = transform.position.y - zoomScrollSpeed * ((Input.mousePositionDelta.y / Screen.height));
+                camPos.x = transform.position.x + zoomScrollSpeed * Input.GetAxis("Horizontal");
+                camPos.y = transform.position.y + zoomScrollSpeed * Input.GetAxis("Vertical");
 
-                camPos.x = Mathf.Clamp(camPos.x, levelView.x - levelSize, levelView.x + levelSize);
+                camPos.x = Mathf.Clamp(camPos.x, levelView.x - levelSize - zoomScrollSize, levelView.x + levelSize + zoomScrollSize);
                 camPos.y = Mathf.Clamp(camPos.y, levelView.y - levelSize, levelView.y + levelSize);
 
                 transform.position = camPos;
