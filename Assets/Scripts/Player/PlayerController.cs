@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public Rigidbody2D playerRb;
     [SerializeField] float maxSpeed;
     [SerializeField] public float bounceForce;
+    public bool lose = false;
     public bool launched = false;
     Vector2 reflectedVector;
     RaycastHit2D ray;
@@ -43,6 +44,10 @@ public class PlayerController : MonoBehaviour
             float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
             playerRb.linearVelocity = new Vector2(xChange, yChange);
             launched = true;
+        }
+        if(launched && playerRb.linearVelocity.magnitude == 0)
+        {
+            lose = true;
         }
         //get if the mouse was clicked down
         //update the force based on location of mouse in comparison with original location
