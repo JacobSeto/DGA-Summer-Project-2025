@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 3
   tags:
   - Wall
+  - Enemy
+  - Insect
+  - Elephant
   layers:
   - Default
   - TransparentFX

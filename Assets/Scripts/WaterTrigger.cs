@@ -11,11 +11,17 @@ public class WaterTrigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-     
+       
     }
 
-    void OnTriggerStay2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     { // Possibly check if player is the one colliding?
-        other.attachedRigidbody.AddForce(-0.3f * other.attachedRigidbody.linearVelocity);
+        // other.attachedRigidbody.AddForce(-0.75f * other.attachedRigidbody.linearVelocity);
+        other.attachedRigidbody.linearDamping = 2;
+    }
+ 
+    void OnTriggerExit2D(Collider2D other)
+    { 
+        other.attachedRigidbody.linearDamping = 0.2f;
     }
 }
