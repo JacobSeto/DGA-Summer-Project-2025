@@ -1520,7 +1520,7 @@ MonoBehaviour:
   playerBody: {fileID: 2009362289}
   playerSize: 2
   zoomScrollSize: 3
-  zoomScrollSpeed: 8
+  zoomScrollSpeed: 0.2
 --- !u!114 &2040068550
 MonoBehaviour:
   m_ObjectHideFlags: 0
