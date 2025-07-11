@@ -90,7 +90,7 @@ public class CameraController : MonoBehaviour
                 camPos.x = transform.position.x - zoomScrollSpeed * ((Input.mousePositionDelta.x / Screen.width));
                 camPos.y = transform.position.y - zoomScrollSpeed * ((Input.mousePositionDelta.y / Screen.height));
 
-                camPos.x = Mathf.Clamp(camPos.x, levelView.x - levelSize, levelView.x + levelSize);
+                camPos.x = Mathf.Clamp(camPos.x, levelView.x - levelSize - zoomScrollSize, levelView.x + levelSize + zoomScrollSize);
                 camPos.y = Mathf.Clamp(camPos.y, levelView.y - levelSize, levelView.y + levelSize);
 
                 transform.position = camPos;

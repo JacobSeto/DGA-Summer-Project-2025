@@ -1516,7 +1516,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 2040068547}
-  player: {fileID: 2009362288}
+  playerLoc: {fileID: 2009362288}
+  playerBody: {fileID: 2009362289}
   playerSize: 2
   zoomScrollSize: 3
   zoomScrollSpeed: 8
