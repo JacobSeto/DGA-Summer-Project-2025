@@ -46,7 +46,7 @@ public class GameManagerScript: MonoBehaviour
         }
         if (zookeeperCount == 0)
         {
-            win = true;
+            WinGame();
         }
         timer += Time.deltaTime;
 
@@ -57,6 +57,8 @@ public class GameManagerScript: MonoBehaviour
     /// </summary>
     public void WinGame()
     {
+        Debug.Log("You Win");
+        Time.timeScale = 0;
         win = true;
         //pull up menu
     }
@@ -66,6 +68,8 @@ public class GameManagerScript: MonoBehaviour
     /// </summary>
     public void LoseGame()
     {
+        Debug.Log("You Lose");
+        Time.timeScale = 0;
         loss = true;
         //pull up loss menu
     }
