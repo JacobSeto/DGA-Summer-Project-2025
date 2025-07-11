@@ -5,7 +5,6 @@ using NUnit.Framework;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 /*
  * The Game Manager handles win and loss conditions alongside tracking the time elapsed in each level.
