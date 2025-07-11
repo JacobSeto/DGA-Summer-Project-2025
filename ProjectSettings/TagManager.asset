@@ -4,6 +4,7 @@
 TagManager:
   serializedVersion: 3
   tags:
+  - Wall
   - Enemy
   - Insect
   - Elephant
@@ -16,7 +17,7 @@ TagManager:
   - UI
   - Ground
   - Obstacle
-  - 
+  - Wall
   - 
   - 
   - 

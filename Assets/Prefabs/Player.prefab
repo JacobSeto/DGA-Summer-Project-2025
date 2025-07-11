@@ -104,6 +104,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerRb: {fileID: -1464496374494826900}
   maxSpeed: 25
+  bounceForce: 0.9
+  lose: 0
+  launched: 0
+  bounceLayers:
+    serializedVersion: 2
+    m_Bits: 256
+  speedText: {fileID: 0}
+  spriteRenderer: {fileID: 6122414213250230835}
+  initialSprite: {fileID: 5117515885611587728, guid: 221f89fea38feeb49a56158b00827c98, type: 3}
+  postLaunchSprite: {fileID: 7502086667154341395, guid: 20bfc828519460c488bf4210ae74a7c8, type: 3}
 --- !u!50 &-1464496374494826900
 Rigidbody2D:
   serializedVersion: 5
@@ -117,7 +127,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 0
+  m_LinearDamping: 0.2
   m_AngularDamping: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -129,8 +139,8 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!58 &-4378600608183086103
 CircleCollider2D:
   m_ObjectHideFlags: 0
