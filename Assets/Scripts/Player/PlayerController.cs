@@ -19,6 +19,20 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI speedText;
 
+    //Sprites
+
+    [SerializeField] SpriteRenderer spriteRenderer;
+
+    [SerializeField] Sprite initialSprite;
+
+    [SerializeField] Sprite postLaunchSprite;
+
+    // Start is called before first frame is script is active
+    void Start()
+    {
+        spriteRenderer.sprite = initialSprite;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -48,6 +62,7 @@ public class PlayerController : MonoBehaviour
             float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
             playerRb.linearVelocity = new Vector2(xChange, yChange);
             launched = true;
+            spriteRenderer.sprite = postLaunchSprite;
         }
         if (launched && playerRb.linearVelocity.magnitude == 0)
         {

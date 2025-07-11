@@ -102,12 +102,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e5ea5f297d9d5e4c9ef944fc7098ddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounceForce: 0.9
   playerRb: {fileID: -1464496374494826900}
   maxSpeed: 25
+  bounceForce: 0.9
+  lose: 0
+  launched: 0
   bounceLayers:
     serializedVersion: 2
     m_Bits: 256
+  speedText: {fileID: 0}
+  spriteRenderer: {fileID: 6122414213250230835}
+  initialSprite: {fileID: 5117515885611587728, guid: 221f89fea38feeb49a56158b00827c98, type: 3}
+  postLaunchSprite: {fileID: 7502086667154341395, guid: 20bfc828519460c488bf4210ae74a7c8, type: 3}
 --- !u!50 &-1464496374494826900
 Rigidbody2D:
   serializedVersion: 5
