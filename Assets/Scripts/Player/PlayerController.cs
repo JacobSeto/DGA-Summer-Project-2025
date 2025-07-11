@@ -1,5 +1,6 @@
 using JetBrains.Annotations;
 using UnityEngine;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,14 +16,17 @@ public class PlayerController : MonoBehaviour
     Vector3 originalPos;
 
     [SerializeField] LayerMask bounceLayers;
-    
+
+    [SerializeField] TextMeshProUGUI speedText;
+
     // Update is called once per frame
     void Update()
     {
-        if(playerRb.linearVelocity.magnitude >= .05f)
+        if (playerRb.linearVelocity.magnitude >= .05f)
         {
             direction = playerRb.linearVelocity.normalized;
             currentSpeed = playerRb.linearVelocity.magnitude;
+            speedText.text = $"Speed: {currentSpeed:F2}";
         }
         else
         {
@@ -45,7 +49,7 @@ public class PlayerController : MonoBehaviour
             playerRb.linearVelocity = new Vector2(xChange, yChange);
             launched = true;
         }
-        if(launched && playerRb.linearVelocity.magnitude == 0)
+        if (launched && playerRb.linearVelocity.magnitude == 0)
         {
             lose = true;
         }
