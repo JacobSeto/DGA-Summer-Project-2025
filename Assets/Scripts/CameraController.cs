@@ -28,8 +28,9 @@ public class CameraController : MonoBehaviour
     public float zoomScrollSpeed;
 
     //Follow variables
-    private float movementSpeed=0f;
+    private float movementSpeed=5f;
     private Vector3 currentPosition;
+    //Screen Bound
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -58,7 +59,7 @@ public class CameraController : MonoBehaviour
         if (zoomed==1) // Following Player
         {
             currentSize -= (levelSize - playerSize) / 10;
-            currentPosition = new Vector3(playerLoc.position.x + (playerBody.linearVelocityX / 2.5f), playerLoc.position.y + (playerBody.linearVelocityY / 2.5f), -10f);
+            currentPosition = new Vector3(playerLoc.position.x + (Mathf.Clamp(playerBody.linearVelocityX, -currentSize*2*(16f/10f), currentSize * 2 * (16f / 10f)) ), playerLoc.position.y + (Mathf.Clamp(playerBody.linearVelocityY, -currentSize, currentSize)), -10f);
         }
         
         if (zoomed == 2) // Whole Level overview
@@ -79,6 +80,9 @@ public class CameraController : MonoBehaviour
         //Moving Camera to and from player (This needs to be changed to incorperate player Speed aka Zoomed=1 )
         if (zoomed != 3)
         {
+            float posX = Mathf.Clamp(currentPosition.x, levelView.x - levelSize - currentSize, levelView.x + levelSize + currentSize);
+            float posY = Mathf.Clamp(currentPosition.y, levelView.y - levelSize - currentSize, levelView.y  +levelSize + currentSize);
+            currentPosition=new Vector3 (posX, posY, -10f);
             transform.position = Vector3.Slerp(transform.position, currentPosition, movementSpeed);
         }
         else 
