@@ -1,9 +1,8 @@
 using UnityEngine;
 
-public class InsectController : MonoBehaviour
+public class CheetahController : MonoBehaviour
 {
-    
-    [SerializeField] private Rigidbody2D rb;
+      [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
@@ -11,11 +10,10 @@ public class InsectController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            // Change the player's stamina
+            Destroy(gameObject);
         }
 
     }
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

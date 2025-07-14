@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Insect
   - Elephant
+  - Zookeeper
+  - Cheetah
   layers:
   - Default
   - TransparentFX
