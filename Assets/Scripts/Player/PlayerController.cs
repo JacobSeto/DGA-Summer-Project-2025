@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using UnityEngine;
 using TMPro;
+using UnityEditor.Tilemaps;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
     Vector2 direction;
     float currentSpeed;
     Vector3 originalPos;
+    float flip = 1;
 
     [SerializeField] LayerMask bounceLayers;
 
@@ -67,7 +69,14 @@ public class PlayerController : MonoBehaviour
                 launched = true;
                 spriteRenderer.sprite = postLaunchSprite;
             }
-            spriteObject.transform.Rotate(0, 0, currentSpeed * Time.deltaTime * rotateForce);
+            if (playerRb.linearVelocityX < 0)
+            {
+                spriteObject.transform.Rotate(0, 0, currentSpeed * Time.deltaTime * rotateForce * flip);
+            }
+            else if (playerRb.linearVelocityX > 0)
+            {
+                spriteObject.transform.Rotate(0, 0, -currentSpeed * Time.deltaTime * rotateForce * flip);
+            }
         }
         //get if the mouse was clicked down
         //update the force based on location of mouse in comparison with original location
@@ -83,7 +92,7 @@ public class PlayerController : MonoBehaviour
             playerRb.linearVelocity = Vector2.ClampMagnitude(playerRb.linearVelocity, maxSpeed);
         }
     }
-    
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if ((bounceLayers.value & (1 << collision.gameObject.layer)) > 0)
@@ -95,6 +104,12 @@ public class PlayerController : MonoBehaviour
                 reflectedVector = UnityEngine.Vector2.Reflect(direction * currentSpeed, ray.normal);
                 playerRb.linearVelocity = reflectedVector * bounceForce;
             }
+        }
+        ContactPoint2D contact = collision.GetContact(0);
+        Vector2 normal = contact.normal;
+        if (Mathf.Abs(normal.y) > 0.5)
+        {
+            flip = flip * -1;
         }
     }
 }
