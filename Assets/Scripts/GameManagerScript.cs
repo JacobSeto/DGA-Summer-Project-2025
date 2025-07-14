@@ -22,7 +22,7 @@ public class GameManagerScript: MonoBehaviour
     //placeholders for testing
     private int zookeeperCount = 0;
     private float timer = 0.0f;
-
+    
     void Awake() => Instance = this;
 
     private List<GameObject> zooKeepers;
@@ -30,12 +30,19 @@ public class GameManagerScript: MonoBehaviour
 
     void Start()
     {
-        zooKeepers = GameObject.FindGameObjectsWithTag("Zookeeper");
-        zookeeperCount = zooKeepers.Length;
+        zooKeepers = GameObject.FindGameObjectsWithTag("Zookeeper").ToList();
+        zookeeperCount = zooKeepers.Count;
     }
 
     void Update()
     {
+        for (int i = 0; i < zooKeepers.Count; i++)
+        {
+            if (!zooKeepers[i].activeSelf)
+            {
+                zooKeepers.Remove(zooKeepers[i]);
+            }
+        }
         if (zookeeperCount == 0)
         {
             WinGame();
@@ -51,7 +58,7 @@ public class GameManagerScript: MonoBehaviour
         }
 
     }
-
+    
     /// <summary>
     /// Sets up win condition
     /// </summary>
@@ -73,6 +80,7 @@ public class GameManagerScript: MonoBehaviour
         loss = true;
         //pull up loss menu
     }
+    
     /// <summary>
     /// If pause is false, Pauses the game, freezing everything and opening up a menu. Does opposite if pause is true.
     /// </summary>
@@ -92,16 +100,18 @@ public class GameManagerScript: MonoBehaviour
             //close pause menu
         }
     }
-
+  
     /// <summary>
     /// Returns current timer length
     /// </summary>
-    /// <returns></returns>
     public float GetTime()
     {
         return timer;
     }
 
+    /// <summary>
+    /// Brings down zookeeper count.
+    /// </summary>
     public void decrementZookeeper()
     {
         zookeeperCount -= 1;
