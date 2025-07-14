@@ -83,7 +83,8 @@ public class PlayerController : MonoBehaviour
                     playerRb.linearVelocity = new Vector2(0,0);
                 }
             }
-            if (playerRb.linearVelocityX < 0)
+        }
+        if (playerRb.linearVelocityX < 0)
             {
                 spriteObject.transform.Rotate(0, 0, currentSpeed * Time.deltaTime * rotateForce * flip);
             }
@@ -91,18 +92,10 @@ public class PlayerController : MonoBehaviour
             {
                 spriteObject.transform.Rotate(0, 0, -currentSpeed * Time.deltaTime * rotateForce * flip);
             }
-        }
-
         //get if the mouse was clicked down
         //update the force based on location of mouse in comparison with original location
         //Camera.main.ScreenToWorldPoint()
         //when let go, do a calculation and apply the force
-        
-        // game status updates
-        if (launched && playerRb.linearVelocity.magnitude == 0)
-        {
-            lose = true;
-        }
     }
 
     private void FixedUpdate()

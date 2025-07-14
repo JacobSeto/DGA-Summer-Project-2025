@@ -134,7 +134,7 @@ PrefabInstance:
     - target: {fileID: -6027955848104475147, guid: 33ab23f5c1400c74bae73e2161dc02d2, type: 3}
       propertyPath: spriteRenderer
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1929667980}
     - target: {fileID: 3839974316450237729, guid: 33ab23f5c1400c74bae73e2161dc02d2, type: 3}
       propertyPath: m_Name
       value: Player
@@ -4248,6 +4248,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &1929667980 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 3958427247207750238, guid: 33ab23f5c1400c74bae73e2161dc02d2, type: 3}
+  m_PrefabInstance: {fileID: 64550451}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &618209679509266728
 PrefabInstance:
   m_ObjectHideFlags: 0
