@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] Sprite postLaunchSprite;
 
+
     // Start is called before first frame is script is active
     void Start()
     {
@@ -81,7 +82,7 @@ public class PlayerController : MonoBehaviour
             playerRb.linearVelocity = Vector2.ClampMagnitude(playerRb.linearVelocity, maxSpeed);
         }
     }
-    
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if ((bounceLayers.value & (1 << collision.gameObject.layer)) > 0)
@@ -94,5 +95,15 @@ public class PlayerController : MonoBehaviour
                 playerRb.linearVelocity = reflectedVector * bounceForce;
             }
         }
+        if (collision.gameObject.CompareTag("Insect"))
+        {
+            currentSpeed *= 2f;
+        }
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            currentSpeed *= 0.5f;
+        }
+        ElephantController elephant = collision.gameObject.GetComponent<ElephantController>();
+        elephant?.DecreaseHP();
     }
 }
