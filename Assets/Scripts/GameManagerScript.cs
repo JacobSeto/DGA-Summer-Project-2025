@@ -18,6 +18,7 @@ public class GameManagerScript: MonoBehaviour
     public static GameManagerScript Instance;
     private bool loss = false;
     private bool win = false;
+    private bool pause = false;
     //placeholders for testing
     private int zookeeperCount = 0;
     private float timer = 0.0f;
@@ -25,7 +26,7 @@ public class GameManagerScript: MonoBehaviour
     void Awake() => Instance = this;
 
     private List<GameObject> zooKeepers;
-    
+    private bool Player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().enabled;
 
     void Start()
     {
@@ -47,7 +48,15 @@ public class GameManagerScript: MonoBehaviour
         {
             WinGame();
         }
-        timer += Time.deltaTime;
+        if (pause == false)
+        {
+            timer += Time.deltaTime;
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Debug.Log("Pause");
+            Pause();
+        }
 
     }
     
@@ -72,6 +81,26 @@ public class GameManagerScript: MonoBehaviour
         loss = true;
         //pull up loss menu
     }
+    /// <summary>
+    /// If pause is false, Pauses the game, freezing everything and opening up a menu. Does opposite if pause is true.
+    /// </summary>
+    public void Pause()
+    {
+        if (!pause) {
+            pause = true;
+            Player = false;
+            Time.timeScale = 0;
+            //pull up pause menu
+            }
+        else
+        {
+            pause = false;
+            Player = true;
+            Time.timeScale = 1;
+            //close pause menu
+        }
+    }
+   
     /// <summary>
     /// Returns current timer length
     /// </summary>
