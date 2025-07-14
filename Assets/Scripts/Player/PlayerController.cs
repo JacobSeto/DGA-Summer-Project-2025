@@ -17,6 +17,10 @@ public class PlayerController : MonoBehaviour
     float currentSpeed;
     Vector3 originalPos;
 
+    private int stamina;
+
+    private int maxStamina;
+
     [SerializeField] LayerMask bounceLayers;
 
     [SerializeField] TextMeshProUGUI speedText;
@@ -53,7 +57,7 @@ public class PlayerController : MonoBehaviour
             playerRb.linearVelocity = Vector2.zero;
         }
 
-        // initial launch with left click + drag, otherwise must activate stanima using right click
+        // initial launch with left click + drag, otherwise must activate stamina using right click
         if (!launched)
         {
             if (Input.GetMouseButtonDown(0))
@@ -78,7 +82,7 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     // indicate to player that launch force was too low!
-                    playerRb.linearVelocity = new Vector2(0,0);
+                    playerRb.linearVelocity = new Vector2(0, 0);
                 }
             }
         }
@@ -87,7 +91,7 @@ public class PlayerController : MonoBehaviour
         //update the force based on location of mouse in comparison with original location
         //Camera.main.ScreenToWorldPoint()
         //when let go, do a calculation and apply the force
-        
+
         // game status updates
         if (launched && playerRb.linearVelocity.magnitude == 0)
         {
@@ -113,7 +117,7 @@ public class PlayerController : MonoBehaviour
             // playerRb.AddForce(oppositeForce);
         }
     }
-    
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if ((bounceLayers.value & (1 << collision.gameObject.layer)) > 0)
@@ -126,5 +130,48 @@ public class PlayerController : MonoBehaviour
                 playerRb.linearVelocity = reflectedVector * bounceForce;
             }
         }
+    }
+
+    /// <summary>
+    /// Change the max speed (in flight)
+    /// Does not affect the max speed the Armadillo is launched at
+    /// </summary>
+    public void ChangeMaxSpeed(float newSpeed)
+    {
+        maxSpeed = newSpeed;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns> Returns magnitude of player velocity </returns>
+    public float GetCurrentSpeed()
+    {
+        return currentSpeed;
+    }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns> Returns current stamina count for player </returns>
+    public int GetStaminaCount()
+    {
+        return stamina;
+    }
+
+    /// <summary>
+    /// Decrements current stamina by 1
+    /// </summary>
+    public void DecrementStamina()
+    {
+        if (stamina > 0) stamina--;
+    }
+    
+    /// <summary>
+    /// Increments current stamina by 1
+    /// </summary>
+    public void IncrementStamina()
+    {
+        if (stamina < maxStamina) stamina++;
     }
 }
