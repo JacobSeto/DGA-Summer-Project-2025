@@ -16,6 +16,7 @@ using UnityEngine.Rendering;
 public class GameManagerScript: MonoBehaviour
 {
     public static GameManagerScript Instance;
+    [SerializeField] public GameObject player;
     private bool loss = false;
     private bool win = false;
     //placeholders for testing
@@ -46,6 +47,10 @@ public class GameManagerScript: MonoBehaviour
         if (zookeeperCount == 0)
         {
             WinGame();
+        }
+        if (player.GetComponent<PlayerController>().lose)
+        {
+            LoseGame();
         }
         timer += Time.deltaTime;
 
