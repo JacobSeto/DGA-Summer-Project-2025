@@ -35,10 +35,6 @@ public class GameManagerScript: MonoBehaviour
 
     void Update()
     {
-        if (zookeeperCount == 0)
-        {
-            WinGame();
-        }
         timer += Time.deltaTime;
 
     }
@@ -76,6 +72,9 @@ public class GameManagerScript: MonoBehaviour
     public void decrementZookeeper()
     {
         zookeeperCount -= 1;
-        Debug.Log(zookeeperCount);
+        if (zookeeperCount == 0)
+        {
+            WinGame();
+        }
     }
 }
