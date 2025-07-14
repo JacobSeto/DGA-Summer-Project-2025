@@ -16,7 +16,7 @@ using UnityEngine.Rendering;
 public class GameManagerScript: MonoBehaviour
 {
     public static GameManagerScript Instance;
-    [SerializeField] public GameObject player;
+    private GameObject player;
     private bool loss = false;
     private bool win = false;
     private bool pause = false;
@@ -27,12 +27,14 @@ public class GameManagerScript: MonoBehaviour
     void Awake() => Instance = this;
 
     private List<GameObject> zooKeepers;
-    private bool Player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().enabled;
+    private bool playerFreeze;
 
     void Start()
     {
         zooKeepers = GameObject.FindGameObjectsWithTag("Zookeeper").ToList();
         zookeeperCount = zooKeepers.Count;
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerFreeze = player.GetComponent<PlayerController>().enabled;
     }
 
     void Update()
@@ -61,7 +63,6 @@ public class GameManagerScript: MonoBehaviour
         {
             LoseGame();
         }
-        timer += Time.deltaTime;
     }
 
     /// <summary>
@@ -93,14 +94,14 @@ public class GameManagerScript: MonoBehaviour
     {
         if (!pause) {
             pause = true;
-            Player = false;
+            playerFreeze = false;
             Time.timeScale = 0;
             //pull up pause menu
             }
         else
         {
             pause = false;
-            Player = true;
+            playerFreeze = true;
             Time.timeScale = 1;
             //close pause menu
         }
