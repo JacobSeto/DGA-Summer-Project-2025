@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour
             // playerRb.AddForce(oppositeForce);
         }
     }
-
+    
     void OnCollisionEnter2D(Collision2D collision)
     {
         if ((bounceLayers.value & (1 << collision.gameObject.layer)) > 0)
@@ -145,49 +145,6 @@ public class PlayerController : MonoBehaviour
         {
             flip = flip * -1;
         }
-    }
-
-    /// <summary>
-    /// Change the max speed (in flight)
-    /// Does not affect the max speed the Armadillo is launched at
-    /// </summary>
-    public void ChangeMaxSpeed(float newSpeed)
-    {
-        maxSpeed = newSpeed;
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns> Returns magnitude of player velocity </returns>
-    public float GetCurrentSpeed()
-    {
-        return currentSpeed;
-    }
-    
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns> Returns current stamina count for player </returns>
-    public int GetStaminaCount()
-    {
-        return stamina;
-    }
-
-    /// <summary>
-    /// Decrements current stamina by 1
-    /// </summary>
-    public void DecrementStamina()
-    {
-        if (stamina > 0) stamina--;
-    }
-    
-    /// <summary>
-    /// Increments current stamina by 1
-    /// </summary>
-    public void IncrementStamina()
-    {
-        if (stamina < maxStamina) stamina++;
     }
 
     /// <summary>
