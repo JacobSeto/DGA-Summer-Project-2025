@@ -54,20 +54,34 @@ public class PlayerController : MonoBehaviour
             lose = true;
             playerRb.linearVelocity = Vector2.zero;
         }
-        if (!lose)
+
+        // initial launch with left click + drag, otherwise must activate stanima using right click
+        if (!launched)
         {
             if (Input.GetMouseButtonDown(0))
             {
                 originalPos = Input.mousePosition;
                 //store initial mouse location
             }
+            // if (Input.GetMouseButton(0))
+            // {
+
+            // }
             if (Input.GetMouseButtonUp(0))
             {
                 float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
                 float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
                 playerRb.linearVelocity = new Vector2(xChange, yChange);
-                launched = true;
-                spriteRenderer.sprite = postLaunchSprite;
+                if (playerRb.linearVelocity.magnitude > 0.2 * maxSpeed)
+                {
+                    launched = true;
+                    spriteRenderer.sprite = postLaunchSprite;
+                }
+                else
+                {
+                    // indicate to player that launch force was too low!
+                    playerRb.linearVelocity = new Vector2(0,0);
+                }
             }
             if (playerRb.linearVelocityX < 0)
             {
@@ -78,18 +92,35 @@ public class PlayerController : MonoBehaviour
                 spriteObject.transform.Rotate(0, 0, -currentSpeed * Time.deltaTime * rotateForce * flip);
             }
         }
+
         //get if the mouse was clicked down
         //update the force based on location of mouse in comparison with original location
         //Camera.main.ScreenToWorldPoint()
         //when let go, do a calculation and apply the force
         
+        // game status updates
+        if (launched && playerRb.linearVelocity.magnitude == 0)
+        {
+            lose = true;
+        }
     }
 
     private void FixedUpdate()
     {
-        if (playerRb.linearVelocity.magnitude > maxSpeed)
+        if (currentSpeed > maxSpeed)
         {
             playerRb.linearVelocity = Vector2.ClampMagnitude(playerRb.linearVelocity, maxSpeed);
+        }
+        else if (currentSpeed < 0.005 * maxSpeed)
+        {
+            playerRb.linearVelocity = Vector2.ClampMagnitude(playerRb.linearVelocity, 0);
+        }
+        else if (currentSpeed < 0.15 * maxSpeed)
+        {
+            float decay = Mathf.Lerp(1f, 0.94f, Mathf.Exp(currentSpeed - (0.05f * maxSpeed)));
+            playerRb.linearVelocity *= decay;
+            // Vector2 oppositeForce = -playerRb.linearVelocity.normalized * decelerationForce;
+            // playerRb.AddForce(oppositeForce);
         }
     }
 
