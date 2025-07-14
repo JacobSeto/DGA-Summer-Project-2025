@@ -16,13 +16,14 @@ using UnityEngine.Rendering;
 public class GameManagerScript: MonoBehaviour
 {
     public static GameManagerScript Instance;
+    [SerializeField] public GameObject player;
     private bool loss = false;
     private bool win = false;
     private bool pause = false;
     //placeholders for testing
     private int zookeeperCount = 0;
     private float timer = 0.0f;
-    
+
     void Awake() => Instance = this;
 
     private List<GameObject> zooKeepers;
@@ -56,9 +57,13 @@ public class GameManagerScript: MonoBehaviour
             Debug.Log("Pause");
             Pause();
         }
-
+        if (player.GetComponent<PlayerController>().lose)
+        {
+            LoseGame();
+        }
+        timer += Time.deltaTime;
     }
-    
+
     /// <summary>
     /// Sets up win condition
     /// </summary>
@@ -80,7 +85,7 @@ public class GameManagerScript: MonoBehaviour
         loss = true;
         //pull up loss menu
     }
-    
+
     /// <summary>
     /// If pause is false, Pauses the game, freezing everything and opening up a menu. Does opposite if pause is true.
     /// </summary>
@@ -100,7 +105,7 @@ public class GameManagerScript: MonoBehaviour
             //close pause menu
         }
     }
-  
+
     /// <summary>
     /// Returns current timer length
     /// </summary>
