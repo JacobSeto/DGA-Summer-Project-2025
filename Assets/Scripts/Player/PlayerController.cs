@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             lose = true;
-            Debug.Log(lose);
+            playerRb.linearVelocity = Vector2.zero;
         }
         if (!lose)
         {
