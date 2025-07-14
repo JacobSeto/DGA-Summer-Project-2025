@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float maxSpeed;
     [SerializeField] float minSpeed;
     [SerializeField] public float bounceForce;
+    [SerializeField] public float rotateForce;
     public bool lose = false;
     public bool launched = false;
     Vector2 reflectedVector;
@@ -24,6 +25,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] SpriteRenderer spriteRenderer;
 
+    [SerializeField] GameObject spriteObject;
+
     [SerializeField] Sprite initialSprite;
 
     [SerializeField] Sprite postLaunchSprite;
@@ -31,6 +34,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before first frame is script is active
     void Start()
     {
+        spriteRenderer = spriteObject.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = initialSprite;
     }
 
@@ -63,11 +67,13 @@ public class PlayerController : MonoBehaviour
                 launched = true;
                 spriteRenderer.sprite = postLaunchSprite;
             }
+            spriteObject.transform.Rotate(0, 0, currentSpeed * Time.deltaTime * rotateForce);
         }
         //get if the mouse was clicked down
         //update the force based on location of mouse in comparison with original location
         //Camera.main.ScreenToWorldPoint()
         //when let go, do a calculation and apply the force
+        
     }
 
     private void FixedUpdate()
