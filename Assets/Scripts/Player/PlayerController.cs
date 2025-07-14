@@ -17,6 +17,11 @@ public class PlayerController : MonoBehaviour
     Vector2 direction;
     float currentSpeed;
     Vector3 originalPos;
+
+    private int stamina;
+
+    private int maxStamina;
+
     float flip = 1;
 
     [SerializeField] LayerMask bounceLayers;
@@ -55,7 +60,7 @@ public class PlayerController : MonoBehaviour
             playerRb.linearVelocity = Vector2.zero;
         }
 
-        // initial launch with left click + drag, otherwise must activate stanima using right click
+        // initial launch with left click + drag, otherwise must activate stamina using right click
         if (!launched)
         {
             if (Input.GetMouseButtonDown(0))
@@ -80,22 +85,27 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     // indicate to player that launch force was too low!
-                    playerRb.linearVelocity = new Vector2(0,0);
+                    playerRb.linearVelocity = new Vector2(0, 0);
                 }
             }
         }
         if (playerRb.linearVelocityX < 0)
-            {
-                spriteObject.transform.Rotate(0, 0, currentSpeed * Time.deltaTime * rotateForce * flip);
-            }
-            else if (playerRb.linearVelocityX > 0)
-            {
-                spriteObject.transform.Rotate(0, 0, -currentSpeed * Time.deltaTime * rotateForce * flip);
-            }
+        {
+            spriteObject.transform.Rotate(0, 0, currentSpeed * Time.deltaTime * rotateForce * flip);
+        }
+        else if (playerRb.linearVelocityX > 0)
+        {
+            spriteObject.transform.Rotate(0, 0, -currentSpeed * Time.deltaTime * rotateForce * flip);
+        }
         //get if the mouse was clicked down
         //update the force based on location of mouse in comparison with original location
         //Camera.main.ScreenToWorldPoint()
         //when let go, do a calculation and apply the force
+        if (launched && playerRb.linearVelocity.magnitude == 0)
+        {
+            lose = true;
+        }
+        
     }
 
     private void FixedUpdate()
@@ -135,5 +145,91 @@ public class PlayerController : MonoBehaviour
         {
             flip = flip * -1;
         }
+    }
+
+    /// <summary>
+    /// Change the max speed (in flight)
+    /// Does not affect the max speed the Armadillo is launched at
+    /// </summary>
+    public void ChangeMaxSpeed(float newSpeed)
+    {
+        maxSpeed = newSpeed;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns> Returns magnitude of player velocity </returns>
+    public float GetCurrentSpeed()
+    {
+        return currentSpeed;
+    }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns> Returns current stamina count for player </returns>
+    public int GetStaminaCount()
+    {
+        return stamina;
+    }
+
+    /// <summary>
+    /// Decrements current stamina by 1
+    /// </summary>
+    public void DecrementStamina()
+    {
+        if (stamina > 0) stamina--;
+    }
+    
+    /// <summary>
+    /// Increments current stamina by 1
+    /// </summary>
+    public void IncrementStamina()
+    {
+        if (stamina < maxStamina) stamina++;
+    }
+
+    /// <summary>
+    /// Change the max speed (in flight)
+    /// Does not affect the max speed the Armadillo is launched at
+    /// </summary>
+    public void ChangeMaxSpeed(float newSpeed)
+    {
+        maxSpeed = newSpeed;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns> Returns magnitude of player velocity </returns>
+    public float GetCurrentSpeed()
+    {
+        return currentSpeed;
+    }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns> Returns current stamina count for player </returns>
+    public int GetStaminaCount()
+    {
+        return stamina;
+    }
+
+    /// <summary>
+    /// Decrements current stamina by 1
+    /// </summary>
+    public void DecrementStamina()
+    {
+        if (stamina > 0) stamina--;
+    }
+    
+    /// <summary>
+    /// Increments current stamina by 1
+    /// </summary>
+    public void IncrementStamina()
+    {
+        if (stamina < maxStamina) stamina++;
     }
 }
