@@ -120,7 +120,6 @@ public class PlayerController : MonoBehaviour
         {
             lose = true;
         }
-        
     }
 
     private void FixedUpdate()
@@ -160,7 +159,7 @@ public class PlayerController : MonoBehaviour
         {
             flip = flip * -1;
         }
-        audioSource.Play();
+        audioSource.PlayOneShot(audioSource.clip);
     }
 
     /// <summary>
