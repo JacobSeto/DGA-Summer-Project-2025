@@ -167,6 +167,9 @@ public class PlayerController : MonoBehaviour
         ElephantController elephant = collision.gameObject.GetComponent<ElephantController>();
         elephant?.DecreaseHP();
 
+        CheetahController cheetah = collision.gameObject.GetComponent<CheetahController>();
+        IncrementStamina();
+
         ContactPoint2D contact = collision.GetContact(0);
         Vector2 normal = contact.normal;
         if (Mathf.Abs(normal.y) > 0.5)
