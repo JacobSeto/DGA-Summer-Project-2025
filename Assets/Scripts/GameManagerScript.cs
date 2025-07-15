@@ -16,46 +16,44 @@ using UnityEngine.Rendering;
 public class GameManagerScript: MonoBehaviour
 {
     public static GameManagerScript Instance;
-    [SerializeField] public GameObject player;
+    private GameObject player;
     private bool loss = false;
     private bool win = false;
+    private bool pause = false;
     //placeholders for testing
     private int zookeeperCount = 0;
     private float timer = 0.0f;
-    
+
     void Awake() => Instance = this;
 
-    private List<GameObject> zooKeepers;
-    
+    private GameObject[] zooKeepers;
+    private bool playerFreeze;
 
     void Start()
     {
-        zooKeepers = GameObject.FindGameObjectsWithTag("Zookeeper").ToList();
-        zookeeperCount = zooKeepers.Count;
+        zooKeepers = GameObject.FindGameObjectsWithTag("Zookeeper");
+        zookeeperCount = zooKeepers.Length;
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerFreeze = player.GetComponent<PlayerController>().enabled;
     }
 
     void Update()
     {
-        for (int i = 0; i < zooKeepers.Count; i++)
+        if (pause == false)
         {
-            if (!zooKeepers[i].activeSelf)
-            {
-                zooKeepers.Remove(zooKeepers[i]);
-                zookeeperCount--;
-            }
+            timer += Time.deltaTime;
         }
-        if (zookeeperCount == 0)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            WinGame();
+            Debug.Log("Pause");
+            Pause();
         }
         if (player.GetComponent<PlayerController>().lose)
         {
             LoseGame();
         }
-        timer += Time.deltaTime;
-
     }
-    
+
     /// <summary>
     /// Sets up win condition
     /// </summary>
@@ -77,12 +75,44 @@ public class GameManagerScript: MonoBehaviour
         loss = true;
         //pull up loss menu
     }
+
+    /// <summary>
+    /// If pause is false, Pauses the game, freezing everything and opening up a menu. Does opposite if pause is true.
+    /// </summary>
+    public void Pause()
+    {
+        if (!pause) {
+            pause = true;
+            playerFreeze = false;
+            Time.timeScale = 0;
+            //pull up pause menu
+            }
+        else
+        {
+            pause = false;
+            playerFreeze = true;
+            Time.timeScale = 1;
+            //close pause menu
+        }
+    }
+
     /// <summary>
     /// Returns current timer length
     /// </summary>
-    /// <returns></returns>
     public float GetTime()
     {
         return timer;
+    }
+
+    /// <summary>
+    /// Brings down zookeeper count.
+    /// </summary>
+    public void decrementZookeeper()
+    {
+        zookeeperCount -= 1;
+        if (zookeeperCount == 0)
+        {
+            WinGame();
+        }
     }
 }
