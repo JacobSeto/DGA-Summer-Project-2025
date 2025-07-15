@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     Vector2 direction;
     float currentSpeed;
     Vector3 originalPos;
+    float angle;
 
     private int stamina;
 
@@ -25,8 +26,7 @@ public class PlayerController : MonoBehaviour
     float flip = 1;
 
     [SerializeField] LayerMask bounceLayers;
-
-    [SerializeField] TextMeshProUGUI speedText;
+    [SerializeField] GameObject pivot;
 
     //Sprites
 
@@ -52,7 +52,9 @@ public class PlayerController : MonoBehaviour
         {
             direction = playerRb.linearVelocity.normalized;
             currentSpeed = playerRb.linearVelocity.magnitude;
-            speedText.text = $"Speed: {currentSpeed:F2}";
+            angle = Mathf.Clamp01(currentSpeed / maxSpeed);
+            angle = Mathf.Lerp(-90f, 90f, angle);
+            pivot.transform.rotation = Quaternion.Euler(0f, 0f, -angle);
         }
         else
         {
