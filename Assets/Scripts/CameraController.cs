@@ -34,6 +34,8 @@ public class CameraController : MonoBehaviour
     private Vector3 currentPosition;
     //Screen Bound
     private int activePenn=0;
+    //
+    [SerializeField] private PlayerController player;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -58,7 +60,7 @@ public class CameraController : MonoBehaviour
                 activePenn = i;
             }
         }
-
+        
         if (Input.GetButtonDown("Jump"))
         {
             Debug.Log("Clicked");
@@ -66,11 +68,7 @@ public class CameraController : MonoBehaviour
             if (zoomed == 4) { zoomed = 1; }
             Debug.Log("Zoom level: " + zoomed);
         }
-        if (zoomed==1) // Following Player
-        {
-            currentSize -= (levelSize - playerSize) / 10;
-            currentPosition = new Vector3(playerLoc.position.x + (Mathf.Clamp(playerBody.linearVelocityX, -currentSize*2*(16f/10f), currentSize * 2 * (16f / 10f)) ), playerLoc.position.y + (Mathf.Clamp(playerBody.linearVelocityY, -currentSize, currentSize)), -10f);
-        }
+        
         
         if (zoomed == 2) // Whole Level overview
         {
@@ -82,7 +80,14 @@ public class CameraController : MonoBehaviour
             currentSize -= (levelSize - zoomScrollSize) / 10;
             
         }
-        
+        if (zoomed==1 || player.launched) // Following Player
+        {
+            zoomed = 1;
+            currentSize -= (levelSize - playerSize) / 10;
+            currentPosition = new Vector3(playerLoc.position.x + (Mathf.Clamp(playerBody.linearVelocityX, -currentSize*2*(16f/10f), currentSize * 2 * (16f / 10f)) ), playerLoc.position.y + (Mathf.Clamp(playerBody.linearVelocityY, -currentSize, currentSize)), -10f);
+        }
+
+
         //Zooming Camera
         currentSize = Mathf.Clamp(currentSize, playerSize, levelSize);
         _camera.orthographicSize = Mathf.SmoothDamp(_camera.orthographicSize, currentSize, ref velocity, smoothing);
