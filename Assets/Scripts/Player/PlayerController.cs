@@ -6,6 +6,11 @@ using UnityEditor.Tilemaps;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] public Rigidbody2D playerRb;
+    [SerializeField] float maxLaunchSpeed;
+
+    /// <summary>
+    /// Max speed that the armidillo can be at any moment(including boosts/powerups)
+    /// </summary>
     [SerializeField] float maxSpeed;
     [SerializeField] float minSpeed;
     [SerializeField] public float bounceForce;
@@ -52,7 +57,7 @@ public class PlayerController : MonoBehaviour
         {
             direction = playerRb.linearVelocity.normalized;
             currentSpeed = playerRb.linearVelocity.magnitude;
-            angle = Mathf.Clamp01(currentSpeed / maxSpeed);
+            angle = Mathf.Clamp01(currentSpeed / maxLaunchSpeed);
             angle = Mathf.Lerp(-90f, 90f, angle);
             pivot.transform.rotation = Quaternion.Euler(0f, 0f, -angle);
         }
@@ -79,10 +84,14 @@ public class PlayerController : MonoBehaviour
                 float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
                 float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
                 playerRb.linearVelocity = new Vector2(xChange, yChange);
-                if (playerRb.linearVelocity.magnitude > 0.2 * maxSpeed)
+                if (playerRb.linearVelocity.magnitude > 0.2 * maxLaunchSpeed)
                 {
                     launched = true;
                     spriteRenderer.sprite = postLaunchSprite;
+                }
+                else if (playerRb.linearVelocity.magnitude > maxLaunchSpeed)
+                {
+                    playerRb.linearVelocity = Vector2.ClampMagnitude(playerRb.linearVelocity, maxLaunchSpeed);
                 }
                 else
                 {
