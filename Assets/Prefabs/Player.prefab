@@ -104,6 +104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerRb: {fileID: -1464496374494826900}
   maxSpeed: 25
+  minSpeed: 0.5
   bounceForce: 0.9
   lose: 0
   launched: 0
