@@ -41,7 +41,7 @@ public class PlayerController : MonoBehaviour
         {
             direction = playerRb.linearVelocity.normalized;
             currentSpeed = playerRb.linearVelocity.magnitude;
-            speedText.text = $"Speed: {currentSpeed:F2}";
+            // speedText.text = $"Speed: {currentSpeed:F2}";
         }
         else
         {
