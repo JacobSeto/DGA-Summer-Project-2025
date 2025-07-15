@@ -135,7 +135,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRb: {fileID: -1464496374494826900}
-  maxSpeed: 25
+  maxLaunchSpeed: 20
+  maxSpeed: 32
   minSpeed: 0.5
   bounceForce: 0.9
   rotateForce: 45
@@ -144,7 +145,7 @@ MonoBehaviour:
   bounceLayers:
     serializedVersion: 2
     m_Bits: 256
-  speedText: {fileID: 0}
+  pivot: {fileID: 0}
   spriteRenderer: {fileID: 3958427247207750238}
   spriteObject: {fileID: 2210973940943747788}
   initialSprite: {fileID: 5117515885611587728, guid: 221f89fea38feeb49a56158b00827c98, type: 3}
