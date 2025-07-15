@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float rotateForce;
     public bool lose = false;
     public bool launched = false;
+    public bool slowMotion = false;
     Vector2 reflectedVector;
     RaycastHit2D ray;
     Vector2 direction;
@@ -47,12 +48,19 @@ public class PlayerController : MonoBehaviour
             currentSpeed = playerRb.linearVelocity.magnitude;
             speedText.text = $"Speed: {currentSpeed:F2}";
         }
-        else
+        else if(launched && playerRb.linearVelocity.magnitude == 0)
         {
             lose = true;
             playerRb.linearVelocity = Vector2.zero;
         }
-        if (!lose)
+
+        if (Input.GetMouseButton(1))
+        {
+            slowMotion = !slowMotion;
+        }
+
+
+        if (!lose && (!launched || slowMotion))
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -69,11 +77,6 @@ public class PlayerController : MonoBehaviour
             }
             spriteObject.transform.Rotate(0, 0, currentSpeed * Time.deltaTime * rotateForce);
         }
-        //get if the mouse was clicked down
-        //update the force based on location of mouse in comparison with original location
-        //Camera.main.ScreenToWorldPoint()
-        //when let go, do a calculation and apply the force
-        
     }
 
     private void FixedUpdate()
