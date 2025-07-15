@@ -28,15 +28,18 @@ public class PlayerController : MonoBehaviour
 
     private int maxStamina;
 
-    private AudioSource audioSource;
-
     float flip = 1;
 
     [SerializeField] LayerMask bounceLayers;
     [SerializeField] GameObject pivot;
-    [SerializeField] GameObject audioObject;
 
-    //Sprites
+    // Audio 
+    [SerializeField] GameObject bounceAudioObject;
+    [SerializeField] GameObject pullAudioObject;
+    private AudioSource bounceAudioSource;
+    private AudioSource pullAudioSource;
+
+    // Sprites
 
     [SerializeField] SpriteRenderer spriteRenderer;
 
@@ -50,7 +53,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         spriteRenderer = spriteObject.GetComponent<SpriteRenderer>();
-        audioSource = audioObject.GetComponent<AudioSource>();
+        bounceAudioSource = bounceAudioObject.GetComponent<AudioSource>();
+        pullAudioSource = pullAudioObject.GetComponent<AudioSource>();
         spriteRenderer.sprite = initialSprite;
     }
 
@@ -73,6 +77,7 @@ public class PlayerController : MonoBehaviour
             {
                 originalPos = Input.mousePosition;
                 //store initial mouse location
+                pullAudioSource.PlayOneShot(pullAudioSource.clip);
             }
             // if (Input.GetMouseButton(0))
             // {
@@ -118,7 +123,6 @@ public class PlayerController : MonoBehaviour
         {
             lose = true;
         }
-        
     }
 
     private void FixedUpdate()
@@ -158,7 +162,7 @@ public class PlayerController : MonoBehaviour
         {
             flip = flip * -1;
         }
-        audioSource.Play();
+        bounceAudioSource.PlayOneShot(bounceAudioSource.clip);
     }
 
     /// <summary>
