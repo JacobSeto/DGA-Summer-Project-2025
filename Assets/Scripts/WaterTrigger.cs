@@ -4,12 +4,13 @@ public class WaterTrigger : MonoBehaviour
 {
     // [SerializeField] private Collider2D waterTileCollider;
     [SerializeField] private float waterDampeningValue;
-    [SerializeField] private Rigidbody2D playerBody;
+    Rigidbody2D playerBody;
     private float defaultDampeningValue;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        playerBody = GameManagerScript.Instance.player.GetComponent<Rigidbody2D>();
         defaultDampeningValue = playerBody.linearDamping;
     }
 
