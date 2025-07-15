@@ -1115,7 +1115,7 @@ RectTransform:
   m_LocalScale: {x: 0.8421053, y: 0.6400001, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 907733864}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1298,9 +1298,6 @@ PrefabInstance:
       propertyPath: audioObject
       value: 
       objectReference: {fileID: 296339701}
-      propertyPath: maxLaunchSpeed
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 3839974316450237729, guid: 33ab23f5c1400c74bae73e2161dc02d2, type: 3}
       propertyPath: m_Name
       value: Player
@@ -12516,3 +12513,4 @@ SceneRoots:
   - {fileID: 356749669}
   - {fileID: 26765273}
   - {fileID: 296339703}
+  - {fileID: 1314049761}
