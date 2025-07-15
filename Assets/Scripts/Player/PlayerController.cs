@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] public Rigidbody2D playerRb;
     [SerializeField] float maxSpeed;
+    [SerializeField] float minSpeed;
     [SerializeField] public float bounceForce;
     public bool lose = false;
     public bool launched = false;
@@ -36,7 +37,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerRb.linearVelocity.magnitude >= .05f)
+        if (playerRb.linearVelocity.magnitude >= minSpeed || !launched)
         {
             direction = playerRb.linearVelocity.normalized;
             currentSpeed = playerRb.linearVelocity.magnitude;
@@ -44,29 +45,24 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            // Lose Game
-        }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            originalPos = Input.mousePosition;
-            //store initial mouse location
-        }
-        if (Input.GetMouseButton(0))
-        {
-
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
-            float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
-            playerRb.linearVelocity = new Vector2(xChange, yChange);
-            launched = true;
-            spriteRenderer.sprite = postLaunchSprite;
-        }
-        if (launched && playerRb.linearVelocity.magnitude == 0)
-        {
             lose = true;
+            playerRb.linearVelocity = Vector2.zero;
+        }
+        if (!lose)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                originalPos = Input.mousePosition;
+                //store initial mouse location
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
+                float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
+                float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
+                playerRb.linearVelocity = new Vector2(xChange, yChange);
+                launched = true;
+                spriteRenderer.sprite = postLaunchSprite;
+            }
         }
         //get if the mouse was clicked down
         //update the force based on location of mouse in comparison with original location
