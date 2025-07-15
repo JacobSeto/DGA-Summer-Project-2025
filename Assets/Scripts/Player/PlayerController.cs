@@ -157,6 +157,15 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
+    /// Set velocity given new x veloicty and new y veloicty
+    /// playerRb is public so this prob isn't needed
+    /// </summary>
+    public void setVelocity(float x, float y)
+    {
+        playerRb.linearVelocity = new Vector2(x, y);
+    }
+
+    /// <summary>
     /// 
     /// </summary>
     /// <returns> Returns magnitude of player velocity </returns>
