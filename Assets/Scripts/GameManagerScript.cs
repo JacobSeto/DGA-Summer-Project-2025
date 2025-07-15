@@ -16,7 +16,7 @@ using UnityEngine.Rendering;
 public class GameManagerScript: MonoBehaviour
 {
     public static GameManagerScript Instance;
-    private GameObject player;
+    [HideInInspector] public GameObject player;
     private bool loss = false;
     private bool win = false;
     private bool pause = false;
@@ -24,7 +24,10 @@ public class GameManagerScript: MonoBehaviour
     private int zookeeperCount = 0;
     private float timer = 0.0f;
 
-    void Awake() => Instance = this;
+    void Awake() {
+        Instance = this;
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
 
     private GameObject[] zooKeepers;
     private bool playerFreeze;
@@ -33,7 +36,6 @@ public class GameManagerScript: MonoBehaviour
     {
         zooKeepers = GameObject.FindGameObjectsWithTag("Zookeeper");
         zookeeperCount = zooKeepers.Length;
-        player = GameObject.FindGameObjectWithTag("Player");
         playerFreeze = player.GetComponent<PlayerController>().enabled;
     }
 
