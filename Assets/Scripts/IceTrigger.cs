@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class WaterTrigger : MonoBehaviour
+public class IceTrigger : MonoBehaviour
 {
     // [SerializeField] private Collider2D waterTileCollider;
-    [SerializeField] private float waterDampeningValue;
+    [SerializeField] private float iceDampeningValue;
     Rigidbody2D playerBody;
     private float defaultDampeningValue;
 
@@ -17,7 +17,7 @@ public class WaterTrigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -25,19 +25,19 @@ public class WaterTrigger : MonoBehaviour
         // other.attachedRigidbody.AddForce(-0.75f * other.attachedRigidbody.linearVelocity);
         if (other.CompareTag("Player"))
         {
-            other.attachedRigidbody.linearDamping = waterDampeningValue;
+            other.attachedRigidbody.linearDamping = iceDampeningValue;
             // Debug.Log(other.attachedRigidbody.linearDamping);
         }
-        
+
     }
- 
+
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            other.attachedRigidbody.linearDamping = defaultDampeningValue; // Note: Janky if immediately entering a special tile upon exiting water 
+            other.attachedRigidbody.linearDamping = defaultDampeningValue;
             // Debug.Log(other.attachedRigidbody.linearDamping);
         }
-    
+
     }
 }

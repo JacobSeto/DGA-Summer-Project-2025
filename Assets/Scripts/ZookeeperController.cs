@@ -19,6 +19,7 @@ public class ZookeeperController : MonoBehaviour
     private void destroyZookeeper()
     {
         zooKeeper.SetActive(false);
+        GameManagerScript.Instance.decrementZookeeper();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
