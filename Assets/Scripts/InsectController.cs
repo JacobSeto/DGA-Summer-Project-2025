@@ -11,7 +11,7 @@ public class InsectController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            // Change the player's stamina
+          // add stamina player code
         }
 
     }
