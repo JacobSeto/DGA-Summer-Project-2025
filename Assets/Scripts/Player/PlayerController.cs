@@ -57,18 +57,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerRb.linearVelocity.magnitude >= minSpeed || !launched)
+        if (playerRb.linearVelocity.magnitude >= minSpeed && launched)
         {
             direction = playerRb.linearVelocity.normalized;
             currentSpeed = playerRb.linearVelocity.magnitude;
             angle = Mathf.Clamp01(currentSpeed / maxLaunchSpeed);
             angle = Mathf.Lerp(-90f, 90f, angle);
             pivot.transform.rotation = Quaternion.Euler(0f, 0f, -angle);
-        }
-        else
-        {
-            lose = true;
-            playerRb.linearVelocity = Vector2.zero;
         }
 
         // initial launch with left click + drag, otherwise must activate stamina using right click
@@ -96,14 +91,17 @@ public class PlayerController : MonoBehaviour
                 else if (playerRb.linearVelocity.magnitude > maxLaunchSpeed)
                 {
                     playerRb.linearVelocity = Vector2.ClampMagnitude(playerRb.linearVelocity, maxLaunchSpeed);
+                    launched = true;
                 }
                 else
                 {
                     // indicate to player that launch force was too low!
                     playerRb.linearVelocity = new Vector2(0, 0);
+                    launched = false;
                 }
             }
         }
+
         if (playerRb.linearVelocityX < 0)
         {
             spriteObject.transform.Rotate(0, 0, currentSpeed * Time.deltaTime * rotateForce * flip);
@@ -116,7 +114,7 @@ public class PlayerController : MonoBehaviour
         //update the force based on location of mouse in comparison with original location
         //Camera.main.ScreenToWorldPoint()
         //when let go, do a calculation and apply the force
-        if (launched && playerRb.linearVelocity.magnitude == 0)
+        if (launched && playerRb.linearVelocity.magnitude <= minSpeed)
         {
             lose = true;
         }
