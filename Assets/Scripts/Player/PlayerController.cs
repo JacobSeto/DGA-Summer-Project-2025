@@ -23,10 +23,13 @@ public class PlayerController : MonoBehaviour
 
     private int maxStamina;
 
+    private AudioSource audioSource;
+
     float flip = 1;
 
     [SerializeField] LayerMask bounceLayers;
     [SerializeField] GameObject pivot;
+    [SerializeField] GameObject audioObject;
 
     //Sprites
 
@@ -42,6 +45,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         spriteRenderer = spriteObject.GetComponent<SpriteRenderer>();
+        audioSource = audioObject.GetComponent<AudioSource>();
         spriteRenderer.sprite = initialSprite;
     }
 
@@ -128,7 +132,7 @@ public class PlayerController : MonoBehaviour
             // playerRb.AddForce(oppositeForce);
         }
     }
-    
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if ((bounceLayers.value & (1 << collision.gameObject.layer)) > 0)
@@ -147,6 +151,7 @@ public class PlayerController : MonoBehaviour
         {
             flip = flip * -1;
         }
+        audioSource.Play();
     }
 
     /// <summary>
