@@ -26,30 +26,19 @@ public class GameManagerScript: MonoBehaviour
 
     void Awake() => Instance = this;
 
-    private List<GameObject> zooKeepers;
+    private GameObject[] zooKeepers;
     private bool playerFreeze;
 
     void Start()
     {
-        zooKeepers = GameObject.FindGameObjectsWithTag("Zookeeper").ToList();
-        zookeeperCount = zooKeepers.Count;
+        zooKeepers = GameObject.FindGameObjectsWithTag("Zookeeper");
+        zookeeperCount = zooKeepers.Length;
         player = GameObject.FindGameObjectWithTag("Player");
         playerFreeze = player.GetComponent<PlayerController>().enabled;
     }
 
     void Update()
     {
-        for (int i = 0; i < zooKeepers.Count; i++)
-        {
-            if (!zooKeepers[i].activeSelf)
-            {
-                zooKeepers.Remove(zooKeepers[i]);
-            }
-        }
-        if (zookeeperCount == 0)
-        {
-            WinGame();
-        }
         if (pause == false)
         {
             timer += Time.deltaTime;
@@ -121,6 +110,9 @@ public class GameManagerScript: MonoBehaviour
     public void decrementZookeeper()
     {
         zookeeperCount -= 1;
-        Debug.Log(zookeeperCount);
+        if (zookeeperCount == 0)
+        {
+            WinGame();
+        }
     }
 }
