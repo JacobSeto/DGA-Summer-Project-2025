@@ -26,8 +26,10 @@ public class PlayerController : MonoBehaviour
     private int stamina;
     private int maxStamina;
     float flip = 1;
+    
+    // Audio
     private AudioManager audioManager;
-
+    private bool stretching=false;
 
     [SerializeField] LayerMask bounceLayers;
     [SerializeField] GameObject pivot;
@@ -62,29 +64,32 @@ public class PlayerController : MonoBehaviour
                 originalPos = Input.mousePosition;
                 //store initial mouse location
                 audioManager.PlayPull();
+                stretching = true;
+            }
+            if (stretching) {
+                audioManager.PlayStretch();
             }
             if (Input.GetMouseButtonUp(0))
             {
+                stretching=false;
                 float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
                 float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
                 playerRb.linearVelocity = new Vector2(xChange, yChange);
 
-                // is this a race condition? someitmes you instal lose
-                if (playerRb.linearVelocity.magnitude > 0.2 * maxLaunchSpeed)
-                {
+                // is this a race condition? someitmes you instalose
+                if (playerRb.linearVelocity.magnitude > maxLaunchSpeed) {
+                    playerRb.linearVelocity = Vector2.ClampMagnitude(playerRb.linearVelocity, maxLaunchSpeed);
+                    launched = true;
+                    spriteRenderer.sprite = postLaunchSprite;
+                } else if (playerRb.linearVelocity.magnitude > 0.2 * maxLaunchSpeed) {
                     launched = true;
                     spriteRenderer.sprite = postLaunchSprite;
                 }
-                else if (playerRb.linearVelocity.magnitude > maxLaunchSpeed)
-                {
-                    playerRb.linearVelocity = Vector2.ClampMagnitude(playerRb.linearVelocity, maxLaunchSpeed);
+                else {
+                    // launch force too low, enforce minimum launch speed
+                    playerRb.linearVelocity = new Vector2(xChange + maxLaunchSpeed * 0.2f, yChange + maxLaunchSpeed * 0.2f);
                     launched = true;
-                }
-                else
-                {
-                    // indicate to player that launch force was too low!
-                    playerRb.linearVelocity = new Vector2(0, 0);
-                    launched = false;
+                    spriteRenderer.sprite = postLaunchSprite;
                 }
             }
         }
