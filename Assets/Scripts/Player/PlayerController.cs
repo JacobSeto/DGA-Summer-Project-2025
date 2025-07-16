@@ -56,11 +56,13 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = spriteObject.GetComponent<SpriteRenderer>();
         audioSource = audioObject.GetComponent<AudioSource>();
         spriteRenderer.sprite = initialSprite;
+        stamina = 3;
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("Current Stamina: " + stamina);
         if (playerRb.linearVelocity.magnitude >= minSpeed || !launched)
         {
             direction = playerRb.linearVelocity.normalized;
@@ -184,8 +186,10 @@ public class PlayerController : MonoBehaviour
         ElephantController elephant = collision.gameObject.GetComponent<ElephantController>();
         elephant?.DecreaseHP();
 
-        CheetahController cheetah = collision.gameObject.GetComponent<CheetahController>();
-        IncrementStamina();
+        if (collision.gameObject.CompareTag("Cheetah"))
+        {
+            stamina++;
+        }
 
         ContactPoint2D contact = collision.GetContact(0);
         Vector2 normal = contact.normal;
