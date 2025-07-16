@@ -103,7 +103,10 @@ public class CameraController : MonoBehaviour
             // float posX = Mathf.Clamp(currentPosition.x, levelView.x - levelSize - currentSize, levelView.x + levelSize + currentSize);
             //float posY = Mathf.Clamp(currentPosition.y, levelView.y - levelSize - currentSize, levelView.y  +levelSize + currentSize);
             //currentPosition=new Vector3 (posX, posY, -10f);
-            currentPosition = Bind(currentPosition);
+            if (zoomed == 1) 
+            { 
+                currentPosition = Bind(currentPosition); 
+            }
             transform.position = Vector3.Slerp(transform.position, currentPosition, movementSpeed);
             
         }
