@@ -5,7 +5,7 @@ public class AudioManager : MonoBehaviour
     [Header("Sound Effects")]
     [SerializeField] private AudioSource bounceAudio;
     [SerializeField] private AudioSource pullAudio;
-    [SerializeField] private AudioSource stretchAudio;
+    [SerializeField] private AudioSource releaseAudio;
     private static AudioManager instance;
 
     public static AudioManager Instance {
@@ -36,12 +36,12 @@ public class AudioManager : MonoBehaviour
     }
 
     public void PlayPull() {
-        pullAudio.pitch = 1;
-        pullAudio.PlayOneShot(pullAudio.clip);
+            pullAudio.pitch = 1;
+            pullAudio.PlayOneShot(pullAudio.clip);
     }
 
-    public void PlayStretch() {
-        stretchAudio.pitch = 1;
-        stretchAudio.Play();
+    public void PlayRelease() {
+        releaseAudio.pitch = 1;
+        releaseAudio.PlayOneShot(releaseAudio.clip);
     }
 }

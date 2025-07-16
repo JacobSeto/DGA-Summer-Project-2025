@@ -15,15 +15,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float minSpeed;
     [SerializeField] public float bounceForce;
     [SerializeField] public float rotateForce;
+    [SerializeField] int stamina;
+    [SerializeField] public float slowDownAmount;
     public bool lose = false;
     public bool launched = false;
+    public bool slowMotion = false;
     Vector2 reflectedVector;
     RaycastHit2D ray;
     Vector2 direction;
     float currentSpeed;
     Vector3 originalPos;
     float angle;
-    private int stamina;
     private int maxStamina;
     float flip = 1;
 
@@ -33,8 +35,7 @@ public class PlayerController : MonoBehaviour
     public Vector3 OriginalMousePos => originalPos;
     
     // Audio
-    private AudioManager audioManager;
-    private bool stretching=false;
+    [SerializeField] AudioManager audioManager;
 
     [SerializeField] LayerMask bounceLayers;
     [SerializeField] GameObject pivot;
@@ -49,6 +50,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] Sprite postLaunchSprite;
 
+
     // Start is called before first frame is script is active
     void Start()
     {
@@ -62,7 +64,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // initial launch with left click + drag, otherwise must activate stamina using right click
-        if (!launched)
+        if (!launched || stamina > 0)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -70,6 +72,12 @@ public class PlayerController : MonoBehaviour
                 //store initial mouse location
                 //audioManager.PlayPull();
                 stretching = true;
+                if (launched)
+                {
+                    slowMotion = true;
+                    Time.timeScale = slowDownAmount;
+                    Time.fixedDeltaTime = 0.02F * Time.timeScale;
+                }
             }
             if (stretching)
             {
@@ -80,14 +88,20 @@ public class PlayerController : MonoBehaviour
                 dragDistance = Vector3.Distance(currentMousePos, originalPos);
 
                 Debug.Log($"Drag distance: {dragDistance}");
+                audioManager.PlayPull();
             }
             if (Input.GetMouseButtonUp(0))
             {
-                stretching=false;
+                if (slowMotion)
+                {
+                    Time.timeScale = 1;
+                    Time.fixedDeltaTime = 0.02F;
+                }
+                audioManager.PlayRelease();
                 float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
                 float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
                 playerRb.linearVelocity = new Vector2(xChange, yChange);
-
+                DecrementStamina();
                 // is this a race condition? someitmes you instalose
                 if (playerRb.linearVelocity.magnitude > maxLaunchSpeed) {
                     playerRb.linearVelocity = Vector2.ClampMagnitude(playerRb.linearVelocity, maxLaunchSpeed);
@@ -103,38 +117,25 @@ public class PlayerController : MonoBehaviour
                     launched = true;
                     spriteRenderer.sprite = postLaunchSprite;
                 }
+                
             }
         }
-        else
-        {
-            if (playerRb.linearVelocityX < 0)
-            {
-                spriteObject.transform.Rotate(0, 0, currentSpeed * Time.deltaTime * rotateForce * flip);
-            }
-            else if (playerRb.linearVelocityX > 0)
-            {
-                spriteObject.transform.Rotate(0, 0, -currentSpeed * Time.deltaTime * rotateForce * flip);
-            }
-
-            if (playerRb.linearVelocity.magnitude >= minSpeed)
-            {
+        if (playerRb.linearVelocity.magnitude >= minSpeed) {
                 direction = playerRb.linearVelocity.normalized;
                 currentSpeed = playerRb.linearVelocity.magnitude;
                 angle = Mathf.Clamp01(currentSpeed / maxLaunchSpeed);
                 angle = Mathf.Lerp(-90f, 90f, angle);
                 pivot.transform.rotation = Quaternion.Euler(0f, 0f, -angle);
-                return;
-            }
-            else
-            {
+                if (playerRb.linearVelocityX < 0) {
+                    spriteObject.transform.Rotate(0, 0, currentSpeed * Time.deltaTime * rotateForce * flip);
+                }
+                else if (playerRb.linearVelocityX > 0) {
+                    spriteObject.transform.Rotate(0, 0, -currentSpeed * Time.deltaTime * rotateForce * flip);
+                }
+            } else if (launched) {
                 lose = true;
-                return;
+                playerRb.linearVelocity = Vector2.zero;
             }
-            //get if the mouse was clicked down
-            //update the force based on location of mouse in comparison with original location
-            //Camera.main.ScreenToWorldPoint()
-            //when let go, do a calculation and apply the force
-        }
     }
 
     private void FixedUpdate()
@@ -151,8 +152,6 @@ public class PlayerController : MonoBehaviour
         {
             float decay = Mathf.Lerp(1f, 0.94f, Mathf.Exp(currentSpeed - (0.05f * maxSpeed)));
             playerRb.linearVelocity *= decay;
-            // Vector2 oppositeForce = -playerRb.linearVelocity.normalized * decelerationForce;
-            // playerRb.AddForce(oppositeForce);
         }
     }
 
@@ -168,6 +167,28 @@ public class PlayerController : MonoBehaviour
                 playerRb.linearVelocity = reflectedVector * bounceForce;
             }
         }
+
+        // Animal Controller Collisions
+        if (collision.gameObject.CompareTag("Insect"))
+        {
+            currentSpeed *= 2f;
+        }
+        if (collision.gameObject.CompareTag("Tranquilizer"))
+        {
+            DecrementStamina();
+        }
+        if (collision.gameObject.CompareTag("Enemy"))
+            {
+                currentSpeed *= 0.5f;
+            }
+        ElephantController elephant = collision.gameObject.GetComponent<ElephantController>();
+        elephant?.DecreaseHP();
+
+        if (collision.gameObject.CompareTag("Cheetah"))
+        {
+            stamina++;
+        }
+
         ContactPoint2D contact = collision.GetContact(0);
         Vector2 normal = contact.normal;
         if (Mathf.Abs(normal.y) > 0.5)
@@ -237,5 +258,6 @@ public class PlayerController : MonoBehaviour
     public void IncrementStamina()
     {
         if (stamina < maxStamina) stamina++;
+
     }
 }
