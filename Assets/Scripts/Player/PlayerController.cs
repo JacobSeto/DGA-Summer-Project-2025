@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float bounceForce;
     [SerializeField] public float rotateForce;
     [SerializeField] int stamina;
+    [SerializeField] public float slowDownAmount;
     public bool lose = false;
     public bool launched = false;
     public bool slowMotion = false;
@@ -82,14 +83,16 @@ public class PlayerController : MonoBehaviour
                 if (launched)
                 {
                     slowMotion = true;
-                    playerRb.linearVelocity = playerRb.linearVelocity / 2;
+                    Time.timeScale = slowDownAmount;
+                    Time.fixedDeltaTime = 0.02F * Time.timeScale;
                 }
             }
             if (Input.GetMouseButtonUp(0))
             {
                 if (slowMotion)
                 {
-                    playerRb.linearVelocity = playerRb.linearVelocity * 2;
+                    Time.timeScale = 1;
+                    Time.fixedDeltaTime = 0.02F;
                 }
                 float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
                 float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
@@ -125,7 +128,7 @@ public class PlayerController : MonoBehaviour
         //update the force based on location of mouse in comparison with original location
         //Camera.main.ScreenToWorldPoint()
         //when let go, do a calculation and apply the force
-        if (launched && playerRb.linearVelocity.magnitude == 0)
+        if (launched && playerRb.linearVelocity.magnitude == 0 && stamina <=0)
         {
             lose = true;
         }

@@ -43,7 +43,15 @@ public class GameManagerScript: MonoBehaviour
     {
         if (pause == false)
         {
-            timer += Time.deltaTime;
+            if (player.GetComponent<PlayerController>().slowMotion)
+            {
+                timer += Time.deltaTime/player.GetComponent<PlayerController>().slowDownAmount;
+            } else
+            {
+                timer += Time.deltaTime;
+            }
+            
+            
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
