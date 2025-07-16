@@ -19,12 +19,14 @@ public class IceTrigger : MonoBehaviour
 
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerStay2D(Collider2D other)
     { // Possibly check if player is the one colliding?
         // other.attachedRigidbody.AddForce(-0.75f * other.attachedRigidbody.linearVelocity);
         if (other.CompareTag("Player"))
         {
-            other.attachedRigidbody.linearDamping = iceDampeningValue;
+            if (!GameManagerScript.Instance.inAir()) { 
+                other.attachedRigidbody.linearDamping = iceDampeningValue; 
+            }
             // Debug.Log(other.attachedRigidbody.linearDamping);
         }
 
