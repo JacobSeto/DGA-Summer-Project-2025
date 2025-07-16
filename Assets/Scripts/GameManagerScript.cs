@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
@@ -23,6 +24,7 @@ public class GameManagerScript: MonoBehaviour
     //placeholders for testing
     private int zookeeperCount = 0;
     private float timer = 0.0f;
+    private bool isInAir = false;
 
     void Awake() {
         Instance = this;
@@ -112,6 +114,23 @@ public class GameManagerScript: MonoBehaviour
     public float GetTime()
     {
         return timer;
+    }
+
+    public void goInAir()
+    {
+        StartCoroutine(AirTime());
+    }
+
+    IEnumerator AirTime()
+    {
+        isInAir = true;
+        yield return new WaitForSeconds(1);
+        isInAir = false;
+    }
+
+    public bool inAir()
+    {
+        return isInAir;
     }
 
     /// <summary>
