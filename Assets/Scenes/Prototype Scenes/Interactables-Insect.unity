@@ -705,14 +705,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 2018537049}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e75ad23c9172f46e28c68afa18543e02, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e5ea5f297d9d5e4c9ef944fc7098ddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 2018537052}
-  groundCheck: {fileID: 1985728582}
-  groundLayer:
+  playerRb: {fileID: 2018537052}
+  maxSpeed: 8
+  bounceForce: 2
+  lose: 0
+  launched: 0
+  bounceLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
+  speedText: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  initialSprite: {fileID: 0}
+  postLaunchSprite: {fileID: 0}
 --- !u!61 &2018537051
 BoxCollider2D:
   m_ObjectHideFlags: 0

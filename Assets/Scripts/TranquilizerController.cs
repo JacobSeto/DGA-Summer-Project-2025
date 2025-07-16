@@ -1,8 +1,7 @@
 using UnityEngine;
 
-public class InsectController : MonoBehaviour
+public class TranquilizerController : MonoBehaviour
 {
-    
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
@@ -15,7 +14,6 @@ public class InsectController : MonoBehaviour
         }
 
     }
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
