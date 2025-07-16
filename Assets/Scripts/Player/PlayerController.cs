@@ -29,7 +29,6 @@ public class PlayerController : MonoBehaviour
     
     // Audio
     private AudioManager audioManager;
-    private bool stretching=false;
 
     [SerializeField] LayerMask bounceLayers;
     [SerializeField] GameObject pivot;
@@ -64,14 +63,10 @@ public class PlayerController : MonoBehaviour
                 originalPos = Input.mousePosition;
                 //store initial mouse location
                 audioManager.PlayPull();
-                stretching = true;
-            }
-            if (stretching) {
-                audioManager.PlayStretch();
             }
             if (Input.GetMouseButtonUp(0))
             {
-                stretching=false;
+                audioManager.PlayRelease();
                 float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
                 float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
                 playerRb.linearVelocity = new Vector2(xChange, yChange);
