@@ -36,6 +36,8 @@ public class PlayerController : MonoBehaviour
     // Audio 
     [SerializeField] GameObject bounceAudioObject;
     [SerializeField] GameObject pullAudioObject;
+    private AudioSource[] audioSources;
+
     private AudioSource bounceAudioSource;
     private AudioSource pullAudioSource;
 
@@ -53,23 +55,17 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         spriteRenderer = spriteObject.GetComponent<SpriteRenderer>();
-        bounceAudioSource = bounceAudioObject.GetComponent<AudioSource>();
-        pullAudioSource = pullAudioObject.GetComponent<AudioSource>();
+
+        // Audio: Get Components gets all Audio Components on Player's prefab
+        audioSources = GetComponents<AudioSource>();
+        bounceAudioSource = audioSources[0];
+        pullAudioSource = audioSources[1];
         spriteRenderer.sprite = initialSprite;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (playerRb.linearVelocity.magnitude >= minSpeed && launched)
-        {
-            direction = playerRb.linearVelocity.normalized;
-            currentSpeed = playerRb.linearVelocity.magnitude;
-            angle = Mathf.Clamp01(currentSpeed / maxLaunchSpeed);
-            angle = Mathf.Lerp(-90f, 90f, angle);
-            pivot.transform.rotation = Quaternion.Euler(0f, 0f, -angle);
-        }
-
         // initial launch with left click + drag, otherwise must activate stamina using right click
         if (!launched)
         {
@@ -79,15 +75,13 @@ public class PlayerController : MonoBehaviour
                 //store initial mouse location
                 pullAudioSource.PlayOneShot(pullAudioSource.clip);
             }
-            // if (Input.GetMouseButton(0))
-            // {
-
-            // }
             if (Input.GetMouseButtonUp(0))
             {
                 float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
                 float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
                 playerRb.linearVelocity = new Vector2(xChange, yChange);
+
+                // is this a race condition? someitmes you instal lose
                 if (playerRb.linearVelocity.magnitude > 0.2 * maxLaunchSpeed)
                 {
                     launched = true;
@@ -106,22 +100,33 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            if (playerRb.linearVelocity.magnitude >= minSpeed)
+            {
+                direction = playerRb.linearVelocity.normalized;
+                currentSpeed = playerRb.linearVelocity.magnitude;
+                angle = Mathf.Clamp01(currentSpeed / maxLaunchSpeed);
+                angle = Mathf.Lerp(-90f, 90f, angle);
+                pivot.transform.rotation = Quaternion.Euler(0f, 0f, -angle);
+            }
+            else
+            {
+                lose = true;
+            }
 
-        if (playerRb.linearVelocityX < 0)
-        {
-            spriteObject.transform.Rotate(0, 0, currentSpeed * Time.deltaTime * rotateForce * flip);
-        }
-        else if (playerRb.linearVelocityX > 0)
-        {
-            spriteObject.transform.Rotate(0, 0, -currentSpeed * Time.deltaTime * rotateForce * flip);
-        }
-        //get if the mouse was clicked down
-        //update the force based on location of mouse in comparison with original location
-        //Camera.main.ScreenToWorldPoint()
-        //when let go, do a calculation and apply the force
-        if (launched && playerRb.linearVelocity.magnitude <= minSpeed)
-        {
-            lose = true;
+            if (playerRb.linearVelocityX < 0)
+            {
+                spriteObject.transform.Rotate(0, 0, currentSpeed * Time.deltaTime * rotateForce * flip);
+            }
+            else if (playerRb.linearVelocityX > 0)
+            {
+                spriteObject.transform.Rotate(0, 0, -currentSpeed * Time.deltaTime * rotateForce * flip);
+            }
+            //get if the mouse was clicked down
+            //update the force based on location of mouse in comparison with original location
+            //Camera.main.ScreenToWorldPoint()
+            //when let go, do a calculation and apply the force
         }
     }
 
@@ -146,6 +151,7 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        bounceAudioSource.pitch = 1;
         if ((bounceLayers.value & (1 << collision.gameObject.layer)) > 0)
         {
             ray = Physics2D.Raycast(transform.position, direction, 4f, bounceLayers.value);
@@ -162,7 +168,15 @@ public class PlayerController : MonoBehaviour
         {
             flip = flip * -1;
         }
+        // play audio on bounce, randomized semitones
+        int[] semitones = new[] { 0, 2, 4, 7, 9 };
+        int x = Random.Range(0, 5);
+        for (int i = 0; i < x; i++)
+        {
+            bounceAudioSource.pitch *= 1.059463f;
+        }
         bounceAudioSource.PlayOneShot(bounceAudioSource.clip);
+        
     }
 
     /// <summary>
