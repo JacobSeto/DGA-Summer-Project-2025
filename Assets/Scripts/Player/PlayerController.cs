@@ -88,6 +88,9 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
+        //get if the mouse was clicked down
+        //update the force based on location of mouse in comparison with original location
+        //when let go, do a calculation and apply the force
         else
         {
             if (playerRb.linearVelocity.magnitude >= minSpeed)
@@ -102,7 +105,6 @@ public class PlayerController : MonoBehaviour
             {
                 lose = true;
             }
-
             if (playerRb.linearVelocityX < 0)
             {
                 spriteObject.transform.Rotate(0, 0, currentSpeed * Time.deltaTime * rotateForce * flip);
@@ -111,10 +113,6 @@ public class PlayerController : MonoBehaviour
             {
                 spriteObject.transform.Rotate(0, 0, -currentSpeed * Time.deltaTime * rotateForce * flip);
             }
-            //get if the mouse was clicked down
-            //update the force based on location of mouse in comparison with original location
-            //Camera.main.ScreenToWorldPoint()
-            //when let go, do a calculation and apply the force
         }
     }
 
@@ -132,8 +130,6 @@ public class PlayerController : MonoBehaviour
         {
             float decay = Mathf.Lerp(1f, 0.94f, Mathf.Exp(currentSpeed - (0.05f * maxSpeed)));
             playerRb.linearVelocity *= decay;
-            // Vector2 oppositeForce = -playerRb.linearVelocity.normalized * decelerationForce;
-            // playerRb.AddForce(oppositeForce);
         }
     }
 
