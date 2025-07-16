@@ -23,23 +23,14 @@ public class PlayerController : MonoBehaviour
     float currentSpeed;
     Vector3 originalPos;
     float angle;
-
     private int stamina;
-
     private int maxStamina;
-
     float flip = 1;
+    private AudioManager audioManager;
+
 
     [SerializeField] LayerMask bounceLayers;
     [SerializeField] GameObject pivot;
-
-    // Audio 
-    [SerializeField] GameObject bounceAudioObject;
-    [SerializeField] GameObject pullAudioObject;
-    private AudioSource[] audioSources;
-
-    private AudioSource bounceAudioSource;
-    private AudioSource pullAudioSource;
 
     // Sprites
 
@@ -54,13 +45,10 @@ public class PlayerController : MonoBehaviour
     // Start is called before first frame is script is active
     void Start()
     {
-        spriteRenderer = spriteObject.GetComponent<SpriteRenderer>();
 
-        // Audio: Get Components gets all Audio Components on Player's prefab
-        audioSources = GetComponents<AudioSource>();
-        bounceAudioSource = audioSources[0];
-        pullAudioSource = audioSources[1];
+        spriteRenderer = spriteObject.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = initialSprite;
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     // Update is called once per frame
@@ -73,7 +61,7 @@ public class PlayerController : MonoBehaviour
             {
                 originalPos = Input.mousePosition;
                 //store initial mouse location
-                pullAudioSource.PlayOneShot(pullAudioSource.clip);
+                audioManager.PlayPull();
             }
             if (Input.GetMouseButtonUp(0))
             {
@@ -151,7 +139,6 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        bounceAudioSource.pitch = 1;
         if ((bounceLayers.value & (1 << collision.gameObject.layer)) > 0)
         {
             ray = Physics2D.Raycast(transform.position, direction, 4f, bounceLayers.value);
@@ -168,14 +155,7 @@ public class PlayerController : MonoBehaviour
         {
             flip = flip * -1;
         }
-        // play audio on bounce, randomized semitones
-        int[] semitones = new[] { 0, 2, 4, 7, 9 };
-        int x = Random.Range(0, 5);
-        for (int i = 0; i < x; i++)
-        {
-            bounceAudioSource.pitch *= 1.059463f;
-        }
-        bounceAudioSource.PlayOneShot(bounceAudioSource.clip);
+        audioManager.PlayBounce();
         
     }
 
@@ -189,7 +169,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Set velocity given new x veloicty and new y veloicty
+    /// Set velocity given new x velocity and new y velocity
     /// playerRb is public so this prob isn't needed
     /// </summary>
     public void setVelocity(float x, float y)
