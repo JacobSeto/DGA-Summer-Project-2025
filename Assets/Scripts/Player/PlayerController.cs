@@ -26,6 +26,11 @@ public class PlayerController : MonoBehaviour
     private int stamina;
     private int maxStamina;
     float flip = 1;
+
+    // Trajectory/stretching variables
+    float dragDistance;
+    public bool IsStretching => stretching;
+    public Vector3 OriginalMousePos => originalPos;
     
     // Audio
     private AudioManager audioManager;
@@ -63,11 +68,18 @@ public class PlayerController : MonoBehaviour
             {
                 originalPos = Input.mousePosition;
                 //store initial mouse location
-                audioManager.PlayPull();
+                //audioManager.PlayPull();
                 stretching = true;
             }
-            if (stretching) {
-                audioManager.PlayStretch();
+            if (stretching)
+            {
+                //audioManager.PlayStretch();
+
+                // for trajectory UI
+                Vector3 currentMousePos = Input.mousePosition;
+                dragDistance = Vector3.Distance(currentMousePos, originalPos);
+
+                Debug.Log($"Drag distance: {dragDistance}");
             }
             if (Input.GetMouseButtonUp(0))
             {
@@ -95,19 +107,6 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if (playerRb.linearVelocity.magnitude >= minSpeed)
-            {
-                direction = playerRb.linearVelocity.normalized;
-                currentSpeed = playerRb.linearVelocity.magnitude;
-                angle = Mathf.Clamp01(currentSpeed / maxLaunchSpeed);
-                angle = Mathf.Lerp(-90f, 90f, angle);
-                pivot.transform.rotation = Quaternion.Euler(0f, 0f, -angle);
-            }
-            else
-            {
-                lose = true;
-            }
-
             if (playerRb.linearVelocityX < 0)
             {
                 spriteObject.transform.Rotate(0, 0, currentSpeed * Time.deltaTime * rotateForce * flip);
@@ -115,6 +114,21 @@ public class PlayerController : MonoBehaviour
             else if (playerRb.linearVelocityX > 0)
             {
                 spriteObject.transform.Rotate(0, 0, -currentSpeed * Time.deltaTime * rotateForce * flip);
+            }
+
+            if (playerRb.linearVelocity.magnitude >= minSpeed)
+            {
+                direction = playerRb.linearVelocity.normalized;
+                currentSpeed = playerRb.linearVelocity.magnitude;
+                angle = Mathf.Clamp01(currentSpeed / maxLaunchSpeed);
+                angle = Mathf.Lerp(-90f, 90f, angle);
+                pivot.transform.rotation = Quaternion.Euler(0f, 0f, -angle);
+                return;
+            }
+            else
+            {
+                lose = true;
+                return;
             }
             //get if the mouse was clicked down
             //update the force based on location of mouse in comparison with original location
@@ -160,8 +174,17 @@ public class PlayerController : MonoBehaviour
         {
             flip = flip * -1;
         }
-        audioManager.PlayBounce();
+        //audioManager.PlayBounce();
         
+    }
+
+    /// <summary>
+    /// How far from the original click has the player dragged the mouse(for trajectory UI)?
+    /// </summary>
+    /// <returns>float representing world distance</returns>
+    public float getDragDistance()
+    {
+        return dragDistance;
     }
 
     /// <summary>

@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 5117515885611587728, guid: 221f89fea38feeb49a56158b00827c98, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -148,8 +148,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   pivot: {fileID: 0}
-  bounceAudioObject: {fileID: 0}
-  pullAudioObject: {fileID: 0}
   spriteRenderer: {fileID: 3958427247207750238}
   spriteObject: {fileID: 2210973940943747788}
   initialSprite: {fileID: 5117515885611587728, guid: 221f89fea38feeb49a56158b00827c98, type: 3}
