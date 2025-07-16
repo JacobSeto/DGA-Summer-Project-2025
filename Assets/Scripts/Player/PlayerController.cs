@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     float flip = 1;
 
     // Trajectory/stretching variables
+    private bool stretching = false;
     float dragDistance;
     public bool IsStretching => stretching;
     public Vector3 OriginalMousePos => originalPos;
@@ -64,7 +65,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // initial launch with left click + drag, otherwise must activate stamina using right click
-        if (!launched || stamina > 0)
+        if (!lose && (!launched || stamina > 0))
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -88,16 +89,17 @@ public class PlayerController : MonoBehaviour
                 dragDistance = Vector3.Distance(currentMousePos, originalPos);
 
                 Debug.Log($"Drag distance: {dragDistance}");
-                audioManager.PlayPull();
+                //audioManager.PlayPull();
             }
             if (Input.GetMouseButtonUp(0))
             {
+                stretching = false;
                 if (slowMotion)
                 {
                     Time.timeScale = 1;
                     Time.fixedDeltaTime = 0.02F;
                 }
-                audioManager.PlayRelease();
+                //audioManager.PlayRelease();
                 float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
                 float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
                 playerRb.linearVelocity = new Vector2(xChange, yChange);
