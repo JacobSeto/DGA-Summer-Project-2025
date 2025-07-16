@@ -56,7 +56,6 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = spriteObject.GetComponent<SpriteRenderer>();
         audioSource = audioObject.GetComponent<AudioSource>();
         spriteRenderer.sprite = initialSprite;
-        stamina = 3;
     }
 
     // Update is called once per frame
