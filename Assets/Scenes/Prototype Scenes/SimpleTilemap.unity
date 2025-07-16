@@ -211,6 +211,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 661092821}
     - target: {fileID: -6027955848104475147, guid: 33ab23f5c1400c74bae73e2161dc02d2, type: 3}
+      propertyPath: stamina
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -6027955848104475147, guid: 33ab23f5c1400c74bae73e2161dc02d2, type: 3}
       propertyPath: maxSpeed
       value: 24.5
       objectReference: {fileID: 0}
@@ -4195,7 +4199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6a2e4addfe1c574885e1fc35da481c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waterTileCollider: {fileID: 1504338641}
+  waterDampeningValue: 0
 --- !u!1 &1636274749
 GameObject:
   m_ObjectHideFlags: 0

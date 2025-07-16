@@ -15,8 +15,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float minSpeed;
     [SerializeField] public float bounceForce;
     [SerializeField] public float rotateForce;
+    [SerializeField] int stamina;
     public bool lose = false;
     public bool launched = false;
+    public bool slowMotion = false;
     Vector2 reflectedVector;
     RaycastHit2D ray;
     Vector2 direction;
@@ -24,7 +26,7 @@ public class PlayerController : MonoBehaviour
     Vector3 originalPos;
     float angle;
 
-    private int stamina;
+    
 
     private int maxStamina;
 
@@ -72,22 +74,28 @@ public class PlayerController : MonoBehaviour
         }
 
         // initial launch with left click + drag, otherwise must activate stamina using right click
-        if (!launched)
+        if (!launched || stamina > 0)
         {
             if (Input.GetMouseButtonDown(0))
             {
                 originalPos = Input.mousePosition;
-                //store initial mouse location
+                if (launched)
+                {
+                    slowMotion = true;
+                    playerRb.linearVelocity = playerRb.linearVelocity / 2;
+                }
             }
-            // if (Input.GetMouseButton(0))
-            // {
-
-            // }
             if (Input.GetMouseButtonUp(0))
             {
+                if (slowMotion)
+                {
+                    playerRb.linearVelocity = playerRb.linearVelocity * 2;
+                }
                 float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
                 float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
                 playerRb.linearVelocity = new Vector2(xChange, yChange);
+                slowMotion = false;
+                DecrementStamina();
                 if (playerRb.linearVelocity.magnitude > 0.2 * maxLaunchSpeed)
                 {
                     launched = true;
@@ -102,6 +110,7 @@ public class PlayerController : MonoBehaviour
                     // indicate to player that launch force was too low!
                     playerRb.linearVelocity = new Vector2(0, 0);
                 }
+                
             }
         }
         if (playerRb.linearVelocityX < 0)
