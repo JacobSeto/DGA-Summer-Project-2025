@@ -26,20 +26,16 @@ public class PlayerController : MonoBehaviour
     float currentSpeed;
     Vector3 originalPos;
     float angle;
-
-    
-
     private int maxStamina;
-
-    private AudioSource audioSource;
-
     float flip = 1;
+    
+    // Audio
+    [SerializeField] AudioManager audioManager;
 
     [SerializeField] LayerMask bounceLayers;
     [SerializeField] GameObject pivot;
-    [SerializeField] GameObject audioObject;
 
-    //Sprites
+    // Sprites
 
     [SerializeField] SpriteRenderer spriteRenderer;
 
@@ -53,35 +49,23 @@ public class PlayerController : MonoBehaviour
     // Start is called before first frame is script is active
     void Start()
     {
+
         spriteRenderer = spriteObject.GetComponent<SpriteRenderer>();
-        audioSource = audioObject.GetComponent<AudioSource>();
         spriteRenderer.sprite = initialSprite;
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Current Stamina: " + stamina);
-        if (playerRb.linearVelocity.magnitude >= minSpeed || !launched)
-        {
-            direction = playerRb.linearVelocity.normalized;
-            currentSpeed = playerRb.linearVelocity.magnitude;
-            angle = Mathf.Clamp01(currentSpeed / maxLaunchSpeed);
-            angle = Mathf.Lerp(-90f, 90f, angle);
-            pivot.transform.rotation = Quaternion.Euler(0f, 0f, -angle);
-        }
-        else
-        {
-            lose = true;
-            playerRb.linearVelocity = Vector2.zero;
-        }
-
         // initial launch with left click + drag, otherwise must activate stamina using right click
         if (!launched || stamina > 0)
         {
             if (Input.GetMouseButtonDown(0))
             {
                 originalPos = Input.mousePosition;
+                //store initial mouse location
+                audioManager.PlayPull();
                 if (launched)
                 {
                     slowMotion = true;
@@ -96,45 +80,45 @@ public class PlayerController : MonoBehaviour
                     Time.timeScale = 1;
                     Time.fixedDeltaTime = 0.02F;
                 }
+                audioManager.PlayRelease();
                 float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
                 float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
                 playerRb.linearVelocity = new Vector2(xChange, yChange);
-                slowMotion = false;
                 DecrementStamina();
-                if (playerRb.linearVelocity.magnitude > 0.2 * maxLaunchSpeed)
-                {
+                // is this a race condition? someitmes you instalose
+                if (playerRb.linearVelocity.magnitude > maxLaunchSpeed) {
+                    playerRb.linearVelocity = Vector2.ClampMagnitude(playerRb.linearVelocity, maxLaunchSpeed);
+                    launched = true;
+                    spriteRenderer.sprite = postLaunchSprite;
+                } else if (playerRb.linearVelocity.magnitude > 0.2 * maxLaunchSpeed) {
                     launched = true;
                     spriteRenderer.sprite = postLaunchSprite;
                 }
-                else if (playerRb.linearVelocity.magnitude > maxLaunchSpeed)
-                {
-                    playerRb.linearVelocity = Vector2.ClampMagnitude(playerRb.linearVelocity, maxLaunchSpeed);
-                }
-                else
-                {
-                    // indicate to player that launch force was too low!
-                    playerRb.linearVelocity = new Vector2(0, 0);
+                else {
+                    // launch force too low, enforce minimum launch speed
+                    playerRb.linearVelocity = new Vector2(xChange + maxLaunchSpeed * 0.2f, yChange + maxLaunchSpeed * 0.2f);
+                    launched = true;
+                    spriteRenderer.sprite = postLaunchSprite;
                 }
                 
             }
         }
-        if (playerRb.linearVelocityX < 0)
-        {
-            spriteObject.transform.Rotate(0, 0, currentSpeed * Time.deltaTime * rotateForce * flip);
-        }
-        else if (playerRb.linearVelocityX > 0)
-        {
-            spriteObject.transform.Rotate(0, 0, -currentSpeed * Time.deltaTime * rotateForce * flip);
-        }
-        //get if the mouse was clicked down
-        //update the force based on location of mouse in comparison with original location
-        //Camera.main.ScreenToWorldPoint()
-        //when let go, do a calculation and apply the force
-        if (launched && playerRb.linearVelocity.magnitude == 0 && stamina <=0)
-        {
-            lose = true;
-        }
-        
+        if (playerRb.linearVelocity.magnitude >= minSpeed) {
+                direction = playerRb.linearVelocity.normalized;
+                currentSpeed = playerRb.linearVelocity.magnitude;
+                angle = Mathf.Clamp01(currentSpeed / maxLaunchSpeed);
+                angle = Mathf.Lerp(-90f, 90f, angle);
+                pivot.transform.rotation = Quaternion.Euler(0f, 0f, -angle);
+                if (playerRb.linearVelocityX < 0) {
+                    spriteObject.transform.Rotate(0, 0, currentSpeed * Time.deltaTime * rotateForce * flip);
+                }
+                else if (playerRb.linearVelocityX > 0) {
+                    spriteObject.transform.Rotate(0, 0, -currentSpeed * Time.deltaTime * rotateForce * flip);
+                }
+            } else if (launched) {
+                lose = true;
+                playerRb.linearVelocity = Vector2.zero;
+            }
     }
 
     private void FixedUpdate()
@@ -151,8 +135,6 @@ public class PlayerController : MonoBehaviour
         {
             float decay = Mathf.Lerp(1f, 0.94f, Mathf.Exp(currentSpeed - (0.05f * maxSpeed)));
             playerRb.linearVelocity *= decay;
-            // Vector2 oppositeForce = -playerRb.linearVelocity.normalized * decelerationForce;
-            // playerRb.AddForce(oppositeForce);
         }
     }
 
@@ -196,7 +178,8 @@ public class PlayerController : MonoBehaviour
         {
             flip = flip * -1;
         }
-        audioSource.Play();
+        audioManager.PlayBounce();
+        
     }
 
     /// <summary>
@@ -209,7 +192,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
-    /// Set velocity given new x veloicty and new y veloicty
+    /// Set velocity given new x velocity and new y velocity
     /// playerRb is public so this prob isn't needed
     /// </summary>
     public void setVelocity(float x, float y)
