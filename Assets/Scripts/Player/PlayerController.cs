@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
                 playerRb.linearVelocity = new Vector2(xChange, yChange);
 
                 // is this a race condition? someitmes you instal lose
-                if (playerRb.linearVelocity.magnitude > 0.2 * maxLaunchSpeed)
+                if (playerRb.linearVelocity.magnitude > 0.2f * maxLaunchSpeed)
                 {
                     launched = true;
                     spriteRenderer.sprite = postLaunchSprite;
