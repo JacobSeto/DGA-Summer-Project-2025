@@ -1,13 +1,20 @@
 using JetBrains.Annotations;
 using UnityEngine;
 using TMPro;
+using UnityEditor.Tilemaps;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] public Rigidbody2D playerRb;
+    [SerializeField] float maxLaunchSpeed;
+
+    /// <summary>
+    /// Max speed that the armidillo can be at any moment(including boosts/powerups)
+    /// </summary>
     [SerializeField] float maxSpeed;
     [SerializeField] float minSpeed;
     [SerializeField] public float bounceForce;
+    [SerializeField] public float rotateForce;
     public bool lose = false;
     public bool launched = false;
     Vector2 reflectedVector;
@@ -15,14 +22,25 @@ public class PlayerController : MonoBehaviour
     Vector2 direction;
     float currentSpeed;
     Vector3 originalPos;
+    float angle;
+
+    private int stamina;
+
+    private int maxStamina;
+
+    private AudioSource audioSource;
+
+    float flip = 1;
 
     [SerializeField] LayerMask bounceLayers;
-
-    [SerializeField] TextMeshProUGUI speedText;
+    [SerializeField] GameObject pivot;
+    [SerializeField] GameObject audioObject;
 
     //Sprites
 
     [SerializeField] SpriteRenderer spriteRenderer;
+
+    [SerializeField] GameObject spriteObject;
 
     [SerializeField] Sprite initialSprite;
 
@@ -31,6 +49,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before first frame is script is active
     void Start()
     {
+        spriteRenderer = spriteObject.GetComponent<SpriteRenderer>();
+        audioSource = audioObject.GetComponent<AudioSource>();
         spriteRenderer.sprite = initialSprite;
     }
 
@@ -41,43 +61,87 @@ public class PlayerController : MonoBehaviour
         {
             direction = playerRb.linearVelocity.normalized;
             currentSpeed = playerRb.linearVelocity.magnitude;
-            speedText.text = $"Speed: {currentSpeed:F2}";
+            angle = Mathf.Clamp01(currentSpeed / maxLaunchSpeed);
+            angle = Mathf.Lerp(-90f, 90f, angle);
+            pivot.transform.rotation = Quaternion.Euler(0f, 0f, -angle);
         }
         else
         {
             lose = true;
             playerRb.linearVelocity = Vector2.zero;
         }
-        if (!lose)
+
+        // initial launch with left click + drag, otherwise must activate stamina using right click
+        if (!launched)
         {
             if (Input.GetMouseButtonDown(0))
             {
                 originalPos = Input.mousePosition;
                 //store initial mouse location
             }
+            // if (Input.GetMouseButton(0))
+            // {
+
+            // }
             if (Input.GetMouseButtonUp(0))
             {
                 float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
                 float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
                 playerRb.linearVelocity = new Vector2(xChange, yChange);
-                launched = true;
-                spriteRenderer.sprite = postLaunchSprite;
+                if (playerRb.linearVelocity.magnitude > 0.2 * maxLaunchSpeed)
+                {
+                    launched = true;
+                    spriteRenderer.sprite = postLaunchSprite;
+                }
+                else if (playerRb.linearVelocity.magnitude > maxLaunchSpeed)
+                {
+                    playerRb.linearVelocity = Vector2.ClampMagnitude(playerRb.linearVelocity, maxLaunchSpeed);
+                }
+                else
+                {
+                    // indicate to player that launch force was too low!
+                    playerRb.linearVelocity = new Vector2(0, 0);
+                }
             }
+        }
+        if (playerRb.linearVelocityX < 0)
+        {
+            spriteObject.transform.Rotate(0, 0, currentSpeed * Time.deltaTime * rotateForce * flip);
+        }
+        else if (playerRb.linearVelocityX > 0)
+        {
+            spriteObject.transform.Rotate(0, 0, -currentSpeed * Time.deltaTime * rotateForce * flip);
         }
         //get if the mouse was clicked down
         //update the force based on location of mouse in comparison with original location
         //Camera.main.ScreenToWorldPoint()
         //when let go, do a calculation and apply the force
+        if (launched && playerRb.linearVelocity.magnitude == 0)
+        {
+            lose = true;
+        }
+        
     }
 
     private void FixedUpdate()
     {
-        if (playerRb.linearVelocity.magnitude > maxSpeed)
+        if (currentSpeed > maxSpeed)
         {
             playerRb.linearVelocity = Vector2.ClampMagnitude(playerRb.linearVelocity, maxSpeed);
         }
+        else if (currentSpeed < 0.005 * maxSpeed)
+        {
+            playerRb.linearVelocity = Vector2.ClampMagnitude(playerRb.linearVelocity, 0);
+        }
+        else if (currentSpeed < 0.15 * maxSpeed)
+        {
+            float decay = Mathf.Lerp(1f, 0.94f, Mathf.Exp(currentSpeed - (0.05f * maxSpeed)));
+            playerRb.linearVelocity *= decay;
+            // Vector2 oppositeForce = -playerRb.linearVelocity.normalized * decelerationForce;
+            // playerRb.AddForce(oppositeForce);
+        }
     }
-    
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if ((bounceLayers.value & (1 << collision.gameObject.layer)) > 0)
@@ -90,5 +154,64 @@ public class PlayerController : MonoBehaviour
                 playerRb.linearVelocity = reflectedVector * bounceForce;
             }
         }
+        ContactPoint2D contact = collision.GetContact(0);
+        Vector2 normal = contact.normal;
+        if (Mathf.Abs(normal.y) > 0.5)
+        {
+            flip = flip * -1;
+        }
+        audioSource.Play();
+    }
+
+    /// <summary>
+    /// Change the max speed (in flight)
+    /// Does not affect the max speed the Armadillo is launched at
+    /// </summary>
+    public void ChangeMaxSpeed(float newSpeed)
+    {
+        maxSpeed = newSpeed;
+    }
+
+    /// <summary>
+    /// Set velocity given new x veloicty and new y veloicty
+    /// playerRb is public so this prob isn't needed
+    /// </summary>
+    public void setVelocity(float x, float y)
+    {
+        playerRb.linearVelocity = new Vector2(x, y);
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns> Returns magnitude of player velocity </returns>
+    public float GetCurrentSpeed()
+    {
+        return currentSpeed;
+    }
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns> Returns current stamina count for player </returns>
+    public int GetStaminaCount()
+    {
+        return stamina;
+    }
+
+    /// <summary>
+    /// Decrements current stamina by 1
+    /// </summary>
+    public void DecrementStamina()
+    {
+        if (stamina > 0) stamina--;
+    }
+    
+    /// <summary>
+    /// Increments current stamina by 1
+    /// </summary>
+    public void IncrementStamina()
+    {
+        if (stamina < maxStamina) stamina++;
     }
 }
