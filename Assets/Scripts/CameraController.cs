@@ -34,6 +34,7 @@ public class CameraController : MonoBehaviour
     private Vector3 currentPosition;
     //Screen Bound
     private int activePenn=0;
+    private Vector3 penPostition;
     //
     [SerializeField] private PlayerController player;
 
@@ -46,6 +47,7 @@ public class CameraController : MonoBehaviour
         
         currentSize = levelSize;
         currentPosition = levelView;
+        penPostition = pen[activePenn].transform.position;
     }
 
     // Update is called once per frame
@@ -55,7 +57,7 @@ public class CameraController : MonoBehaviour
 
         for (int i = 0; i < pen.Length; i++)
         {
-            if (pen[i].OverlapPoint(playerLoc.position))
+            if (pen[i].OverlapPoint(player.transform.position))
             {
                 activePenn = i;
             }
@@ -72,19 +74,22 @@ public class CameraController : MonoBehaviour
         
         if (zoomed == 2) // Whole Level overview
         {
-            currentSize += (levelSize - playerSize) / 10;
+            currentSize = levelSize;
             currentPosition = new Vector3(levelView.x, levelView.y, -10f);
         }
         if (zoomed == 3) // Inspecting Level
         {
-            currentSize -= (levelSize - zoomScrollSize) / 10;
+            currentSize = zoomScrollSize;
             
         }
         if (zoomed==1 || player.launched) // Following Player
         {
             zoomed = 1;
-            currentSize -= (levelSize - playerSize) / 10;
-            currentPosition = new Vector3(playerLoc.position.x + (Mathf.Clamp(playerBody.linearVelocityX, -currentSize*2*(16f/10f), currentSize * 2 * (16f / 10f)) ), playerLoc.position.y + (Mathf.Clamp(playerBody.linearVelocityY, -currentSize, currentSize)), -10f);
+            currentSize = playerSize;
+            currentPosition = new Vector3(playerLoc.position.x + (Mathf.Clamp(playerBody.linearVelocityX, -currentSize*2*(16f/10f), currentSize * 2 * (16f / 10f)) ), 
+                playerLoc.position.y + (Mathf.Clamp(playerBody.linearVelocityY, -2*currentSize, 2*currentSize)),
+                -10f);
+            //currentPosition = new Vector3(playerLoc.position.x + playerBody.linearVelocityX, playerLoc.position.y + playerBody.linearVelocityY, -10f);
         }
 
 
@@ -100,6 +105,7 @@ public class CameraController : MonoBehaviour
             //currentPosition=new Vector3 (posX, posY, -10f);
             currentPosition = Bind(currentPosition);
             transform.position = Vector3.Slerp(transform.position, currentPosition, movementSpeed);
+            
         }
         else 
         {
@@ -122,9 +128,11 @@ public class CameraController : MonoBehaviour
     private Vector3 Bind(Vector3 curPosition)
     {
         Vector3 boundedPosition = curPosition;
-        while(!pen[activePenn].OverlapPoint(new Vector2(boundedPosition.x, boundedPosition.y))) 
+        int i = 0;
+        while(!pen[activePenn].OverlapPoint(new Vector2(boundedPosition.x, boundedPosition.y)) && i<5000 ) 
         {
-            boundedPosition = boundedPosition / 1.05f;
+            boundedPosition = boundedPosition - (boundedPosition - playerLoc.position) * .05f;
+            i++;
         }
         boundedPosition.z = -10f;
         return boundedPosition;
