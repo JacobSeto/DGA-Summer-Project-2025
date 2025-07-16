@@ -156,14 +156,19 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        // Animal Controller Collisions
         if (collision.gameObject.CompareTag("Insect"))
         {
             currentSpeed *= 2f;
         }
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Tranquilizer"))
         {
-            currentSpeed *= 0.5f;
+            DecrementStamina();
         }
+        if (collision.gameObject.CompareTag("Enemy"))
+            {
+                currentSpeed *= 0.5f;
+            }
         ElephantController elephant = collision.gameObject.GetComponent<ElephantController>();
         elephant?.DecreaseHP();
 
