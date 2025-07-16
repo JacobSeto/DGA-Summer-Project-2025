@@ -15,8 +15,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float minSpeed;
     [SerializeField] public float bounceForce;
     [SerializeField] public float rotateForce;
+    [SerializeField] int stamina;
+    [SerializeField] public float slowDownAmount;
     public bool lose = false;
     public bool launched = false;
+    public bool slowMotion = false;
     Vector2 reflectedVector;
     RaycastHit2D ray;
     Vector2 direction;
@@ -24,7 +27,7 @@ public class PlayerController : MonoBehaviour
     Vector3 originalPos;
     float angle;
 
-    private int stamina;
+    
 
     private int maxStamina;
 
@@ -73,22 +76,30 @@ public class PlayerController : MonoBehaviour
         }
 
         // initial launch with left click + drag, otherwise must activate stamina using right click
-        if (!launched)
+        if (!launched || stamina > 0)
         {
             if (Input.GetMouseButtonDown(0))
             {
                 originalPos = Input.mousePosition;
-                //store initial mouse location
+                if (launched)
+                {
+                    slowMotion = true;
+                    Time.timeScale = slowDownAmount;
+                    Time.fixedDeltaTime = 0.02F * Time.timeScale;
+                }
             }
-            // if (Input.GetMouseButton(0))
-            // {
-
-            // }
             if (Input.GetMouseButtonUp(0))
             {
+                if (slowMotion)
+                {
+                    Time.timeScale = 1;
+                    Time.fixedDeltaTime = 0.02F;
+                }
                 float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
                 float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
                 playerRb.linearVelocity = new Vector2(xChange, yChange);
+                slowMotion = false;
+                DecrementStamina();
                 if (playerRb.linearVelocity.magnitude > 0.2 * maxLaunchSpeed)
                 {
                     launched = true;
@@ -103,6 +114,7 @@ public class PlayerController : MonoBehaviour
                     // indicate to player that launch force was too low!
                     playerRb.linearVelocity = new Vector2(0, 0);
                 }
+                
             }
         }
         if (playerRb.linearVelocityX < 0)
@@ -117,7 +129,7 @@ public class PlayerController : MonoBehaviour
         //update the force based on location of mouse in comparison with original location
         //Camera.main.ScreenToWorldPoint()
         //when let go, do a calculation and apply the force
-        if (launched && playerRb.linearVelocity.magnitude == 0)
+        if (launched && playerRb.linearVelocity.magnitude == 0 && stamina <=0)
         {
             lose = true;
         }
