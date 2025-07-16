@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] Sprite postLaunchSprite;
 
+
     // Start is called before first frame is script is active
     void Start()
     {
@@ -116,6 +117,7 @@ public class PlayerController : MonoBehaviour
                 }
             } else if (launched) {
                 lose = true;
+                playerRb.linearVelocity = Vector2.zero;
             }
     }
 
@@ -148,6 +150,28 @@ public class PlayerController : MonoBehaviour
                 playerRb.linearVelocity = reflectedVector * bounceForce;
             }
         }
+
+        // Animal Controller Collisions
+        if (collision.gameObject.CompareTag("Insect"))
+        {
+            currentSpeed *= 2f;
+        }
+        if (collision.gameObject.CompareTag("Tranquilizer"))
+        {
+            DecrementStamina();
+        }
+        if (collision.gameObject.CompareTag("Enemy"))
+            {
+                currentSpeed *= 0.5f;
+            }
+        ElephantController elephant = collision.gameObject.GetComponent<ElephantController>();
+        elephant?.DecreaseHP();
+
+        if (collision.gameObject.CompareTag("Cheetah"))
+        {
+            stamina++;
+        }
+
         ContactPoint2D contact = collision.GetContact(0);
         Vector2 normal = contact.normal;
         if (Mathf.Abs(normal.y) > 0.5)
@@ -208,5 +232,6 @@ public class PlayerController : MonoBehaviour
     public void IncrementStamina()
     {
         if (stamina < maxStamina) stamina++;
+
     }
 }
