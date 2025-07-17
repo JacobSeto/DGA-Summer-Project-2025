@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using UnityEngine;
 using TMPro;
 using UnityEditor.Tilemaps;
+using UnityEditorInternal;
 
 public class PlayerController : MonoBehaviour
 {
@@ -15,9 +16,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float minSpeed;
     [SerializeField] public float bounceForce;
     [SerializeField] public float rotateForce;
-    [SerializeField] int stamina;
+    [SerializeField] public int stamina;
     [SerializeField] public float slowDownAmount;
-    public bool lose = false;
     public bool launched = false;
     public bool slowMotion = false;
     Vector2 reflectedVector;
@@ -28,12 +28,18 @@ public class PlayerController : MonoBehaviour
     float angle;
     private int maxStamina;
     float flip = 1;
+
+    // Trajectory/stretching variables
+    private bool stretching = false;
+    float dragDistance;
+    public bool IsStretching => stretching;
+    public Vector3 OriginalMousePos => originalPos;
     
     // Audio
-    [SerializeField] AudioManager audioManager;
+    AudioManager audioManager;
 
     [SerializeField] LayerMask bounceLayers;
-    [SerializeField] GameObject pivot;
+    private GameObject pivot;
 
     // Sprites
 
@@ -45,27 +51,28 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] Sprite postLaunchSprite;
 
+    [SerializeField] Animator animator;
 
     // Start is called before first frame is script is active
     void Start()
     {
-
         spriteRenderer = spriteObject.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = initialSprite;
-        audioManager = FindObjectOfType<AudioManager>();
+        audioManager = AudioManager.Instance;
     }
 
     // Update is called once per frame
     void Update()
     {
         // initial launch with left click + drag, otherwise must activate stamina using right click
-        if (!launched || stamina > 0)
+        if (!lose && (!launched || stamina > 0))
         {
             if (Input.GetMouseButtonDown(0))
             {
                 originalPos = Input.mousePosition;
                 //store initial mouse location
                 audioManager.PlayPull();
+                stretching = true;
                 if (launched)
                 {
                     slowMotion = true;
@@ -73,8 +80,16 @@ public class PlayerController : MonoBehaviour
                     Time.fixedDeltaTime = 0.02F * Time.timeScale;
                 }
             }
+            if (stretching)
+            {
+                // for trajectory UI
+                Vector3 currentMousePos = Input.mousePosition;
+                dragDistance = Vector3.Distance(currentMousePos, originalPos);
+                Debug.Log($"Drag distance: {dragDistance}");
+            }
             if (Input.GetMouseButtonUp(0))
             {
+                stretching = false;
                 if (slowMotion)
                 {
                     Time.timeScale = 1;
@@ -84,29 +99,31 @@ public class PlayerController : MonoBehaviour
                 float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
                 float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
                 playerRb.linearVelocity = new Vector2(xChange, yChange);
-                DecrementStamina();
+                if (launched)
+                {
+                    DecrementStamina();
+                }
                 // is this a race condition? someitmes you instalose
                 if (playerRb.linearVelocity.magnitude > maxLaunchSpeed) {
                     playerRb.linearVelocity = Vector2.ClampMagnitude(playerRb.linearVelocity, maxLaunchSpeed);
-                    launched = true;
                     spriteRenderer.sprite = postLaunchSprite;
                 } else if (playerRb.linearVelocity.magnitude > 0.2 * maxLaunchSpeed) {
-                    launched = true;
                     spriteRenderer.sprite = postLaunchSprite;
                 }
                 else {
                     // launch force too low, enforce minimum launch speed
                     playerRb.linearVelocity = new Vector2(xChange + maxLaunchSpeed * 0.2f, yChange + maxLaunchSpeed * 0.2f);
-                    launched = true;
                     spriteRenderer.sprite = postLaunchSprite;
                 }
-                
+                launched = true;
+                animator.SetBool("Launch", launched);
+
             }
         }
         if (playerRb.linearVelocity.magnitude >= minSpeed) {
                 direction = playerRb.linearVelocity.normalized;
                 currentSpeed = playerRb.linearVelocity.magnitude;
-                angle = Mathf.Clamp01(currentSpeed / maxLaunchSpeed);
+                angle = Mathf.Clamp01(currentSpeed / maxSpeed);
                 angle = Mathf.Lerp(-90f, 90f, angle);
                 pivot.transform.rotation = Quaternion.Euler(0f, 0f, -angle);
                 if (playerRb.linearVelocityX < 0) {
@@ -116,7 +133,7 @@ public class PlayerController : MonoBehaviour
                     spriteObject.transform.Rotate(0, 0, -currentSpeed * Time.deltaTime * rotateForce * flip);
                 }
             } else if (launched) {
-                lose = true;
+                GameManagerScript.Instance.LoseGame();
                 playerRb.linearVelocity = Vector2.zero;
             }
     }
@@ -180,6 +197,20 @@ public class PlayerController : MonoBehaviour
         }
         audioManager.PlayBounce();
         
+    }
+
+    public void addPivot(GameObject add)
+    {
+        pivot = add;
+    }
+
+    /// <summary>
+    /// How far from the original click has the player dragged the mouse(for trajectory UI)?
+    /// </summary>
+    /// <returns>float representing world distance</returns>
+    public float getDragDistance()
+    {
+        return dragDistance;
     }
 
     /// <summary>

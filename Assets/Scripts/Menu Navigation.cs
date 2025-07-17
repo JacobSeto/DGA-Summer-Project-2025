@@ -2,7 +2,7 @@ using UnityEngine;
 
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+public class MenuNavigation : MonoBehaviour
 {
     [SerializeField] GameObject activeScreen;
 
@@ -17,8 +17,13 @@ public class MainMenu : MonoBehaviour
         activeScreen = screen;
     }
 
-    public void LoadLevel(string levelName)
+    public void LoadScene(string levelName)
     {
         SceneManager.LoadScene(levelName);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
