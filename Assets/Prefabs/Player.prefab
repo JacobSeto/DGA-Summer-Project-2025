@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 5117515885611587728, guid: 221f89fea38feeb49a56158b00827c98, type: 3}
+  m_Sprite: {fileID: 2648501501076065017, guid: 8176ac15cd80687499653c0acf2e5e83, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -147,6 +147,7 @@ MonoBehaviour:
   lose: 0
   launched: 0
   slowMotion: 0
+  audioManager: {fileID: 0}
   bounceLayers:
     serializedVersion: 2
     m_Bits: 256

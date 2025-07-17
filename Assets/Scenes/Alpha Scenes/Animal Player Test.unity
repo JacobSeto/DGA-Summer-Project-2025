@@ -609,6 +609,33 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1 &1092379091 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3839974316450237729, guid: 33ab23f5c1400c74bae73e2161dc02d2, type: 3}
+  m_PrefabInstance: {fileID: 1516391114}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1092379098
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092379091}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ae7313554cddf9a42bba7caed5f279cc, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1105668850
 GameObject:
   m_ObjectHideFlags: 0
@@ -897,6 +924,10 @@ PrefabInstance:
       propertyPath: audioObject
       value: 
       objectReference: {fileID: 1828203799}
+    - target: {fileID: -6027955848104475147, guid: 33ab23f5c1400c74bae73e2161dc02d2, type: 3}
+      propertyPath: initialSprite
+      value: 
+      objectReference: {fileID: 2648501501076065017, guid: 8176ac15cd80687499653c0acf2e5e83, type: 3}
     - target: {fileID: 2210973940943747788, guid: 33ab23f5c1400c74bae73e2161dc02d2, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -952,7 +983,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3839974316450237729, guid: 33ab23f5c1400c74bae73e2161dc02d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1092379098}
   m_SourcePrefab: {fileID: 100100000, guid: 33ab23f5c1400c74bae73e2161dc02d2, type: 3}
 --- !u!1 &1828203799
 GameObject:
