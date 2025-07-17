@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ArrowScript : MonoBehaviour
 {
-    [SerializeField] PlayerController playerController;
+    [HideInInspector] PlayerController playerController;
 
     [SerializeField] SpriteRenderer spriteRenderer;
 
@@ -20,7 +20,7 @@ public class ArrowScript : MonoBehaviour
     {
         arrowTransform = this.transform;
 
-        //should eventually be given to by game manager right?
+        playerController = GetComponentInParent<PlayerController>();
         if (playerController == null)
         {
             Debug.LogError("PlayerController reference is not assigned for UI trajectory");
