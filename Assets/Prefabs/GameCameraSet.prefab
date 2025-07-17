@@ -320,9 +320,9 @@ MonoBehaviour:
   _camera: {fileID: 644919270627231681}
   pen:
   - {fileID: 8684494758021159904}
-  playerLoc: {fileID: 0}
-  playerBody: {fileID: 0}
+  playerLoc: {fileID: 6657906720841977185, guid: 33ab23f5c1400c74bae73e2161dc02d2, type: 3}
+  playerBody: {fileID: -1464496374494826900, guid: 33ab23f5c1400c74bae73e2161dc02d2, type: 3}
   playerSize: 6
   zoomScrollSize: 6
   zoomScrollSpeed: 0.2
-  player: {fileID: 0}
+  player: {fileID: -6027955848104475147, guid: 33ab23f5c1400c74bae73e2161dc02d2, type: 3}
