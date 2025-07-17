@@ -101,23 +101,24 @@ public class PlayerController : MonoBehaviour
                 float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
                 float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
                 playerRb.linearVelocity = new Vector2(xChange, yChange);
-                DecrementStamina();
+                if (launched)
+                {
+                    DecrementStamina();
+                }
                 // is this a race condition? someitmes you instalose
                 if (playerRb.linearVelocity.magnitude > maxLaunchSpeed) {
                     playerRb.linearVelocity = Vector2.ClampMagnitude(playerRb.linearVelocity, maxLaunchSpeed);
-                    launched = true;
                     spriteRenderer.sprite = postLaunchSprite;
                 } else if (playerRb.linearVelocity.magnitude > 0.2 * maxLaunchSpeed) {
-                    launched = true;
                     spriteRenderer.sprite = postLaunchSprite;
                 }
                 else {
                     // launch force too low, enforce minimum launch speed
                     playerRb.linearVelocity = new Vector2(xChange + maxLaunchSpeed * 0.2f, yChange + maxLaunchSpeed * 0.2f);
-                    launched = true;
                     spriteRenderer.sprite = postLaunchSprite;
                 }
-                
+                launched = true;
+
             }
         }
         if (playerRb.linearVelocity.magnitude >= minSpeed) {
