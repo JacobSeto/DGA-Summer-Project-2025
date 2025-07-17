@@ -51,11 +51,9 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] Sprite postLaunchSprite;
 
-
     // Start is called before first frame is script is active
     void Start()
     {
-
         spriteRenderer = spriteObject.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = initialSprite;
         audioManager = FindObjectOfType<AudioManager>();
@@ -71,7 +69,7 @@ public class PlayerController : MonoBehaviour
             {
                 originalPos = Input.mousePosition;
                 //store initial mouse location
-                //audioManager.PlayPull();
+                audioManager.PlayPull();
                 stretching = true;
                 if (launched)
                 {
@@ -89,7 +87,7 @@ public class PlayerController : MonoBehaviour
                 dragDistance = Vector3.Distance(currentMousePos, originalPos);
 
                 Debug.Log($"Drag distance: {dragDistance}");
-                //audioManager.PlayPull();
+                audioManager.PlayPull();
             }
             if (Input.GetMouseButtonUp(0))
             {
@@ -99,7 +97,7 @@ public class PlayerController : MonoBehaviour
                     Time.timeScale = 1;
                     Time.fixedDeltaTime = 0.02F;
                 }
-                //audioManager.PlayRelease();
+                audioManager.PlayRelease();
                 float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
                 float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
                 playerRb.linearVelocity = new Vector2(xChange, yChange);
@@ -197,7 +195,7 @@ public class PlayerController : MonoBehaviour
         {
             flip = flip * -1;
         }
-        //audioManager.PlayBounce();
+        audioManager.PlayBounce();
         
     }
 
