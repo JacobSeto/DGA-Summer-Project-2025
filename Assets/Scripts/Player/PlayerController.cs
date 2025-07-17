@@ -85,9 +85,6 @@ public class PlayerController : MonoBehaviour
                 // for trajectory UI
                 Vector3 currentMousePos = Input.mousePosition;
                 dragDistance = Vector3.Distance(currentMousePos, originalPos);
-
-                Debug.Log($"Drag distance: {dragDistance}");
-                audioManager.PlayPull();
             }
             if (Input.GetMouseButtonUp(0))
             {
