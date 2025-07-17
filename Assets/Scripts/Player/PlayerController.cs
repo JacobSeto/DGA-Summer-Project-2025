@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
     public Vector3 OriginalMousePos => originalPos;
     
     // Audio
-    [SerializeField] AudioManager audioManager;
+    AudioManager audioManager;
 
     [SerializeField] LayerMask bounceLayers;
     [SerializeField] GameObject pivot;
