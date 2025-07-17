@@ -35,9 +35,6 @@ public class PlayerController : MonoBehaviour
     float dragDistance;
     public bool IsStretching => stretching;
     public Vector3 OriginalMousePos => originalPos;
-    
-    // Audio
-    AudioManager audioManager;
 
     [SerializeField] LayerMask bounceLayers;
     [SerializeField] GameObject pivot;
@@ -59,7 +56,6 @@ public class PlayerController : MonoBehaviour
     {
         spriteRenderer = spriteObject.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = initialSprite;
-        audioManager = AudioManager.Instance;
     }
 
     // Update is called once per frame
@@ -72,7 +68,7 @@ public class PlayerController : MonoBehaviour
             {
                 originalPos = Input.mousePosition;
                 //store initial mouse location
-                audioManager.PlayPull();
+                AudioManager.Instance.PlayPull();
                 stretching = true;
                 if (launched)
                 {
@@ -96,7 +92,7 @@ public class PlayerController : MonoBehaviour
                     Time.timeScale = 1;
                     Time.fixedDeltaTime = 0.02F;
                 }
-                audioManager.PlayRelease();
+                AudioManager.Instance.PlayRelease();
                 float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
                 float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
                 playerRb.linearVelocity = new Vector2(xChange, yChange);
@@ -196,7 +192,7 @@ public class PlayerController : MonoBehaviour
         {
             flip = flip * -1;
         }
-        audioManager.PlayBounce();
+        AudioManager.Instance.PlayBounce();
         
     }
 
