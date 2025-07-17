@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
     
     // Audio
     [SerializeField] AudioManager audioManager;
+    private bool played = false;
 
     [SerializeField] LayerMask bounceLayers;
     [SerializeField] GameObject pivot;
@@ -80,17 +81,19 @@ public class PlayerController : MonoBehaviour
             }
             if (stretching)
             {
-                //audioManager.PlayStretch();
-
                 // for trajectory UI
                 Vector3 currentMousePos = Input.mousePosition;
                 dragDistance = Vector3.Distance(currentMousePos, originalPos);
-
                 Debug.Log($"Drag distance: {dragDistance}");
-                audioManager.PlayPull();
+                if (!played)
+                {
+                    audioManager.PlayPull();
+                    played = true;
+                }
             }
             if (Input.GetMouseButtonUp(0))
             {
+                played = false;
                 stretching = false;
                 if (slowMotion)
                 {
