@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
     public Vector3 OriginalMousePos => originalPos;
 
     [SerializeField] LayerMask bounceLayers;
-    [SerializeField] GameObject pivot;
+    private GameObject pivot;
 
     // Sprites
 
@@ -194,6 +194,11 @@ public class PlayerController : MonoBehaviour
         }
         AudioManager.Instance.PlayBounce();
         
+    }
+
+    public void addPivot(GameObject add)
+    {
+        pivot = add;
     }
 
     /// <summary>
