@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using UnityEngine;
 using TMPro;
 using UnityEditor.Tilemaps;
+using UnityEditorInternal;
 
 public class PlayerController : MonoBehaviour
 {
@@ -50,6 +51,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Sprite initialSprite;
 
     [SerializeField] Sprite postLaunchSprite;
+
+    [SerializeField] Animator animator;
 
     // Start is called before first frame is script is active
     void Start()
@@ -114,6 +117,7 @@ public class PlayerController : MonoBehaviour
                     spriteRenderer.sprite = postLaunchSprite;
                 }
                 launched = true;
+                animator.SetBool("Launch", launched);
 
             }
         }
