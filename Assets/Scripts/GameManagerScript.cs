@@ -17,7 +17,7 @@ using UnityEngine.Rendering;
 public class GameManagerScript: MonoBehaviour
 {
     public static GameManagerScript Instance;
-    [HideInInspector] public GameObject player;
+    [HideInInspector] public PlayerController player;
     private bool loss = false;
     private bool win = false;
     private bool pause = false;
@@ -25,29 +25,28 @@ public class GameManagerScript: MonoBehaviour
     private int zookeeperCount = 0;
     private float timer = 0.0f;
     private bool isInAir = false;
+    [SerializeField] GameObject pauseMenu;
 
     void Awake() {
         Instance = this;
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
     private GameObject[] zooKeepers;
-    private bool playerFreeze;
 
     void Start()
     {
         zooKeepers = GameObject.FindGameObjectsWithTag("Zookeeper");
         zookeeperCount = zooKeepers.Length;
-        playerFreeze = player.GetComponent<PlayerController>().enabled;
     }
 
     void Update()
     {
         if (pause == false)
         {
-            if (player.GetComponent<PlayerController>().slowMotion)
+            if (player.slowMotion)
             {
-                timer += Time.deltaTime/player.GetComponent<PlayerController>().slowDownAmount;
+                timer += Time.deltaTime/player.slowDownAmount;
             } else
             {
                 timer += Time.deltaTime;
@@ -93,18 +92,16 @@ public class GameManagerScript: MonoBehaviour
     /// </summary>
     public void Pause()
     {
-        if (!pause) {
-            pause = true;
-            playerFreeze = false;
+        pause = !pause;
+        pauseMenu.SetActive(pause);
+        player.enabled = !pause;
+        if (pause)
+        {
             Time.timeScale = 0;
-            //pull up pause menu
-            }
+        }
         else
         {
-            pause = false;
-            playerFreeze = true;
             Time.timeScale = 1;
-            //close pause menu
         }
     }
 
