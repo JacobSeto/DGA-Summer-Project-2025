@@ -963,14 +963,14 @@ PrefabInstance:
     - target: {fileID: 5435733796405283327, guid: 39b310945bc0d47158b22f634e2cf1f0, type: 3}
       propertyPath: rb
       value: 
-      objectReference: {fileID: 1090240531}
+      objectReference: {fileID: 0}
     - target: {fileID: 5435733796405283327, guid: 39b310945bc0d47158b22f634e2cf1f0, type: 3}
       propertyPath: groundCheck
       value: 
-      objectReference: {fileID: 890267216}
+      objectReference: {fileID: 0}
     - target: {fileID: 5435733796405283327, guid: 39b310945bc0d47158b22f634e2cf1f0, type: 3}
       propertyPath: groundLayer.m_Bits
-      value: 64
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7213829802744064855, guid: 39b310945bc0d47158b22f634e2cf1f0, type: 3}
       propertyPath: m_LocalPosition.x
