@@ -25,7 +25,12 @@ public class GameManagerScript: MonoBehaviour
     private int zookeeperCount = 0;
     private float timer = 0.0f;
     private bool isInAir = false;
+
+    [Header("Game Menu")]
+    [SerializeField] MenuNavigation menuNavigation;
     [SerializeField] GameObject pauseMenu;
+    [SerializeField] GameObject winScreen;
+    [SerializeField] GameObject loseScreen;
 
     void Awake() {
         Instance = this;
@@ -54,14 +59,10 @@ public class GameManagerScript: MonoBehaviour
             
             
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !win && !loss)
         {
             Debug.Log("Pause");
             Pause();
-        }
-        if (player.GetComponent<PlayerController>().lose)
-        {
-            LoseGame();
         }
     }
 
@@ -71,8 +72,9 @@ public class GameManagerScript: MonoBehaviour
     public void WinGame()
     {
         Debug.Log("You Win");
-        Time.timeScale = 0;
         win = true;
+        Pause();
+        menuNavigation.ChangeActiveScreen(winScreen);
         //pull up menu
     }
 
@@ -82,9 +84,9 @@ public class GameManagerScript: MonoBehaviour
     public void LoseGame()
     {
         Debug.Log("You Lose");
-        Time.timeScale = 0;
         loss = true;
-        //pull up loss menu
+        Pause();
+        menuNavigation.ChangeActiveScreen(loseScreen);
     }
 
     /// <summary>
@@ -93,11 +95,12 @@ public class GameManagerScript: MonoBehaviour
     public void Pause()
     {
         pause = !pause;
-        pauseMenu.SetActive(pause);
         player.enabled = !pause;
+        pauseMenu.SetActive(pause);
         if (pause)
         {
             Time.timeScale = 0;
+            
         }
         else
         {
