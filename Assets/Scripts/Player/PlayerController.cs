@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // initial launch with left click + drag, otherwise must activate stamina using right click
-        if (!lose && (!launched || stamina > 0))
+        if ((!launched || stamina > 0))
         {
             if (Input.GetMouseButtonDown(0))
             {
