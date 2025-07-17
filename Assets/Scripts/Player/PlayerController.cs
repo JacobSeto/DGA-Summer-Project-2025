@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour
         if (playerRb.linearVelocity.magnitude >= minSpeed) {
                 direction = playerRb.linearVelocity.normalized;
                 currentSpeed = playerRb.linearVelocity.magnitude;
-                angle = Mathf.Clamp01(currentSpeed / maxLaunchSpeed);
+                angle = Mathf.Clamp01(currentSpeed / maxSpeed);
                 angle = Mathf.Lerp(-90f, 90f, angle);
                 pivot.transform.rotation = Quaternion.Euler(0f, 0f, -angle);
                 if (playerRb.linearVelocityX < 0) {
