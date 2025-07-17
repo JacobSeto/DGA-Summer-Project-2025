@@ -67,7 +67,7 @@ public class CameraController : MonoBehaviour
         {
             Debug.Log("Clicked");
             zoomed += 1;
-            if (zoomed == 4) { zoomed = 1; }
+            if (zoomed == 3) { zoomed = 1; }
             Debug.Log("Zoom level: " + zoomed);
         }
         
