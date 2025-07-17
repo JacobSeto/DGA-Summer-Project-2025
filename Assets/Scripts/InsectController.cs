@@ -2,10 +2,6 @@ using UnityEngine;
 
 public class InsectController : MonoBehaviour
 {
-    
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private Transform groundCheck;
-    [SerializeField] private LayerMask groundLayer;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
