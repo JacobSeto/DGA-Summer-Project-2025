@@ -4381,6 +4381,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StaminaCounter
       objectReference: {fileID: 0}
+    - target: {fileID: 1349087708874736012, guid: 5a2da06ac12834e22ae8956b531162bb, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1131369964}
     - target: {fileID: 8264391812155250665, guid: 5a2da06ac12834e22ae8956b531162bb, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

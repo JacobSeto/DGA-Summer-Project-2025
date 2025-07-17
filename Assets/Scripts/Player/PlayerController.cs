@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float minSpeed;
     [SerializeField] public float bounceForce;
     [SerializeField] public float rotateForce;
-    [SerializeField] int stamina;
+    [SerializeField] public int stamina;
     [SerializeField] public float slowDownAmount;
     public bool lose = false;
     public bool launched = false;
