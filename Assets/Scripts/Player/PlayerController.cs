@@ -51,14 +51,12 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] Sprite postLaunchSprite;
 
-
     // Start is called before first frame is script is active
     void Start()
     {
-
         spriteRenderer = spriteObject.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = initialSprite;
-        audioManager = FindObjectOfType<AudioManager>();
+        audioManager = AudioManager.Instance;
     }
 
     // Update is called once per frame
@@ -71,7 +69,7 @@ public class PlayerController : MonoBehaviour
             {
                 originalPos = Input.mousePosition;
                 //store initial mouse location
-                //audioManager.PlayPull();
+                audioManager.PlayPull();
                 stretching = true;
                 if (launched)
                 {
@@ -82,44 +80,42 @@ public class PlayerController : MonoBehaviour
             }
             if (stretching)
             {
-                //audioManager.PlayStretch();
-
                 // for trajectory UI
                 Vector3 currentMousePos = Input.mousePosition;
                 dragDistance = Vector3.Distance(currentMousePos, originalPos);
-
                 Debug.Log($"Drag distance: {dragDistance}");
-                //audioManager.PlayPull();
             }
             if (Input.GetMouseButtonUp(0))
             {
+                played = false;
                 stretching = false;
                 if (slowMotion)
                 {
                     Time.timeScale = 1;
                     Time.fixedDeltaTime = 0.02F;
                 }
-                //audioManager.PlayRelease();
+                audioManager.PlayRelease();
                 float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
                 float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
                 playerRb.linearVelocity = new Vector2(xChange, yChange);
-                DecrementStamina();
+                if (launched)
+                {
+                    DecrementStamina();
+                }
                 // is this a race condition? someitmes you instalose
                 if (playerRb.linearVelocity.magnitude > maxLaunchSpeed) {
                     playerRb.linearVelocity = Vector2.ClampMagnitude(playerRb.linearVelocity, maxLaunchSpeed);
-                    launched = true;
                     spriteRenderer.sprite = postLaunchSprite;
                 } else if (playerRb.linearVelocity.magnitude > 0.2 * maxLaunchSpeed) {
-                    launched = true;
                     spriteRenderer.sprite = postLaunchSprite;
                 }
                 else {
                     // launch force too low, enforce minimum launch speed
                     playerRb.linearVelocity = new Vector2(xChange + maxLaunchSpeed * 0.2f, yChange + maxLaunchSpeed * 0.2f);
-                    launched = true;
                     spriteRenderer.sprite = postLaunchSprite;
                 }
-                
+                launched = true;
+
             }
         }
         if (playerRb.linearVelocity.magnitude >= minSpeed) {
@@ -197,7 +193,7 @@ public class PlayerController : MonoBehaviour
         {
             flip = flip * -1;
         }
-        //audioManager.PlayBounce();
+        audioManager.PlayBounce();
         
     }
 

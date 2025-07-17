@@ -70,7 +70,11 @@ public class ArrowScript : MonoBehaviour
 
         arrowTransform.localScale = new Vector3(stretch, 0.3f, 0.3f);
 
-        arrowTransform.position = playerPos + Vector3.Scale(new Vector3(4, 4, 4), directionWorld);
+        float displacementStretch = Mathf.Lerp(1f, 6f, stretch);
+
+        arrowTransform.position = playerPos + Vector3.Scale(
+            new Vector3(displacementStretch, displacementStretch, displacementStretch),
+            directionWorld);
 
         Debug.Log($"arrowTransform at: {arrowTransform.position}");
     }
