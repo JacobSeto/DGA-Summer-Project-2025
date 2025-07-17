@@ -86,8 +86,8 @@ public class CameraController : MonoBehaviour
         {
             zoomed = 1;
             currentSize = playerSize;
-            currentPosition = new Vector3(playerLoc.position.x + (Mathf.Clamp(playerBody.linearVelocityX, -currentSize*2*(16f/10f), currentSize * 2 * (16f / 10f)) ), 
-                playerLoc.position.y + (Mathf.Clamp(playerBody.linearVelocityY, -2*currentSize, 2*currentSize)),
+            currentPosition = new Vector3(playerLoc.position.x + (Mathf.Clamp(playerBody.linearVelocityX, -currentSize*(16f/10f), currentSize * (16f / 10f)) ), 
+                playerLoc.position.y + (Mathf.Clamp(playerBody.linearVelocityY, -currentSize, currentSize)),
                 -10f);
             //currentPosition = new Vector3(playerLoc.position.x + playerBody.linearVelocityX, playerLoc.position.y + playerBody.linearVelocityY, -10f);
         }
