@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour
     {
         spriteRenderer = spriteObject.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = initialSprite;
-        audioManager = FindObjectOfType<AudioManager>();
+        audioManager = AudioManager.Instance;
     }
 
     // Update is called once per frame
