@@ -87,7 +87,6 @@ public class PlayerController : MonoBehaviour
             }
             if (Input.GetMouseButtonUp(0))
             {
-                played = false;
                 stretching = false;
                 if (slowMotion)
                 {
