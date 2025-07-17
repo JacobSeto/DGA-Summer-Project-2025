@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
     AudioManager audioManager;
 
     [SerializeField] LayerMask bounceLayers;
-    [SerializeField] GameObject pivot;
+    private GameObject pivot;
 
     // Sprites
 
@@ -198,6 +198,11 @@ public class PlayerController : MonoBehaviour
         }
         audioManager.PlayBounce();
         
+    }
+
+    public void addPivot(GameObject add)
+    {
+        pivot = add;
     }
 
     /// <summary>
