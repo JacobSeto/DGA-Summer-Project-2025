@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float rotateForce;
     [SerializeField] int stamina;
     [SerializeField] public float slowDownAmount;
-    public bool lose = false;
     public bool launched = false;
     public bool slowMotion = false;
     Vector2 reflectedVector;
@@ -116,7 +115,7 @@ public class PlayerController : MonoBehaviour
                     spriteObject.transform.Rotate(0, 0, -currentSpeed * Time.deltaTime * rotateForce * flip);
                 }
             } else if (launched) {
-                lose = true;
+                GameManagerScript.Instance.LoseGame();
                 playerRb.linearVelocity = Vector2.zero;
             }
     }
