@@ -6,11 +6,20 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Prototype Scenes/Main Menu.unity
+    path: Assets/Scenes/Build Scenes/Main Menu.unity
     guid: 7faa411ef282466489f44a0463a75bbe
   - enabled: 1
-    path: Assets/Scenes/Prototype Scenes/Prototype Level.unity
-    guid: 2727ecab78ed42a48b471523937ccd4d
+    path: Assets/Scenes/Build Scenes/Alpha Level 2.unity
+    guid: 72dd3cc973965fa4e9e9a364dbc4943d
+  - enabled: 1
+    path: Assets/Scenes/Build Scenes/Basic Level.unity
+    guid: 94b2909bfeb46484eab2052debf1977a
+  - enabled: 1
+    path: Assets/Scenes/Build Scenes/Ice Level.unity
+    guid: 459eaf90302a48b489a7f7008fd6e4bd
+  - enabled: 1
+    path: Assets/Scenes/Build Scenes/Sea Level 2.unity
+    guid: 6ec6202f1cf9bbf4ca059d1f069286b8
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
