@@ -1,8 +1,4 @@
-using JetBrains.Annotations;
 using UnityEngine;
-using TMPro;
-using UnityEditor.Tilemaps;
-using UnityEditorInternal;
 
 public class PlayerController : MonoBehaviour
 {
@@ -61,7 +57,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         // initial launch with left click + drag, otherwise must activate stamina using right click
-        if (!lose && (!launched || stamina > 0))
+        if ((!launched || stamina > 0))
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -165,10 +161,10 @@ public class PlayerController : MonoBehaviour
         }
 
         // Animal Controller Collisions
-        if (collision.gameObject.CompareTag("Insect"))
-        {
-            currentSpeed *= 2f;
-        }
+        //if (collision.gameObject.CompareTag("Insect"))
+        //{
+        //    currentSpeed *= 2f;
+        //}
         if (collision.gameObject.CompareTag("Tranquilizer"))
         {
             DecrementStamina();
@@ -180,10 +176,10 @@ public class PlayerController : MonoBehaviour
         ElephantController elephant = collision.gameObject.GetComponent<ElephantController>();
         elephant?.DecreaseHP();
 
-        if (collision.gameObject.CompareTag("Cheetah"))
-        {
-            stamina++;
-        }
+        //if (collision.gameObject.CompareTag("Cheetah"))
+        //{
+        //    stamina++;
+        //}
 
         ContactPoint2D contact = collision.GetContact(0);
         Vector2 normal = contact.normal;
@@ -193,6 +189,22 @@ public class PlayerController : MonoBehaviour
         }
         AudioManager.Instance.PlayBounce();
         
+    }
+
+    // Animal Triggers
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Cheetah"))
+        {
+            stamina++;
+        }
+        if (collision.gameObject.CompareTag("Insect"))
+        {
+            // Debug.Log("Old Speed: " + currentSpeed);
+            currentSpeed *= 2f;
+            playerRb.linearVelocity *= 2f;
+            // Debug.Log("New Speed: " + currentSpeed);
+        }
     }
 
     public void addPivot(GameObject add)

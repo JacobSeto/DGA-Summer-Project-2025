@@ -28,6 +28,7 @@ public class GameManagerScript: MonoBehaviour
 
     [Header("Game Menu")]
     [SerializeField] MenuNavigation menuNavigation;
+    [SerializeField] GameObject gameMenu;
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject winScreen;
     [SerializeField] GameObject loseScreen;
@@ -96,15 +97,17 @@ public class GameManagerScript: MonoBehaviour
     {
         pause = !pause;
         player.enabled = !pause;
-        pauseMenu.SetActive(pause);
         if (pause)
         {
             Time.timeScale = 0;
+            menuNavigation.ChangeActiveScreen(pauseMenu);
             
         }
         else
         {
             Time.timeScale = 1;
+            menuNavigation.ChangeActiveScreen(gameMenu);
+
         }
     }
 
