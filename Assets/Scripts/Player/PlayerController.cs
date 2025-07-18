@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     Vector2 direction;
     float currentSpeed;
     Vector3 originalPos;
+    Vector3 originalPlayerPos;
     float angle;
     private int maxStamina;
     float flip = 1;
@@ -30,6 +31,8 @@ public class PlayerController : MonoBehaviour
     float dragDistance;
     public bool IsStretching => stretching;
     public Vector3 OriginalMousePos => originalPos;
+
+    public Vector3 OriginalPlayerPos => originalPlayerPos;
 
     [SerializeField] LayerMask bounceLayers;
     private GameObject pivot;
@@ -62,6 +65,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 originalPos = Input.mousePosition;
+                originalPlayerPos = playerRb.transform.position;
                 //store initial mouse location
                 AudioManager.Instance.PlayPull();
                 stretching = true;

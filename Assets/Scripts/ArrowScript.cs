@@ -43,7 +43,9 @@ public class ArrowScript : MonoBehaviour
             return;
         }
 
-        Vector3 playerPos = playerController.transform.position;
+        Vector3 playerPos = playerController.OriginalPlayerPos;
+
+        Vector3 drawOrigin = playerController.playerRb.transform.position;
 
         Vector3 playerMousePos = Input.mousePosition;
 
@@ -72,7 +74,7 @@ public class ArrowScript : MonoBehaviour
 
         float displacementStretch = Mathf.Lerp(1f, 6f, stretch);
 
-        arrowTransform.position = playerPos + Vector3.Scale(
+        arrowTransform.position = drawOrigin + Vector3.Scale(
             new Vector3(displacementStretch, displacementStretch, displacementStretch),
             directionWorld);
 
