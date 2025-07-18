@@ -36,12 +36,12 @@ public class AudioManager : MonoBehaviour
     }
 
     public void PlayPull() {
-            pullAudio.pitch = 1;
+            pullAudio.pitch = 0.5f;
             pullAudio.PlayOneShot(pullAudio.clip);
     }
 
     public void PlayRelease() {
-        releaseAudio.pitch = 1;
+        releaseAudio.pitch = 0.5f;
         releaseAudio.PlayOneShot(releaseAudio.clip);
     }
 }
