@@ -16,10 +16,13 @@ public class MenuNavigation : MonoBehaviour
         screen.SetActive(true);
         activeScreen = screen;
     }
-
-    public void LoadScene(string levelName)
+    /// <summary>
+    /// Loads a Unity Scene with the given scene name
+    /// </summary>
+    /// <param name="scenelName"></param>
+    public void LoadScene(string sceneName)
     {
-        SceneManager.LoadScene(levelName);
+        SceneManager.LoadScene(sceneName);
     }
 
     public void QuitGame()
