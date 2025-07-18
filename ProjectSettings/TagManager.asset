@@ -8,6 +8,10 @@ TagManager:
   - Enemy
   - Insect
   - Elephant
+  - Zookeeper
+  - Cheetah
+  - Monkey
+  - Tranquilizer
   layers:
   - Default
   - TransparentFX
@@ -18,7 +22,7 @@ TagManager:
   - Ground
   - Obstacle
   - Wall
-  - 
+  - Game Objects
   - 
   - 
   - 

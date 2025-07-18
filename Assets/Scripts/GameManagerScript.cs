@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
@@ -16,43 +17,53 @@ using UnityEngine.Rendering;
 public class GameManagerScript: MonoBehaviour
 {
     public static GameManagerScript Instance;
-    [HideInInspector] public GameObject player;
+    [HideInInspector] public PlayerController player;
     private bool loss = false;
     private bool win = false;
     private bool pause = false;
     //placeholders for testing
     private int zookeeperCount = 0;
     private float timer = 0.0f;
+    private bool isInAir = false;
+
+    [Header("Game Menu")]
+    [SerializeField] MenuNavigation menuNavigation;
+    [SerializeField] GameObject gameMenu;
+    [SerializeField] GameObject pauseMenu;
+    [SerializeField] GameObject winScreen;
+    [SerializeField] GameObject loseScreen;
 
     void Awake() {
         Instance = this;
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
 
     private GameObject[] zooKeepers;
-    private bool playerFreeze;
 
     void Start()
     {
         zooKeepers = GameObject.FindGameObjectsWithTag("Zookeeper");
         zookeeperCount = zooKeepers.Length;
-        playerFreeze = player.GetComponent<PlayerController>().enabled;
     }
 
     void Update()
     {
         if (pause == false)
         {
-            timer += Time.deltaTime;
+            if (player.slowMotion)
+            {
+                timer += Time.deltaTime/player.slowDownAmount;
+            } else
+            {
+                timer += Time.deltaTime;
+            }
+            
+            
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !win && !loss)
         {
             Debug.Log("Pause");
             Pause();
-        }
-        if (player.GetComponent<PlayerController>().lose)
-        {
-            LoseGame();
         }
     }
 
@@ -62,8 +73,9 @@ public class GameManagerScript: MonoBehaviour
     public void WinGame()
     {
         Debug.Log("You Win");
-        Time.timeScale = 0;
         win = true;
+        Pause();
+        menuNavigation.ChangeActiveScreen(winScreen);
         //pull up menu
     }
 
@@ -73,9 +85,9 @@ public class GameManagerScript: MonoBehaviour
     public void LoseGame()
     {
         Debug.Log("You Lose");
-        Time.timeScale = 0;
         loss = true;
-        //pull up loss menu
+        Pause();
+        menuNavigation.ChangeActiveScreen(loseScreen);
     }
 
     /// <summary>
@@ -83,18 +95,19 @@ public class GameManagerScript: MonoBehaviour
     /// </summary>
     public void Pause()
     {
-        if (!pause) {
-            pause = true;
-            playerFreeze = false;
+        pause = !pause;
+        player.enabled = !pause;
+        if (pause)
+        {
             Time.timeScale = 0;
-            //pull up pause menu
-            }
+            menuNavigation.ChangeActiveScreen(pauseMenu);
+            
+        }
         else
         {
-            pause = false;
-            playerFreeze = true;
             Time.timeScale = 1;
-            //close pause menu
+            menuNavigation.ChangeActiveScreen(gameMenu);
+
         }
     }
 
@@ -104,6 +117,23 @@ public class GameManagerScript: MonoBehaviour
     public float GetTime()
     {
         return timer;
+    }
+
+    public void goInAir()
+    {
+        StartCoroutine(AirTime());
+    }
+
+    IEnumerator AirTime()
+    {
+        isInAir = true;
+        yield return new WaitForSeconds(1);
+        isInAir = false;
+    }
+
+    public bool inAir()
+    {
+        return isInAir;
     }
 
     /// <summary>

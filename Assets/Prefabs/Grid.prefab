@@ -274,7 +274,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iceDampeningValue: -0.5
-  playerBody: {fileID: 0}
 --- !u!1 &1496054587793749608
 GameObject:
   m_ObjectHideFlags: 0
@@ -549,7 +548,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mudDampeningValue: 5
-  playerBody: {fileID: 0}
 --- !u!1 &1968706831108413956
 GameObject:
   m_ObjectHideFlags: 0
@@ -824,7 +822,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waterDampeningValue: 2
-  playerBody: {fileID: 0}
 --- !u!1 &4071237277681893716
 GameObject:
   m_ObjectHideFlags: 0
@@ -1168,7 +1165,7 @@ GameObject:
   - component: {fileID: 4780551010463288088}
   - component: {fileID: 8179955231491072922}
   - component: {fileID: 7411768662461425628}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Game Objects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
