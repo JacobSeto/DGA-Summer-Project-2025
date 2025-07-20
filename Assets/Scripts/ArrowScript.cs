@@ -6,10 +6,6 @@ public class ArrowScript : MonoBehaviour
 
     [SerializeField] SpriteRenderer spriteRenderer;
 
-    [SerializeField] float minSpeed = 0f;
-
-    [SerializeField] float maxSpeed = 10f;
-
     [SerializeField] float minStretch = 0.2f;
 
     [SerializeField] float maxStretch = 1f;
@@ -44,39 +40,25 @@ public class ArrowScript : MonoBehaviour
         }
 
         Vector3 playerPos = playerController.OriginalPlayerPos;
-
         Vector3 drawOrigin = playerController.playerRb.transform.position;
-
         Vector3 playerMousePos = Input.mousePosition;
-
         Vector3 originalMousePos = playerController.OriginalMousePos;
-
-        float magnitude = playerController.getDragDistance();
-
+        
         Vector3 direction = -(playerMousePos - originalMousePos).normalized;
-
-        // Calculate what the arrow will look like
-        Vector3 targetScreenPos = originalMousePos + direction * 200f; // 100 is arbitrary to get a point "forward"
-        Vector3 targetWorldPos = Camera.main.ScreenToWorldPoint(new Vector3(targetScreenPos.x, targetScreenPos.y, -Camera.main.transform.position.z));
-
-        Vector2 directionWorld = (targetWorldPos - playerPos).normalized;
-
-        float angleDegrees = Mathf.Atan2(directionWorld.y, directionWorld.x) * Mathf.Rad2Deg;
+        float angleDegrees = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         float dragDistancePixels = (playerMousePos - originalMousePos).magnitude;
-
         float t = Mathf.InverseLerp(0, 300f, dragDistancePixels);
         float stretch = Mathf.Lerp(minStretch, maxStretch, t);
 
+
         arrowTransform.rotation = Quaternion.Euler(0f, 0f, angleDegrees);
-
         arrowTransform.localScale = new Vector3(stretch, 0.3f, 0.3f);
-
         float displacementStretch = Mathf.Lerp(1f, 6f, stretch);
 
         arrowTransform.position = drawOrigin + Vector3.Scale(
             new Vector3(displacementStretch, displacementStretch, displacementStretch),
-            directionWorld);
+            direction);
 
         Debug.Log($"arrowTransform at: {arrowTransform.position}");
     }
