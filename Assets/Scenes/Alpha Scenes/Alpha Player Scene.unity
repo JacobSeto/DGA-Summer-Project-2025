@@ -16608,6 +16608,18 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 51369859}
+    - target: {fileID: 6895318524310602813, guid: be288ff3dfd9d4dc688e6f6d63182147, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -215
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975175566009050006, guid: be288ff3dfd9d4dc688e6f6d63182147, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -428
+      objectReference: {fileID: 0}
+    - target: {fileID: 6975175566009050006, guid: be288ff3dfd9d4dc688e6f6d63182147, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 96
+      objectReference: {fileID: 0}
     - target: {fileID: 7451917277514460678, guid: be288ff3dfd9d4dc688e6f6d63182147, type: 3}
       propertyPath: m_Name
       value: Player UI
