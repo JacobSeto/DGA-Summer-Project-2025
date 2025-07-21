@@ -58,7 +58,10 @@ public class PlayerController : MonoBehaviour
     public Vector3 OriginalPlayerPos => originalPlayerPos;
     
 
-    [SerializeField] LayerMask bounceLayers;
+    [SerializeField] LayerMask wallLayer;
+    [SerializeField] LayerMask boundaryLayer;
+
+    private LayerMask bounceLayers; 
     private GameObject pivot;
 
     // Sprites
@@ -82,15 +85,17 @@ public class PlayerController : MonoBehaviour
         slowMotion = false;
         stretching = false;
         bounceImpulseActive = true;
+        bounceLayers = wallLayer.value | boundaryLayer.value;
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(launched);
         if (!bounceImpulseActive)
         {
             bounceTimer += Time.deltaTime;
-            if (bounceTimer > bounceCooldown) bounceImpulseActive = true; 
+            if (bounceTimer > bounceCooldown) bounceImpulseActive = true;
         }
         // initial launch with left click + drag, otherwise must activate stamina using right click
         if ((!launched || stamina > 0))
@@ -112,12 +117,12 @@ public class PlayerController : MonoBehaviour
             {
                 spriteObject.transform.Rotate(0, 0, -currentSpeed * Time.deltaTime * rotateForce * flip);
             }
-            }
-            else if (launched)
-            {
-                GameManagerScript.Instance.LoseGame();
-                playerRb.linearVelocity = Vector2.zero;
-            }
+        }
+        else if (launched)
+        {
+            GameManagerScript.Instance.LoseGame();
+            playerRb.linearVelocity = Vector2.zero;
+        }
     }
 
     private void HandleLaunch()
@@ -203,6 +208,8 @@ public class PlayerController : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         ContactPoint2D contact = collision.GetContact(0);
+
+        Debug.Log(bounceLayers.value);
 
         // As it works right now, everything in LayerMask bounceLayers will act as a physical object the player can ricochet off of
         // As such, the impulse we apply stars its cooldown in here so player can't lose from bouncing too much in a short period of time
