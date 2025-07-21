@@ -61,6 +61,7 @@ public class PlayerController : MonoBehaviour
     
 
     [SerializeField] LayerMask bounceLayers;
+    [SerializeField] GameObject slowVisual;
     private GameObject pivot;
 
     // Sprites
@@ -85,6 +86,7 @@ public class PlayerController : MonoBehaviour
         stretching = false;
         bounceImpulseActive = true;
         timeLeft = slowTime;
+        slowVisual.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -115,7 +117,6 @@ public class PlayerController : MonoBehaviour
         if (slowMotion)
         {
             timeLeft = timeLeft - Time.deltaTime;
-            Debug.Log(timeLeft);
             if (timeLeft <= 0)
             {
                 EndSlowMotion();
@@ -192,6 +193,7 @@ public class PlayerController : MonoBehaviour
 
     private void SlowMotion()
     {
+        slowVisual.SetActive(true);
         slowMotion = true;
         Time.timeScale = slowDownAmount;
         Time.fixedDeltaTime = 0.02F * Time.timeScale;
@@ -199,6 +201,7 @@ public class PlayerController : MonoBehaviour
 
     private void EndSlowMotion()
     {
+        slowVisual.SetActive(false);
         Time.timeScale = 1;
         Time.fixedDeltaTime = 0.02F;
         slowMotion = false;
