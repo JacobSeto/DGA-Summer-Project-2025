@@ -45,6 +45,8 @@ public class PlayerController : MonoBehaviour
     float angle;
     private int maxStamina;
     float flip = 1;
+    float slowTime = 0.5f;
+    float timeLeft;
 
     // acceleration variables 
     const int accelerationWindow = 10;
@@ -82,6 +84,7 @@ public class PlayerController : MonoBehaviour
         slowMotion = false;
         stretching = false;
         bounceImpulseActive = true;
+        timeLeft = slowTime;
     }
 
     // Update is called once per frame
@@ -100,7 +103,23 @@ public class PlayerController : MonoBehaviour
         else if (stamina > 0)
         {
             HandleLaunch();
-            SlowMotion();
+            if (Input.GetButtonDown("Slow"))
+            {
+                SlowMotion();
+            }
+            if (Input.GetButtonUp("Slow"))
+            {
+                EndSlowMotion();
+            }
+        }
+        if (slowMotion)
+        {
+            timeLeft = timeLeft - Time.deltaTime;
+            Debug.Log(timeLeft);
+            if (timeLeft <= 0)
+            {
+                EndSlowMotion();
+            }
         }
         if (playerRb.linearVelocity.magnitude >= minSpeed)
         {
@@ -141,7 +160,7 @@ public class PlayerController : MonoBehaviour
             // for trajectory UI
             Vector3 currentMousePos = Input.mousePosition;
             dragDistance = Vector3.Distance(currentMousePos, originalPos);
-            Debug.Log($"Drag distance: {dragDistance}");
+            //Debug.Log($"Drag distance: {dragDistance}");
         }
         if (Input.GetMouseButtonUp(0))
         {
@@ -173,16 +192,9 @@ public class PlayerController : MonoBehaviour
 
     private void SlowMotion()
     {
-        if (Input.GetButtonDown("Slow"))
-        {
-            slowMotion = true;
-            Time.timeScale = slowDownAmount;
-            Time.fixedDeltaTime = 0.02F * Time.timeScale;
-        }
-        if (Input.GetButtonUp("Slow"))
-        {
-            EndSlowMotion();
-        }
+        slowMotion = true;
+        Time.timeScale = slowDownAmount;
+        Time.fixedDeltaTime = 0.02F * Time.timeScale;
     }
 
     private void EndSlowMotion()
@@ -190,6 +202,7 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 1;
         Time.fixedDeltaTime = 0.02F;
         slowMotion = false;
+        timeLeft = slowTime;
     }
 
     private void FixedUpdate()
@@ -206,8 +219,8 @@ public class PlayerController : MonoBehaviour
         {
             float decay = Mathf.Lerp(1f, 0.975f, ((0.33f * maxSpeed) - currentSpeed) / (0.33f * maxSpeed));
             playerRb.linearVelocity *= decay;
-            Debug.Log(decay);
-            Debug.Log((0.33f * maxSpeed) - currentSpeed);
+            //Debug.Log(decay);
+            //Debug.Log((0.33f * maxSpeed) - currentSpeed);
         }
     }
 
@@ -222,7 +235,7 @@ public class PlayerController : MonoBehaviour
             ray = Physics2D.Raycast(transform.position, direction, 4f, bounceLayers.value);
             if (ray)
             {
-                Debug.Log(currentSpeed);
+                //Debug.Log(currentSpeed);
                 reflectedVector = UnityEngine.Vector2.Reflect(direction * currentSpeed, ray.normal);
 
                 if (bounceImpulseActive)
