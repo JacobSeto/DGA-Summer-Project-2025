@@ -62,8 +62,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] LayerMask wallLayer;
     [SerializeField] LayerMask boundaryLayer;
-
-    [SerializeField] LayerMask bounceLayers;
+    
+    LayerMask bounceLayers;
     [SerializeField] GameObject slowVisual;
     private GameObject pivot;
 

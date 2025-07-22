@@ -171,9 +171,15 @@ MonoBehaviour:
   slowDownAmount: 0.3
   launched: 0
   slowMotion: 0
-  bounceLayers:
+  wallLayer:
     serializedVersion: 2
     m_Bits: 256
+  boundaryLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  bounceLayers:
+    serializedVersion: 2
+    m_Bits: 0
   slowVisual: {fileID: 8830392198594967785}
   spriteRenderer: {fileID: 3958427247207750238}
   spriteObject: {fileID: 2210973940943747788}
