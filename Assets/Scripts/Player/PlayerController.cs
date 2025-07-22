@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask boundaryLayer;
 
     [SerializeField] LayerMask bounceLayers;
+    // GameObject that deals with slow motion visual
     [SerializeField] GameObject slowVisual;
     private GameObject pivot;
 
