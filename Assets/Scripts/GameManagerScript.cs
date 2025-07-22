@@ -44,7 +44,6 @@ public class GameManagerScript: MonoBehaviour
     {
         zooKeepers = GameObject.FindGameObjectsWithTag("Zookeeper");
         zookeeperCount = zooKeepers.Length;
-        Time.timeScale = 1;
     }
 
     void Update()

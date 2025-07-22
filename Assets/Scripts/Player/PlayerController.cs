@@ -45,8 +45,6 @@ public class PlayerController : MonoBehaviour
     float angle;
     private int maxStamina;
     float flip = 1;
-    float slowTime = 0.5f;
-    float timeLeft;
 
     // acceleration variables 
     const int accelerationWindow = 10;
@@ -62,9 +60,11 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] LayerMask wallLayer;
     [SerializeField] LayerMask boundaryLayer;
-    
-    LayerMask bounceLayers;
     [SerializeField] GameObject slowVisual;
+    private LayerMask bounceLayers;
+
+    private bool wallBounce;
+
     private GameObject pivot;
 
     // Sprites
@@ -88,53 +88,30 @@ public class PlayerController : MonoBehaviour
         slowMotion = false;
         stretching = false;
         bounceImpulseActive = true;
+        wallBounce = true;
         bounceLayers = wallLayer.value | boundaryLayer.value;
-        timeLeft = slowTime;
-        slowVisual.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(launched);
         if (!bounceImpulseActive)
         {
             bounceTimer += Time.deltaTime;
             if (bounceTimer > bounceCooldown) bounceImpulseActive = true;
         }
         // initial launch with left click + drag, otherwise must activate stamina using right click
-        if (!launched)
+        if ((!launched || stamina > 0))
         {
             HandleLaunch();
         }
-        else if (stamina > 0)
-        {
-            HandleLaunch();
-            if (Input.GetButtonDown("Slow"))
-            {
-                SlowMotion();
-            }
-            if (Input.GetButtonUp("Slow"))
-            {
-                EndSlowMotion();
-            }
-        }
-        if (slowMotion)
-        {
-            timeLeft = timeLeft - Time.deltaTime;
-            if (timeLeft <= 0)
-            {
-                EndSlowMotion();
-            }
-        }
-        if (playerRb.linearVelocity.magnitude >= minSpeed)
-        {
+        if (playerRb.linearVelocity.magnitude >= minSpeed) {
             direction = playerRb.linearVelocity.normalized;
             currentSpeed = playerRb.linearVelocity.magnitude;
             angle = Mathf.Clamp01(currentSpeed / maxSpeed);
             angle = Mathf.Lerp(-90f, 90f, angle);
             pivot.transform.rotation = Quaternion.Euler(0f, 0f, -angle);
-
+            
             if (playerRb.linearVelocityX < 0)
             {
                 spriteObject.transform.Rotate(0, 0, currentSpeed * Time.deltaTime * rotateForce * flip);
@@ -160,21 +137,38 @@ public class PlayerController : MonoBehaviour
             //store initial mouse location
             AudioManager.Instance.PlayPull();
             stretching = true;
+            if (launched)
+            {
+                slowMotion = true;
+                Time.timeScale = slowDownAmount;
+                Time.fixedDeltaTime = 0.02F * Time.timeScale;
+            }
         }
         if (stretching)
         {
             // for trajectory UI
             Vector3 currentMousePos = Input.mousePosition;
             dragDistance = Vector3.Distance(currentMousePos, originalPos);
-            //Debug.Log($"Drag distance: {dragDistance}");
+            Debug.Log($"Drag distance: {dragDistance}");
         }
         if (Input.GetMouseButtonUp(0))
         {
             stretching = false;
+            if (slowMotion)
+            {
+                Time.timeScale = 1;
+                Time.fixedDeltaTime = 0.02F;
+            }
             AudioManager.Instance.PlayRelease();
             float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
             float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
             playerRb.linearVelocity = new Vector2(xChange, yChange);
+            if (launched)
+            {
+                DecrementStamina();
+            }
+            
+            
             if (playerRb.linearVelocity.magnitude > maxLaunchSpeed)
             {
                 playerRb.linearVelocity = Vector2.ClampMagnitude(playerRb.linearVelocity, maxLaunchSpeed);
@@ -190,27 +184,9 @@ public class PlayerController : MonoBehaviour
                 playerRb.linearVelocity = new Vector2(xChange + maxLaunchSpeed * 0.2f, yChange + maxLaunchSpeed * 0.2f);
                 spriteRenderer.sprite = postLaunchSprite;
             }
-            DecrementStamina();
-            animator.SetBool("Launch", true);
             launched = true;
+            animator.SetBool("Launch", launched);
         }
-    }
-
-    private void SlowMotion()
-    {
-        slowVisual.SetActive(true);
-        slowMotion = true;
-        Time.timeScale = slowDownAmount;
-        Time.fixedDeltaTime = 0.02F * Time.timeScale;
-    }
-
-    private void EndSlowMotion()
-    {
-        slowVisual.SetActive(false);
-        Time.timeScale = 1;
-        Time.fixedDeltaTime = 0.02F;
-        slowMotion = false;
-        timeLeft = slowTime;
     }
 
     private void FixedUpdate()
@@ -227,8 +203,8 @@ public class PlayerController : MonoBehaviour
         {
             float decay = Mathf.Lerp(1f, 0.975f, ((0.33f * maxSpeed) - currentSpeed) / (0.33f * maxSpeed));
             playerRb.linearVelocity *= decay;
-            //Debug.Log(decay);
-            //Debug.Log((0.33f * maxSpeed) - currentSpeed);
+            Debug.Log(decay);
+            Debug.Log((0.33f * maxSpeed) - currentSpeed);
         }
     }
 
@@ -239,25 +215,25 @@ public class PlayerController : MonoBehaviour
         Debug.Log(bounceLayers.value);
 
         // As it works right now, everything in LayerMask bounceLayers will act as a physical object the player can ricochet off of
-        // As such, the impulse we apply stars its cooldown in here so player can't lose from bouncing too much in a short period of time
-        if ((bounceLayers.value & (1 << collision.gameObject.layer)) > 0)
-        {
-            ray = Physics2D.Raycast(transform.position, direction, 4f, bounceLayers.value);
-            if (ray)
+            // As such, the impulse we apply stars its cooldown in here so player can't lose from bouncing too much in a short period of time
+            if ((bounceLayers.value & (1 << collision.gameObject.layer)) > 0)
             {
-                //Debug.Log(currentSpeed);
-                reflectedVector = UnityEngine.Vector2.Reflect(direction * currentSpeed, ray.normal);
-
-                if (bounceImpulseActive)
+                ray = Physics2D.Raycast(transform.position, direction, 4f, bounceLayers.value);
+                if (ray)
                 {
-                    // give impulse to player, reset timer
-                    reflectedVector *= bounceForce;
-                    bounceTimer = 0f;
-                    bounceImpulseActive = false;
+                    Debug.Log(currentSpeed);
+                    reflectedVector = UnityEngine.Vector2.Reflect(direction * currentSpeed, ray.normal);
+
+                    if (bounceImpulseActive)
+                    {
+                        // give impulse to player, reset timer
+                        reflectedVector *= bounceForce;
+                        bounceTimer = 0f;
+                        bounceImpulseActive = false;
+                    }
+                    playerRb.linearVelocity = reflectedVector;
                 }
-                playerRb.linearVelocity = reflectedVector;
             }
-        }
 
         // Animal Controller Collisions
         //if (collision.gameObject.CompareTag("Insect"))
@@ -288,6 +264,23 @@ public class PlayerController : MonoBehaviour
         }
 
         AudioManager.Instance.PlayBounce();
+    }
+
+    /// <summary>
+    /// Set whether or not inner walls(not boundaries) can bounce player
+    /// Set to false when player is airborne
+    /// </summary>
+    /// <param name="flag">True to allow wall bounce, false to turn off wall bounce</param>
+    public void SetWallBounceActive(bool flag)
+    {
+        wallBounce = flag;
+        int playerLayer = gameObject.layer;
+        int wallLayerIndex = Mathf.RoundToInt(Mathf.Log(wallLayer, 2));
+
+        Debug.Log(wallLayerIndex);
+        Debug.Log(playerLayer);
+
+        Physics2D.IgnoreLayerCollision(playerLayer, wallLayerIndex, !flag);
     }
 
     // Animal Triggers
