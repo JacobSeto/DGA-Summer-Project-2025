@@ -30,8 +30,14 @@ public class GameManagerScript: MonoBehaviour
     private float timer = 0.0f;
     private bool isInAir = false;
 
+    public bool isPopupOpen => uiPopupScreen.activeSelf;
+
+
     [Header("Game Menu")]
     [SerializeField] MenuNavigation menuNavigation;
+
+    [SerializeField] GameObject uiPopupScreen;
+
     [SerializeField] GameObject gameMenu;
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject winScreen;
@@ -48,10 +54,10 @@ public class GameManagerScript: MonoBehaviour
     {
         zooKeepers = GameObject.FindGameObjectsWithTag("Zookeeper");
         zookeeperCount = zooKeepers.Length;
+        ShowIntroPopup();
         originalCount = zooKeepers.Length;
         OriginalPos = player.transform.position;
         originalStamina = player.stamina;
-
     }
 
     void Update()
@@ -79,6 +85,19 @@ public class GameManagerScript: MonoBehaviour
             Reset();
         }
     }
+
+    private void ShowIntroPopup()
+    {
+        Pause();
+        menuNavigation.ChangeActiveScreen(uiPopupScreen);
+    }
+
+    public void DonePopup()
+    {
+        menuNavigation.ChangeActiveScreen(gameMenu);
+    }
+
+    
 
     /// <summary>
     /// Sets up win condition
