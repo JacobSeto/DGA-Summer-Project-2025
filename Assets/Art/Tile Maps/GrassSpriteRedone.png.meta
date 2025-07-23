@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 56b8a7ac0f6013b49b5211f7790e32b5
+guid: e2630e8a22325b04cb7a42109e6ee39a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1309308220008384947
-    second: WallCut_0
+      213: -2568751044729112783
+    second: GrassSpriteRedone_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,12 +100,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WallCut_0
+      name: GrassSpriteRedone_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 8
+        width: 32
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d46b6e46c1764dde0800000000000000
-      internalID: -1309308220008384947
+      spriteID: 137f18ed886f95cd0800000000000000
+      internalID: -2568751044729112783
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      WallCut_0: -1309308220008384947
+      GrassSpriteRedone_0: -2568751044729112783
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

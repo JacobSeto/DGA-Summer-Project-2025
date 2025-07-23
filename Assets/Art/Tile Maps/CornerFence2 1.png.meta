@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 56b8a7ac0f6013b49b5211f7790e32b5
+guid: a5b531dcb24b6b644bec2c639b6e7633
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1309308220008384947
-    second: WallCut_0
+      213: 4896682327853459811
+    second: CornerFence2 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -72,10 +72,10 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 32
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,12 +100,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WallCut_0
+      name: CornerFence2 1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 8
+        width: 32
         height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d46b6e46c1764dde0800000000000000
-      internalID: -1309308220008384947
+      spriteID: 36963a922a284f340800000000000000
+      internalID: 4896682327853459811
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      WallCut_0: -1309308220008384947
+      CornerFence2 1_0: 4896682327853459811
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
