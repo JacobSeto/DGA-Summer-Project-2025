@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -45,6 +46,7 @@ public class PlayerController : MonoBehaviour
     float angle;
     private int maxStamina;
     float flip = 1;
+    private bool thrown;
 
     // acceleration variables 
     const int accelerationWindow = 10;
@@ -126,6 +128,33 @@ public class PlayerController : MonoBehaviour
             GameManagerScript.Instance.LoseGame();
             playerRb.linearVelocity = Vector2.zero;
         }
+        if (GameManagerScript.Instance.inAir() && !thrown)
+        {
+            thrown = true;
+            StartCoroutine(MonkeyThrow());
+        }
+    }
+
+    IEnumerator MonkeyThrow()
+    {
+        float timer = 0f;
+
+        while (timer < 1)
+        {
+            spriteRenderer.transform.localScale = Vector3.Lerp(spriteRenderer.transform.localScale, new Vector3 (2, 2, 2), timer);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        timer = 0f;
+
+        while (timer < 1)
+        {
+            spriteRenderer.transform.localScale = Vector3.Lerp(spriteRenderer.transform.localScale, new Vector3(1, 1, 1), timer);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        spriteRenderer.transform.localScale = new Vector3(1, 1, 1);
     }
 
     private void HandleLaunch()
@@ -188,6 +217,7 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("Launch", launched);
         }
     }
+
 
     private void FixedUpdate()
     {
