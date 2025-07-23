@@ -133,6 +133,10 @@ public class PlayerController : MonoBehaviour
             thrown = true;
             StartCoroutine(MonkeyThrow());
         }
+        if (GameManagerScript.Instance.inAir() && thrown)
+        {
+            thrown = false;
+        }
     }
 
     IEnumerator MonkeyThrow()
