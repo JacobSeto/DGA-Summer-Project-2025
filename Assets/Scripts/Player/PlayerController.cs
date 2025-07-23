@@ -237,13 +237,20 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Elephant"))
         {
+            Debug.Log("Bumped");            
             ray = Physics2D.Raycast(transform.position, direction, 4f, bounceLayers.value);
             if (ray)
             {
-                Debug.Log("Bumped elephant");
-
                 reflectedVector = UnityEngine.Vector2.Reflect(direction * currentSpeed, ray.normal);
-                playerRb.linearVelocity = reflectedVector * bounceForce * 5f;
+
+                    if (bounceImpulseActive)
+                    {
+                        // give impulse to player, reset timer
+                        reflectedVector *= bounceForce;
+                        bounceTimer = 0f;
+                        bounceImpulseActive = false;
+                    }
+                    playerRb.linearVelocity = reflectedVector * 8f;
             }
         }
         
