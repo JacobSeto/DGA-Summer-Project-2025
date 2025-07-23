@@ -160,21 +160,27 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if (collision.gameObject.CompareTag("Elephant"))
+        {
+            ray = Physics2D.Raycast(transform.position, direction, 4f, bounceLayers.value);
+            if (ray)
+            {
+                Debug.Log("Bumped elephant");
+
+                reflectedVector = UnityEngine.Vector2.Reflect(direction * currentSpeed, ray.normal);
+                playerRb.linearVelocity = reflectedVector * bounceForce * 5f;
+            }
+        }
+        
+
         // Animal Controller Collisions
         //if (collision.gameObject.CompareTag("Insect"))
         //{
         //    currentSpeed *= 2f;
         //}
-        if (collision.gameObject.CompareTag("Tranquilizer"))
-        {
-            DecrementStamina();
-        }
-        if (collision.gameObject.CompareTag("Enemy"))
-            {
-                currentSpeed *= 0.5f;
-            }
-        ElephantController elephant = collision.gameObject.GetComponent<ElephantController>();
-        elephant?.DecreaseHP();
+
+        // ElephantController elephant = collision.gameObject.GetComponent<ElephantController>();
+        // elephant?.DecreaseHP();
 
         //if (collision.gameObject.CompareTag("Cheetah"))
         //{
