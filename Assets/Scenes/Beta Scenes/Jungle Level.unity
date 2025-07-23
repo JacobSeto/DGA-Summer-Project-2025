@@ -189,6 +189,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 586869068486766963, guid: cd81b424f06461d408267a195d2923be, type: 3}
+      propertyPath: uiPopupScreen
+      value: 
+      objectReference: {fileID: 469079316}
     - target: {fileID: 8351651270294215032, guid: cd81b424f06461d408267a195d2923be, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -238,6 +242,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd81b424f06461d408267a195d2923be, type: 3}
+--- !u!1 &469079316 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2246258618854676842, guid: cd81b424f06461d408267a195d2923be, type: 3}
+  m_PrefabInstance: {fileID: 469079315}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &627031569
 PrefabInstance:
   m_ObjectHideFlags: 0
