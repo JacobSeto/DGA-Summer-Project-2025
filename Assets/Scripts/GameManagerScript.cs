@@ -30,8 +30,14 @@ public class GameManagerScript: MonoBehaviour
     private float timer = 0.0f;
     private bool isInAir = false;
 
+    public bool isPopupOpen => uiPopupScreen.activeSelf;
+
+
     [Header("Game Menu")]
     [SerializeField] MenuNavigation menuNavigation;
+
+    [SerializeField] GameObject uiPopupScreen;
+
     [SerializeField] GameObject gameMenu;
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject winScreen;
@@ -48,10 +54,10 @@ public class GameManagerScript: MonoBehaviour
     {
         zooKeepers = GameObject.FindGameObjectsWithTag("Zookeeper");
         zookeeperCount = zooKeepers.Length;
+        ShowIntroPopup();
         originalCount = zooKeepers.Length;
         OriginalPos = player.transform.position;
         originalStamina = player.stamina;
-
     }
 
     void Update()
@@ -79,6 +85,19 @@ public class GameManagerScript: MonoBehaviour
             Reset();
         }
     }
+
+    private void ShowIntroPopup()
+    {
+        Pause();
+        menuNavigation.ChangeActiveScreen(uiPopupScreen);
+    }
+
+    public void DonePopup()
+    {
+        menuNavigation.ChangeActiveScreen(gameMenu);
+    }
+
+    
 
     /// <summary>
     /// Sets up win condition
@@ -141,23 +160,35 @@ public class GameManagerScript: MonoBehaviour
         return timer;
     }
 
+    /// <summary>
+    /// Activates player in air state after running into monkey
+    /// </summary>
     public void goInAir()
     {
         StartCoroutine(AirTime());
     }
 
+    /// <summary>
+    /// Timer for player in air state after running into monkey
+    /// </summary>
     IEnumerator AirTime()
     {
         isInAir = true;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         isInAir = false;
     }
 
+    /// <summary>
+    /// Whether player is in the air or not
+    /// </summary>
     public bool inAir()
     {
         return isInAir;
     }
 
+    /// <summary>
+    /// Number of active zookeepers
+    /// </summary>
     public int numZookeepers()
     {
         return zookeeperCount;
