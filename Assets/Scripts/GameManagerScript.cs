@@ -119,23 +119,35 @@ public class GameManagerScript: MonoBehaviour
         return timer;
     }
 
+    /// <summary>
+    /// Activates player in air state after running into monkey
+    /// </summary>
     public void goInAir()
     {
         StartCoroutine(AirTime());
     }
 
+    /// <summary>
+    /// Timer for player in air state after running into monkey
+    /// </summary>
     IEnumerator AirTime()
     {
         isInAir = true;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         isInAir = false;
     }
 
+    /// <summary>
+    /// Whether player is in the air or not
+    /// </summary>
     public bool inAir()
     {
         return isInAir;
     }
 
+    /// <summary>
+    /// Number of active zookeepers
+    /// </summary>
     public int numZookeepers()
     {
         return zookeeperCount;
