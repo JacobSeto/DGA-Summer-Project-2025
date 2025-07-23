@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Tutorial : MonoBehaviour
@@ -31,8 +32,11 @@ public class Tutorial : MonoBehaviour
         }
         if (clicks == 2)
         {
-            Debug.Log("unfreeze");
             player.Unfreeze();
+        }
+        if (clicks == 3)
+        {
+            text.gameObject.SetActive(false);
         }
     }
 }
