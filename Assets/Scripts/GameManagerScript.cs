@@ -158,6 +158,11 @@ public class GameManagerScript: MonoBehaviour
         return isInAir;
     }
 
+    public int numZookeepers()
+    {
+        return zookeeperCount;
+    }
+
     /// <summary>
     /// Brings down zookeeper count.
     /// </summary>
