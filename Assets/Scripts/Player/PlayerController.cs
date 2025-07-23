@@ -36,13 +36,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float slowDownAmount;
     public bool launched;
     public bool slowMotion;
+    public float angle;
     Vector2 reflectedVector;
     RaycastHit2D ray;
     Vector2 direction;
     float currentSpeed;
     Vector3 originalPos;
     Vector3 originalPlayerPos;
-    float angle;
     private int maxStamina;
     float flip = 1;
     float slowTime = 0.5f;
@@ -131,8 +131,8 @@ public class PlayerController : MonoBehaviour
             direction = playerRb.linearVelocity.normalized;
             currentSpeed = playerRb.linearVelocity.magnitude;
             angle = Mathf.Clamp01(currentSpeed / maxSpeed);
-            angle = Mathf.Lerp(-90f, 90f, angle);
-            pivot.transform.rotation = Quaternion.Euler(0f, 0f, -angle);
+            angle = Mathf.Lerp(-90f, 90f, angle) * -1;
+            pivot.transform.rotation = Quaternion.Euler(0f, 0f, angle);
 
             if (playerRb.linearVelocityX < 0)
             {
