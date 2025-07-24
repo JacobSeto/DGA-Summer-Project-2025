@@ -1,11 +1,12 @@
+using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 /*
  * The Game Manager handles win and loss conditions alongside tracking the time elapsed in each level.
@@ -18,16 +19,25 @@ public class GameManagerScript: MonoBehaviour
 {
     public static GameManagerScript Instance;
     [HideInInspector] public PlayerController player;
+    private Vector3 OriginalPos;
     private bool loss = false;
     private bool win = false;
     private bool pause = false;
     //placeholders for testing
     private int zookeeperCount = 0;
+    private int originalCount = 0;
+    private int originalStamina = 0;
     private float timer = 0.0f;
     private bool isInAir = false;
 
+    public bool isPopupOpen => uiPopupScreen.activeSelf;
+
+
     [Header("Game Menu")]
     [SerializeField] MenuNavigation menuNavigation;
+
+    [SerializeField] GameObject uiPopupScreen;
+
     [SerializeField] GameObject gameMenu;
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject winScreen;
@@ -44,7 +54,10 @@ public class GameManagerScript: MonoBehaviour
     {
         zooKeepers = GameObject.FindGameObjectsWithTag("Zookeeper");
         zookeeperCount = zooKeepers.Length;
-        Time.timeScale = 1;
+        ShowIntroPopup();
+        originalCount = zooKeepers.Length;
+        OriginalPos = player.transform.position;
+        originalStamina = player.stamina;
     }
 
     void Update()
@@ -66,7 +79,25 @@ public class GameManagerScript: MonoBehaviour
             Debug.Log("Pause");
             Pause();
         }
+        if (Input.GetKeyDown(KeyCode.R) && !win && !loss)
+        {
+            Debug.Log("Reset");
+            Reset();
+        }
     }
+
+    private void ShowIntroPopup()
+    {
+        Pause();
+        menuNavigation.ChangeActiveScreen(uiPopupScreen);
+    }
+
+    public void DonePopup()
+    {
+        menuNavigation.ChangeActiveScreen(gameMenu);
+    }
+
+    
 
     /// <summary>
     /// Sets up win condition
@@ -113,6 +144,15 @@ public class GameManagerScript: MonoBehaviour
     }
 
     /// <summary>
+    /// Resets the game, setting all states back to original positions.
+    /// </summary>
+    public void Reset()
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
+    }
+
+    /// <summary>
     /// Returns current timer length
     /// </summary>
     public float GetTime()
@@ -120,23 +160,35 @@ public class GameManagerScript: MonoBehaviour
         return timer;
     }
 
+    /// <summary>
+    /// Activates player in air state after running into monkey
+    /// </summary>
     public void goInAir()
     {
         StartCoroutine(AirTime());
     }
 
+    /// <summary>
+    /// Timer for player in air state after running into monkey
+    /// </summary>
     IEnumerator AirTime()
     {
         isInAir = true;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         isInAir = false;
     }
 
+    /// <summary>
+    /// Whether player is in the air or not
+    /// </summary>
     public bool inAir()
     {
         return isInAir;
     }
 
+    /// <summary>
+    /// Number of active zookeepers
+    /// </summary>
     public int numZookeepers()
     {
         return zookeeperCount;
