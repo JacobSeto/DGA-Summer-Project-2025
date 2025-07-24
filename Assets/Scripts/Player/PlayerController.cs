@@ -234,25 +234,6 @@ public class PlayerController : MonoBehaviour
                     playerRb.linearVelocity = reflectedVector;
                 }
             }
-
-        if (collision.gameObject.CompareTag("Elephant"))
-        {
-            Debug.Log("Bumped");            
-            ray = Physics2D.Raycast(transform.position, direction, 4f, bounceLayers.value);
-            if (ray)
-            {
-                reflectedVector = UnityEngine.Vector2.Reflect(direction * currentSpeed, ray.normal);
-
-                    if (bounceImpulseActive)
-                    {
-                        // give impulse to player, reset timer
-                        reflectedVector *= bounceForce;
-                        bounceTimer = 0f;
-                        bounceImpulseActive = false;
-                    }
-                    playerRb.linearVelocity = reflectedVector * 8f;
-            }
-        }
         
 
         // Animal Controller Collisions
@@ -319,6 +300,25 @@ public class PlayerController : MonoBehaviour
             currentSpeed *= 2f;
             playerRb.linearVelocity *= 2f;
             // Debug.Log("New Speed: " + currentSpeed);
+        }
+
+         if (collision.gameObject.CompareTag("Elephant"))
+        {
+            Debug.Log("Bumped. triggered");            
+            ray = Physics2D.Raycast(transform.position, direction, 4f, bounceLayers.value);
+            if (ray)
+            {
+                reflectedVector = UnityEngine.Vector2.Reflect(direction * currentSpeed, ray.normal);
+
+                    if (bounceImpulseActive)
+                    {
+                        // give impulse to player, reset timer
+                        reflectedVector *= bounceForce;
+                        bounceTimer = 0f;
+                        bounceImpulseActive = false;
+                    }
+                    playerRb.linearVelocity = reflectedVector * 8f;
+            }
         }
     }
 
