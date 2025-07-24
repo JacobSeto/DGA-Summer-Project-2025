@@ -37,6 +37,7 @@ public class Tutorial : MonoBehaviour
         if (clicks == 3)
         {
             text.gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 }
