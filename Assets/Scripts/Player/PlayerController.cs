@@ -290,11 +290,11 @@ public class PlayerController : MonoBehaviour
     // Animal Triggers
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Cheetah"))
+        if (collision.gameObject.CompareTag("Insect"))
         {
             stamina++;
         }
-        if (collision.gameObject.CompareTag("Insect"))
+        if (collision.gameObject.CompareTag("Cheetah"))
         {
             // Debug.Log("Old Speed: " + currentSpeed);
             currentSpeed *= 2f;
