@@ -6,6 +6,7 @@ using NUnit.Framework;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 /*
  * The Game Manager handles win and loss conditions alongside tracking the time elapsed in each level.
@@ -14,7 +15,7 @@ using UnityEngine.Rendering;
  * Win: boolean that tracks if the player has beaten the level.
  * Timer: float showing time elapsed in a level.
  */
-public class GameManagerScript: MonoBehaviour
+public class GameManagerScript : MonoBehaviour
 {
     public static GameManagerScript Instance;
     [HideInInspector] public PlayerController player;
@@ -32,8 +33,10 @@ public class GameManagerScript: MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject winScreen;
     [SerializeField] GameObject loseScreen;
+    [SerializeField] Image[] staminaBar;
 
-    void Awake() {
+    void Awake()
+    {
         Instance = this;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
@@ -53,13 +56,14 @@ public class GameManagerScript: MonoBehaviour
         {
             if (player.slowMotion)
             {
-                timer += Time.deltaTime/player.slowDownAmount;
-            } else
+                timer += Time.deltaTime / player.slowDownAmount;
+            }
+            else
             {
                 timer += Time.deltaTime;
             }
-            
-            
+
+
         }
         if (Input.GetKeyDown(KeyCode.Escape) && !win && !loss)
         {
@@ -102,7 +106,7 @@ public class GameManagerScript: MonoBehaviour
         {
             Time.timeScale = 0;
             menuNavigation.ChangeActiveScreen(pauseMenu);
-            
+
         }
         else
         {
@@ -151,6 +155,19 @@ public class GameManagerScript: MonoBehaviour
         if (zookeeperCount == 0)
         {
             WinGame();
+        }
+    }
+    
+    public void UpdateStaminaBar(int stamina)
+    {
+        for (int i = 0; i < stamina; i++)
+        {
+            staminaBar[i].enabled = true;
+        }
+
+        for (int i = stamina; i < player.GetMaxStamina(); i++)
+        {
+            staminaBar[i].enabled = false;
         }
     }
 }

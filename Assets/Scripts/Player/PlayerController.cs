@@ -44,6 +44,8 @@ public class PlayerController : MonoBehaviour
     Vector3 originalPos;
     Vector3 originalPlayerPos;
 
+    // stamina
+
     private int stamina;
     float flip = 1;
     float slowTime = 0.5f;
@@ -59,7 +61,7 @@ public class PlayerController : MonoBehaviour
     public bool IsStretching => stretching;
     public Vector3 OriginalMousePos => originalPos;
     public Vector3 OriginalPlayerPos => originalPlayerPos;
-    
+
 
     [SerializeField] LayerMask wallLayer;
     [SerializeField] LayerMask boundaryLayer;
@@ -92,6 +94,8 @@ public class PlayerController : MonoBehaviour
         timeLeft = slowTime;
         slowVisual.gameObject.SetActive(false);
         stamina = maxStamina;
+
+        GameManagerScript.Instance.UpdateStaminaBar(stamina);
     }
 
     // Update is called once per frame
@@ -357,7 +361,7 @@ public class PlayerController : MonoBehaviour
     {
         return currentSpeed;
     }
-    
+
     /// <summary>
     /// 
     /// </summary>
@@ -382,14 +386,15 @@ public class PlayerController : MonoBehaviour
     public void DecrementStamina()
     {
         if (stamina > 0) stamina--;
+        GameManagerScript.Instance.UpdateStaminaBar(stamina);
     }
-    
+
     /// <summary>
     /// Increments current stamina by 1
     /// </summary>
     public void IncrementStamina()
     {
         if (stamina < maxStamina) stamina++;
-
+        GameManagerScript.Instance.UpdateStaminaBar(stamina);
     }
 }
