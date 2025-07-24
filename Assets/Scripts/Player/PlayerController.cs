@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour
     public bool launched;
     public bool slowMotion;
     public float angle;
+    public int stamina;
     Vector2 reflectedVector;
     RaycastHit2D ray;
     Vector2 direction;
@@ -44,7 +45,6 @@ public class PlayerController : MonoBehaviour
     Vector3 originalPos;
     Vector3 originalPlayerPos;
 
-    private int stamina;
     float flip = 1;
     float slowTime = 0.5f;
     float timeLeft;

@@ -89,6 +89,7 @@ public class GameManagerScript: MonoBehaviour
     private void ShowIntroPopup()
     {
         Pause();
+        Debug.Log("start");
         menuNavigation.ChangeActiveScreen(uiPopupScreen);
     }
 
