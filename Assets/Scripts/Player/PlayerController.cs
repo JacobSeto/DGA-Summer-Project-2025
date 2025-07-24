@@ -234,25 +234,6 @@ public class PlayerController : MonoBehaviour
                     playerRb.linearVelocity = reflectedVector;
                 }
             }
-
-        if (collision.gameObject.CompareTag("Elephant"))
-        {
-            Debug.Log("Bumped");            
-            ray = Physics2D.Raycast(transform.position, direction, 4f, bounceLayers.value);
-            if (ray)
-            {
-                reflectedVector = UnityEngine.Vector2.Reflect(direction * currentSpeed, ray.normal);
-
-                    if (bounceImpulseActive)
-                    {
-                        // give impulse to player, reset timer
-                        reflectedVector *= bounceForce;
-                        bounceTimer = 0f;
-                        bounceImpulseActive = false;
-                    }
-                    playerRb.linearVelocity = reflectedVector * 8f;
-            }
-        }
         
 
         // Animal Controller Collisions
@@ -309,16 +290,28 @@ public class PlayerController : MonoBehaviour
     // Animal Triggers
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Cheetah"))
+        if (collision.gameObject.CompareTag("Insect"))
         {
             stamina++;
         }
-        if (collision.gameObject.CompareTag("Insect"))
+
+         if (collision.gameObject.CompareTag("Elephant"))
         {
-            // Debug.Log("Old Speed: " + currentSpeed);
-            currentSpeed *= 2f;
-            playerRb.linearVelocity *= 2f;
-            // Debug.Log("New Speed: " + currentSpeed);
+            Debug.Log("Bumped. triggered");            
+            ray = Physics2D.Raycast(transform.position, direction, 4f, bounceLayers.value);
+            if (ray)
+            {
+                reflectedVector = UnityEngine.Vector2.Reflect(direction * currentSpeed, ray.normal);
+
+                    if (bounceImpulseActive)
+                    {
+                        // give impulse to player, reset timer
+                        reflectedVector *= bounceForce;
+                        bounceTimer = 0f;
+                        bounceImpulseActive = false;
+                    }
+                    playerRb.linearVelocity = reflectedVector * 8f;
+            }
         }
     }
 
