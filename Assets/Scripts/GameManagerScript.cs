@@ -28,7 +28,6 @@ public class GameManagerScript: MonoBehaviour
     private int originalCount = 0;
     private int originalStamina = 0;
     private float timer = 0.0f;
-    private bool isInAir = false;
 
     public bool isPopupOpen => uiPopupScreen.activeSelf;
 
@@ -151,32 +150,6 @@ public class GameManagerScript: MonoBehaviour
     public float GetTime()
     {
         return timer;
-    }
-
-    /// <summary>
-    /// Activates player in air state after running into monkey
-    /// </summary>
-    public void goInAir()
-    {
-        StartCoroutine(AirTime());
-    }
-
-    /// <summary>
-    /// Timer for player in air state after running into monkey
-    /// </summary>
-    IEnumerator AirTime()
-    {
-        isInAir = true;
-        yield return new WaitForSeconds(2);
-        isInAir = false;
-    }
-
-    /// <summary>
-    /// Whether player is in the air or not
-    /// </summary>
-    public bool inAir()
-    {
-        return isInAir;
     }
 
     /// <summary>

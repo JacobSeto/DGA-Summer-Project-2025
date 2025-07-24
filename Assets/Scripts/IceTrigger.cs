@@ -25,9 +25,7 @@ public class IceTrigger : MonoBehaviour
         // other.attachedRigidbody.AddForce(-0.75f * other.attachedRigidbody.linearVelocity);
         if (other.CompareTag("Player"))
         {
-            if (!GameManagerScript.Instance.inAir()) { 
-                other.attachedRigidbody.linearDamping = iceDampeningValue; 
-            }
+            other.attachedRigidbody.linearDamping = iceDampeningValue; 
             // Debug.Log(other.attachedRigidbody.linearDamping);
         }
 

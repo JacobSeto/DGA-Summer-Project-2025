@@ -25,10 +25,8 @@ public class WaterTrigger : MonoBehaviour
         // other.attachedRigidbody.AddForce(-0.75f * other.attachedRigidbody.linearVelocity);
         if (other.CompareTag("Player"))
         {
-            if (!GameManagerScript.Instance.inAir()){ 
-                other.attachedRigidbody.linearDamping = waterDampeningValue;
-            }
-            // Debug.Log(other.attachedRigidbody.linearDamping);
+            other.attachedRigidbody.linearDamping = waterDampeningValue;
+            //Debug.Log(other.attachedRigidbody.linearDamping);
         }
     }
  
