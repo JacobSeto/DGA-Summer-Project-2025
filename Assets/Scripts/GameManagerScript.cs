@@ -56,7 +56,7 @@ public class GameManagerScript: MonoBehaviour
         zookeeperCount = zooKeepers.Length;
         originalCount = zooKeepers.Length;
         OriginalPos = player.transform.position;
-        originalStamina = player.stamina;
+        originalStamina = player.GetStaminaCount();
     }
 
     void Update()
