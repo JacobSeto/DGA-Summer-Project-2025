@@ -54,7 +54,6 @@ public class GameManagerScript: MonoBehaviour
     {
         zooKeepers = GameObject.FindGameObjectsWithTag("Zookeeper");
         zookeeperCount = zooKeepers.Length;
-        ShowIntroPopup();
         originalCount = zooKeepers.Length;
         OriginalPos = player.transform.position;
         originalStamina = player.stamina;
@@ -84,13 +83,6 @@ public class GameManagerScript: MonoBehaviour
             Debug.Log("Reset");
             Reset();
         }
-    }
-
-    private void ShowIntroPopup()
-    {
-        Pause();
-        Debug.Log("start");
-        menuNavigation.ChangeActiveScreen(uiPopupScreen);
     }
 
     public void DonePopup()

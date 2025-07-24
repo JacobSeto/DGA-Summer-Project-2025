@@ -2425,6 +2425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   menuNavigation: {fileID: 8509025858032375474}
+  uiPopupScreen: {fileID: 2279949085797727871, guid: cda8ca7fd45bc49f8b9acc4a9037f173, type: 3}
   gameMenu: {fileID: 6172991957283706989}
   pauseMenu: {fileID: 4747576535336511266}
   winScreen: {fileID: 9096940041729674530}
