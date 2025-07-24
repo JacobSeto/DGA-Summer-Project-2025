@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     private bool bounceImpulseActive;
 
     [SerializeField] public float rotateForce;
-    [SerializeField] public int stamina;
+    [SerializeField] public int maxStamina;
     [SerializeField] public float slowDownAmount;
     public bool launched;
     public bool slowMotion;
@@ -43,7 +43,8 @@ public class PlayerController : MonoBehaviour
     float currentSpeed;
     Vector3 originalPos;
     Vector3 originalPlayerPos;
-    private int maxStamina;
+
+    private int stamina;
     float flip = 1;
     float slowTime = 0.5f;
     float timeLeft;
@@ -90,6 +91,7 @@ public class PlayerController : MonoBehaviour
         bounceLayers = wallLayer.value | boundaryLayer.value;
         timeLeft = slowTime;
         slowVisual.gameObject.SetActive(false);
+        stamina = maxStamina;
     }
 
     // Update is called once per frame
@@ -386,6 +388,15 @@ public class PlayerController : MonoBehaviour
     public int GetStaminaCount()
     {
         return stamina;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns>Max stamina the player can have</returns>
+    public int GetMaxStamina()
+    {
+        return maxStamina;
     }
 
     /// <summary>
