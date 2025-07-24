@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: Corner Fence Collision
+  m_Name: fence-tile014_0
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: -6364430323145520374, guid: 4080bba27d0494a4ca2a8568b16febc6, type: 3}
+  m_Sprite: {fileID: -2865741964862917718, guid: 4e35cbe3715e14784a62eb5b7bdda09b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
