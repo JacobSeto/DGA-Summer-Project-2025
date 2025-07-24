@@ -403,7 +403,7 @@ public class PlayerController : MonoBehaviour
     /// <param name="flag">True to allow wall bounce, false to turn off wall bounce</param>
     public void SetWallBounceActive(bool flag)
     {
-        wallBounce = flag;
+        //wallBounce = flag;
         int playerLayer = gameObject.layer;
         int wallLayerIndex = Mathf.RoundToInt(Mathf.Log(wallLayer, 2));
 
