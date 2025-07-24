@@ -294,13 +294,6 @@ public class PlayerController : MonoBehaviour
         {
             stamina++;
         }
-        if (collision.gameObject.CompareTag("Cheetah"))
-        {
-            // Debug.Log("Old Speed: " + currentSpeed);
-            currentSpeed *= 2f;
-            playerRb.linearVelocity *= 2f;
-            // Debug.Log("New Speed: " + currentSpeed);
-        }
 
          if (collision.gameObject.CompareTag("Elephant"))
         {
