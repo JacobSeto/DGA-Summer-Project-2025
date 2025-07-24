@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8151320076802970917}
   - component: {fileID: 1521910971831563377}
   - component: {fileID: 314459045522029256}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Ice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -289,7 +289,7 @@ GameObject:
   - component: {fileID: 6239078219000057456}
   - component: {fileID: 1940198196212718298}
   - component: {fileID: 3309238229196056935}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Mud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -563,7 +563,7 @@ GameObject:
   - component: {fileID: 5742678592139029190}
   - component: {fileID: 198540488206393483}
   - component: {fileID: 8520861615533396906}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}

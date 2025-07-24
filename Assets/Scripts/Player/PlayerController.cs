@@ -47,6 +47,10 @@ public class PlayerController : MonoBehaviour
     private int maxStamina;
     float flip = 1;
     private bool thrown;
+    private bool isInAir;
+    private bool aboveWall;
+    private Vector3 inAirScale = new Vector3(2, 2, 2);
+    private Vector3 defaultScale;
 
     // acceleration variables 
     const int accelerationWindow = 10;
@@ -92,6 +96,7 @@ public class PlayerController : MonoBehaviour
         bounceImpulseActive = true;
         wallBounce = true;
         bounceLayers = wallLayer.value | boundaryLayer.value;
+        defaultScale = spriteRenderer.transform.localScale;
     }
 
     // Update is called once per frame
@@ -128,14 +133,21 @@ public class PlayerController : MonoBehaviour
             GameManagerScript.Instance.LoseGame();
             playerRb.linearVelocity = Vector2.zero;
         }
-        if (GameManagerScript.Instance.inAir() && !thrown)
+
+        if (isInAir && !thrown)
         {
             thrown = true;
             StartCoroutine(MonkeyThrow());
         }
-        if (GameManagerScript.Instance.inAir() && thrown)
+        else if (isInAir && thrown)
         {
             thrown = false;
+        }
+
+        if (aboveWall && !Physics2D.CircleCast(transform.position, 1f, Vector2.zero, Mathf.Infinity, wallLayer))
+        {
+            SetWallBounceActive(true);
+            aboveWall = false;
         }
     }
 
@@ -145,7 +157,7 @@ public class PlayerController : MonoBehaviour
 
         while (timer < 1)
         {
-            spriteRenderer.transform.localScale = Vector3.Lerp(spriteRenderer.transform.localScale, new Vector3 (2, 2, 2), timer);
+            spriteRenderer.transform.localScale = Vector3.Lerp(defaultScale, inAirScale, timer);
             timer += Time.deltaTime;
             yield return null;
         }
@@ -154,7 +166,7 @@ public class PlayerController : MonoBehaviour
 
         while (timer < 1)
         {
-            spriteRenderer.transform.localScale = Vector3.Lerp(spriteRenderer.transform.localScale, new Vector3(1, 1, 1), timer);
+            spriteRenderer.transform.localScale = Vector3.Lerp(inAirScale, defaultScale, timer);
             timer += Time.deltaTime;
             yield return null;
         }
@@ -301,6 +313,43 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
+    /// Activates player in air state after running into monkey
+    /// </summary>
+    public void goInAir()
+    {
+        SetWallBounceActive(false);
+        StartCoroutine(AirTime());
+    }
+
+    /// <summary>
+    /// Timer for player in air state after running into monkey
+    /// </summary>
+    IEnumerator AirTime()
+    {
+        isInAir = true;
+        Physics2D.IgnoreLayerCollision(gameObject.layer, 7, true);
+        yield return new WaitForSeconds(2);
+        isInAir = false;
+        Physics2D.IgnoreLayerCollision(gameObject.layer, 7, false);
+        if (Physics2D.CircleCast(transform.position, 1f, Vector2.zero, Mathf.Infinity, wallLayer))
+        {
+            aboveWall = true;
+        }
+        else
+        {
+            SetWallBounceActive(true);
+        }
+    }
+
+    /// <summary>
+    /// Whether player is in the air or not
+    /// </summary>
+    public bool inAir()
+    {
+        return isInAir;
+    }
+
+    /// <summary>
     /// Set whether or not inner walls(not boundaries) can bounce player
     /// Set to false when player is airborne
     /// </summary>
@@ -330,6 +379,10 @@ public class PlayerController : MonoBehaviour
             currentSpeed *= 2f;
             playerRb.linearVelocity *= 2f;
             // Debug.Log("New Speed: " + currentSpeed);
+        }
+        if (collision.gameObject.CompareTag("Monkey"))
+        {
+            goInAir();
         }
     }
 

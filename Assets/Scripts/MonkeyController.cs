@@ -26,7 +26,6 @@ public class MonkeyController : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             destroyMonkey();
-            GameManagerScript.Instance.goInAir();
         }
     }
 }
