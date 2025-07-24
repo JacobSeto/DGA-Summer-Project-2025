@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: Mud Tile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: -3188702180127858350, guid: bd6de533f974f4640ac317ae04e1e4b6, type: 3}
+  m_Sprite: {fileID: 1299951405470584857, guid: 4e4029a185a280f44ae79b4fc0852617, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

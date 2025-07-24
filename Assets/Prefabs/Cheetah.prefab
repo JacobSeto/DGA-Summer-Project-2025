@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4403501911379710227}
   - component: {fileID: 4206887658688321185}
   - component: {fileID: -1161905845753595105}
+  - component: {fileID: 8184472545215700056}
   m_Layer: 5
   m_Name: Cheetah
   m_TagString: Cheetah
@@ -157,3 +158,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.5, y: 1.375}
   m_EdgeRadius: 0
+--- !u!114 &8184472545215700056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6344942684285239071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f7a67275eacf4fe2b554bbafd0392ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coolDownTime: 10
