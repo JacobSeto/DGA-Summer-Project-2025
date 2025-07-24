@@ -25,9 +25,9 @@ public class Tutorial : MonoBehaviour
         }
         if (clicks == 1)
         {
-            text.SetText("Launch Josephine towards the zookeeper by clicking " +
-                "and dragging your cursor until the arrow is pointing the " +
-                "direction you want to go. Then, release! Try it out now!");
+            text.SetText("Launch her at the zookeeper by clicking " +
+                "& dragging until the arrow points " +
+                "where you want to go. Then, let go!");
             clicks = clicks + 1;
         }
         if (clicks == 2)
