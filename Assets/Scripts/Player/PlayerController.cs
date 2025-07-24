@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -46,6 +47,11 @@ public class PlayerController : MonoBehaviour
     Vector3 originalPlayerPos;
 
     float flip = 1;
+    private bool thrown;
+    private bool isInAir;
+    private bool aboveWall;
+    private Vector3 inAirScale = new Vector3(2, 2, 2);
+    private Vector3 defaultScale;
     float slowTime = 0.5f;
     float timeLeft;
 
@@ -89,6 +95,7 @@ public class PlayerController : MonoBehaviour
         stretching = false;
         bounceImpulseActive = true;
         bounceLayers = wallLayer.value | boundaryLayer.value;
+        defaultScale = spriteRenderer.transform.localScale;
         timeLeft = slowTime;
         slowVisual.gameObject.SetActive(false);
         stamina = maxStamina;
@@ -150,6 +157,44 @@ public class PlayerController : MonoBehaviour
             GameManagerScript.Instance.LoseGame();
             playerRb.linearVelocity = Vector2.zero;
         }
+
+        if (isInAir && !thrown)
+        {
+            thrown = true;
+            StartCoroutine(MonkeyThrow());
+        }
+        else if (isInAir && thrown)
+        {
+            thrown = false;
+        }
+
+        if (aboveWall && !Physics2D.CircleCast(transform.position, 1f, Vector2.zero, Mathf.Infinity, wallLayer))
+        {
+            SetWallBounceActive(true);
+            aboveWall = false;
+        }
+    }
+
+    IEnumerator MonkeyThrow()
+    {
+        float timer = 0f;
+
+        while (timer < 1)
+        {
+            spriteRenderer.transform.localScale = Vector3.Lerp(defaultScale, inAirScale, timer);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        timer = 0f;
+
+        while (timer < 1)
+        {
+            spriteRenderer.transform.localScale = Vector3.Lerp(inAirScale, defaultScale, timer);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        spriteRenderer.transform.localScale = new Vector3(1, 1, 1);
     }
 
     private void HandleLaunch()
@@ -314,6 +359,60 @@ public class PlayerController : MonoBehaviour
         AudioManager.Instance.PlayBounce();
     }
 
+    /// <summary>
+    /// Activates player in air state after running into monkey
+    /// </summary>
+    public void goInAir()
+    {
+        SetWallBounceActive(false);
+        StartCoroutine(AirTime());
+    }
+
+    /// <summary>
+    /// Timer for player in air state after running into monkey
+    /// </summary>
+    IEnumerator AirTime()
+    {
+        isInAir = true;
+        Physics2D.IgnoreLayerCollision(gameObject.layer, 7, true);
+        yield return new WaitForSeconds(2);
+        isInAir = false;
+        Physics2D.IgnoreLayerCollision(gameObject.layer, 7, false);
+        if (Physics2D.CircleCast(transform.position, 1f, Vector2.zero, Mathf.Infinity, wallLayer))
+        {
+            aboveWall = true;
+        }
+        else
+        {
+            SetWallBounceActive(true);
+        }
+    }
+
+    /// <summary>
+    /// Whether player is in the air or not
+    /// </summary>
+    public bool inAir()
+    {
+        return isInAir;
+    }
+
+    /// <summary>
+    /// Set whether or not inner walls(not boundaries) can bounce player
+    /// Set to false when player is airborne
+    /// </summary>
+    /// <param name="flag">True to allow wall bounce, false to turn off wall bounce</param>
+    public void SetWallBounceActive(bool flag)
+    {
+        wallBounce = flag;
+        int playerLayer = gameObject.layer;
+        int wallLayerIndex = Mathf.RoundToInt(Mathf.Log(wallLayer, 2));
+
+        Debug.Log(wallLayerIndex);
+        Debug.Log(playerLayer);
+
+        Physics2D.IgnoreLayerCollision(playerLayer, wallLayerIndex, !flag);
+    }
+
     // Animal Triggers
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -339,6 +438,10 @@ public class PlayerController : MonoBehaviour
                     }
                     playerRb.linearVelocity = reflectedVector * 8f;
             }
+        }
+        if (collision.gameObject.CompareTag("Monkey"))
+        {
+            goInAir();
         }
     }
 
