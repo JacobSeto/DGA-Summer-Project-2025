@@ -445,16 +445,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Freeze()
-    {
-        enabled = false;
-    }
-
-    public void Unfreeze()
-    {
-        enabled = true;
-    }
-
        public void Freeze()
     {
         enabled = false;
