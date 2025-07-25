@@ -1,35 +1,43 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PopupController : MonoBehaviour
 {
-    [SerializeField] private GameObject text1;
-    [SerializeField] private GameObject text2;
-    [SerializeField] private Button nextButton;
-    [SerializeField] private Button doneButton;
+    [SerializeField] TMP_Text dialogueText;
+    [SerializeField] Button nextButton;
+
+    [SerializeField] string[] text;
+    private PlayerController player;
+
+    private int currentIndex = 0;
 
     void Start()
     {
-        text1.SetActive(true);
-        text2.SetActive(false);
-        doneButton.gameObject.SetActive(false); 
+        player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
 
-        nextButton.onClick.AddListener(OnNextClicked);
-        doneButton.onClick.AddListener(OnDoneClicked); 
+        dialogueText.text = text[currentIndex];
+        nextButton.onClick.AddListener(NextMessage);
     }
 
-    void OnNextClicked()
+    void Update()
     {
-        text1.SetActive(false);
-        text2.SetActive(true);
-
-        nextButton.gameObject.SetActive(false);
-        doneButton.gameObject.SetActive(true); 
+        
     }
 
-    void OnDoneClicked()
+    void NextMessage()
     {
-        gameObject.SetActive(false);
-        GameManagerScript.Instance.DonePopup();
+        currentIndex++;
+
+        if (currentIndex < text.Length)
+        {
+            player.Freeze();
+            dialogueText.text = text[currentIndex];
+        }
+        else
+        {
+            player.Unfreeze();
+            gameObject.SetActive(false); 
+        }
     }
 }

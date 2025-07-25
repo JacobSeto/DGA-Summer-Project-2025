@@ -25,9 +25,7 @@ public class MudTrigger : MonoBehaviour
         // other.attachedRigidbody.AddForce(-0.75f * other.attachedRigidbody.linearVelocity);
         if (other.CompareTag("Player"))
         {
-            if (!GameManagerScript.Instance.inAir()){ 
-                other.attachedRigidbody.linearDamping = mudDampeningValue; 
-            }
+            other.attachedRigidbody.linearDamping = mudDampeningValue; 
             // Debug.Log(other.attachedRigidbody.linearDamping);
         }
 

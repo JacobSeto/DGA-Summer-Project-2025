@@ -179,12 +179,15 @@ MonoBehaviour:
   boundaryLayer:
     serializedVersion: 2
     m_Bits: 1024
-  slowVisual: {fileID: 8830392198594967785}
+  slowVisual: {fileID: 0}
   spriteRenderer: {fileID: 3958427247207750238}
   spriteObject: {fileID: 2210973940943747788}
   initialSprite: {fileID: 5117515885611587728, guid: 221f89fea38feeb49a56158b00827c98, type: 3}
   postLaunchSprite: {fileID: 7502086667154341395, guid: 20bfc828519460c488bf4210ae74a7c8, type: 3}
   animator: {fileID: 4199128376377569001}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!50 &-1464496374494826900
 Rigidbody2D:
   serializedVersion: 5
