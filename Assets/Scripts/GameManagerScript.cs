@@ -89,12 +89,15 @@ public class GameManagerScript : MonoBehaviour
         }
     }
 
+    public void HideGameMenu()
+    {
+        menuNavigation.ChangeActiveScreen(uiPopupScreen);
+    }
+
     public void DonePopup()
     {
         menuNavigation.ChangeActiveScreen(gameMenu);
     }
-
-    
 
     /// <summary>
     /// Sets up win condition
@@ -173,6 +176,11 @@ public class GameManagerScript : MonoBehaviour
         {
             WinGame();
         }
+    }
+
+    public GameObject getGameScreen()
+    {
+        return gameMenu;
     }
     
     public void UpdateStaminaBar(int stamina)
