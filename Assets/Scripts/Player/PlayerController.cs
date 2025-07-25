@@ -79,6 +79,10 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] Animator animator;
 
+    // Particle System Controller
+    
+    //private ParticleSystemController particleSystemController;
+
     // Start is called before first frame is script is active
     void Start()
     {
@@ -298,6 +302,9 @@ public class PlayerController : MonoBehaviour
             // Debug.Log("New Speed: " + currentSpeed);
         }
     }
+
+    // Particle System Controller
+    
 
     public void addPivot(GameObject add)
     {
