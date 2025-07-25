@@ -100,8 +100,6 @@ public class GameManagerScript : MonoBehaviour
         menuNavigation.ChangeActiveScreen(gameMenu);
     }
 
-    
-
     /// <summary>
     /// Sets up win condition
     /// </summary>

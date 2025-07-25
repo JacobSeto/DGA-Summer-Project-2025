@@ -11,7 +11,7 @@ public class Tutorial : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-        player.startingStamina = 2;
+        player.startingStamina = 1;
     }
 
     void Update()
