@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
     public bool slowMotion;
     public float angle;
     public int stamina;
+    public bool speedometerExists = true;
     Vector2 reflectedVector;
     RaycastHit2D ray;
     Vector2 direction;
@@ -150,7 +151,9 @@ public class PlayerController : MonoBehaviour
             currentSpeed = playerRb.linearVelocity.magnitude;
             angle = Mathf.Clamp01(currentSpeed / maxSpeed);
             angle = Mathf.Lerp(-90f, 90f, angle) * -1;
-            pivot.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+            if (speedometerExists) {
+                pivot.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+            }
 
             if (playerRb.linearVelocityX < 0)
             {
