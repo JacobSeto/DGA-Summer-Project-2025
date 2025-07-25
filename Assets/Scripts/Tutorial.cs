@@ -11,6 +11,7 @@ public class Tutorial : MonoBehaviour
     {
         text = gameObject.transform.GetChild(0).GetComponent<TMP_Text>();
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        player.startingStamina = 1;
     }
 
     void Update()
@@ -27,7 +28,7 @@ public class Tutorial : MonoBehaviour
         {
             text.SetText("Launch her at the zookeeper by clicking " +
                 "& dragging until the arrow points " +
-                "where you want to go. Then, let go!");
+                "where you want to go. Then, let go! Try it now!");
             clicks = clicks + 1;
         }
         if (clicks == 2)
