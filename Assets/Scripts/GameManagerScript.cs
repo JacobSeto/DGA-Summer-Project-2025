@@ -177,6 +177,11 @@ public class GameManagerScript : MonoBehaviour
             WinGame();
         }
     }
+
+    public GameObject getGameScreen()
+    {
+        return gameMenu;
+    }
     
     public void UpdateStaminaBar(int stamina)
     {
