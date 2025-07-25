@@ -47,9 +47,6 @@ public class PlayerController : MonoBehaviour
     Vector3 originalPos;
     Vector3 originalPlayerPos;
 
-    // stamina
-
-    private int stamina;
     float flip = 1;
     float slowTime = 0.5f;
     float timeLeft;
