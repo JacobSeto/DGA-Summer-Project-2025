@@ -6,20 +6,10 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource bounceAudio;
     [SerializeField] private AudioSource pullAudio;
     [SerializeField] private AudioSource releaseAudio;
-    private static AudioManager instance;
-
-    public static AudioManager Instance {
-
-        get {
-            if (instance==null) {
-                Debug.LogError("Audio manager is null");
-            }
-            return instance;
-        }
-    }
+    public static AudioManager Instance;
 
     private void Awake() {
-        instance = this;
+        Instance = this;
     }
 
     public void PlayBounce()
