@@ -52,7 +52,6 @@ public class PlayerController : MonoBehaviour
     private bool thrown;
     private bool isInAir;
     private bool aboveWall;
-    private bool wallBounce;
     private Vector3 inAirScale = new Vector3(2, 2, 2);
     private Vector3 defaultScale;
     float slowTime = 0.5f;

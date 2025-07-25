@@ -1789,7 +1789,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1473176482826625423, guid: fb915fcc83af8094bb359004411c8305, type: 3}
       propertyPath: m_TileMatrixArray.Array.data[0].m_RefCount
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1473176482826625423, guid: fb915fcc83af8094bb359004411c8305, type: 3}
       propertyPath: m_TileMatrixArray.Array.data[1].m_Data.e00
@@ -1977,7 +1977,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1473176482826625423, guid: fb915fcc83af8094bb359004411c8305, type: 3}
       propertyPath: m_TileMatrixArray.Array.data[4].m_RefCount
-      value: 10
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1473176482826625423, guid: fb915fcc83af8094bb359004411c8305, type: 3}
       propertyPath: m_TileSpriteArray.Array.data[0].m_RefCount
@@ -3365,7 +3365,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1473176482826625423, guid: fb915fcc83af8094bb359004411c8305, type: 3}
       propertyPath: m_Tiles.Array.data[25].second.m_TileMatrixIndex
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1473176482826625423, guid: fb915fcc83af8094bb359004411c8305, type: 3}
       propertyPath: m_Tiles.Array.data[25].second.m_TileSpriteIndex
@@ -3381,7 +3381,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1473176482826625423, guid: fb915fcc83af8094bb359004411c8305, type: 3}
       propertyPath: m_Tiles.Array.data[27].second.m_TileMatrixIndex
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1473176482826625423, guid: fb915fcc83af8094bb359004411c8305, type: 3}
       propertyPath: m_Tiles.Array.data[27].second.m_TileSpriteIndex
@@ -3397,7 +3397,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1473176482826625423, guid: fb915fcc83af8094bb359004411c8305, type: 3}
       propertyPath: m_Tiles.Array.data[29].second.m_TileMatrixIndex
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1473176482826625423, guid: fb915fcc83af8094bb359004411c8305, type: 3}
       propertyPath: m_Tiles.Array.data[29].second.m_TileSpriteIndex
@@ -3413,7 +3413,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1473176482826625423, guid: fb915fcc83af8094bb359004411c8305, type: 3}
       propertyPath: m_Tiles.Array.data[31].second.m_TileMatrixIndex
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1473176482826625423, guid: fb915fcc83af8094bb359004411c8305, type: 3}
       propertyPath: m_Tiles.Array.data[31].second.m_TileSpriteIndex
@@ -22124,11 +22124,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 442743865250039125, guid: b5b11d92ce8e742988800b9d71e997f8, type: 3}
   m_PrefabInstance: {fileID: 630473601}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &630473603 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4228780388479189723, guid: b5b11d92ce8e742988800b9d71e997f8, type: 3}
-  m_PrefabInstance: {fileID: 630473601}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &693649789
 GameObject:
   m_ObjectHideFlags: 0
@@ -22140,7 +22135,7 @@ GameObject:
   - component: {fileID: 693649790}
   - component: {fileID: 693649793}
   - component: {fileID: 693649792}
-  - component: {fileID: 693649791}
+  - component: {fileID: 693649794}
   m_Layer: 5
   m_Name: TutorialText
   m_TagString: Untagged
@@ -22167,19 +22162,6 @@ RectTransform:
   m_AnchoredPosition: {x: -105, y: 72}
   m_SizeDelta: {x: 363.245, y: 26.227}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &693649791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 693649789}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 730600eb6ea0d4094a307f87e919743f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  background: {fileID: 630473603}
 --- !u!114 &693649792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22280,6 +22262,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 693649789}
   m_CullTransparentMesh: 1
+--- !u!114 &693649794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693649789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf3c7b1cda51c4cc0b7f8ba1d6b74bbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1247143808
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22290,11 +22284,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2362709706912073056, guid: 81dcc2ffa032b8742bf357eb4b653187, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.5
+      value: 7.41
       objectReference: {fileID: 0}
     - target: {fileID: 2362709706912073056, guid: 81dcc2ffa032b8742bf357eb4b653187, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.5
+      value: -0.52
       objectReference: {fileID: 0}
     - target: {fileID: 2362709706912073056, guid: 81dcc2ffa032b8742bf357eb4b653187, type: 3}
       propertyPath: m_LocalPosition.z
