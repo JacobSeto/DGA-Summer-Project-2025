@@ -12,7 +12,6 @@ public class PlayerTestLaunch : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(testPlayerBody.linearVelocity);
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             testPlayerBody.linearVelocity = new Vector2(0f, 5f);

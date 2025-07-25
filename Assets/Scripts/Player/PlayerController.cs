@@ -88,6 +88,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] Animator animator;
 
+    private bool wallBounce;
+
     // Start is called before first frame is script is active
     void Start()
     {
@@ -102,6 +104,10 @@ public class PlayerController : MonoBehaviour
         timeLeft = slowTime;
         slowVisual.gameObject.SetActive(false);
         stamina = startingStamina;
+        if(stamina == 0)
+        {
+            throw new System.Exception("Stamina is 0");
+        }
 
         GameManagerScript.Instance.UpdateStaminaBar(stamina);
     }
@@ -109,7 +115,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(launched);
         if (!bounceImpulseActive)
         {
             bounceTimer += Time.deltaTime;
@@ -217,7 +222,6 @@ public class PlayerController : MonoBehaviour
             // for trajectory UI
             Vector3 currentMousePos = Input.mousePosition;
             dragDistance = Vector3.Distance(currentMousePos, originalPos);
-            //Debug.Log($"Drag distance: {dragDistance}");
         }
         if (Input.GetMouseButtonUp(0))
         {
@@ -278,16 +282,12 @@ public class PlayerController : MonoBehaviour
         {
             float decay = Mathf.Lerp(1f, 0.975f, ((0.33f * maxSpeed) - currentSpeed) / (0.33f * maxSpeed));
             playerRb.linearVelocity *= decay;
-            //Debug.Log(decay);
-            //Debug.Log((0.33f * maxSpeed) - currentSpeed);
         }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         ContactPoint2D contact = collision.GetContact(0);
-
-        Debug.Log(bounceLayers.value);
 
         // As it works right now, everything in LayerMask bounceLayers will act as a physical object the player can ricochet off of
         // As such, the impulse we apply stars its cooldown in here so player can't lose from bouncing too much in a short period of time
@@ -296,7 +296,6 @@ public class PlayerController : MonoBehaviour
             ray = Physics2D.Raycast(transform.position, direction, 4f, bounceLayers.value);
             if (ray)
             {
-                //Debug.Log(currentSpeed);
                 reflectedVector = UnityEngine.Vector2.Reflect(direction * currentSpeed, ray.normal);
 
                 if (bounceImpulseActive)
@@ -311,8 +310,7 @@ public class PlayerController : MonoBehaviour
         }
 
         if (collision.gameObject.CompareTag("Elephant"))
-        {
-            Debug.Log("Bumped");            
+        {         
             ray = Physics2D.Raycast(transform.position, direction, 4f, bounceLayers.value);
             if (ray)
             {
@@ -408,12 +406,9 @@ public class PlayerController : MonoBehaviour
     /// <param name="flag">True to allow wall bounce, false to turn off wall bounce</param>
     public void SetWallBounceActive(bool flag)
     {
-        wallBounce = flag;
+        // wallBounce = flag;
         int playerLayer = gameObject.layer;
         int wallLayerIndex = Mathf.RoundToInt(Mathf.Log(wallLayer, 2));
-
-        Debug.Log(wallLayerIndex);
-        Debug.Log(playerLayer);
 
         Physics2D.IgnoreLayerCollision(playerLayer, wallLayerIndex, !flag);
     }
@@ -427,8 +422,7 @@ public class PlayerController : MonoBehaviour
         }
 
          if (collision.gameObject.CompareTag("Elephant"))
-        {
-            Debug.Log("Bumped. triggered");            
+        {  
             ray = Physics2D.Raycast(transform.position, direction, 4f, bounceLayers.value);
             if (ray)
             {
@@ -450,7 +444,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Freeze()
+       public void Freeze()
     {
         enabled = false;
     }

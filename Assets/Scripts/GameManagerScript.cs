@@ -61,6 +61,7 @@ public class GameManagerScript : MonoBehaviour
         originalCount = zooKeepers.Length;
         OriginalPos = player.transform.position;
         originalStamina = player.GetStaminaCount();
+        Time.timeScale = 1.0f;
     }
 
     void Update()
@@ -80,12 +81,10 @@ public class GameManagerScript : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Escape) && !win && !loss)
         {
-            Debug.Log("Pause");
             Pause();
         }
         if (Input.GetKeyDown(KeyCode.R) && !win && !loss)
         {
-            Debug.Log("Reset");
             Reset();
         }
     }
@@ -105,7 +104,6 @@ public class GameManagerScript : MonoBehaviour
     /// </summary>
     public void WinGame()
     {
-        Debug.Log("You Win");
         win = true;
         Pause();
         menuNavigation.ChangeActiveScreen(winScreen);
@@ -117,7 +115,6 @@ public class GameManagerScript : MonoBehaviour
     /// </summary>
     public void LoseGame()
     {
-        Debug.Log("You Lose");
         loss = true;
         Pause();
         menuNavigation.ChangeActiveScreen(loseScreen);

@@ -26,7 +26,6 @@ public class WaterTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.attachedRigidbody.linearDamping = waterDampeningValue;
-            //Debug.Log(other.attachedRigidbody.linearDamping);
         }
     }
  
@@ -35,7 +34,6 @@ public class WaterTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.attachedRigidbody.linearDamping = defaultDampeningValue; // Note: Janky if immediately entering a special tile upon exiting water 
-            // Debug.Log(other.attachedRigidbody.linearDamping);
         }
     
     }
