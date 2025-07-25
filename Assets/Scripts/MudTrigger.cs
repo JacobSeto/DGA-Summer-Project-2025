@@ -26,7 +26,6 @@ public class MudTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.attachedRigidbody.linearDamping = mudDampeningValue; 
-            // Debug.Log(other.attachedRigidbody.linearDamping);
         }
 
     }
@@ -36,7 +35,6 @@ public class MudTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.attachedRigidbody.linearDamping = defaultDampeningValue;
-            // Debug.Log(other.attachedRigidbody.linearDamping);
         }
 
     }

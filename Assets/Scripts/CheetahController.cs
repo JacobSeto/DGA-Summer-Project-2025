@@ -38,7 +38,6 @@ public class CheetahController : MonoBehaviour
                 player.playerRb.linearVelocity *= 2f;
                 canIncreaseSpeed = false;
                 timer = coolDownTime;
-                Debug.Log("Speed added. Cooldown started.");
             }
         }
     }
