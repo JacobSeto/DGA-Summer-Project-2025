@@ -18,7 +18,7 @@ public class Tutorial : MonoBehaviour
     {
         if (clicks == 0)
         {
-            player.Freeze();
+            GameManagerScript.Instance.HideGameMenu();
         }
         if (Input.GetMouseButtonUp(0))
         {
@@ -26,18 +26,6 @@ public class Tutorial : MonoBehaviour
         }
         if (clicks == 1)
         {
-            text.SetText("Launch her at the zookeeper by clicking " +
-                "& dragging until the arrow points " +
-                "where you want to go. Then, let go! Try it now!");
-            clicks = clicks + 1;
-        }
-        if (clicks == 2)
-        {
-            player.Unfreeze();
-        }
-        if (clicks == 3)
-        {
-            text.gameObject.SetActive(false);
             gameObject.SetActive(false);
         }
     }

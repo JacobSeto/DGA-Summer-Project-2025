@@ -90,6 +90,11 @@ public class GameManagerScript : MonoBehaviour
         }
     }
 
+    public void HideGameMenu()
+    {
+        menuNavigation.ChangeActiveScreen(uiPopupScreen);
+    }
+
     public void DonePopup()
     {
         menuNavigation.ChangeActiveScreen(gameMenu);

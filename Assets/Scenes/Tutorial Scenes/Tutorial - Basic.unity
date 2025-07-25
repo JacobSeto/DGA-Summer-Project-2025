@@ -19971,8 +19971,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Help the armadillo escape the zoo by knocking all zookeepers out of the
-    pen! (Click to continue)
+  m_text: Launch her at the zookeeper by clicking & dragging until the arrow points
+    where you want to go. Then, release! Try it now!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0d4738f5fca3f46498b8c9afafbf2a0c, type: 2}
   m_sharedMaterial: {fileID: 9170347423843607153, guid: 0d4738f5fca3f46498b8c9afafbf2a0c, type: 2}
