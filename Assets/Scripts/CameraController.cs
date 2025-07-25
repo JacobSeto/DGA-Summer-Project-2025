@@ -107,7 +107,7 @@ public class CameraController : MonoBehaviour
             { 
                 currentPosition = Bind(currentPosition); 
             }
-            transform.position = Vector3.Slerp(transform.position, currentPosition, movementSpeed);
+            transform.position = Vector3.Slerp(transform.position, currentPosition, player.GetCurrentSpeed()*Time.deltaTime*.95f);
             
         }
         else 

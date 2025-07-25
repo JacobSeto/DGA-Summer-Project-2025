@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: Shore Tile
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 5889934061101069038, guid: 172300ddbe2e9dc459260239418eb77c, type: 3}
+  m_Sprite: {fileID: -3466952542901333293, guid: f2ecec5e4e458ec47ba26ce3a60b8832, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
