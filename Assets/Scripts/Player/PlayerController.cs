@@ -34,6 +34,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] public float rotateForce;
     [SerializeField] public int maxStamina;
+
+    [SerializeField] public int startingStamina;
     [SerializeField] public float slowDownAmount;
     public bool launched;
     public bool slowMotion;
@@ -65,7 +67,7 @@ public class PlayerController : MonoBehaviour
     public bool IsStretching => stretching;
     public Vector3 OriginalMousePos => originalPos;
     public Vector3 OriginalPlayerPos => originalPlayerPos;
-    
+
 
     [SerializeField] LayerMask wallLayer;
     [SerializeField] LayerMask boundaryLayer;
@@ -85,6 +87,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] Animator animator;
 
+    private bool wallBounce;
+
     // Start is called before first frame is script is active
     void Start()
     {
@@ -98,7 +102,9 @@ public class PlayerController : MonoBehaviour
         defaultScale = spriteRenderer.transform.localScale;
         timeLeft = slowTime;
         slowVisual.gameObject.SetActive(false);
-        stamina = maxStamina;
+        stamina = startingStamina;
+
+        GameManagerScript.Instance.UpdateStaminaBar(stamina);
     }
 
     // Update is called once per frame
@@ -403,7 +409,7 @@ public class PlayerController : MonoBehaviour
     /// <param name="flag">True to allow wall bounce, false to turn off wall bounce</param>
     public void SetWallBounceActive(bool flag)
     {
-        //wallBounce = flag;
+        // wallBounce = flag;
         int playerLayer = gameObject.layer;
         int wallLayerIndex = Mathf.RoundToInt(Mathf.Log(wallLayer, 2));
 
@@ -445,7 +451,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Freeze()
+       public void Freeze()
     {
         enabled = false;
     }
@@ -495,7 +501,7 @@ public class PlayerController : MonoBehaviour
     {
         return currentSpeed;
     }
-    
+
     /// <summary>
     /// 
     /// </summary>
@@ -520,14 +526,15 @@ public class PlayerController : MonoBehaviour
     public void DecrementStamina()
     {
         if (stamina > 0) stamina--;
+        GameManagerScript.Instance.UpdateStaminaBar(stamina);
     }
-    
+
     /// <summary>
     /// Increments current stamina by 1
     /// </summary>
     public void IncrementStamina()
     {
         if (stamina < maxStamina) stamina++;
-
+        GameManagerScript.Instance.UpdateStaminaBar(stamina);
     }
 }

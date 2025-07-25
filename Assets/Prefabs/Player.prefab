@@ -167,10 +167,12 @@ MonoBehaviour:
   minSpeed: 0.5
   bounceForce: 0.9
   rotateForce: 45
-  stamina: 3
+  maxStamina: 4
+  startingStamina: 2
   slowDownAmount: 0.3
   launched: 0
   slowMotion: 0
+  angle: 0
   wallLayer:
     serializedVersion: 2
     m_Bits: 256
