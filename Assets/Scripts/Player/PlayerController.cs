@@ -85,6 +85,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] Animator animator;
 
+    private bool wallBounce;
+
     // Start is called before first frame is script is active
     void Start()
     {
@@ -445,7 +447,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Freeze()
+       public void Freeze()
     {
         enabled = false;
     }
