@@ -168,6 +168,7 @@ MonoBehaviour:
   bounceForce: 0.9
   rotateForce: 45
   maxStamina: 4
+  startingStamina: 2
   slowDownAmount: 0.3
   launched: 0
   slowMotion: 0
@@ -177,7 +178,7 @@ MonoBehaviour:
     m_Bits: 256
   boundaryLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
   slowVisual: {fileID: 8830392198594967785}
   spriteRenderer: {fileID: 3958427247207750238}
   spriteObject: {fileID: 2210973940943747788}

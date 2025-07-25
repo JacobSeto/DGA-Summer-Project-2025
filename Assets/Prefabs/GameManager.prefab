@@ -2434,6 +2434,7 @@ MonoBehaviour:
   - {fileID: 1378667640612165837}
   - {fileID: 4729908989922394471}
   - {fileID: 3704094033564136023}
+  greyscaleMat: {fileID: 2100000, guid: 9351a3757453d4242bd4f9f3f3b9859c, type: 2}
 --- !u!1 &8380021242513430653
 GameObject:
   m_ObjectHideFlags: 0

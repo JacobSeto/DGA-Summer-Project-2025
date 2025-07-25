@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] public float rotateForce;
     [SerializeField] public int maxStamina;
+
+    [SerializeField] public int startingStamina;
     [SerializeField] public float slowDownAmount;
     public bool launched;
     public bool slowMotion;
@@ -93,7 +95,7 @@ public class PlayerController : MonoBehaviour
         bounceLayers = wallLayer.value | boundaryLayer.value;
         timeLeft = slowTime;
         slowVisual.gameObject.SetActive(false);
-        stamina = maxStamina;
+        stamina = startingStamina;
 
         GameManagerScript.Instance.UpdateStaminaBar(stamina);
     }

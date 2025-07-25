@@ -35,6 +35,8 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] GameObject loseScreen;
     [SerializeField] Image[] staminaBar;
 
+    public Material greyscaleMat;
+
     void Awake()
     {
         Instance = this;
@@ -162,12 +164,12 @@ public class GameManagerScript : MonoBehaviour
     {
         for (int i = 0; i < stamina; i++)
         {
-            staminaBar[i].enabled = true;
+            staminaBar[i].material = Canvas.GetDefaultCanvasMaterial();
         }
 
         for (int i = stamina; i < player.GetMaxStamina(); i++)
         {
-            staminaBar[i].enabled = false;
+            staminaBar[i].material = greyscaleMat;
         }
     }
 }
