@@ -54,7 +54,6 @@ public class GameManagerScript: MonoBehaviour
     {
         zooKeepers = GameObject.FindGameObjectsWithTag("Zookeeper");
         zookeeperCount = zooKeepers.Length;
-        ShowIntroPopup();
         originalCount = zooKeepers.Length;
         OriginalPos = player.transform.position;
         originalStamina = player.stamina;

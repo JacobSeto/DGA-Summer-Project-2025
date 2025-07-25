@@ -315,6 +315,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+       public void Freeze()
+    {
+        enabled = false;
+    }
+
+    public void Unfreeze()
+    {
+        enabled = true;
+    }
+
     public void addPivot(GameObject add)
     {
         pivot = add;
