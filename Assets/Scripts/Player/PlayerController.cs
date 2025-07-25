@@ -417,7 +417,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Insect"))
         {
-            stamina++;
+            IncrementStamina();
         }
 
          if (collision.gameObject.CompareTag("Elephant"))
