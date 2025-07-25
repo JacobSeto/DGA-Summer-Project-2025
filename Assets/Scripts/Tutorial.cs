@@ -1,17 +1,17 @@
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Tutorial : MonoBehaviour
 {
-    private TMP_Text text;
     private int clicks = 0;
     private PlayerController player;
+    [SerializeField] private GameObject background;
     void Start()
     {
-        text = gameObject.transform.GetChild(0).GetComponent<TMP_Text>();
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-        player.startingStamina = 1;
+        player.startingStamina = 2;
     }
 
     void Update()
@@ -26,7 +26,7 @@ public class Tutorial : MonoBehaviour
         }
         if (clicks == 1)
         {
-            gameObject.SetActive(false);
+            background.SetActive(false);
         }
     }
 }
