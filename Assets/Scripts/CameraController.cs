@@ -65,10 +65,8 @@ public class CameraController : MonoBehaviour
         
         if (Input.GetButtonDown("Jump"))
         {
-            Debug.Log("Clicked");
             zoomed += 1;
             if (zoomed == 3) { zoomed = 1; }
-            Debug.Log("Zoom level: " + zoomed);
         }
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
