@@ -70,8 +70,12 @@ public class CameraController : MonoBehaviour
             if (zoomed == 3) { zoomed = 1; }
             Debug.Log("Zoom level: " + zoomed);
         }
-        
-        
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            zoomed = 1;
+        }
+
         if (zoomed == 2) // Whole Level overview
         {
             currentSize = levelSize;
@@ -107,7 +111,7 @@ public class CameraController : MonoBehaviour
             { 
                 currentPosition = Bind(currentPosition); 
             }
-            transform.position = Vector3.Slerp(transform.position, currentPosition, player.GetCurrentSpeed()*Time.deltaTime*.95f);
+            transform.position = Vector3.Slerp(transform.position, currentPosition, Mathf.Clamp(player.GetCurrentSpeed()*Time.deltaTime*.95f,0.1f,100000000));
             
         }
         else 
