@@ -119,11 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &35635896 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8830392198594967785, guid: 33ab23f5c1400c74bae73e2161dc02d2, type: 3}
-  m_PrefabInstance: {fileID: 1620024684}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &209763910
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20225,7 +20220,7 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 442743865250039125, guid: b5b11d92ce8e742988800b9d71e997f8, type: 3}
   m_PrefabInstance: {fileID: 987136287}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1596985439
+--- !u!1001 &1387286330
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -20233,13 +20228,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1216542175501226449, guid: 3d218a13950af4a7da50f645153eb143, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4175064600497152878, guid: 3d218a13950af4a7da50f645153eb143, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.59491
+      value: 601.2988
       objectReference: {fileID: 0}
     - target: {fileID: 4175064600497152878, guid: 3d218a13950af4a7da50f645153eb143, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.65514
+      value: 716.15686
       objectReference: {fileID: 0}
     - target: {fileID: 4175064600497152878, guid: 3d218a13950af4a7da50f645153eb143, type: 3}
       propertyPath: m_LocalPosition.z
@@ -20273,12 +20272,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5224106745749738200, guid: 3d218a13950af4a7da50f645153eb143, type: 3}
+      propertyPath: m_Name
+      value: MediumAudio
+      objectReference: {fileID: 0}
     - target: {fileID: 5954986269512263673, guid: 3d218a13950af4a7da50f645153eb143, type: 3}
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5522311424788802548, guid: 3d218a13950af4a7da50f645153eb143, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d218a13950af4a7da50f645153eb143, type: 3}
@@ -20293,7 +20297,7 @@ PrefabInstance:
     - target: {fileID: -6027955848104475147, guid: 33ab23f5c1400c74bae73e2161dc02d2, type: 3}
       propertyPath: slowVisual
       value: 
-      objectReference: {fileID: 35635896}
+      objectReference: {fileID: 0}
     - target: {fileID: -1464496374494826900, guid: 33ab23f5c1400c74bae73e2161dc02d2, type: 3}
       propertyPath: m_Interpolate
       value: 1
@@ -20647,6 +20651,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1763181459}
+  - {fileID: 1387286330}
   - {fileID: 1889211606}
-  - {fileID: 1596985439}
   - {fileID: 237528659}

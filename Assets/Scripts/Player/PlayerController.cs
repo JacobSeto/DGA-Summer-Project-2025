@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// Max speed that the armidillo can be at any moment(including boosts/powerups)
     /// </summary>
-    [SerializeField] float maxSpeed;
+    [SerializeField] public float maxSpeed;
     [SerializeField] float minSpeed;
 
     /// <summary>
@@ -41,10 +41,10 @@ public class PlayerController : MonoBehaviour
     public bool slowMotion;
     public float angle;
     public int stamina;
+    float currentSpeed;
     Vector2 reflectedVector;
     RaycastHit2D ray;
     Vector2 direction;
-    float currentSpeed;
     Vector3 originalPos;
     Vector3 originalPlayerPos;
 
