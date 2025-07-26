@@ -7,11 +7,13 @@ public class Tutorial : MonoBehaviour
 {
     private int clicks = 0;
     private PlayerController player;
-    [SerializeField] private GameObject background;
+    private GameObject background;
     void Start()
     {
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         player.startingStamina = 1;
+        background = gameObject.transform.parent.gameObject;
+        player.tutorial = true;
     }
 
     void Update()
