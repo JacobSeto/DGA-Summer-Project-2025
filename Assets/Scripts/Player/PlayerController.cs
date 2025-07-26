@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
     public bool slowMotion;
     public float angle;
     public int stamina;
+    public bool tutorial = false;
     public bool speedometerExists = true;
     Vector2 reflectedVector;
     RaycastHit2D ray;
@@ -166,8 +167,10 @@ public class PlayerController : MonoBehaviour
         }
         else if (launched)
         {
-            GameManagerScript.Instance.LoseGame();
-            playerRb.linearVelocity = Vector2.zero;
+            if (!tutorial) {
+                GameManagerScript.Instance.LoseGame();
+                playerRb.linearVelocity = Vector2.zero;
+            }
         }
 
         if (isInAir && !thrown)

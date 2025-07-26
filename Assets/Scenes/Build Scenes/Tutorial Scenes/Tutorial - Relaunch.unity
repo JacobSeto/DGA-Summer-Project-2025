@@ -22182,8 +22182,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Click and drag to relaunch, but it'll cost you a can of bug juice. Don't
-    run out!
+  m_text: Always stay moving! Never roll to a stop or the zookeepers will catch you!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0d4738f5fca3f46498b8c9afafbf2a0c, type: 2}
   m_sharedMaterial: {fileID: 9170347423843607153, guid: 0d4738f5fca3f46498b8c9afafbf2a0c, type: 2}
@@ -22271,7 +22270,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 693649789}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf3c7b1cda51c4cc0b7f8ba1d6b74bbe, type: 3}
+  m_Script: {fileID: 11500000, guid: 225a26fe6635c4ccf863ae18d546f7ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!50 &1051344020 stripped
