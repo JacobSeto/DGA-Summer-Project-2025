@@ -13,6 +13,7 @@ public class Tutorial : MonoBehaviour
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         player.startingStamina = 1;
         background = gameObject.transform.parent.gameObject;
+        player.tutorial = true;
     }
 
     void Update()

@@ -42,6 +42,7 @@ public class PlayerController : MonoBehaviour
     public float angle;
     public int stamina;
     public bool tutorial = false;
+    public bool tutorialTwo = false;
     public bool speedometerExists = true;
     Vector2 reflectedVector;
     RaycastHit2D ray;
@@ -138,6 +139,11 @@ public class PlayerController : MonoBehaviour
                 EndSlowMotion();
             }
         }
+        if (tutorial) {
+           if (stamina==0) {
+                stamina = stamina + 1;
+            } 
+        }
         if (slowMotion)
         {
             timeLeft = timeLeft - Time.deltaTime;
@@ -167,9 +173,14 @@ public class PlayerController : MonoBehaviour
         }
         else if (launched)
         {
-            if (!tutorial) {
+            if (!tutorialTwo) {
                 GameManagerScript.Instance.LoseGame();
                 playerRb.linearVelocity = Vector2.zero;
+            } else {
+                if (stamina==0) {
+                    GameManagerScript.Instance.LoseGame();
+                    playerRb.linearVelocity = Vector2.zero;
+                }
             }
         }
 
