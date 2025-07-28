@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 6df545454a78143ccb62bdd44c61b588
+guid: b0f6c66aa2fcd43e5ae899a3ea2149f1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5482268014148902724
-    second: Zookeeper_0
+      213: -7380667778181474788
+    second: Monkey Throw_0
   - first:
-      213: -644523637086566947
-    second: Zookeeper_1
+      213: -6661507059690520018
+    second: Monkey Throw_1
   - first:
-      213: -4650096931756663465
-    second: Zookeeper_2
+      213: -4560718175980103490
+    second: Monkey Throw_2
   - first:
-      213: 8797556248505584411
-    second: Zookeeper_3
+      213: 9019303499201598510
+    second: Monkey Throw_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,12 +109,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Zookeeper_0
+      name: Monkey Throw_0
       rect:
         serializedVersion: 2
-        x: 2
+        x: 6
         y: 0
-        width: 28
+        width: 35
         height: 49
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -124,19 +124,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cb02b2599421be3b0800000000000000
-      internalID: -5482268014148902724
+      spriteID: c16525c92c9929990800000000000000
+      internalID: -7380667778181474788
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Zookeeper_1
+      name: Monkey Throw_1
       rect:
         serializedVersion: 2
-        x: 34
+        x: 55
         y: 0
-        width: 29
+        width: 35
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e22c3669f929d83a0800000000000000
+      internalID: -6661507059690520018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monkey Throw_2
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 0
+        width: 45
         height: 46
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -146,20 +168,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dd5cc1aba213e07f0800000000000000
-      internalID: -644523637086566947
+      spriteID: eb8d9009bf215b0c0800000000000000
+      internalID: -4560718175980103490
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Zookeeper_2
+      name: Monkey Throw_3
       rect:
         serializedVersion: 2
-        x: 65
+        x: 153
         y: 0
-        width: 30
-        height: 45
+        width: 41
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,30 +190,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 75d92835a79877fb0800000000000000
-      internalID: -4650096931756663465
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Zookeeper_3
-      rect:
-        serializedVersion: 2
-        x: 98
-        y: 0
-        width: 29
-        height: 46
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b1b81bbebc2371a70800000000000000
-      internalID: 8797556248505584411
+      spriteID: e2459570fb00b2d70800000000000000
+      internalID: 9019303499201598510
       vertices: []
       indices: 
       edges: []
@@ -210,10 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Zookeeper_0: -5482268014148902724
-      Zookeeper_1: -644523637086566947
-      Zookeeper_2: -4650096931756663465
-      Zookeeper_3: 8797556248505584411
+      Monkey Throw_0: -7380667778181474788
+      Monkey Throw_1: -6661507059690520018
+      Monkey Throw_2: -4560718175980103490
+      Monkey Throw_3: 9019303499201598510
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

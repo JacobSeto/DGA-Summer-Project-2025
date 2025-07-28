@@ -41,6 +41,9 @@ public class PlayerController : MonoBehaviour
     public bool slowMotion;
     public int stamina;
     public float currentSpeed;
+    public bool tutorial = false;
+    public bool tutorialTwo = false;
+    public bool speedometerExists = true;
     Vector2 reflectedVector;
     RaycastHit2D ray;
     Vector2 direction;
@@ -132,6 +135,11 @@ public class PlayerController : MonoBehaviour
                 EndSlowMotion();
             }
         }
+        if (tutorial) {
+           if (stamina==0) {
+                stamina = stamina + 1;
+            } 
+        }
         if (slowMotion)
         {
             timeLeft = timeLeft - Time.deltaTime;
@@ -144,7 +152,6 @@ public class PlayerController : MonoBehaviour
         {
             direction = playerRb.linearVelocity.normalized;
             currentSpeed = playerRb.linearVelocity.magnitude;
-
             if (playerRb.linearVelocityX < 0)
             {
                 spriteObject.transform.Rotate(0, 0, currentSpeed * Time.deltaTime * rotateForce * flip);
@@ -156,8 +163,15 @@ public class PlayerController : MonoBehaviour
         }
         else if (launched)
         {
-            GameManagerScript.Instance.LoseGame();
-            playerRb.linearVelocity = Vector2.zero;
+            if (!tutorialTwo) {
+                GameManagerScript.Instance.LoseGame();
+                playerRb.linearVelocity = Vector2.zero;
+            } else {
+                if (stamina==0) {
+                    GameManagerScript.Instance.LoseGame();
+                    playerRb.linearVelocity = Vector2.zero;
+                }
+            }
         }
 
         if (isInAir && !thrown)

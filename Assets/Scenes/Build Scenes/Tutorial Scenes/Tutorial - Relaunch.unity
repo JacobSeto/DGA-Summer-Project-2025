@@ -22020,11 +22020,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 442743865250039125, guid: b5b11d92ce8e742988800b9d71e997f8, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -199.491
+      value: 310.3057
       objectReference: {fileID: 0}
     - target: {fileID: 442743865250039125, guid: b5b11d92ce8e742988800b9d71e997f8, type: 3}
       propertyPath: m_SizeDelta.y
-      value: -371.8379
+      value: -209.4821
       objectReference: {fileID: 0}
     - target: {fileID: 442743865250039125, guid: b5b11d92ce8e742988800b9d71e997f8, type: 3}
       propertyPath: m_LocalScale.x
@@ -22068,11 +22068,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 442743865250039125, guid: b5b11d92ce8e742988800b9d71e997f8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -222.2193
+      value: -366
       objectReference: {fileID: 0}
     - target: {fileID: 442743865250039125, guid: b5b11d92ce8e742988800b9d71e997f8, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 112.95012
+      value: 226
       objectReference: {fileID: 0}
     - target: {fileID: 442743865250039125, guid: b5b11d92ce8e742988800b9d71e997f8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -22159,8 +22159,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -105, y: 72}
-  m_SizeDelta: {x: 363.245, y: 26.227}
+  m_AnchoredPosition: {x: -207, y: 93}
+  m_SizeDelta: {x: 645.744, y: 126.887}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &693649792
 MonoBehaviour:
@@ -22182,8 +22182,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Click and drag to relaunch, but it'll cost you a can of bug juice. Don't
-    run out!
+  m_text: Always stay moving! Never roll to a stop or the zookeepers will catch you!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0d4738f5fca3f46498b8c9afafbf2a0c, type: 2}
   m_sharedMaterial: {fileID: 9170347423843607153, guid: 0d4738f5fca3f46498b8c9afafbf2a0c, type: 2}
@@ -22210,8 +22209,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 42
-  m_fontSizeBase: 42
+  m_fontSize: 80
+  m_fontSizeBase: 80
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -22248,7 +22247,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -212.92932, w: -148.96217}
+  m_margin: {x: 0, y: 0, z: -537.6409, w: -148.96217}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -22271,7 +22270,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 693649789}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf3c7b1cda51c4cc0b7f8ba1d6b74bbe, type: 3}
+  m_Script: {fileID: 11500000, guid: 225a26fe6635c4ccf863ae18d546f7ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!50 &1051344020 stripped

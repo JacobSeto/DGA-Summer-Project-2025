@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class TutorialTwo : MonoBehaviour
+public class TutorialThree : MonoBehaviour
 {
     private PlayerController player;
     private GameObject gameScreen;
@@ -11,12 +11,7 @@ public class TutorialTwo : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         player.startingStamina = 3;
-        gameScreen = GameManagerScript.Instance.getGameScreen();
-        speedometer = gameScreen.transform.GetChild(1).gameObject;
-        speedometer.SetActive(false);
-        player.speedometerExists = false;
         background = gameObject.transform.parent.gameObject;
-        player.tutorialTwo = true;
     }
 
     void Update()

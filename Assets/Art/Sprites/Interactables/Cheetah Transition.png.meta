@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 6df545454a78143ccb62bdd44c61b588
+guid: f082eb592c2c14fd0a2b77c08dd66633
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5482268014148902724
-    second: Zookeeper_0
+      213: 5474439706881341845
+    second: Cheetah Transition_0
   - first:
-      213: -644523637086566947
-    second: Zookeeper_1
+      213: -5045035291985050144
+    second: Cheetah Transition_1
   - first:
-      213: -4650096931756663465
-    second: Zookeeper_2
+      213: -2313251761734463231
+    second: Cheetah Transition_2
   - first:
-      213: 8797556248505584411
-    second: Zookeeper_3
+      213: -1474494894599258013
+    second: Cheetah Transition_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,13 +109,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Zookeeper_0
+      name: Cheetah Transition_0
       rect:
         serializedVersion: 2
-        x: 2
+        x: 12
         y: 0
-        width: 28
-        height: 49
+        width: 46
+        height: 47
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cb02b2599421be3b0800000000000000
-      internalID: -5482268014148902724
+      spriteID: 599b4f898ed19fb40800000000000000
+      internalID: 5474439706881341845
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Zookeeper_1
+      name: Cheetah Transition_1
       rect:
         serializedVersion: 2
-        x: 34
+        x: 67
         y: 0
-        width: 29
-        height: 46
+        width: 50
+        height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -146,20 +146,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dd5cc1aba213e07f0800000000000000
-      internalID: -644523637086566947
+      spriteID: 0e50ce5b12f6cf9b0800000000000000
+      internalID: -5045035291985050144
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Zookeeper_2
+      name: Cheetah Transition_2
       rect:
         serializedVersion: 2
-        x: 65
+        x: 123
         y: 0
-        width: 30
-        height: 45
+        width: 53
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,20 +168,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 75d92835a79877fb0800000000000000
-      internalID: -4650096931756663465
+      spriteID: 10155c167cda5efd0800000000000000
+      internalID: -2313251761734463231
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Zookeeper_3
+      name: Cheetah Transition_3
       rect:
         serializedVersion: 2
-        x: 98
-        y: 0
-        width: 29
-        height: 46
+        x: 177
+        y: 1
+        width: 57
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -190,8 +190,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b1b81bbebc2371a70800000000000000
-      internalID: 8797556248505584411
+      spriteID: 360c840a4ba898be0800000000000000
+      internalID: -1474494894599258013
       vertices: []
       indices: 
       edges: []
@@ -210,10 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Zookeeper_0: -5482268014148902724
-      Zookeeper_1: -644523637086566947
-      Zookeeper_2: -4650096931756663465
-      Zookeeper_3: 8797556248505584411
+      Cheetah Transition_0: 5474439706881341845
+      Cheetah Transition_1: -5045035291985050144
+      Cheetah Transition_2: -2313251761734463231
+      Cheetah Transition_3: -1474494894599258013
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
