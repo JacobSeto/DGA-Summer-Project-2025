@@ -182,6 +182,8 @@ public class PlayerController : MonoBehaviour
             SetWallBounceActive(true);
             aboveWall = false;
         }
+
+        Debug.Log("Current speed: " + currentSpeed);
     }
 
     IEnumerator MonkeyThrow()
@@ -335,21 +337,11 @@ public class PlayerController : MonoBehaviour
 
         // ElephantController elephant = collision.gameObject.GetComponent<ElephantController>();
         // elephant?.DecreaseHP();
-        if (collision.gameObject.CompareTag("Tranquilizer"))
-        {
-            DecrementStamina();
-        }
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            currentSpeed *= 0.5f;
-        }
-        // ElephantController elephant = collision.gameObject.GetComponent<ElephantController>();
-        // elephant?.DecreaseHP();
 
-        //if (collision.gameObject.CompareTag("Cheetah"))
-        //{
-        //    stamina++;
-        //}
+        // if (collision.gameObject.CompareTag("Cheetah"))
+        // {
+        //    playerRb.linearVelocity.magnitude *= 2f;
+        // }
 
         // Rotation logic
         Vector2 normal = contact.normal;
