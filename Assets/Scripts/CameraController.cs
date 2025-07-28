@@ -32,6 +32,7 @@ public class CameraController : MonoBehaviour
     //Follow variables
     private float movementSpeed=5f;
     private Vector3 currentPosition;
+    private Vector3 bouncecheck;
     //Screen Bound
     private int activePenn=0;
     private Vector3 penPostition;
@@ -88,9 +89,17 @@ public class CameraController : MonoBehaviour
         {
             zoomed = 1;
             currentSize = playerSize;
-            currentPosition = new Vector3(playerLoc.position.x + (Mathf.Clamp(playerBody.linearVelocityX, -currentSize*(16f/10f), currentSize * (16f / 10f)) ), 
-                playerLoc.position.y + (Mathf.Clamp(playerBody.linearVelocityY, -currentSize, currentSize)),
-                -10f);
+            /* //Original: Screen Bound + ahead
+             currentPosition = new Vector3(playerLoc.position.x + (Mathf.Clamp(playerBody.linearVelocityX, -currentSize*(16f/10f), currentSize * (16f / 10f)) ), 
+                 playerLoc.position.y + (Mathf.Clamp(playerBody.linearVelocityY, -currentSize, currentSize)),
+                 -10f); */
+             ///Option 1: Centered
+            // currentPosition = new Vector3(playerLoc.position.x, playerLoc.position.y, -10f); 
+
+            //Option 2: Slightly ahead
+            float frac = .15f;
+            currentPosition = new Vector3(playerLoc.position.x + (Mathf.Clamp(playerBody.linearVelocityX, -currentSize * (16f / 10f) * frac, currentSize * (16f / 10f) * frac)),
+              playerLoc.position.y + (Mathf.Clamp(playerBody.linearVelocityY, -currentSize * frac, currentSize * frac))); 
             //currentPosition = new Vector3(playerLoc.position.x + playerBody.linearVelocityX, playerLoc.position.y + playerBody.linearVelocityY, -10f);
         }
 
@@ -109,8 +118,9 @@ public class CameraController : MonoBehaviour
             { 
                 currentPosition = Bind(currentPosition); 
             }
-            transform.position = Vector3.Slerp(transform.position, currentPosition, Mathf.Clamp(player.GetCurrentSpeed()*Time.deltaTime*.95f,0.1f,100000000));
-            
+           // transform.position = Vector3.Slerp(transform.position, currentPosition, Mathf.Clamp((1/player.GetCurrentSpeed())*Time.deltaTime*.95f,0.1f,100000000));
+            transform.position = Vector3.Slerp(transform.position, currentPosition, .025f);
+
         }
         else 
         {
