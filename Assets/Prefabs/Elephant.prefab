@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1374757904423193619}
   - component: {fileID: 2812936680961514568}
   - component: {fileID: 6042932328677654730}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Elephant
   m_TagString: Elephant
   m_Icon: {fileID: 0}

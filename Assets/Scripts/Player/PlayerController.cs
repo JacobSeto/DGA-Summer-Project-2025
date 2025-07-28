@@ -74,6 +74,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] LayerMask wallLayer;
     [SerializeField] LayerMask boundaryLayer;
+    [SerializeField] LayerMask elephantLayer;
     LayerMask bounceLayers;
     //[SerializeField] GameObject slowVisual;
     private GameObject pivot;
@@ -325,9 +326,9 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (collision.gameObject.CompareTag("Elephant"))
+        if ((elephantLayer.value & (1 << collision.gameObject.layer)) > 0)
         {         
-            ray = Physics2D.Raycast(transform.position, direction, 4f, bounceLayers.value);
+            ray = Physics2D.Raycast(transform.position, direction, 4f, elephantLayer.value);
             if (ray)
             {
                 reflectedVector = UnityEngine.Vector2.Reflect(direction * currentSpeed, ray.normal);
