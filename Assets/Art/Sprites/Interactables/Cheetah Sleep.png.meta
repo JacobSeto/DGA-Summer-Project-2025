@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 84f549d1fcf00411aa3c4b9adb8b1191
+guid: ab0caade85fb9400fb8c289fec334b22
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 973301482186294925
-    second: Monkey_0
+      213: 5842055473896311697
+    second: Cheetah Sleep_0
   - first:
-      213: 380556255581113798
-    second: Monkey_1
+      213: -9146788466551718256
+    second: Cheetah Sleep_1
   - first:
-      213: -3126637007553212853
-    second: Monkey_2
+      213: 4632436171072806795
+    second: Cheetah Sleep_2
   - first:
-      213: 1312512685093574040
-    second: Monkey_3
+      213: -438855911085237274
+    second: Cheetah Sleep_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,13 +109,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Monkey_0
+      name: Cheetah Sleep_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 32
-        height: 48
+        x: 5
+        y: 1
+        width: 58
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d8643119a8cd18d00800000000000000
-      internalID: 973301482186294925
+      spriteID: 19b47bf3086231150800000000000000
+      internalID: 5842055473896311697
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Monkey_1
+      name: Cheetah Sleep_1
       rect:
         serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 48
+        x: 69
+        y: 1
+        width: 58
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -146,20 +146,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6cd07fee5e1084500800000000000000
-      internalID: 380556255581113798
+      spriteID: 09e7b87f954101180800000000000000
+      internalID: -9146788466551718256
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Monkey_2
+      name: Cheetah Sleep_2
       rect:
         serializedVersion: 2
-        x: 64
-        y: 0
-        width: 32
-        height: 48
+        x: 133
+        y: 1
+        width: 58
+        height: 25
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,20 +168,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b4e433f0534fb94d0800000000000000
-      internalID: -3126637007553212853
+      spriteID: b8f17756728b94040800000000000000
+      internalID: 4632436171072806795
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Monkey_3
+      name: Cheetah Sleep_3
       rect:
         serializedVersion: 2
-        x: 96
-        y: 0
-        width: 32
-        height: 48
+        x: 197
+        y: 1
+        width: 58
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -190,8 +190,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8955236455bf63210800000000000000
-      internalID: 1312512685093574040
+      spriteID: 6eb1f20cfded8e9f0800000000000000
+      internalID: -438855911085237274
       vertices: []
       indices: 
       edges: []
@@ -200,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: cec27d77e6f70492eba884b471f2aab5
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -208,14 +208,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":48.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+      entries: []
     nameFileIdTable:
-      Monkey_0: 973301482186294925
-      Monkey_1: 380556255581113798
-      Monkey_2: -3126637007553212853
-      Monkey_3: 1312512685093574040
+      Cheetah Sleep_0: 5842055473896311697
+      Cheetah Sleep_1: -9146788466551718256
+      Cheetah Sleep_2: 4632436171072806795
+      Cheetah Sleep_3: -438855911085237274
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

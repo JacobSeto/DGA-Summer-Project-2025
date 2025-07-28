@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 6cf4e439b87944c52ab596f5e6c29eae
+guid: 24eb1b12b1e704e7db52e61791144ce2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5160706062914596145
-    second: Cheetah_0
+      213: -3679442462494854283
+    second: Zookeeper Outline_0
   - first:
-      213: 3565117314122407990
-    second: Cheetah_1
+      213: 8963696176027507081
+    second: Zookeeper Outline_1
   - first:
-      213: 2449312828471721129
-    second: Cheetah_2
+      213: 5654614962329447181
+    second: Zookeeper Outline_2
   - first:
-      213: 7826571274527833208
-    second: Cheetah_3
+      213: 8954925508956819267
+    second: Zookeeper Outline_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,13 +109,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Cheetah_0
+      name: Zookeeper Outline_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 1
         y: 0
-        width: 48
-        height: 44
+        width: 29
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 13daa3652d28e9740800000000000000
-      internalID: 5160706062914596145
+      spriteID: 573718b239effecc0800000000000000
+      internalID: -3679442462494854283
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cheetah_1
+      name: Zookeeper Outline_1
       rect:
         serializedVersion: 2
-        x: 48
+        x: 34
         y: 0
-        width: 48
-        height: 44
+        width: 29
+        height: 46
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -146,20 +146,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6306cd2fe47d97130800000000000000
-      internalID: 3565117314122407990
+      spriteID: 98995ae2e22756c70800000000000000
+      internalID: 8963696176027507081
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cheetah_2
+      name: Zookeeper Outline_2
       rect:
         serializedVersion: 2
-        x: 96
+        x: 65
         y: 0
-        width: 48
-        height: 44
+        width: 30
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,20 +168,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9ac3ddc5a05bdf120800000000000000
-      internalID: 2449312828471721129
+      spriteID: d0b614b495a397e40800000000000000
+      internalID: 5654614962329447181
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cheetah_3
+      name: Zookeeper Outline_3
       rect:
         serializedVersion: 2
-        x: 144
+        x: 98
         y: 0
-        width: 48
-        height: 44
+        width: 29
+        height: 46
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -190,8 +190,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 87cf1837b119d9c60800000000000000
-      internalID: 7826571274527833208
+      spriteID: 34f847f1e49464c70800000000000000
+      internalID: 8954925508956819267
       vertices: []
       indices: 
       edges: []
@@ -200,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 91fac4e6905984cea9027c0d5684a998
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -208,14 +208,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":1.0},"gridSpriteSize":{"x":48.0,"y":48.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
+      entries: []
     nameFileIdTable:
-      Cheetah_0: 5160706062914596145
-      Cheetah_1: 3565117314122407990
-      Cheetah_2: 2449312828471721129
-      Cheetah_3: 7826571274527833208
+      Zookeeper Outline_0: -3679442462494854283
+      Zookeeper Outline_1: 8963696176027507081
+      Zookeeper Outline_2: 5654614962329447181
+      Zookeeper Outline_3: 8954925508956819267
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
