@@ -1,19 +1,22 @@
 fileFormatVersion: 2
-guid: 6df545454a78143ccb62bdd44c61b588
+guid: 17e598f5879f84be69557756b2bb034c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5482268014148902724
-    second: Zookeeper_0
+      213: -6432487176237874188
+    second: Monkey Transition_0
   - first:
-      213: -644523637086566947
-    second: Zookeeper_1
+      213: 1132218750931407088
+    second: Monkey Transition_1
   - first:
-      213: -4650096931756663465
-    second: Zookeeper_2
+      213: -2255544588691377927
+    second: Monkey Transition_2
   - first:
-      213: 8797556248505584411
-    second: Zookeeper_3
+      213: -3651119660357205914
+    second: Monkey Transition_3
+  - first:
+      213: 1347863692529985353
+    second: Monkey Transition_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,12 +112,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Zookeeper_0
+      name: Monkey Transition_0
       rect:
         serializedVersion: 2
-        x: 2
+        x: 7
         y: 0
-        width: 28
+        width: 35
         height: 49
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -124,20 +127,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cb02b2599421be3b0800000000000000
-      internalID: -5482268014148902724
+      spriteID: 4f306167ef63bb6a0800000000000000
+      internalID: -6432487176237874188
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Zookeeper_1
+      name: Monkey Transition_1
       rect:
         serializedVersion: 2
-        x: 34
+        x: 58
         y: 0
-        width: 29
-        height: 46
+        width: 38
+        height: 47
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -146,20 +149,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dd5cc1aba213e07f0800000000000000
-      internalID: -644523637086566947
+      spriteID: 0f09d4984f276bf00800000000000000
+      internalID: 1132218750931407088
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Zookeeper_2
+      name: Monkey Transition_2
       rect:
         serializedVersion: 2
-        x: 65
+        x: 105
         y: 0
-        width: 30
-        height: 45
+        width: 40
+        height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,20 +171,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 75d92835a79877fb0800000000000000
-      internalID: -4650096931756663465
+      spriteID: 9f0feff9522b2b0e0800000000000000
+      internalID: -2255544588691377927
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Zookeeper_3
+      name: Monkey Transition_3
       rect:
         serializedVersion: 2
-        x: 98
+        x: 149
         y: 0
-        width: 29
-        height: 46
+        width: 46
+        height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -190,8 +193,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b1b81bbebc2371a70800000000000000
-      internalID: 8797556248505584411
+      spriteID: 660c6fb630e945dc0800000000000000
+      internalID: -3651119660357205914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Monkey Transition_4
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 0
+        width: 47
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94765e613e294b210800000000000000
+      internalID: 1347863692529985353
       vertices: []
       indices: 
       edges: []
@@ -210,10 +235,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Zookeeper_0: -5482268014148902724
-      Zookeeper_1: -644523637086566947
-      Zookeeper_2: -4650096931756663465
-      Zookeeper_3: 8797556248505584411
+      Monkey Transition_0: -6432487176237874188
+      Monkey Transition_1: 1132218750931407088
+      Monkey Transition_2: -2255544588691377927
+      Monkey Transition_3: -3651119660357205914
+      Monkey Transition_4: 1347863692529985353
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
