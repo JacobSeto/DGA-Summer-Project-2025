@@ -119,11 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &35635896 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8830392198594967785, guid: 33ab23f5c1400c74bae73e2161dc02d2, type: 3}
-  m_PrefabInstance: {fileID: 1620024684}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &209763910
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19964,7 +19959,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 730600eb6ea0d4094a307f87e919743f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  background: {fileID: 987136288}
 --- !u!114 &400935310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20215,11 +20209,6 @@ PrefabInstance:
       addedObject: {fileID: 400935308}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5b11d92ce8e742988800b9d71e997f8, type: 3}
---- !u!1 &987136288 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4228780388479189723, guid: b5b11d92ce8e742988800b9d71e997f8, type: 3}
-  m_PrefabInstance: {fileID: 987136287}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &987136289 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 442743865250039125, guid: b5b11d92ce8e742988800b9d71e997f8, type: 3}
@@ -20293,7 +20282,7 @@ PrefabInstance:
     - target: {fileID: -6027955848104475147, guid: 33ab23f5c1400c74bae73e2161dc02d2, type: 3}
       propertyPath: slowVisual
       value: 
-      objectReference: {fileID: 35635896}
+      objectReference: {fileID: 0}
     - target: {fileID: -1464496374494826900, guid: 33ab23f5c1400c74bae73e2161dc02d2, type: 3}
       propertyPath: m_Interpolate
       value: 1
@@ -20560,6 +20549,10 @@ PrefabInstance:
     - target: {fileID: 5174813274519700549, guid: cd81b424f06461d408267a195d2923be, type: 3}
       propertyPath: m_margin.w
       value: -5.0819645
+      objectReference: {fileID: 0}
+    - target: {fileID: 5805256464532199319, guid: cd81b424f06461d408267a195d2923be, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6578920570572301571, guid: cd81b424f06461d408267a195d2923be, type: 3}
       propertyPath: m_AnchoredPosition.x

@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 6df545454a78143ccb62bdd44c61b588
+guid: 46ecd97a40d6c49e4ad8d562a4ceb766
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5482268014148902724
-    second: Zookeeper_0
+      213: 4319614820922520880
+    second: Cheetah Idle_0
   - first:
-      213: -644523637086566947
-    second: Zookeeper_1
+      213: -912758141300767267
+    second: Cheetah Idle_1
   - first:
-      213: -4650096931756663465
-    second: Zookeeper_2
+      213: -9078619768099958305
+    second: Cheetah Idle_2
   - first:
-      213: 8797556248505584411
-    second: Zookeeper_3
+      213: 1190631037914442928
+    second: Cheetah Idle_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,13 +109,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Zookeeper_0
+      name: Cheetah Idle_0
       rect:
         serializedVersion: 2
         x: 2
         y: 0
-        width: 28
-        height: 49
+        width: 46
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,19 +124,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cb02b2599421be3b0800000000000000
-      internalID: -5482268014148902724
+      spriteID: 03579971bca52fb30800000000000000
+      internalID: 4319614820922520880
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Zookeeper_1
+      name: Cheetah Idle_1
       rect:
         serializedVersion: 2
-        x: 34
+        x: 49
         y: 0
-        width: 29
+        width: 46
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd50ce57e4b3553f0800000000000000
+      internalID: -912758141300767267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cheetah Idle_2
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 0
+        width: 48
         height: 46
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -146,20 +168,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dd5cc1aba213e07f0800000000000000
-      internalID: -644523637086566947
+      spriteID: fd11097eb63420280800000000000000
+      internalID: -9078619768099958305
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Zookeeper_2
+      name: Cheetah Idle_3
       rect:
         serializedVersion: 2
-        x: 65
+        x: 145
         y: 0
-        width: 30
-        height: 45
+        width: 46
+        height: 47
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,30 +190,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 75d92835a79877fb0800000000000000
-      internalID: -4650096931756663465
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Zookeeper_3
-      rect:
-        serializedVersion: 2
-        x: 98
-        y: 0
-        width: 29
-        height: 46
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b1b81bbebc2371a70800000000000000
-      internalID: 8797556248505584411
+      spriteID: 0bce179ee98f58010800000000000000
+      internalID: 1190631037914442928
       vertices: []
       indices: 
       edges: []
@@ -210,10 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Zookeeper_0: -5482268014148902724
-      Zookeeper_1: -644523637086566947
-      Zookeeper_2: -4650096931756663465
-      Zookeeper_3: 8797556248505584411
+      Cheetah Idle_0: 4319614820922520880
+      Cheetah Idle_1: -912758141300767267
+      Cheetah Idle_2: -9078619768099958305
+      Cheetah Idle_3: 1190631037914442928
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

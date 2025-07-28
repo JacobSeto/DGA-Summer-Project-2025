@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 6df545454a78143ccb62bdd44c61b588
+guid: b2b2a982731c94b09b0691618186c01b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5482268014148902724
-    second: Zookeeper_0
+      213: 999950442945655130
+    second: Monkey Idle_0
   - first:
-      213: -644523637086566947
-    second: Zookeeper_1
+      213: 5271577317284033825
+    second: Monkey Idle_1
   - first:
-      213: -4650096931756663465
-    second: Zookeeper_2
+      213: -2991542191021978975
+    second: Monkey Idle_2
   - first:
-      213: 8797556248505584411
-    second: Zookeeper_3
+      213: -7509181779495044105
+    second: Monkey Idle_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,12 +109,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Zookeeper_0
+      name: Monkey Idle_0
       rect:
         serializedVersion: 2
-        x: 2
+        x: 0
         y: 0
-        width: 28
+        width: 35
         height: 49
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -124,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cb02b2599421be3b0800000000000000
-      internalID: -5482268014148902724
+      spriteID: a5135c041a980ed00800000000000000
+      internalID: 999950442945655130
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Zookeeper_1
+      name: Monkey Idle_1
       rect:
         serializedVersion: 2
-        x: 34
+        x: 36
         y: 0
-        width: 29
-        height: 46
+        width: 35
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -146,20 +146,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dd5cc1aba213e07f0800000000000000
-      internalID: -644523637086566947
+      spriteID: 125b8bad3a7682940800000000000000
+      internalID: 5271577317284033825
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Zookeeper_2
+      name: Monkey Idle_2
       rect:
         serializedVersion: 2
-        x: 65
+        x: 71
         y: 0
-        width: 30
-        height: 45
+        width: 36
+        height: 51
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,20 +168,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 75d92835a79877fb0800000000000000
-      internalID: -4650096931756663465
+      spriteID: 1aa8a852a38eb76d0800000000000000
+      internalID: -2991542191021978975
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Zookeeper_3
+      name: Monkey Idle_3
       rect:
         serializedVersion: 2
-        x: 98
+        x: 108
         y: 0
-        width: 29
-        height: 46
+        width: 35
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -190,8 +190,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b1b81bbebc2371a70800000000000000
-      internalID: 8797556248505584411
+      spriteID: 7fbbc57f4f60ac790800000000000000
+      internalID: -7509181779495044105
       vertices: []
       indices: 
       edges: []
@@ -210,10 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Zookeeper_0: -5482268014148902724
-      Zookeeper_1: -644523637086566947
-      Zookeeper_2: -4650096931756663465
-      Zookeeper_3: 8797556248505584411
+      Monkey Idle_0: 999950442945655130
+      Monkey Idle_1: 5271577317284033825
+      Monkey Idle_2: -2991542191021978975
+      Monkey Idle_3: -7509181779495044105
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
