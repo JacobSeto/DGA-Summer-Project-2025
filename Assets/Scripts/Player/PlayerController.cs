@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour
     private bool aboveWall;
     private Vector3 inAirScale = new Vector3(2, 2, 2);
     private Vector3 defaultScale;
+    private GameObject arrow;
     float slowTime = 0.5f;
     float timeLeft;
 
@@ -106,7 +107,7 @@ public class PlayerController : MonoBehaviour
         {
             throw new System.Exception("Stamina is 0");
         }
-
+        arrow = gameObject.transform.GetChild(1).gameObject;
         GameManagerScript.Instance.UpdateStaminaBar(stamina);
     }
 
@@ -450,12 +451,14 @@ public class PlayerController : MonoBehaviour
 
        public void Freeze()
     {
+        arrow.SetActive(false);
         enabled = false;
     }
 
     public void Unfreeze()
     {
         enabled = true;
+        arrow.SetActive(true);
     }
 
     /// <summary>
