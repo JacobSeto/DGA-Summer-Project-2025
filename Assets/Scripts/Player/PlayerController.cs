@@ -71,7 +71,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask wallLayer;
     [SerializeField] LayerMask boundaryLayer;
     LayerMask bounceLayers;
-    //[SerializeField] GameObject slowVisual;
 
     // Sprites
 
@@ -99,7 +98,6 @@ public class PlayerController : MonoBehaviour
         bounceLayers = wallLayer.value | boundaryLayer.value;
         defaultScale = spriteRenderer.transform.localScale;
         timeLeft = slowTime;
-        //slowVisual.gameObject.SetActive(false);
         stamina = startingStamina;
         if(stamina == 0)
         {
@@ -247,7 +245,6 @@ public class PlayerController : MonoBehaviour
 
     private void SlowMotion()
     {
-        //slowVisual.SetActive(true);
         slowMotion = true;
         Time.timeScale = slowDownAmount;
         Time.fixedDeltaTime = 0.02F * Time.timeScale;
@@ -255,7 +252,6 @@ public class PlayerController : MonoBehaviour
 
     private void EndSlowMotion()
     {
-       // slowVisual.SetActive(false);
         Time.timeScale = 1;
         Time.fixedDeltaTime = 0.02F;
         slowMotion = false;
