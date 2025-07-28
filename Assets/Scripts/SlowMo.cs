@@ -1,11 +1,12 @@
 using UnityEngine;
 
-public class Pivot : MonoBehaviour
+public class SlowMo : MonoBehaviour
 {
     private GameObject player;
+    private bool slowMo;
     void Start()
     {
         player = GameObject.FindWithTag("Player");
-        player.GetComponent<PlayerController>().addPivot(gameObject);
+        slowMo = player.GetComponent<PlayerController>().slowMotion;
     }
 }
