@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// Max speed that the armidillo can be at any moment(including boosts/powerups)
     /// </summary>
-    [SerializeField] float maxSpeed;
+    [SerializeField] public float maxSpeed;
     [SerializeField] float minSpeed;
 
     /// <summary>
@@ -39,15 +39,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float slowDownAmount;
     public bool launched;
     public bool slowMotion;
-    public float angle;
     public int stamina;
+    public float currentSpeed;
     public bool tutorial = false;
     public bool tutorialTwo = false;
     public bool speedometerExists = true;
     Vector2 reflectedVector;
     RaycastHit2D ray;
     Vector2 direction;
-    float currentSpeed;
     Vector3 originalPos;
     Vector3 originalPlayerPos;
 
@@ -57,6 +56,7 @@ public class PlayerController : MonoBehaviour
     private bool aboveWall;
     private Vector3 inAirScale = new Vector3(2, 2, 2);
     private Vector3 defaultScale;
+    private GameObject arrow;
     float slowTime = 0.5f;
     float timeLeft;
 
@@ -76,8 +76,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask boundaryLayer;
     [SerializeField] LayerMask elephantLayer;
     LayerMask bounceLayers;
-    //[SerializeField] GameObject slowVisual;
-    private GameObject pivot;
 
     // Sprites
 
@@ -105,13 +103,12 @@ public class PlayerController : MonoBehaviour
         bounceLayers = wallLayer.value | boundaryLayer.value;
         defaultScale = spriteRenderer.transform.localScale;
         timeLeft = slowTime;
-        //slowVisual.gameObject.SetActive(false);
         stamina = startingStamina;
         if(stamina == 0)
         {
             throw new System.Exception("Stamina is 0");
         }
-
+        arrow = gameObject.transform.GetChild(1).gameObject;
         GameManagerScript.Instance.UpdateStaminaBar(stamina);
     }
 
@@ -157,12 +154,6 @@ public class PlayerController : MonoBehaviour
         {
             direction = playerRb.linearVelocity.normalized;
             currentSpeed = playerRb.linearVelocity.magnitude;
-            angle = Mathf.Clamp01(currentSpeed / maxSpeed);
-            angle = Mathf.Lerp(-90f, 90f, angle) * -1;
-            if (speedometerExists) {
-                pivot.transform.rotation = Quaternion.Euler(0f, 0f, angle);
-            }
-
             if (playerRb.linearVelocityX < 0)
             {
                 spriteObject.transform.Rotate(0, 0, currentSpeed * Time.deltaTime * rotateForce * flip);
@@ -272,7 +263,6 @@ public class PlayerController : MonoBehaviour
 
     private void SlowMotion()
     {
-        //slowVisual.SetActive(true);
         slowMotion = true;
         Time.timeScale = slowDownAmount;
         Time.fixedDeltaTime = 0.02F * Time.timeScale;
@@ -280,7 +270,6 @@ public class PlayerController : MonoBehaviour
 
     private void EndSlowMotion()
     {
-       // slowVisual.SetActive(false);
         Time.timeScale = 1;
         Time.fixedDeltaTime = 0.02F;
         slowMotion = false;
@@ -455,6 +444,7 @@ public class PlayerController : MonoBehaviour
 
     public void Freeze()
     {
+        arrow.SetActive(false);
         enabled = false;
         
     }
@@ -462,11 +452,7 @@ public class PlayerController : MonoBehaviour
     public void Unfreeze()
     {
         enabled = true;
-    }
-
-    public void addPivot(GameObject add)
-    {
-        pivot = add;
+        arrow.SetActive(true);
     }
 
     /// <summary>
