@@ -224,7 +224,6 @@ public class PlayerController : MonoBehaviour
             originalPos = Input.mousePosition;
             originalPlayerPos = playerRb.transform.position;
             //store initial mouse location
-            AudioManager.Instance.PlayPull();
             stretching = true;
         }
         if (stretching)
