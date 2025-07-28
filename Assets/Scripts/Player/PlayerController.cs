@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// Max speed that the armidillo can be at any moment(including boosts/powerups)
     /// </summary>
-    [SerializeField] float maxSpeed;
+    [SerializeField] public float maxSpeed;
     [SerializeField] float minSpeed;
 
     /// <summary>
@@ -39,12 +39,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float slowDownAmount;
     public bool launched;
     public bool slowMotion;
-    public float angle;
     public int stamina;
+    public float currentSpeed;
     Vector2 reflectedVector;
     RaycastHit2D ray;
     Vector2 direction;
-    float currentSpeed;
     Vector3 originalPos;
     Vector3 originalPlayerPos;
 
@@ -73,7 +72,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask boundaryLayer;
     LayerMask bounceLayers;
     //[SerializeField] GameObject slowVisual;
-    private GameObject pivot;
 
     // Sprites
 
@@ -148,9 +146,6 @@ public class PlayerController : MonoBehaviour
         {
             direction = playerRb.linearVelocity.normalized;
             currentSpeed = playerRb.linearVelocity.magnitude;
-            angle = Mathf.Clamp01(currentSpeed / maxSpeed);
-            angle = Mathf.Lerp(-90f, 90f, angle) * -1;
-            pivot.transform.rotation = Quaternion.Euler(0f, 0f, angle);
 
             if (playerRb.linearVelocityX < 0)
             {
@@ -451,11 +446,6 @@ public class PlayerController : MonoBehaviour
     public void Unfreeze()
     {
         enabled = true;
-    }
-
-    public void addPivot(GameObject add)
-    {
-        pivot = add;
     }
 
     /// <summary>

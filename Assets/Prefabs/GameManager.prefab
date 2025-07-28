@@ -2426,7 +2426,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   menuNavigation: {fileID: 8509025858032375474}
-  uiPopupScreen: {fileID: 2279949085797727871, guid: cda8ca7fd45bc49f8b9acc4a9037f173, type: 3}
+  uiPopupScreen: {fileID: 5805256464532199319}
   gameMenu: {fileID: 6172991957283706989}
   pauseMenu: {fileID: 4747576535336511266}
   winScreen: {fileID: 9096940041729674530}
@@ -3014,6 +3014,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cda8ca7fd45bc49f8b9acc4a9037f173, type: 3}
+--- !u!1 &5805256464532199319 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2279949085797727871, guid: cda8ca7fd45bc49f8b9acc4a9037f173, type: 3}
+  m_PrefabInstance: {fileID: 5707301398212274664}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &7145794943111796502 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3179152960605028094, guid: cda8ca7fd45bc49f8b9acc4a9037f173, type: 3}
