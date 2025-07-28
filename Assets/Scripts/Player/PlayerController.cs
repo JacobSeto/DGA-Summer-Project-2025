@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 inAirScale = new Vector3(2, 2, 2);
     private Vector3 defaultScale;
     float slowTime = 0.5f;
-    float timeLeft;
+    //float timeLeft;
 
     // acceleration variables 
     const int accelerationWindow = 10;
@@ -70,6 +70,9 @@ public class PlayerController : MonoBehaviour
     public Vector3 OriginalMousePos => originalPos;
     public Vector3 OriginalPlayerPos => originalPlayerPos;
 
+    bool cancelled  = false;
+    [SerializeField] float gracePeriod;
+    float currentGrace;
 
     [SerializeField] LayerMask wallLayer;
     [SerializeField] LayerMask boundaryLayer;
@@ -98,9 +101,10 @@ public class PlayerController : MonoBehaviour
         slowMotion = false;
         stretching = false;
         bounceImpulseActive = true;
+        currentGrace = 3f;
         bounceLayers = wallLayer.value | boundaryLayer.value;
         defaultScale = spriteRenderer.transform.localScale;
-        timeLeft = slowTime;
+        //timeLeft = slowTime;
         stamina = startingStamina;
         if(stamina == 0)
         {
@@ -126,28 +130,28 @@ public class PlayerController : MonoBehaviour
         else if (stamina > 0)
         {
             HandleLaunch();
-            if (Input.GetButtonDown("Slow"))
-            {
-                SlowMotion();
-            }
-            if (Input.GetButtonUp("Slow"))
-            {
-                EndSlowMotion();
-            }
+            //if (Input.GetButtonDown("Slow"))
+            //{
+            //    SlowMotion();
+            //}
+            //if (Input.GetButtonUp("Slow"))
+            //{
+            //    EndSlowMotion();
+            //}
         }
         if (tutorial) {
            if (stamina==0) {
                 stamina = stamina + 1;
             } 
         }
-        if (slowMotion)
-        {
-            timeLeft = timeLeft - Time.deltaTime;
-            if (timeLeft <= 0)
-            {
-                EndSlowMotion();
-            }
-        }
+        //if (slowMotion)
+        //{
+        //    timeLeft = timeLeft - Time.deltaTime;
+        //    if (timeLeft <= 0)
+        //    {
+        //        EndSlowMotion();
+        //    }
+        //}
         if (playerRb.linearVelocity.magnitude >= minSpeed)
         {
             direction = playerRb.linearVelocity.normalized;
@@ -160,10 +164,13 @@ public class PlayerController : MonoBehaviour
             {
                 spriteObject.transform.Rotate(0, 0, -currentSpeed * Time.deltaTime * rotateForce * flip);
             }
+            currentGrace = gracePeriod;
         }
-        else if (launched)
+        else if (launched && !stretching)
         {
-            if (!tutorialTwo) {
+            currentGrace -= Time.deltaTime;
+            Debug.Log(currentGrace.ToString());
+            if (!tutorialTwo && currentGrace <= 0) {
                 GameManagerScript.Instance.LoseGame();
                 playerRb.linearVelocity = Vector2.zero;
             } else {
@@ -221,7 +228,12 @@ public class PlayerController : MonoBehaviour
             originalPlayerPos = playerRb.transform.position;
             //store initial mouse location
             AudioManager.Instance.PlayPull();
+            if (launched)
+            {
+                SlowMotion();
+            }
             stretching = true;
+            cancelled = false;
         }
         if (stretching)
         {
@@ -229,31 +241,42 @@ public class PlayerController : MonoBehaviour
             Vector3 currentMousePos = Input.mousePosition;
             dragDistance = Vector3.Distance(currentMousePos, originalPos);
         }
+        if (Input.GetMouseButton(1))
+        {
+            cancelled = true;
+            EndSlowMotion();
+            stretching = false;
+        }
         if (Input.GetMouseButtonUp(0))
         {
-            stretching = false;
-            AudioManager.Instance.PlayRelease();
-            float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
-            float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
-            playerRb.linearVelocity = new Vector2(xChange, yChange);
-            if (playerRb.linearVelocity.magnitude > maxLaunchSpeed)
+            if (!cancelled)
             {
-                playerRb.linearVelocity = Vector2.ClampMagnitude(playerRb.linearVelocity, maxLaunchSpeed);
-                spriteRenderer.sprite = postLaunchSprite;
+                EndSlowMotion();
+                stretching = false;
+                AudioManager.Instance.PlayRelease();
+                float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
+                float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
+                playerRb.linearVelocity = new Vector2(xChange, yChange);
+                if (playerRb.linearVelocity.magnitude > maxLaunchSpeed)
+                {
+                    playerRb.linearVelocity = Vector2.ClampMagnitude(playerRb.linearVelocity, maxLaunchSpeed);
+                    spriteRenderer.sprite = postLaunchSprite;
+                }
+                else if (playerRb.linearVelocity.magnitude > 0.2 * maxLaunchSpeed)
+                {
+                    spriteRenderer.sprite = postLaunchSprite;
+                }
+                else
+                {
+                    // launch force too low, enforce minimum launch speed
+                    playerRb.linearVelocity = new Vector2(xChange + maxLaunchSpeed * 0.2f, yChange + maxLaunchSpeed * 0.2f);
+                    spriteRenderer.sprite = postLaunchSprite;
+                }
+                DecrementStamina();
+                animator.SetBool("Launch", true);
+                launched = true;
             }
-            else if (playerRb.linearVelocity.magnitude > 0.2 * maxLaunchSpeed)
-            {
-                spriteRenderer.sprite = postLaunchSprite;
-            }
-            else
-            {
-                // launch force too low, enforce minimum launch speed
-                playerRb.linearVelocity = new Vector2(xChange + maxLaunchSpeed * 0.2f, yChange + maxLaunchSpeed * 0.2f);
-                spriteRenderer.sprite = postLaunchSprite;
-            }
-            DecrementStamina();
-            animator.SetBool("Launch", true);
-            launched = true;
+            
         }
     }
 
@@ -269,7 +292,7 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 1;
         Time.fixedDeltaTime = 0.02F;
         slowMotion = false;
-        timeLeft = slowTime;
+        //timeLeft = slowTime;
     }
 
     private void FixedUpdate()
