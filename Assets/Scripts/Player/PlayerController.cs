@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// Max speed that the armidillo can be at any moment(including boosts/powerups)
     /// </summary>
-    [SerializeField] float maxSpeed;
+    [SerializeField] public float maxSpeed;
     [SerializeField] float minSpeed;
 
     /// <summary>
@@ -39,15 +39,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public float slowDownAmount;
     public bool launched;
     public bool slowMotion;
-    public float angle;
     public int stamina;
+    public float currentSpeed;
     public bool tutorial = false;
     public bool tutorialTwo = false;
     public bool speedometerExists = true;
     Vector2 reflectedVector;
     RaycastHit2D ray;
     Vector2 direction;
-    float currentSpeed;
     Vector3 originalPos;
     Vector3 originalPlayerPos;
 
@@ -76,8 +75,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask boundaryLayer;
     [SerializeField] LayerMask elephantLayer;
     LayerMask bounceLayers;
-    //[SerializeField] GameObject slowVisual;
-    private GameObject pivot;
 
     // Sprites
 
@@ -105,7 +102,6 @@ public class PlayerController : MonoBehaviour
         bounceLayers = wallLayer.value | boundaryLayer.value;
         defaultScale = spriteRenderer.transform.localScale;
         timeLeft = slowTime;
-        //slowVisual.gameObject.SetActive(false);
         stamina = startingStamina;
         if(stamina == 0)
         {
@@ -270,7 +266,6 @@ public class PlayerController : MonoBehaviour
 
     private void SlowMotion()
     {
-        //slowVisual.SetActive(true);
         slowMotion = true;
         Time.timeScale = slowDownAmount;
         Time.fixedDeltaTime = 0.02F * Time.timeScale;
@@ -278,7 +273,6 @@ public class PlayerController : MonoBehaviour
 
     private void EndSlowMotion()
     {
-       // slowVisual.SetActive(false);
         Time.timeScale = 1;
         Time.fixedDeltaTime = 0.02F;
         slowMotion = false;
@@ -469,11 +463,6 @@ public class PlayerController : MonoBehaviour
     public void Unfreeze()
     {
         enabled = true;
-    }
-
-    public void addPivot(GameObject add)
-    {
-        pivot = add;
     }
 
     /// <summary>
