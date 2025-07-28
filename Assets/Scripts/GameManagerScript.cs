@@ -6,6 +6,7 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 /*
@@ -15,7 +16,7 @@ using UnityEngine.SceneManagement;
  * Win: boolean that tracks if the player has beaten the level.
  * Timer: float showing time elapsed in a level.
  */
-public class GameManagerScript: MonoBehaviour
+public class GameManagerScript : MonoBehaviour
 {
     public static GameManagerScript Instance;
     [HideInInspector] public PlayerController player;
@@ -41,8 +42,12 @@ public class GameManagerScript: MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject winScreen;
     [SerializeField] GameObject loseScreen;
+    [SerializeField] Image[] staminaBar;
 
-    void Awake() {
+    public Material greyscaleMat;
+
+    void Awake()
+    {
         Instance = this;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
     }
@@ -56,6 +61,7 @@ public class GameManagerScript: MonoBehaviour
         originalCount = zooKeepers.Length;
         OriginalPos = player.transform.position;
         originalStamina = player.GetStaminaCount();
+        Time.timeScale = 1.0f;
     }
 
     void Update()
@@ -64,24 +70,28 @@ public class GameManagerScript: MonoBehaviour
         {
             if (player.slowMotion)
             {
-                timer += Time.deltaTime/player.slowDownAmount;
-            } else
+                timer += Time.deltaTime / player.slowDownAmount;
+            }
+            else
             {
                 timer += Time.deltaTime;
             }
-            
-            
+
+
         }
         if (Input.GetKeyDown(KeyCode.Escape) && !win && !loss)
         {
-            Debug.Log("Pause");
             Pause();
         }
         if (Input.GetKeyDown(KeyCode.R) && !win && !loss)
         {
-            Debug.Log("Reset");
             Reset();
         }
+    }
+
+    public void HideGameMenu()
+    {
+        menuNavigation.ChangeActiveScreen(uiPopupScreen);
     }
 
     public void DonePopup()
@@ -89,14 +99,11 @@ public class GameManagerScript: MonoBehaviour
         menuNavigation.ChangeActiveScreen(gameMenu);
     }
 
-    
-
     /// <summary>
     /// Sets up win condition
     /// </summary>
     public void WinGame()
     {
-        Debug.Log("You Win");
         win = true;
         Pause();
         menuNavigation.ChangeActiveScreen(winScreen);
@@ -108,7 +115,6 @@ public class GameManagerScript: MonoBehaviour
     /// </summary>
     public void LoseGame()
     {
-        Debug.Log("You Lose");
         loss = true;
         Pause();
         menuNavigation.ChangeActiveScreen(loseScreen);
@@ -125,7 +131,7 @@ public class GameManagerScript: MonoBehaviour
         {
             Time.timeScale = 0;
             menuNavigation.ChangeActiveScreen(pauseMenu);
-            
+
         }
         else
         {
@@ -169,6 +175,24 @@ public class GameManagerScript: MonoBehaviour
         if (zookeeperCount == 0)
         {
             WinGame();
+        }
+    }
+
+    public GameObject getGameScreen()
+    {
+        return gameMenu;
+    }
+    
+    public void UpdateStaminaBar(int stamina)
+    {
+        for (int i = 0; i < stamina; i++)
+        {
+            staminaBar[i].material = Canvas.GetDefaultCanvasMaterial();
+        }
+
+        for (int i = stamina; i < player.GetMaxStamina(); i++)
+        {
+            staminaBar[i].material = greyscaleMat;
         }
     }
 }

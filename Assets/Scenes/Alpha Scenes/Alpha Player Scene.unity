@@ -130,7 +130,7 @@ PrefabInstance:
     - target: {fileID: -6027955848104475147, guid: 33ab23f5c1400c74bae73e2161dc02d2, type: 3}
       propertyPath: pivot
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 634753599}
     - target: {fileID: -6027955848104475147, guid: 33ab23f5c1400c74bae73e2161dc02d2, type: 3}
       propertyPath: bounceAudioObject
       value: 
@@ -147,10 +147,6 @@ PrefabInstance:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 5328b010feada427ea7b63014adb24a6, type: 3}
-    - target: {fileID: 3531265652737282810, guid: 33ab23f5c1400c74bae73e2161dc02d2, type: 3}
-      propertyPath: m_Color.a
-      value: 0.83137256
-      objectReference: {fileID: 0}
     - target: {fileID: 3839974316450237729, guid: 33ab23f5c1400c74bae73e2161dc02d2, type: 3}
       propertyPath: m_Name
       value: Player
@@ -605,6 +601,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3d218a13950af4a7da50f645153eb143, type: 3}
+--- !u!1 &634753599 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5832994115004356368, guid: be288ff3dfd9d4dc688e6f6d63182147, type: 3}
+  m_PrefabInstance: {fileID: 7884328095657892409}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &723189186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16839,18 +16840,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 51369859}
-    - target: {fileID: 6895318524310602813, guid: be288ff3dfd9d4dc688e6f6d63182147, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -215
-      objectReference: {fileID: 0}
-    - target: {fileID: 6975175566009050006, guid: be288ff3dfd9d4dc688e6f6d63182147, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -428
-      objectReference: {fileID: 0}
-    - target: {fileID: 6975175566009050006, guid: be288ff3dfd9d4dc688e6f6d63182147, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 96
-      objectReference: {fileID: 0}
     - target: {fileID: 7451917277514460678, guid: be288ff3dfd9d4dc688e6f6d63182147, type: 3}
       propertyPath: m_Name
       value: Player UI
@@ -16871,6 +16860,7 @@ SceneRoots:
   - {fileID: 2014623833}
   - {fileID: 26640824}
   - {fileID: 1054842721}
+  - {fileID: 354791816137230238}
   - {fileID: 605716509}
   - {fileID: 1760518620}
   - {fileID: 33672826}

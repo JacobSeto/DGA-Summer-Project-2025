@@ -17,10 +17,6 @@ public class ArrowScript : MonoBehaviour
         arrowTransform = this.transform;
 
         playerController = GetComponentInParent<PlayerController>();
-        if (playerController == null)
-        {
-            Debug.LogError("PlayerController reference is not assigned for UI trajectory");
-        }
     }
 
     void Update()
@@ -31,7 +27,6 @@ public class ArrowScript : MonoBehaviour
         if (playerController.IsStretching)
         {
             spriteRenderer.enabled = true;
-            Debug.Log("Stretching");
         }
         else
         {
@@ -59,7 +54,5 @@ public class ArrowScript : MonoBehaviour
         arrowTransform.position = drawOrigin + Vector3.Scale(
             new Vector3(displacementStretch, displacementStretch, displacementStretch),
             direction);
-
-        Debug.Log($"arrowTransform at: {arrowTransform.position}");
     }
 }
