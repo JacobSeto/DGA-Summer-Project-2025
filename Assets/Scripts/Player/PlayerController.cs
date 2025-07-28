@@ -57,7 +57,6 @@ public class PlayerController : MonoBehaviour
     private Vector3 inAirScale = new Vector3(2, 2, 2);
     private Vector3 defaultScale;
     private GameObject arrow;
-    float slowTime = 0.5f;
     //float timeLeft;
 
     // acceleration variables 
@@ -105,7 +104,6 @@ public class PlayerController : MonoBehaviour
         currentGrace = 3f;
         bounceLayers = wallLayer.value | boundaryLayer.value;
         defaultScale = spriteRenderer.transform.localScale;
-        //timeLeft = slowTime;
         stamina = startingStamina;
         if(stamina == 0)
         {
@@ -292,7 +290,6 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 1;
         Time.fixedDeltaTime = 0.02F;
         slowMotion = false;
-        //timeLeft = slowTime;
     }
 
     private void FixedUpdate()
