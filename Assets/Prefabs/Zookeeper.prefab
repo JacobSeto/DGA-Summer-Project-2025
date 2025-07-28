@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zooKeeper: {fileID: 3194259576899802323}
+  animator: {fileID: 8895082390748324229}
 --- !u!95 &8895082390748324229
 Animator:
   serializedVersion: 7
