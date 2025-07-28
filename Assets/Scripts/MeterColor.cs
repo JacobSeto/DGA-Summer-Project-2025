@@ -9,6 +9,7 @@ public class MeterColor : MonoBehaviour
     GameObject yellow;
     GameObject green;
     PlayerController player;
+    [SerializeField] Pivot pivot;
     void Start()
     {
         normal = gameObject.transform.GetChild(0).gameObject;
@@ -26,14 +27,14 @@ public class MeterColor : MonoBehaviour
     {
         if (player.launched)
         {
-            if (player.angle >= 35)
+            if (pivot.angle >= 35)
             {
                 //red highlight
                 current.SetActive(false);
                 red.SetActive(true);
                 current = red;
             }
-        else if (player.angle >= -35)
+        else if (pivot.angle >= -35)
             {
                 //yellow
                 current.SetActive(false);
