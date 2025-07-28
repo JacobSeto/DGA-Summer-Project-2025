@@ -27,7 +27,7 @@ public class CheetahController : MonoBehaviour
                 
             }
         }
-         animator.SetBool("useable", canIncreaseSpeed);
+         animator.SetBool("usable", canIncreaseSpeed);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

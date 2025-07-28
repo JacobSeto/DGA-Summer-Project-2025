@@ -109,7 +109,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: useable
+    m_ConditionEvent: usable
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2841435634011844230}
@@ -134,7 +134,7 @@ AnimatorController:
   m_Name: Cheetah
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: useable
+  - m_Name: usable
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -177,7 +177,7 @@ AnimatorState:
   m_Motion: {fileID: 7400000, guid: 603802609e8e74f62ba0b7918d9f51f2, type: 2}
   m_Tag: 
   m_SpeedParameter: 
-  m_MirrorParameter: useable
+  m_MirrorParameter: usable
   m_CycleOffsetParameter: 
   m_TimeParameter: 
 --- !u!1102 &1336547434573202145
@@ -216,7 +216,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: useable
+    m_ConditionEvent: usable
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1336547434573202145}
