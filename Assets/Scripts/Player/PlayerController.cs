@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
     public float currentSpeed;
     public bool tutorial = false;
     public bool tutorialTwo = false;
+    public bool speedometerExists = true;
     Vector2 reflectedVector;
     RaycastHit2D ray;
     Vector2 direction;
@@ -55,6 +56,7 @@ public class PlayerController : MonoBehaviour
     private bool aboveWall;
     private Vector3 inAirScale = new Vector3(2, 2, 2);
     private Vector3 defaultScale;
+    private GameObject arrow;
     float slowTime = 0.5f;
     float timeLeft;
 
@@ -106,7 +108,7 @@ public class PlayerController : MonoBehaviour
         {
             throw new System.Exception("Stamina is 0");
         }
-
+        arrow = gameObject.transform.GetChild(1).gameObject;
         GameManagerScript.Instance.UpdateStaminaBar(stamina);
     }
 
@@ -190,6 +192,8 @@ public class PlayerController : MonoBehaviour
             SetWallBounceActive(true);
             aboveWall = false;
         }
+
+        Debug.Log("Current speed: " + currentSpeed);
     }
 
     IEnumerator MonkeyThrow()
@@ -221,7 +225,6 @@ public class PlayerController : MonoBehaviour
             originalPos = Input.mousePosition;
             originalPlayerPos = playerRb.transform.position;
             //store initial mouse location
-            AudioManager.Instance.PlayPull();
             stretching = true;
         }
         if (stretching)
@@ -341,21 +344,11 @@ public class PlayerController : MonoBehaviour
 
         // ElephantController elephant = collision.gameObject.GetComponent<ElephantController>();
         // elephant?.DecreaseHP();
-        if (collision.gameObject.CompareTag("Tranquilizer"))
-        {
-            DecrementStamina();
-        }
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            currentSpeed *= 0.5f;
-        }
-        // ElephantController elephant = collision.gameObject.GetComponent<ElephantController>();
-        // elephant?.DecreaseHP();
 
-        //if (collision.gameObject.CompareTag("Cheetah"))
-        //{
-        //    stamina++;
-        //}
+        // if (collision.gameObject.CompareTag("Cheetah"))
+        // {
+        //    playerRb.linearVelocity.magnitude *= 2f;
+        // }
 
         // Rotation logic
         Vector2 normal = contact.normal;
@@ -449,14 +442,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-       public void Freeze()
+    public void Freeze()
     {
+        arrow.SetActive(false);
         enabled = false;
+        
     }
 
     public void Unfreeze()
     {
         enabled = true;
+        arrow.SetActive(true);
     }
 
     /// <summary>
