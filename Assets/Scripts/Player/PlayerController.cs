@@ -239,6 +239,10 @@ public class PlayerController : MonoBehaviour
             // for trajectory UI
             Vector3 currentMousePos = Input.mousePosition;
             dragDistance = Vector3.Distance(currentMousePos, originalPos);
+
+            float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
+            float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
+            Debug.Log("Expected launch angle: " + Mathf.Atan2(yChange, xChange));
         }
         if (Input.GetMouseButton(1))
         {
@@ -255,6 +259,7 @@ public class PlayerController : MonoBehaviour
                 AudioManager.Instance.PlayRelease();
                 float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
                 float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
+                Debug.Log(Mathf.Atan2(yChange, xChange));
                 playerRb.linearVelocity = new Vector2(xChange, yChange);
                 if (playerRb.linearVelocity.magnitude > maxLaunchSpeed)
                 {
@@ -267,8 +272,13 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
-                    // launch force too low, enforce minimum launch speed
-                    playerRb.linearVelocity = new Vector2(xChange + maxLaunchSpeed * 0.2f, yChange + maxLaunchSpeed * 0.2f);
+                    float mag = playerRb.linearVelocity.magnitude;
+                    mag = Mathf.Clamp(mag, maxLaunchSpeed * 0.2f, maxLaunchSpeed);
+
+                    Vector2 final = playerRb.linearVelocity.normalized;
+                    final = final * mag;
+                    Debug.Log("Min launch angle: " + Mathf.Atan2(final.y, final.x));
+                    playerRb.linearVelocity = final;
                     spriteRenderer.sprite = postLaunchSprite;
                 }
                 DecrementStamina();

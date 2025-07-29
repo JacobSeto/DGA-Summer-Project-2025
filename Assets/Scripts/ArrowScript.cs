@@ -129,17 +129,8 @@ public class ArrowScript : MonoBehaviour
         float rayDistance = spacing * (maxArrows + 2f);
         RaycastHit2D hit = Physics2D.Raycast(drawOrigin, -direction, rayDistance, bounceLayers);
         float maxDist = hit.collider != null ? hit.distance : float.MaxValue;
-        
-        if (hit.collider != null)
-        {
-            UpdateBounceTrajectory(hit.point, Vector3.Reflect(-direction, hit.normal), true);
-        }
-        else
-        {
-            UpdateBounceTrajectory(Vector3.zero, Vector3.zero, false);
-        }
 
-
+        bool clamped = false;
         for (int i = 0; i < arrowCount; i++)
         {
 
@@ -158,7 +149,17 @@ public class ArrowScript : MonoBehaviour
             else
             {
                 arrows[i].gameObject.SetActive(false);
+                clamped = true;
             }
+        }
+
+        if (hit.collider != null)
+        {
+            UpdateBounceTrajectory(hit.point, Vector3.Reflect(-direction, hit.normal), clamped);
+        }
+        else
+        {
+            UpdateBounceTrajectory(Vector3.zero, Vector3.zero, false);
         }
 
         for (int i = arrowCount; i < arrows.Length; i++)
