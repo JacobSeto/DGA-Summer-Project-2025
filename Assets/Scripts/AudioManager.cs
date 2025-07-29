@@ -4,6 +4,7 @@ public class AudioManager : MonoBehaviour
 {
     [Header("Sound Effects")]
     [SerializeField] private AudioSource bounceAudio;
+    [SerializeField] private AudioSource pullAudio;
     [SerializeField] private AudioSource releaseAudio;
     public static AudioManager Instance;
 
@@ -22,6 +23,11 @@ public class AudioManager : MonoBehaviour
             bounceAudio.pitch *= 1.059463f;
         }
         bounceAudio.PlayOneShot(bounceAudio.clip);
+    }
+
+    public void PlayPull() {
+            pullAudio.pitch = 0.5f;
+            pullAudio.PlayOneShot(pullAudio.clip);
     }
 
     public void PlayRelease() {

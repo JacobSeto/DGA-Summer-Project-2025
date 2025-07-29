@@ -3,24 +3,17 @@ using UnityEngine;
 public class ZookeeperController : MonoBehaviour
 {
     [SerializeField] GameObject zooKeeper;
-    private PlayerController player;
-    [SerializeField] Animator animator;
 
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        
     }
 
+    // Update is called once per frame
     void Update()
     {
-        if (player.slowMotion)
-        {
-            animator.SetBool("Highlight", true);
-        }
-        else
-        {
-            animator.SetBool("Highlight", false);
-        }
+        
     }
 
     private void destroyZookeeper()

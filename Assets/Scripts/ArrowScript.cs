@@ -1,29 +1,22 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 public class ArrowScript : MonoBehaviour
 {
     [HideInInspector] PlayerController playerController;
 
-    [SerializeField] float spacing = 0.5f;
+    [SerializeField] SpriteRenderer spriteRenderer;
 
-    [SerializeField] float maxArrows;
+    [SerializeField] float minStretch = 0.2f;
 
-    [SerializeField] private Transform[] arrows;
+    [SerializeField] float maxStretch = 1f;
 
     private Transform arrowTransform;
-
-    private float arrowDragDistance = 40f;
 
     void Awake()
     {
         arrowTransform = this.transform;
 
         playerController = GetComponentInParent<PlayerController>();
-        for (int i = 0; i < arrows.Length; i++)
-        {
-            arrows[i].gameObject.SetActive(false);
-        }
     }
 
     void Update()
@@ -31,45 +24,35 @@ public class ArrowScript : MonoBehaviour
         if (playerController == null)
             return;
 
-        Vector3 playerPos = playerController.OriginalPlayerPos;
-
-        Vector3 drawOrigin = playerController.playerRb.transform.position;
-
-        Vector3 playerMousePos = Input.mousePosition;
-
-        Vector3 originalMousePos = playerController.OriginalMousePos;
-
-        float drag = Vector3.Distance(originalMousePos, playerMousePos);
-        int arrowCount = (int)Mathf.Clamp(Mathf.FloorToInt(drag / 30f), 1f, maxArrows);
-
-        Vector3 direction = (playerMousePos - originalMousePos).normalized;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-        if (!playerController.IsStretching)
+        if (playerController.IsStretching)
         {
-            for (int i = 0; i < arrows.Length; i++)
-            {
-                arrows[i].gameObject.SetActive(false);
-            }
+            spriteRenderer.enabled = true;
+        }
+        else
+        {
+            spriteRenderer.enabled = false;
             return;
         }
 
-        for (int i = 0; i < arrowCount; i++)
-        {
-            arrows[i].gameObject.SetActive(true);
+        Vector3 playerPos = playerController.OriginalPlayerPos;
+        Vector3 drawOrigin = playerController.playerRb.transform.position;
+        Vector3 playerMousePos = Input.mousePosition;
+        Vector3 originalMousePos = playerController.OriginalMousePos;
+        
+        Vector3 direction = -(playerMousePos - originalMousePos).normalized;
+        float angleDegrees = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+        float dragDistancePixels = (playerMousePos - originalMousePos).magnitude;
+        float t = Mathf.InverseLerp(0, 300f, dragDistancePixels);
+        float stretch = Mathf.Lerp(minStretch, maxStretch, t);
 
 
-            arrows[i].localPosition = direction * -spacing * (i + 1.5f);
-            arrows[i].rotation = Quaternion.Euler(0, 0, angle);
-            float totalFillProgress = drag / arrowDragDistance;
-            float arrowFillAmount = Mathf.Clamp01(totalFillProgress - i);
-            
-            arrows[i].GetComponent<ArrowUIScript>().SetFillAmount(arrowFillAmount);
-        }
+        arrowTransform.rotation = Quaternion.Euler(0f, 0f, angleDegrees);
+        arrowTransform.localScale = new Vector3(stretch, 0.3f, 0.3f);
+        float displacementStretch = Mathf.Lerp(1f, 6f, stretch);
 
-        for (int i = arrowCount; i < arrows.Length; i++)
-        {
-            arrows[i].gameObject.SetActive(false);
-        }
+        arrowTransform.position = drawOrigin + Vector3.Scale(
+            new Vector3(displacementStretch, displacementStretch, displacementStretch),
+            direction);
     }
 }
