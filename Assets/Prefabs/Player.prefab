@@ -171,12 +171,8 @@ MonoBehaviour:
   slowDownAmount: 0.3
   launched: 0
   slowMotion: 0
-  stamina: 0
-  currentSpeed: 0
-  tutorial: 0
-  tutorialTwo: 0
-  speedometerExists: 1
   gracePeriod: 2
+  stamina: 4
   currentSpeed: 0
   tutorial: 0
   tutorialTwo: 0
@@ -362,7 +358,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 98f5a4f766b8447b19c8129f05c59c72, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 98f5a4f766b8447b19c8129f05c59c72, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
