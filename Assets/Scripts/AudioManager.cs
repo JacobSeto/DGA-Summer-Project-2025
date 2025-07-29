@@ -5,6 +5,8 @@ public class AudioManager : MonoBehaviour
     [Header("Sound Effects")]
     [SerializeField] private AudioSource bounceAudio;
     [SerializeField] private AudioSource releaseAudio;
+    [SerializeField] private AudioSource pullAudio;
+    [SerializeField] private AudioSource maxPullAudio;
     public static AudioManager Instance;
 
     private void Awake() {
@@ -28,4 +30,30 @@ public class AudioManager : MonoBehaviour
         releaseAudio.pitch = 0.5f;
         releaseAudio.PlayOneShot(releaseAudio.clip);
     }
+
+    public void PlayPull()
+    {
+        pullAudio.pitch = 1;
+        pullAudio.PlayOneShot(pullAudio.clip);
+    }
+
+    public void StopPull()
+    {
+        pullAudio.Stop();
+    }
+
+    //max stretch audio
+    public void PlayMaxPull()
+    {
+        maxPullAudio.pitch = 1;
+        maxPullAudio.PlayOneShot(maxPullAudio.clip);
+        maxPullAudio.loop = true;
+    }
+
+    public void StopMaxPull()
+    {
+        maxPullAudio.Stop();
+    }
+
+    //topped a bar audio
 }

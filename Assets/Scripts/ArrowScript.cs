@@ -15,6 +15,10 @@ public class ArrowScript : MonoBehaviour
 
     private float arrowDragDistance = 40f;
 
+    private int lastArrowCount = 0;
+
+    private bool maxPlayed = false;
+
     void Awake()
     {
         arrowTransform = this.transform;
@@ -41,7 +45,11 @@ public class ArrowScript : MonoBehaviour
 
         float drag = Vector3.Distance(originalMousePos, playerMousePos);
         int arrowCount = (int)Mathf.Clamp(Mathf.FloorToInt(drag / 30f), 1f, maxArrows);
+        if(arrowCount != lastArrowCount)
+        {
 
+        }
+        lastArrowCount = arrowCount;
         Vector3 direction = (playerMousePos - originalMousePos).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
@@ -51,6 +59,7 @@ public class ArrowScript : MonoBehaviour
             {
                 arrows[i].gameObject.SetActive(false);
             }
+            AudioManager.Instance.StopMaxPull();
             return;
         }
 
@@ -63,13 +72,26 @@ public class ArrowScript : MonoBehaviour
             arrows[i].rotation = Quaternion.Euler(0, 0, angle);
             float totalFillProgress = drag / arrowDragDistance;
             float arrowFillAmount = Mathf.Clamp01(totalFillProgress - i);
-            
             arrows[i].GetComponent<ArrowUIScript>().SetFillAmount(arrowFillAmount);
+        }
+
+        if (arrowCount == maxArrows && !maxPlayed)
+        {
+            AudioManager.Instance.StopPull();
+            AudioManager.Instance.PlayMaxPull();
+            maxPlayed = true;
+        }
+        else
+        {
+            AudioManager.Instance.StopMaxPull();
+            maxPlayed = false;
         }
 
         for (int i = arrowCount; i < arrows.Length; i++)
         {
             arrows[i].gameObject.SetActive(false);
         }
+
+        
     }
 }
