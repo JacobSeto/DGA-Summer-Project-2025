@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb5ff91bb41384228a979d921f90f453, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pivot: {fileID: 8626752266289558155}
 --- !u!1 &5119000647158652205
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,6 +491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ea69f4a9d9ad4063821472fbc8e1029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  angle: 0
 --- !u!1 &7912063711265244413
 GameObject:
   m_ObjectHideFlags: 0
