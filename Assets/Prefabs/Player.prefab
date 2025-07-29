@@ -171,8 +171,13 @@ MonoBehaviour:
   slowDownAmount: 0.3
   launched: 0
   slowMotion: 0
-  angle: 0
   stamina: 0
+  currentSpeed: 0
+  tutorial: 0
+  tutorialTwo: 0
+  speedometerExists: 1
+  gracePeriod: 2
+  currentSpeed: 0
   tutorial: 0
   tutorialTwo: 0
   speedometerExists: 1
@@ -182,9 +187,6 @@ MonoBehaviour:
   boundaryLayer:
     serializedVersion: 2
     m_Bits: 1024
-  elephantLayer:
-    serializedVersion: 2
-    m_Bits: 4096
   spriteRenderer: {fileID: 3958427247207750238}
   spriteObject: {fileID: 2210973940943747788}
   initialSprite: {fileID: 5117515885611587728, guid: 221f89fea38feeb49a56158b00827c98, type: 3}
@@ -457,11 +459,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 375963541932877910, guid: 3cdba0b505134467a91785bf93a0ef05, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.81524
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 375963541932877910, guid: 3cdba0b505134467a91785bf93a0ef05, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.1965103
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 375963541932877910, guid: 3cdba0b505134467a91785bf93a0ef05, type: 3}
       propertyPath: m_LocalPosition.z
@@ -493,6 +495,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 375963541932877910, guid: 3cdba0b505134467a91785bf93a0ef05, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 448374188664405027, guid: 3cdba0b505134467a91785bf93a0ef05, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 448374188664405027, guid: 3cdba0b505134467a91785bf93a0ef05, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 448374188664405027, guid: 3cdba0b505134467a91785bf93a0ef05, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 448374188664405027, guid: 3cdba0b505134467a91785bf93a0ef05, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 933437667292922760, guid: 3cdba0b505134467a91785bf93a0ef05, type: 3}

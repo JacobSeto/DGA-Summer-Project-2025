@@ -43,20 +43,21 @@ public class PlayerController : MonoBehaviour
     public float currentSpeed;
     public bool tutorial = false;
     public bool tutorialTwo = false;
+    public bool speedometerExists = true;
     Vector2 reflectedVector;
     RaycastHit2D ray;
     Vector2 direction;
     Vector3 originalPos;
     Vector3 originalPlayerPos;
+
     float flip = 1;
     private bool thrown;
     private bool isInAir;
     private bool aboveWall;
     private Vector3 inAirScale = new Vector3(2, 2, 2);
     private Vector3 defaultScale;
-    float slowTime = 0.5f;
-    float timeLeft;
-    private bool slowCooldown = true;
+    private GameObject arrow;
+    //float timeLeft;
 
     // acceleration variables 
     const int accelerationWindow = 10;
@@ -69,10 +70,12 @@ public class PlayerController : MonoBehaviour
     public Vector3 OriginalMousePos => originalPos;
     public Vector3 OriginalPlayerPos => originalPlayerPos;
 
+    bool cancelled  = false;
+    [SerializeField] float gracePeriod;
+    float currentGrace;
 
     [SerializeField] LayerMask wallLayer;
     [SerializeField] LayerMask boundaryLayer;
-    [SerializeField] LayerMask elephantLayer;
     LayerMask bounceLayers;
 
     // Sprites
@@ -98,15 +101,15 @@ public class PlayerController : MonoBehaviour
         slowMotion = false;
         stretching = false;
         bounceImpulseActive = true;
+        currentGrace = 3f;
         bounceLayers = wallLayer.value | boundaryLayer.value;
         defaultScale = spriteRenderer.transform.localScale;
-        timeLeft = slowTime;
         stamina = startingStamina;
         if(stamina == 0)
         {
             throw new System.Exception("Stamina is 0");
         }
-
+        arrow = gameObject.transform.GetChild(1).gameObject;
         GameManagerScript.Instance.UpdateStaminaBar(stamina);
     }
 
@@ -126,36 +129,32 @@ public class PlayerController : MonoBehaviour
         else if (stamina > 0)
         {
             HandleLaunch();
-            if (slowCooldown)
-            {
-                if (Input.GetButtonDown("Slow"))
-                {
-                    SlowMotion();
-                }
-                if (Input.GetButtonUp("Slow"))
-                {
-                    EndSlowMotion();
-                }
-            }
+            //if (Input.GetButtonDown("Slow"))
+            //{
+            //    SlowMotion();
+            //}
+            //if (Input.GetButtonUp("Slow"))
+            //{
+            //    EndSlowMotion();
+            //}
         }
         if (tutorial) {
            if (stamina==0) {
                 stamina = stamina + 1;
             } 
         }
-        if (slowMotion)
-        {
-            timeLeft = timeLeft - Time.deltaTime;
-            if (timeLeft <= 0)
-            {
-                EndSlowMotion();
-            }
-        }
+        //if (slowMotion)
+        //{
+        //    timeLeft = timeLeft - Time.deltaTime;
+        //    if (timeLeft <= 0)
+        //    {
+        //        EndSlowMotion();
+        //    }
+        //}
         if (playerRb.linearVelocity.magnitude >= minSpeed)
         {
             direction = playerRb.linearVelocity.normalized;
             currentSpeed = playerRb.linearVelocity.magnitude;
-
             if (playerRb.linearVelocityX < 0)
             {
                 spriteObject.transform.Rotate(0, 0, currentSpeed * Time.deltaTime * rotateForce * flip);
@@ -164,10 +163,13 @@ public class PlayerController : MonoBehaviour
             {
                 spriteObject.transform.Rotate(0, 0, -currentSpeed * Time.deltaTime * rotateForce * flip);
             }
+            currentGrace = gracePeriod;
         }
-        else if (launched)
+        else if (launched && !stretching)
         {
-            if (!tutorialTwo) {
+            currentGrace -= Time.deltaTime;
+            Debug.Log(currentGrace.ToString());
+            if (!tutorialTwo && currentGrace <= 0) {
                 GameManagerScript.Instance.LoseGame();
                 playerRb.linearVelocity = Vector2.zero;
             } else {
@@ -224,8 +226,12 @@ public class PlayerController : MonoBehaviour
             originalPos = Input.mousePosition;
             originalPlayerPos = playerRb.transform.position;
             //store initial mouse location
-            AudioManager.Instance.PlayPull();
+            if (launched)
+            {
+                SlowMotion();
+            }
             stretching = true;
+            cancelled = false;
         }
         if (stretching)
         {
@@ -233,32 +239,42 @@ public class PlayerController : MonoBehaviour
             Vector3 currentMousePos = Input.mousePosition;
             dragDistance = Vector3.Distance(currentMousePos, originalPos);
         }
+        if (Input.GetMouseButton(1))
+        {
+            cancelled = true;
+            EndSlowMotion();
+            stretching = false;
+        }
         if (Input.GetMouseButtonUp(0))
         {
-            stretching = false;
-            slowCooldown = true;
-            AudioManager.Instance.PlayRelease();
-            float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
-            float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
-            playerRb.linearVelocity = new Vector2(xChange, yChange);
-            if (playerRb.linearVelocity.magnitude > maxLaunchSpeed)
+            if (!cancelled)
             {
-                playerRb.linearVelocity = Vector2.ClampMagnitude(playerRb.linearVelocity, maxLaunchSpeed);
-                spriteRenderer.sprite = postLaunchSprite;
+                EndSlowMotion();
+                stretching = false;
+                AudioManager.Instance.PlayRelease();
+                float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
+                float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
+                playerRb.linearVelocity = new Vector2(xChange, yChange);
+                if (playerRb.linearVelocity.magnitude > maxLaunchSpeed)
+                {
+                    playerRb.linearVelocity = Vector2.ClampMagnitude(playerRb.linearVelocity, maxLaunchSpeed);
+                    spriteRenderer.sprite = postLaunchSprite;
+                }
+                else if (playerRb.linearVelocity.magnitude > 0.2 * maxLaunchSpeed)
+                {
+                    spriteRenderer.sprite = postLaunchSprite;
+                }
+                else
+                {
+                    // launch force too low, enforce minimum launch speed
+                    playerRb.linearVelocity = new Vector2(xChange + maxLaunchSpeed * 0.2f, yChange + maxLaunchSpeed * 0.2f);
+                    spriteRenderer.sprite = postLaunchSprite;
+                }
+                DecrementStamina();
+                animator.SetBool("Launch", true);
+                launched = true;
             }
-            else if (playerRb.linearVelocity.magnitude > 0.2 * maxLaunchSpeed)
-            {
-                spriteRenderer.sprite = postLaunchSprite;
-            }
-            else
-            {
-                // launch force too low, enforce minimum launch speed
-                playerRb.linearVelocity = new Vector2(xChange + maxLaunchSpeed * 0.2f, yChange + maxLaunchSpeed * 0.2f);
-                spriteRenderer.sprite = postLaunchSprite;
-            }
-            DecrementStamina();
-            animator.SetBool("Launch", true);
-            launched = true;
+            
         }
     }
 
@@ -274,8 +290,6 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 1;
         Time.fixedDeltaTime = 0.02F;
         slowMotion = false;
-        timeLeft = slowTime;
-        slowCooldown = false;
     }
 
     private void FixedUpdate()
@@ -319,9 +333,9 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if ((elephantLayer.value & (1 << collision.gameObject.layer)) > 0)
+        if (collision.gameObject.CompareTag("Elephant"))
         {         
-            ray = Physics2D.Raycast(transform.position, direction, 4f, elephantLayer.value);
+            ray = Physics2D.Raycast(transform.position, direction, 4f, bounceLayers.value);
             if (ray)
             {
                 reflectedVector = UnityEngine.Vector2.Reflect(direction * currentSpeed, ray.normal);
@@ -456,12 +470,14 @@ public class PlayerController : MonoBehaviour
 
        public void Freeze()
     {
+        arrow.SetActive(false);
         enabled = false;
     }
 
     public void Unfreeze()
     {
         enabled = true;
+        arrow.SetActive(true);
     }
 
     /// <summary>
