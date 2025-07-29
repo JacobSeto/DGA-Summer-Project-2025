@@ -507,6 +507,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 8508396645683983645, guid: cd81b424f06461d408267a195d2923be, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8783541309648419471, guid: cd81b424f06461d408267a195d2923be, type: 3}
       propertyPath: m_Color.a
       value: 0.7647059
@@ -554,6 +558,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 5824096553826941724, guid: cd81b424f06461d408267a195d2923be, type: 3}
+    - {fileID: 4039955783514313528, guid: cd81b424f06461d408267a195d2923be, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7168431506054511217, guid: cd81b424f06461d408267a195d2923be, type: 3}
