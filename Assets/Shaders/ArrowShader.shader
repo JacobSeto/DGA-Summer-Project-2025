@@ -10,6 +10,7 @@ Shader "Custom/ArrowFill"
         _GlowIntensity ("Glow Intensity", Range(0, 5)) = 2.0
         _PulseSpeed ("Pulse Speed", Range(0, 10)) = 3.0
         _EdgeGlow ("Edge Glow Width", Range(0, 0.1)) = 0.05
+        _MinAlpha ("Minimum Alpha", Range(0, 1)) = 0.3
     }
     SubShader
     {
@@ -32,6 +33,7 @@ Shader "Custom/ArrowFill"
             float _GlowIntensity;
             float _PulseSpeed;
             float _EdgeGlow;
+            float _MinAlpha;
 
             struct appdata_t
             {
@@ -55,37 +57,32 @@ Shader "Custom/ArrowFill"
 
             fixed4 frag (v2f i) : SV_Target
             {
-                // Sample base texture for the glow
                 fixed4 baseColor = tex2D(_MainTex, i.uv);
-                
                 float brightness = dot(baseColor.rgb, float3(0.299, 0.587, 0.114));
                 float isWhite = step(_WhiteThreshold, brightness);
-
                 float fillMask = step(1.0 - _FillAmount, i.uv.x);
-                
-                // Edge glow effect (glowing edge of the fill)
                 float edgeDistance = abs(i.uv.x - (1.0 - _FillAmount));
                 float edgeGlow = 1.0 - smoothstep(0.0, _EdgeGlow, edgeDistance);
                 edgeGlow *= fillMask;
-                
+
                 // pulse effect when fully filled
                 float pulseEffect = 0.5 + 0.5 * sin(_Time.y * _PulseSpeed);
                 float fullFillBonus = step(0.99, _FillAmount) * pulseEffect * 0.5;
-                
                 float totalGlow = (edgeGlow + fullFillBonus) * _GlowIntensity;
-                
+
                 fixed4 finalColor = baseColor;
-                
                 float affectPixel = (1.0 - isWhite) * fillMask;
-                
                 finalColor.rgb = lerp(baseColor.rgb, baseColor.rgb * _TintColor.rgb, affectPixel);
-                
                 finalColor.rgb += _GlowColor.rgb * totalGlow * affectPixel;
 
                 float saturationBoost = affectPixel * 0.3;
                 float3 gray = dot(finalColor.rgb, float3(0.299, 0.587, 0.114));
                 finalColor.rgb = lerp(finalColor.rgb, lerp(gray, finalColor.rgb, 1.0 + saturationBoost), affectPixel);
-                
+
+                // Apply transparency based on fill amount (affects entire arrow including white areas)
+                float alphaMultiplier = lerp(_MinAlpha, 1.0, _FillAmount);
+                finalColor.a = baseColor.a * alphaMultiplier;
+
                 return finalColor;
             }
             ENDCG

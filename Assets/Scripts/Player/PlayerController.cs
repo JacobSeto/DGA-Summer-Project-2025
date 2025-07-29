@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] LayerMask wallLayer;
     [SerializeField] LayerMask boundaryLayer;
-    LayerMask bounceLayers;
+    public LayerMask bounceLayers;
 
     // Sprites
 
