@@ -48,7 +48,6 @@ public class PlayerController : MonoBehaviour
     Vector2 direction;
     Vector3 originalPos;
     Vector3 originalPlayerPos;
-
     float flip = 1;
     private bool thrown;
     private bool isInAir;
@@ -57,6 +56,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 defaultScale;
     float slowTime = 0.5f;
     float timeLeft;
+    private bool slowCooldown = true;
 
     // acceleration variables 
     const int accelerationWindow = 10;
@@ -126,13 +126,16 @@ public class PlayerController : MonoBehaviour
         else if (stamina > 0)
         {
             HandleLaunch();
-            if (Input.GetButtonDown("Slow"))
+            if (slowCooldown)
             {
-                SlowMotion();
-            }
-            if (Input.GetButtonUp("Slow"))
-            {
-                EndSlowMotion();
+                if (Input.GetButtonDown("Slow"))
+                {
+                    SlowMotion();
+                }
+                if (Input.GetButtonUp("Slow"))
+                {
+                    EndSlowMotion();
+                }
             }
         }
         if (tutorial) {
@@ -233,6 +236,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             stretching = false;
+            slowCooldown = true;
             AudioManager.Instance.PlayRelease();
             float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
             float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
@@ -271,6 +275,7 @@ public class PlayerController : MonoBehaviour
         Time.fixedDeltaTime = 0.02F;
         slowMotion = false;
         timeLeft = slowTime;
+        slowCooldown = false;
     }
 
     private void FixedUpdate()
