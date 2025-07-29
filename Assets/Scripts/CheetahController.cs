@@ -38,6 +38,8 @@ public class CheetahController : MonoBehaviour
             if (player != null)
             {
                 player.playerRb.linearVelocity *= 2f;
+                Debug.Log("Speed increased: " + player.playerRb.linearVelocity);
+
                 canIncreaseSpeed = false;
                 timer = coolDownTime;
             }

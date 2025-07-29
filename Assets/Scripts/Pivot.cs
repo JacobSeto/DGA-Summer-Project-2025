@@ -13,6 +13,9 @@ public class Pivot : MonoBehaviour
     {
         angle = Mathf.Clamp01(player.currentSpeed / player.maxSpeed);
         angle = Mathf.Lerp(-90f, 90f, angle) * -1;
-        gameObject.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        if (player.speedometerExists)
+        {
+            gameObject.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        }
     }
 }
