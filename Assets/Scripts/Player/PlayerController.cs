@@ -43,7 +43,6 @@ public class PlayerController : MonoBehaviour
     public float currentSpeed;
     public bool tutorial = false;
     public bool tutorialTwo = false;
-    public bool speedometerExists = true;
     Vector2 reflectedVector;
     RaycastHit2D ray;
     Vector2 direction;
