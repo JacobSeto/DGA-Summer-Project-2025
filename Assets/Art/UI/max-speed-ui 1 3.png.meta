@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 65946c2e6f1c043818db124f8c20a7e8
+guid: 3cd6a5a17df9e498e9813fed249c198e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5606552979701511677
-    second: max-speed-ui 1_0
+      213: 8630443625160198504
+    second: max-speed-ui 1 3_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: max-speed-ui 1_0
+      name: max-speed-ui 1 3_0
       rect:
         serializedVersion: 2
         x: 3
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: df53481fa3a7ecd40800000000000000
-      internalID: 5606552979701511677
+      spriteID: 86945b340ce75c770800000000000000
+      internalID: 8630443625160198504
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      max-speed-ui 1_0: 5606552979701511677
+      max-speed-ui 1 3_0: 8630443625160198504
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
