@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 /*
  * The Game Manager handles win and loss conditions alongside tracking the time elapsed in each level.
@@ -28,7 +29,10 @@ public class GameManagerScript : MonoBehaviour
     private int zookeeperCount = 0;
     private int originalCount = 0;
     private int originalStamina = 0;
-    private float timer = 0.0f;
+    private String finalTime;
+    private String sceneName;
+    private float fastestTime;
+    private bool tutorial;
 
     public bool isPopupOpen => uiPopupScreen.activeSelf;
 
@@ -41,10 +45,13 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] GameObject gameMenu;
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject winScreen;
+    [SerializeField] GameObject winText;
     [SerializeField] GameObject loseScreen;
     [SerializeField] Image[] staminaBar;
+    [SerializeField] GameObject timerObject;
 
     public Material greyscaleMat;
+    public float timer = 0.0f;
 
     void Awake()
     {
@@ -106,6 +113,26 @@ public class GameManagerScript : MonoBehaviour
     {
         win = true;
         Pause();
+        if (!tutorial)
+        {
+            finalTime = timerObject.GetComponent<Timer>().GetFinalTime();
+            sceneName = SceneManager.GetActiveScene().name;
+            fastestTime = timerObject.GetComponent<Timer>().GetTimeFloat();
+            if (PlayerPrefs.GetFloat(sceneName) != 0f)
+            {
+                if (PlayerPrefs.GetFloat(sceneName) < fastestTime)
+                {
+                    fastestTime = PlayerPrefs.GetFloat(sceneName);
+                }
+            }
+            PlayerPrefs.SetFloat(sceneName, fastestTime);
+            winText.GetComponent<TMP_Text>().SetText("You win! Time: " +
+                finalTime);
+        }
+        else
+        {
+            winText.GetComponent<TMP_Text>().SetText("You win!");
+        }
         menuNavigation.ChangeActiveScreen(winScreen);
         //pull up menu
     }
@@ -181,6 +208,11 @@ public class GameManagerScript : MonoBehaviour
     public GameObject getGameScreen()
     {
         return gameMenu;
+    }
+
+    public void Tutorial()
+    {
+        tutorial = true;
     }
     
     public void UpdateStaminaBar(int stamina)
