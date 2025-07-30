@@ -46,8 +46,13 @@ public class Timer : MonoBehaviour
         }
     }
 
-   public String GetFinalTime()
+    public String GetFinalTime()
     {
         return timeString;
+    }
+
+    public float GetTimeFloat()
+    {
+        return timer;
     }
 }

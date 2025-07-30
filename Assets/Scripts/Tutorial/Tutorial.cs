@@ -14,6 +14,7 @@ public class Tutorial : MonoBehaviour
         player.startingStamina = 1;
         background = gameObject.transform.parent.gameObject;
         player.tutorial = true;
+        GameManagerScript.Instance.Tutorial();
     }
 
     void Update()
