@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 4080bba27d0494a4ca2a8568b16febc6
+guid: 861e798d384f4ed458841e6d2e64f961
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6364430323145520374
-    second: fence-tile002_0
+      213: 416122658150442856
+    second: diagonal_tile002_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: fence-tile002_0
+      name: diagonal_tile002_0
       rect:
         serializedVersion: 2
         x: 0
@@ -108,20 +108,15 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
-      physicsShape:
-      - - {x: 16, y: 16}
-        - {x: -16, y: 16}
-        - {x: -16, y: 4}
-        - {x: 9, y: -16}
-        - {x: 16, y: -16}
-      tessellationDetail: 0
+      physicsShape: []
+      tessellationDetail: -1
       bones: []
-      spriteID: a0bcf2f57500da7a0800000000000000
-      internalID: -6364430323145520374
+      spriteID: 8676c065a5d56c500800000000000000
+      internalID: 416122658150442856
       vertices: []
       indices: 
       edges: []
@@ -130,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 4a125405c29585b42a0334d2780adde6
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -140,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      fence-tile002_0: -6364430323145520374
+      diagonal_tile002_0: 416122658150442856
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
