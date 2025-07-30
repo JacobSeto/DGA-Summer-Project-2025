@@ -161,11 +161,15 @@ public class CameraController : MonoBehaviour
 
         if (Physics2D.CircleCast(playerBody.position, .1f, Vector2.up, 2.5f, wallLayer) && Physics2D.CircleCast(playerBody.position, .1f, Vector2.down, 2.5f, wallLayer))
         {
-            boundedPosition = playerLoc.position;
+            float wallup = Physics2D.CircleCast(playerBody.position, .1f, Vector2.up, 2.5f, wallLayer).centroid.y;
+            float walldown = Physics2D.CircleCast(playerBody.position, .1f, Vector2.down, 2.5f, wallLayer).centroid.y;
+            boundedPosition.y = wallup - (wallup-walldown)/2 ;
         }
         else if (Physics2D.CircleCast(playerBody.position, .1f, Vector2.left, 2.5f, wallLayer) && Physics2D.CircleCast(playerBody.position, .1f, Vector2.right, 2.5f, wallLayer))
         {
-            boundedPosition = playerLoc.position;
+            float wallleft = Physics2D.CircleCast(playerBody.position, .1f, Vector2.left, 2.5f, wallLayer).centroid.x;
+            float wallright = Physics2D.CircleCast(playerBody.position, .1f, Vector2.right, 2.5f, wallLayer).centroid.x;
+            boundedPosition.x = wallright - (wallright - wallleft) / 2;
         }
         else { 
 
