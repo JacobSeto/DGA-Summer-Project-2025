@@ -32,12 +32,14 @@ public class CameraController : MonoBehaviour
     //Follow variables
     private float movementSpeed=5f;
     private Vector3 currentPosition;
-    private Vector3 bouncecheck;
     //Screen Bound
     private int activePenn=0;
     private Vector3 penPostition;
     //
     [SerializeField] private PlayerController player;
+    [SerializeField] private LayerMask wallLayer;
+    // Bounce Check
+    private int bounces;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -45,15 +47,17 @@ public class CameraController : MonoBehaviour
         //Starting main camera Size
         levelView = _camera.transform.position;
         levelSize = _camera.orthographicSize;
-        
+        bounces = 0;
         currentSize = levelSize;
         currentPosition = levelView;
         penPostition = pen[activePenn].transform.position;
+        Screen.SetResolution(640,360, true);
     }
 
     // Update is called once per frame
     void Update()
     {
+
         movementSpeed = (levelView - playerLoc.position).magnitude/2000;
 
         for (int i = 0; i < pen.Length; i++)
@@ -93,13 +97,14 @@ public class CameraController : MonoBehaviour
              currentPosition = new Vector3(playerLoc.position.x + (Mathf.Clamp(playerBody.linearVelocityX, -currentSize*(16f/10f), currentSize * (16f / 10f)) ), 
                  playerLoc.position.y + (Mathf.Clamp(playerBody.linearVelocityY, -currentSize, currentSize)),
                  -10f); */
-             ///Option 1: Centered
-            // currentPosition = new Vector3(playerLoc.position.x, playerLoc.position.y, -10f); 
+
+            //Option 1: Centered
+             //currentPosition = new Vector3(playerLoc.position.x, playerLoc.position.y, -10f); 
 
             //Option 2: Slightly ahead
-            float frac = .15f;
+            float frac = .2f;
             currentPosition = new Vector3(playerLoc.position.x + (Mathf.Clamp(playerBody.linearVelocityX, -currentSize * (16f / 10f) * frac, currentSize * (16f / 10f) * frac)),
-              playerLoc.position.y + (Mathf.Clamp(playerBody.linearVelocityY, -currentSize * frac, currentSize * frac))); 
+            playerLoc.position.y + (Mathf.Clamp(playerBody.linearVelocityY, -currentSize * frac, currentSize * frac)));
             //currentPosition = new Vector3(playerLoc.position.x + playerBody.linearVelocityX, playerLoc.position.y + playerBody.linearVelocityY, -10f);
         }
 
@@ -111,14 +116,11 @@ public class CameraController : MonoBehaviour
         //Moving Camera to and from player (This needs to be changed to incorperate player Speed aka Zoomed=1 )
         if (zoomed != 3)
         {
-            // float posX = Mathf.Clamp(currentPosition.x, levelView.x - levelSize - currentSize, levelView.x + levelSize + currentSize);
-            //float posY = Mathf.Clamp(currentPosition.y, levelView.y - levelSize - currentSize, levelView.y  +levelSize + currentSize);
-            //currentPosition=new Vector3 (posX, posY, -10f);
+
             if (zoomed == 1) 
             { 
                 currentPosition = Bind(currentPosition); 
             }
-           // transform.position = Vector3.Slerp(transform.position, currentPosition, Mathf.Clamp((1/player.GetCurrentSpeed())*Time.deltaTime*.95f,0.1f,100000000));
             transform.position = Vector3.Slerp(transform.position, currentPosition, .025f);
 
         }
@@ -144,10 +146,34 @@ public class CameraController : MonoBehaviour
     {
         Vector3 boundedPosition = curPosition;
         int i = 0;
-        while(!pen[activePenn].OverlapPoint(new Vector2(boundedPosition.x, boundedPosition.y)) && i<5000 ) 
+        Vector2 pl = new Vector2(playerLoc.position.x, playerLoc.position.y);
+        float sc = 1;
+        /*if (Physics2D.Linecast(pl.,pl +   new Vector2(0, sc) , LayerMask.NameToLayer("Wall"),-100,100) && Physics2D.Linecast(pl, pl + new Vector2(0, -sc), LayerMask.NameToLayer("Wall"), -100, 100)) 
+        { 
+            boundedPosition = playerLoc.position;
+            Debug.Log("Centered");
+        }
+        if (Physics2D.Linecast(pl, pl + new Vector2(sc, 0), LayerMask.NameToLayer("Wall"), -100, 100) && Physics2D.Linecast(pl, pl + new Vector2(-sc, 0), LayerMask.NameToLayer("Wall"), -100, 100))
         {
-            boundedPosition = boundedPosition - (boundedPosition - playerLoc.position) * .05f;
-            i++;
+            boundedPosition = playerLoc.position;
+            Debug.Log("Centered");
+        } */
+
+        if (Physics2D.CircleCast(playerBody.position, .1f, Vector2.up, 2.5f, wallLayer) && Physics2D.CircleCast(playerBody.position, .1f, Vector2.down, 2.5f, wallLayer))
+        {
+            boundedPosition = playerLoc.position;
+        }
+        else if (Physics2D.CircleCast(playerBody.position, .1f, Vector2.left, 2.5f, wallLayer) && Physics2D.CircleCast(playerBody.position, .1f, Vector2.right, 2.5f, wallLayer))
+        {
+            boundedPosition = playerLoc.position;
+        }
+        else { 
+
+            while (!pen[activePenn].OverlapPoint(new Vector2(boundedPosition.x, boundedPosition.y)) && i < 5000)
+            {
+                boundedPosition = boundedPosition - (boundedPosition - playerLoc.position) * .05f;
+                i++;
+            }
         }
         boundedPosition.z = -10f;
         return boundedPosition;
