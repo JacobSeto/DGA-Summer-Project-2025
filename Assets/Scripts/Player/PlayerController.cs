@@ -164,7 +164,7 @@ public class PlayerController : MonoBehaviour
             }
             currentGrace = gracePeriod;
         }
-        else if (launched && !stretching)
+        else if (launched)
         {
             currentGrace -= Time.deltaTime;
             //Debug.Log(currentGrace.ToString());
