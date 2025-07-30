@@ -7,6 +7,7 @@ public class PopupController : MonoBehaviour
     [SerializeField] TMP_Text dialogueText;
     [SerializeField] Button nextButton;
 
+    [SerializeField] Button doneButton;
     [SerializeField] string[] text;
     private PlayerController player;
 
@@ -18,11 +19,13 @@ public class PopupController : MonoBehaviour
 
         dialogueText.text = text[currentIndex];
         nextButton.onClick.AddListener(NextMessage);
+        doneButton.onClick.AddListener(ClosePopup);
+        doneButton.gameObject.SetActive(false);
     }
 
     void Update()
     {
-        
+
     }
 
     void NextMessage()
@@ -36,8 +39,15 @@ public class PopupController : MonoBehaviour
         }
         else
         {
-            player.Unfreeze();
-            gameObject.SetActive(false); 
+
+            nextButton.gameObject.SetActive(false);
+            doneButton.gameObject.SetActive(true);
         }
+    }
+
+    void ClosePopup()
+    {
+        player.Unfreeze();
+        gameObject.SetActive(false);
     }
 }
