@@ -554,4 +554,21 @@ public class PlayerController : MonoBehaviour
         if (stamina < maxStamina) stamina++;
         GameManagerScript.Instance.UpdateStaminaBar(stamina);
     }
+
+    public Transform GetClosestZookeeper(Transform[] zookeepers)
+    {
+        Transform tMin = null;
+        float minDist = Mathf.Infinity;
+        Vector3 currentPos = transform.position;
+        foreach (Transform t in zookeepers)
+        {
+            float dist = Vector3.Distance(t.position, currentPos);
+            if (dist < minDist)
+            {
+                tMin = t;
+                minDist = dist;
+            }
+        }
+        return tMin;
+    }
 }
