@@ -6,12 +6,20 @@ public class MudTrigger : MonoBehaviour
     [SerializeField] private float mudDampeningValue;
     Rigidbody2D playerBody;
     private float defaultDampeningValue;
+    private GameObject mudParticlesObj;
+    private GameObject grassParticlesObj;
+    private ParticleSystem grassParticles;
+    private ParticleSystem mudParticles;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerBody = GameManagerScript.Instance.player.GetComponent<Rigidbody2D>();
         defaultDampeningValue = playerBody.linearDamping;
+        mudParticlesObj = GameManagerScript.Instance.player.transform.Find("MudParticles").gameObject;
+        grassParticlesObj = GameManagerScript.Instance.player.transform.Find("GrassParticles").gameObject;
+        mudParticles = mudParticlesObj.GetComponent<ParticleSystem>();
+        grassParticles = grassParticlesObj.GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -26,6 +34,8 @@ public class MudTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.attachedRigidbody.linearDamping = mudDampeningValue; 
+            grassParticles.Stop();
+            mudParticles.Play();
         }
 
     }
@@ -35,6 +45,8 @@ public class MudTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.attachedRigidbody.linearDamping = defaultDampeningValue;
+            grassParticles.Play();
+            mudParticles.Stop();
         }
 
     }

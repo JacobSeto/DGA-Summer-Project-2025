@@ -87,6 +87,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] Animator animator;
 
+    [SerializeField] ParticleSystem particleSystem;
+
     private bool wallBounce;
 
     // Start is called before first frame is script is active
