@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: Shore-Water Inner Corner
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: -5180865246214072546, guid: 219fd5ae9d3358c4b85ca218b26be781, type: 3}
+  m_Sprite: {fileID: 6108025117111144382, guid: 080e2bb0299af914389100ab5835d1be, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
