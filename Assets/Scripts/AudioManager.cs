@@ -7,6 +7,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource releaseAudio;
     [SerializeField] private AudioSource pullAudio;
     [SerializeField] private AudioSource maxPullAudio;
+    [SerializeField] private AudioSource fillArrowAudio;
     public static AudioManager Instance;
 
     private void Awake() {
@@ -45,15 +46,22 @@ public class AudioManager : MonoBehaviour
     //max stretch audio
     public void PlayMaxPull()
     {
-        maxPullAudio.pitch = 1;
-        maxPullAudio.PlayOneShot(maxPullAudio.clip);
-        maxPullAudio.loop = true;
+        if (!maxPullAudio.isPlaying)
+        {
+            maxPullAudio.pitch = 1;
+            maxPullAudio.PlayOneShot(maxPullAudio.clip);
+        }
+        
+        
     }
-
     public void StopMaxPull()
     {
         maxPullAudio.Stop();
     }
 
+    public void PlayFillArrow()
+    {
+        fillArrowAudio.PlayOneShot(fillArrowAudio.clip);
+    }
     //topped a bar audio
 }
