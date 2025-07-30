@@ -155,14 +155,10 @@ public class PlayerController : MonoBehaviour
             direction = playerRb.linearVelocity.normalized;
             currentSpeed = playerRb.linearVelocity.magnitude;
 
-            if (playerRb.linearVelocityX < 0)
-            {
-                spriteObject.transform.Rotate(0, 0, currentSpeed * Time.deltaTime * rotateForce * flip);
-            }
-            else if (playerRb.linearVelocityX > 0)
-            {
-                spriteObject.transform.Rotate(0, 0, -currentSpeed * Time.deltaTime * rotateForce * flip);
-            }
+            //if (playerRb.linearVelocityX < 0)
+                //spriteObject.transform.Rotate(0, 0, currentSpeed * Time.deltaTime * rotateForce * flip);
+            //else if (playerRb.linearVelocityX > 0)
+               // spriteObject.transform.Rotate(0, 0, -currentSpeed * Time.deltaTime * rotateForce * flip);
         }
         else if (launched)
         {
