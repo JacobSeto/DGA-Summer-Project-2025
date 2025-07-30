@@ -29,6 +29,9 @@ public class GameManagerScript : MonoBehaviour
     private int zookeeperCount = 0;
     private int originalCount = 0;
     private int originalStamina = 0;
+    private String finalTime;
+    private String sceneName;
+    private String fastestTime;
 
     public bool isPopupOpen => uiPopupScreen.activeSelf;
 
@@ -109,8 +112,18 @@ public class GameManagerScript : MonoBehaviour
     {
         win = true;
         Pause();
+        finalTime = timerObject.GetComponent<Timer>().GetFinalTime();
         winText.GetComponent<TMP_Text>().SetText("You win! Time: " +
-            timerObject.GetComponent<Timer>().GetFinalTime());
+            finalTime);
+        sceneName = SceneManager.GetActiveScene().name;
+        if (PlayerPrefs.GetString(sceneName) == "")
+        {
+            PlayerPrefs.SetString(sceneName, finalTime);
+        }
+        else
+        {
+          //  if (PlayerPrefs.GetString(sceneName).)
+        }
         menuNavigation.ChangeActiveScreen(winScreen);
         //pull up menu
     }

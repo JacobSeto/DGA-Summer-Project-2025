@@ -28,6 +28,7 @@ public class Timer : MonoBehaviour
         else if (player.launched && !firstLaunch)
         {
             timer = (float)Math.Round(GameManagerScript.Instance.timer, 0) - timerGap;
+            Debug.Log(timer);
             if (timer / 60 >= 1)
             {
                 minutes = timer / 60;
@@ -46,8 +47,13 @@ public class Timer : MonoBehaviour
         }
     }
 
-   public String GetFinalTime()
+    public String GetFinalTime()
     {
         return timeString;
+    }
+
+    public float GetTimeFloat()
+    {
+        return timer;
     }
 }
