@@ -322,7 +322,10 @@ MonoBehaviour:
   - {fileID: 8684494758021159904}
   playerLoc: {fileID: 0}
   playerBody: {fileID: 0}
-  playerSize: 6
+  playerSize: 7.5
   zoomScrollSize: 6
   zoomScrollSpeed: 0.2
   player: {fileID: 0}
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 1280
