@@ -167,7 +167,7 @@ public class PlayerController : MonoBehaviour
         else if (launched && !stretching)
         {
             currentGrace -= Time.deltaTime;
-            Debug.Log(currentGrace.ToString());
+            //Debug.Log(currentGrace.ToString());
             if (!tutorialTwo && currentGrace <= 0) {
                 GameManagerScript.Instance.LoseGame();
                 playerRb.linearVelocity = Vector2.zero;
@@ -195,7 +195,7 @@ public class PlayerController : MonoBehaviour
             aboveWall = false;
         }
 
-        Debug.Log("Current speed: " + currentSpeed);
+        //Debug.Log("Current speed: " + currentSpeed);
     }
 
     IEnumerator MonkeyThrow()
@@ -242,7 +242,7 @@ public class PlayerController : MonoBehaviour
 
             float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
             float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
-            Debug.Log("Expected launch angle: " + Mathf.Atan2(yChange, xChange));
+            //Debug.Log("Expected launch angle: " + Mathf.Atan2(yChange, xChange));
         }
         if (Input.GetMouseButton(1))
         {
@@ -259,7 +259,7 @@ public class PlayerController : MonoBehaviour
                 AudioManager.Instance.PlayRelease();
                 float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
                 float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
-                Debug.Log(Mathf.Atan2(yChange, xChange));
+                //Debug.Log(Mathf.Atan2(yChange, xChange));
                 playerRb.linearVelocity = new Vector2(xChange, yChange);
                 if (playerRb.linearVelocity.magnitude > maxLaunchSpeed)
                 {
@@ -277,7 +277,7 @@ public class PlayerController : MonoBehaviour
 
                     Vector2 final = playerRb.linearVelocity.normalized;
                     final = final * mag;
-                    Debug.Log("Min launch angle: " + Mathf.Atan2(final.y, final.x));
+                    //Debug.Log("Min launch angle: " + Mathf.Atan2(final.y, final.x));
                     playerRb.linearVelocity = final;
                     spriteRenderer.sprite = postLaunchSprite;
                 }
@@ -329,19 +329,24 @@ public class PlayerController : MonoBehaviour
         if ((bounceLayers.value & (1 << collision.gameObject.layer)) > 0)
         {
             ray = Physics2D.Raycast(transform.position, direction, 4f, bounceLayers.value);
+            Vector2 contactVector = new Vector2(transform.position.x - contact.point.x, transform.position.y - contact.point.y);
             if (ray)
             {
                 reflectedVector = UnityEngine.Vector2.Reflect(direction * currentSpeed, ray.normal);
-
-                if (bounceImpulseActive)
-                {
-                    // give impulse to player, reset timer
-                    reflectedVector *= bounceForce;
-                    bounceTimer = 0f;
-                    bounceImpulseActive = false;
-                }
+                
                 playerRb.linearVelocity = reflectedVector;
+            } else {
+                playerRb.linearVelocity = contactVector.normalized * currentSpeed;
             }
+            
+            if (bounceImpulseActive)
+            {
+                // give impulse to player, reset timer
+                playerRb.linearVelocity *= bounceForce;
+                bounceTimer = 0f;
+                bounceImpulseActive = false;
+            }
+
         }
 
         if (collision.gameObject.CompareTag("Elephant"))
