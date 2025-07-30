@@ -16,6 +16,7 @@ public class TutorialTwo : MonoBehaviour
         speedometer.SetActive(false);
         background = gameObject.transform.parent.gameObject;
         player.tutorialTwo = true;
+        GameManagerScript.Instance.Tutorial();
     }
 
     void Update()
