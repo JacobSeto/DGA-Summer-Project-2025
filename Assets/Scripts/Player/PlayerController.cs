@@ -333,10 +333,16 @@ public class PlayerController : MonoBehaviour
             Vector2 contactVector = new Vector2(transform.position.x - contact.point.x, transform.position.y - contact.point.y);
             if (ray)
             {
-                reflectedVector = UnityEngine.Vector2.Reflect(direction * currentSpeed, ray.normal);
-                
+                reflectedVector = UnityEngine.Vector2.Reflect(direction * currentSpeed, contact.normal);
+
                 playerRb.linearVelocity = reflectedVector;
-            } else {
+            }
+            else
+            {
+                Debug.Log("fallback logic used");
+                float angleToNormal = Vector2.Angle(direction, contact.normal);
+                Debug.Log("angle: " + angleToNormal);
+                
                 playerRb.linearVelocity = contactVector.normalized * currentSpeed;
             }
             
@@ -387,7 +393,7 @@ public class PlayerController : MonoBehaviour
         Vector2 normal = contact.normal;
         if (Mathf.Abs(normal.y) > 0.5)
         {
-            flip = flip * -1;
+            flip *= -1;
         }
 
         AudioManager.Instance.PlayBounce();
