@@ -28,7 +28,6 @@ public class GameManagerScript : MonoBehaviour
     private int zookeeperCount = 0;
     private int originalCount = 0;
     private int originalStamina = 0;
-    private float timer = 0.0f;
 
     public bool isPopupOpen => uiPopupScreen.activeSelf;
 
@@ -45,6 +44,7 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] Image[] staminaBar;
 
     public Material greyscaleMat;
+    public float timer = 0.0f;
 
     void Awake()
     {
