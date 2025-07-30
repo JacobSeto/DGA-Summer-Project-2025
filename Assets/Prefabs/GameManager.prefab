@@ -3332,12 +3332,14 @@ MonoBehaviour:
   gameMenu: {fileID: 6172991957283706989}
   pauseMenu: {fileID: 4747576535336511266}
   winScreen: {fileID: 9096940041729674530}
+  winText: {fileID: 8841461169290326283}
   loseScreen: {fileID: 5305311707963755795}
   staminaBar:
   - {fileID: 420908193587752226}
   - {fileID: 3488093938261302485}
   - {fileID: 8088243484380797754}
   - {fileID: 5794629321263621284}
+  timerObject: {fileID: 5904123275828136097}
   greyscaleMat: {fileID: 2100000, guid: 9351a3757453d4242bd4f9f3f3b9859c, type: 2}
   timer: 0
 --- !u!1 &8380021242513430653
@@ -3580,7 +3582,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: You Win!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 0d4738f5fca3f46498b8c9afafbf2a0c, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -3646,7 +3648,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &9096940041729674530

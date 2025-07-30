@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 /*
  * The Game Manager handles win and loss conditions alongside tracking the time elapsed in each level.
@@ -40,8 +41,10 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] GameObject gameMenu;
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject winScreen;
+    [SerializeField] GameObject winText;
     [SerializeField] GameObject loseScreen;
     [SerializeField] Image[] staminaBar;
+    [SerializeField] GameObject timerObject;
 
     public Material greyscaleMat;
     public float timer = 0.0f;
@@ -106,6 +109,8 @@ public class GameManagerScript : MonoBehaviour
     {
         win = true;
         Pause();
+        winText.GetComponent<TMP_Text>().SetText("You win! Time: " +
+            timerObject.GetComponent<Timer>().GetFinalTime());
         menuNavigation.ChangeActiveScreen(winScreen);
         //pull up menu
     }

@@ -8,7 +8,7 @@ public class Timer : MonoBehaviour
     private float timerGap;
     private float minutes;
     private float seconds;
-    private String secString;
+    private String timeString;
     private TMP_Text text;
     private PlayerController player;
     private bool firstLaunch = true;
@@ -32,13 +32,22 @@ public class Timer : MonoBehaviour
             {
                 minutes = timer / 60;
             }
+            timeString = minutes.ToString();
             seconds = timer % 60;
-            secString = seconds.ToString();
-            if (secString.Length != 2)
+            if (seconds.ToString().Length != 2)
             {
-                secString = "0" + secString;
+                timeString = timeString + ":" + "0" + seconds.ToString();
             }
-            text.SetText(minutes.ToString() + ":" + secString);
+            else
+            {
+                timeString = timeString + ":" + seconds.ToString();
+            }
+            text.SetText(timeString);
         }
+    }
+
+   public String GetFinalTime()
+    {
+        return timeString;
     }
 }
