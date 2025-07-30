@@ -23,8 +23,8 @@ public class ZookeeperDirection : MonoBehaviour
         if (nearestZookeeper != null){
             var dir = nearestZookeeper.position - transform.position;
 
-            float newX = Mathf.Abs(dir.magnitude) / 26.25f;
-            float newY = Mathf.Abs(dir.magnitude) / 30;
+            float newX = Mathf.Abs(dir.magnitude) / 6;
+            float newY = Mathf.Abs(dir.magnitude) / 7;
 
             if (newX < minSize)
             {
