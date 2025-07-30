@@ -149,6 +149,7 @@ public class ArrowScript : MonoBehaviour
                 arrows[i].rotation = Quaternion.Euler(0, 0, angle);
                 float totalFillProgress = drag / arrowDragDistance;
                 float arrowFillAmount = Mathf.Clamp01(totalFillProgress - i);
+                
                 if (lastArrowFill[i] != 1 && arrowFillAmount == 1)
                 {
                     AudioManager.Instance.PlayFillArrow();
@@ -158,6 +159,7 @@ public class ArrowScript : MonoBehaviour
                     AudioManager.Instance.PlayFillArrow();
                     lastArrowCount = arrowCount;
                 }
+                lastArrowFill[i] = arrowFillAmount;
                 arrows[i].GetComponent<ArrowUIScript>().SetFillAmount(arrowFillAmount);
             }
             else
