@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class MonkeyController : MonoBehaviour
 {
-    [SerializeField] GameObject monkey;
+    [SerializeField] float coolDownTime = 10f;
+    private float timer;
     private Animator animator;
     private bool canThrow;
 
@@ -16,12 +17,16 @@ public class MonkeyController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        animator.SetBool("usable", canThrow);
-    }
+        if (!canThrow)
+        {
+            timer -= Time.deltaTime;
+            if (timer <= 0f)
+            {
+                canThrow = true;
 
-    private void destroyMonkey()
-    {
-        monkey.SetActive(false);
+            }
+        }
+        animator.SetBool("usable", canThrow);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -30,8 +35,7 @@ public class MonkeyController : MonoBehaviour
         if (collision.CompareTag("Player") && canThrow)
         {
             canThrow = false;
-            animator.SetBool("usable", false);
-            // destroyMonkey();
+            timer = coolDownTime;
         }
     }
 }

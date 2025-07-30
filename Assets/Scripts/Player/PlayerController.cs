@@ -43,7 +43,6 @@ public class PlayerController : MonoBehaviour
     public float currentSpeed;
     public bool tutorial = false;
     public bool tutorialTwo = false;
-    public bool speedometerExists = true;
     Vector2 reflectedVector;
     RaycastHit2D ray;
     Vector2 direction;
@@ -76,7 +75,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] LayerMask wallLayer;
     [SerializeField] LayerMask boundaryLayer;
-    LayerMask bounceLayers;
+    [SerializeField] LayerMask elephantLayer;
+    public LayerMask bounceLayers;
 
     // Sprites
 
@@ -195,6 +195,8 @@ public class PlayerController : MonoBehaviour
             SetWallBounceActive(true);
             aboveWall = false;
         }
+
+        Debug.Log("Current speed: " + currentSpeed);
     }
 
     IEnumerator MonkeyThrow()
@@ -239,6 +241,10 @@ public class PlayerController : MonoBehaviour
             // for trajectory UI
             Vector3 currentMousePos = Input.mousePosition;
             dragDistance = Vector3.Distance(currentMousePos, originalPos);
+
+            float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
+            float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
+            Debug.Log("Expected launch angle: " + Mathf.Atan2(yChange, xChange));
         }
         if (Input.GetMouseButton(1))
         {
@@ -257,6 +263,7 @@ public class PlayerController : MonoBehaviour
                 AudioManager.Instance.PlayRelease();
                 float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
                 float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
+                Debug.Log(Mathf.Atan2(yChange, xChange));
                 playerRb.linearVelocity = new Vector2(xChange, yChange);
                 if (playerRb.linearVelocity.magnitude > maxLaunchSpeed)
                 {
@@ -269,8 +276,13 @@ public class PlayerController : MonoBehaviour
                 }
                 else
                 {
-                    // launch force too low, enforce minimum launch speed
-                    playerRb.linearVelocity = new Vector2(xChange + maxLaunchSpeed * 0.2f, yChange + maxLaunchSpeed * 0.2f);
+                    float mag = playerRb.linearVelocity.magnitude;
+                    mag = Mathf.Clamp(mag, maxLaunchSpeed * 0.2f, maxLaunchSpeed);
+
+                    Vector2 final = playerRb.linearVelocity.normalized;
+                    final = final * mag;
+                    Debug.Log("Min launch angle: " + Mathf.Atan2(final.y, final.x));
+                    playerRb.linearVelocity = final;
                     spriteRenderer.sprite = postLaunchSprite;
                 }
                 DecrementStamina();
@@ -336,9 +348,9 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (collision.gameObject.CompareTag("Elephant"))
+        if ((elephantLayer.value & (1 << collision.gameObject.layer)) > 0)
         {         
-            ray = Physics2D.Raycast(transform.position, direction, 4f, bounceLayers.value);
+            ray = Physics2D.Raycast(transform.position, direction, 4f, elephantLayer.value);
             if (ray)
             {
                 reflectedVector = UnityEngine.Vector2.Reflect(direction * currentSpeed, ray.normal);
@@ -363,21 +375,11 @@ public class PlayerController : MonoBehaviour
 
         // ElephantController elephant = collision.gameObject.GetComponent<ElephantController>();
         // elephant?.DecreaseHP();
-        if (collision.gameObject.CompareTag("Tranquilizer"))
-        {
-            DecrementStamina();
-        }
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            currentSpeed *= 0.5f;
-        }
-        // ElephantController elephant = collision.gameObject.GetComponent<ElephantController>();
-        // elephant?.DecreaseHP();
 
-        //if (collision.gameObject.CompareTag("Cheetah"))
-        //{
-        //    stamina++;
-        //}
+        // if (collision.gameObject.CompareTag("Cheetah"))
+        // {
+        //    playerRb.linearVelocity.magnitude *= 2f;
+        // }
 
         // Rotation logic
         Vector2 normal = contact.normal;
@@ -471,10 +473,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-       public void Freeze()
+    public void Freeze()
     {
         arrow.SetActive(false);
         enabled = false;
+        
     }
 
     public void Unfreeze()
@@ -553,5 +556,22 @@ public class PlayerController : MonoBehaviour
     {
         if (stamina < maxStamina) stamina++;
         GameManagerScript.Instance.UpdateStaminaBar(stamina);
+    }
+
+    public Transform GetClosestZookeeper(Transform[] zookeepers)
+    {
+        Transform tMin = null;
+        float minDist = Mathf.Infinity;
+        Vector3 currentPos = transform.position;
+        foreach (Transform t in zookeepers)
+        {
+            float dist = Vector3.Distance(t.position, currentPos);
+            if (dist < minDist)
+            {
+                tMin = t;
+                minDist = dist;
+            }
+        }
+        return tMin;
     }
 }

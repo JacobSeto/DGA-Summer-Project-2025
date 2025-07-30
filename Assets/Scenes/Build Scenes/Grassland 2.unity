@@ -493,6 +493,10 @@ PrefabInstance:
       propertyPath: audioManager
       value: 
       objectReference: {fileID: 678061433}
+    - target: {fileID: -6027955848104475147, guid: 33ab23f5c1400c74bae73e2161dc02d2, type: 3}
+      propertyPath: startingStamina
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3839974316450237729, guid: 33ab23f5c1400c74bae73e2161dc02d2, type: 3}
       propertyPath: m_Name
       value: Player
