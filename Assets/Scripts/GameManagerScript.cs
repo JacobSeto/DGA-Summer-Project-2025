@@ -31,7 +31,8 @@ public class GameManagerScript : MonoBehaviour
     private int originalStamina = 0;
     private String finalTime;
     private String sceneName;
-    private String fastestTime;
+    private float fastestTime;
+    private bool tutorial;
 
     public bool isPopupOpen => uiPopupScreen.activeSelf;
 
@@ -112,17 +113,25 @@ public class GameManagerScript : MonoBehaviour
     {
         win = true;
         Pause();
-        finalTime = timerObject.GetComponent<Timer>().GetFinalTime();
-        winText.GetComponent<TMP_Text>().SetText("You win! Time: " +
-            finalTime);
-        sceneName = SceneManager.GetActiveScene().name;
-        if (PlayerPrefs.GetString(sceneName) == "")
+        if (!tutorial)
         {
-            PlayerPrefs.SetString(sceneName, finalTime);
+            finalTime = timerObject.GetComponent<Timer>().GetFinalTime();
+            sceneName = SceneManager.GetActiveScene().name;
+            fastestTime = timerObject.GetComponent<Timer>().GetTimeFloat();
+            if (PlayerPrefs.GetFloat(sceneName) != 0f)
+            {
+                if (PlayerPrefs.GetFloat(sceneName) < fastestTime)
+                {
+                    fastestTime = PlayerPrefs.GetFloat(sceneName);
+                }
+            }
+            PlayerPrefs.SetFloat(sceneName, fastestTime);
+            winText.GetComponent<TMP_Text>().SetText("You win! Time: " +
+                finalTime);
         }
         else
         {
-          //  if (PlayerPrefs.GetString(sceneName).)
+            winText.GetComponent<TMP_Text>().SetText("You win!");
         }
         menuNavigation.ChangeActiveScreen(winScreen);
         //pull up menu
@@ -199,6 +208,11 @@ public class GameManagerScript : MonoBehaviour
     public GameObject getGameScreen()
     {
         return gameMenu;
+    }
+
+    public void Tutorial()
+    {
+        tutorial = true;
     }
     
     public void UpdateStaminaBar(int stamina)

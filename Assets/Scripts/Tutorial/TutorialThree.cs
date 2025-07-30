@@ -12,6 +12,7 @@ public class TutorialThree : MonoBehaviour
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         player.startingStamina = 3;
         background = gameObject.transform.parent.gameObject;
+        GameManagerScript.Instance.Tutorial();
     }
 
     void Update()
