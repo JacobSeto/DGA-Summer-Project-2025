@@ -38,8 +38,6 @@ public class CameraController : MonoBehaviour
     //
     [SerializeField] private PlayerController player;
     [SerializeField] private LayerMask wallLayer;
-    // Bounce Check
-    private int bounces;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -47,7 +45,6 @@ public class CameraController : MonoBehaviour
         //Starting main camera Size
         levelView = _camera.transform.position;
         levelSize = _camera.orthographicSize;
-        bounces = 0;
         currentSize = levelSize;
         currentPosition = levelView;
         penPostition = pen[activePenn].transform.position;
@@ -146,8 +143,6 @@ public class CameraController : MonoBehaviour
     {
         Vector3 boundedPosition = curPosition;
         int i = 0;
-        Vector2 pl = new Vector2(playerLoc.position.x, playerLoc.position.y);
-        float sc = 1;
         /*if (Physics2D.Linecast(pl.,pl +   new Vector2(0, sc) , LayerMask.NameToLayer("Wall"),-100,100) && Physics2D.Linecast(pl, pl + new Vector2(0, -sc), LayerMask.NameToLayer("Wall"), -100, 100)) 
         { 
             boundedPosition = playerLoc.position;
