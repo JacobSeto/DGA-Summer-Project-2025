@@ -97,6 +97,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] ParticleSystem[] particles;
 
+    public string currentState;
+
     private bool wallBounce;
 
     // Start is called before first frame is script is active
@@ -116,7 +118,7 @@ public class PlayerController : MonoBehaviour
         {
             throw new System.Exception("Stamina is 0");
         }
-
+        currentState = "Idle";
         GameManagerScript.Instance.UpdateStaminaBar(stamina);
     }
 
@@ -246,22 +248,61 @@ public class PlayerController : MonoBehaviour
             if (playerRb.linearVelocity.magnitude > maxLaunchSpeed)
             {
                 playerRb.linearVelocity = Vector2.ClampMagnitude(playerRb.linearVelocity, maxLaunchSpeed);
-                spriteRenderer.sprite = postLaunchSprite;
+                //spriteRenderer.sprite = postLaunchSprite;
+                PostLaunchUpdate(playerRb.linearVelocity.x, playerRb.linearVelocity.y);
             }
             else if (playerRb.linearVelocity.magnitude > 0.2 * maxLaunchSpeed)
             {
-                spriteRenderer.sprite = postLaunchSprite;
+                //spriteRenderer.sprite = postLaunchSprite;
+                PostLaunchUpdate(playerRb.linearVelocity.x, playerRb.linearVelocity.y);
             }
             else
             {
                 // launch force too low, enforce minimum launch speed
                 playerRb.linearVelocity = new Vector2(xChange + maxLaunchSpeed * 0.2f, yChange + maxLaunchSpeed * 0.2f);
-                spriteRenderer.sprite = postLaunchSprite;
+                //spriteRenderer.sprite = postLaunchSprite;
+                PostLaunchUpdate(playerRb.linearVelocity.x, playerRb.linearVelocity.y);
             }
             DecrementStamina();
             animator.SetBool("Launch", true);
             launched = true;
         }
+    }
+
+    public void PostLaunchUpdate(float velocityX, float velocityY)
+    {
+        if (Mathf.Abs(velocityX) >= Mathf.Abs(velocityY))
+        {
+            //velocityX > 0.1f ? animator.SetBool("Right", true) : animator.SetBool("Left", true);
+            if (velocityX > 0.1f)
+            {
+                UpdateAnimation(currentState, "Right");
+            }
+            else if (velocityX < -0.1f)
+            {
+                UpdateAnimation(currentState, "Left");
+            }
+        }
+        else if (Mathf.Abs(velocityY) > Mathf.Abs(velocityX))
+        {
+            //velocityY > 0.1f ? animator.SetBool("Back", true) : animator.SetBool("Front", true);
+            if (velocityY > 0.1f)
+            {
+                UpdateAnimation(currentState, "Back");
+            }
+            else if (velocityY < -0.1f)
+            {
+                UpdateAnimation(currentState, "Front");
+            }
+        }
+    }
+
+
+    public void UpdateAnimation(string oldState, string newState)
+    {
+        animator.SetBool(oldState, false);
+        animator.SetBool(newState, true);
+        currentState = newState;
     }
 
     private void SlowMotion()
@@ -318,6 +359,7 @@ public class PlayerController : MonoBehaviour
                 }
                 playerRb.linearVelocity = reflectedVector;
             }
+            PostLaunchUpdate(playerRb.linearVelocity.x, playerRb.linearVelocity.y);
         }
 
         if ((elephantLayer.value & (1 << collision.gameObject.layer)) > 0)
@@ -336,6 +378,7 @@ public class PlayerController : MonoBehaviour
                     }
                     playerRb.linearVelocity = reflectedVector * 8f;
             }
+            PostLaunchUpdate(playerRb.linearVelocity.x, playerRb.linearVelocity.y);
         }
         
 
