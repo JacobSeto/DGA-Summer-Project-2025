@@ -5,6 +5,12 @@ using UnityEngine.SceneManagement;
 public class MenuNavigation : MonoBehaviour
 {
     [SerializeField] GameObject activeScreen;
+    public static MenuNavigation Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     /// <summary>
     /// Disables the active screen and sets a new active screen
