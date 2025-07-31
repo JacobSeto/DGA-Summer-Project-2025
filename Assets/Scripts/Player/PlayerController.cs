@@ -232,6 +232,7 @@ public class PlayerController : MonoBehaviour
             {
                 SlowMotion();
             }
+            AudioManager.Instance.PlayPull();
             stretching = true;
             cancelled = false;
         }
@@ -250,11 +251,13 @@ public class PlayerController : MonoBehaviour
             cancelled = true;
             EndSlowMotion();
             stretching = false;
+            AudioManager.Instance.StopPull();
         }
         if (Input.GetMouseButtonUp(0))
         {
             if (!cancelled)
             {
+                AudioManager.Instance.StopPull();
                 EndSlowMotion();
                 stretching = false;
                 AudioManager.Instance.PlayRelease();
