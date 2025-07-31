@@ -8,18 +8,12 @@ public class WaterTrigger : MonoBehaviour
     private float defaultDampeningValue;
     private GameObject waterParticlesObj;
     private GameObject grassParticlesObj;
-    private ParticleSystem waterParticles;
-    private ParticleSystem grassParticles;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerBody = GameManagerScript.Instance.player.GetComponent<Rigidbody2D>();
         defaultDampeningValue = playerBody.linearDamping;
-        waterParticlesObj = GameManagerScript.Instance.player.transform.Find("WaterParticlesSystem").gameObject;
-        grassParticlesObj = GameManagerScript.Instance.player.transform.Find("GrassParticlesSystem").gameObject;
-        waterParticles = waterParticlesObj.GetComponent<ParticleSystem>();
-        grassParticles = grassParticlesObj.GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -34,8 +28,7 @@ public class WaterTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.attachedRigidbody.linearDamping = waterDampeningValue;
-            waterParticles.Play();
-            grassParticles.Stop();
+            GameManagerScript.Instance.player.SetParticles(PlayerController.ParticleTypes.Water, true);
         }
     }
  
@@ -44,8 +37,7 @@ public class WaterTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.attachedRigidbody.linearDamping = defaultDampeningValue; // Note: Janky if immediately entering a special tile upon exiting water 
-            waterParticles.Stop();
-            grassParticles.Play();
+            GameManagerScript.Instance.player.SetParticles(PlayerController.ParticleTypes.Water, false);
         }
     
     }
