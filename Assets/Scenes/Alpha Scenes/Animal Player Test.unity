@@ -1038,6 +1038,10 @@ PrefabInstance:
       propertyPath: initialSprite
       value: 
       objectReference: {fileID: 2648501501076065017, guid: 8176ac15cd80687499653c0acf2e5e83, type: 3}
+    - target: {fileID: 1215696711643872257, guid: 33ab23f5c1400c74bae73e2161dc02d2, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 2210973940943747788, guid: 33ab23f5c1400c74bae73e2161dc02d2, type: 3}
       propertyPath: m_Layer
       value: 0
