@@ -87,7 +87,15 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] Animator animator;
 
-    [SerializeField] ParticleSystem particleSystem;
+    public enum ParticleTypes
+    {
+        Grass = 0,
+        Water,
+        Mud,
+        Ice
+    }
+
+    [SerializeField] ParticleSystem[] particles;
 
     private bool wallBounce;
 
@@ -527,5 +535,22 @@ public class PlayerController : MonoBehaviour
     {
         if (stamina < maxStamina) stamina++;
         GameManagerScript.Instance.UpdateStaminaBar(stamina);
+    }
+    /// <summary>
+    /// Given a particle type, play or stop playing that particle system
+    /// </summary>
+    /// <param name="particleType">The particle type</param>
+    /// <param name="playParticle">true plays particle, false stops particles</param>
+    public void SetParticles(ParticleTypes particleType, bool playParticle)
+    {
+
+        if (playParticle)
+        {
+            particles[(int)particleType].Play();
+        }
+        else
+        {
+            particles[(int)particleType].Stop();
+        }
     }
 }

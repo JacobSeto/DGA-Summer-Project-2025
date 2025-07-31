@@ -8,18 +8,12 @@ public class IceTrigger : MonoBehaviour
     private float defaultDampeningValue;
     private GameObject iceParticlesObj;
     private GameObject grassParticlesObj;
-    private ParticleSystem iceParticles;
-    private ParticleSystem grassParticles;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerBody = GameManagerScript.Instance.player.GetComponent<Rigidbody2D>();
         defaultDampeningValue = playerBody.linearDamping;
-        iceParticlesObj = GameManagerScript.Instance.player.transform.Find("IceParticles").gameObject;
-        grassParticlesObj = GameManagerScript.Instance.player.transform.Find("GrassParticles").gameObject;
-        iceParticles = iceParticlesObj.GetComponent<ParticleSystem>();
-        grassParticles = grassParticlesObj.GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -28,14 +22,13 @@ public class IceTrigger : MonoBehaviour
 
     }
 
-    void OnTriggerStay2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     { // Possibly check if player is the one colliding?
         // other.attachedRigidbody.AddForce(-0.75f * other.attachedRigidbody.linearVelocity);
         if (other.CompareTag("Player"))
         {
             other.attachedRigidbody.linearDamping = iceDampeningValue;
-            iceParticles.Play();
-            grassParticles.Stop();
+            GameManagerScript.Instance.player.SetParticles(PlayerController.ParticleTypes.Ice, true);
         }
 
     }
@@ -45,8 +38,7 @@ public class IceTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.attachedRigidbody.linearDamping = defaultDampeningValue;
-            iceParticles.Stop();
-            grassParticles.Play();
+            GameManagerScript.Instance.player.SetParticles(PlayerController.ParticleTypes.Ice, false);
         }
 
     }
