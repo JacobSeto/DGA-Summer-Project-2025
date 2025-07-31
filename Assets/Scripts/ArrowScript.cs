@@ -15,6 +15,10 @@ public class ArrowScript : MonoBehaviour
 
     private float arrowDragDistance = 40f;
 
+
+    private float[] lastArrowFill;
+    private float lastArrowCount = 0;
+    //private bool maxPlayed = false;
     private LayerMask bounceLayers;
 
     [Header("Bounce Trajectory")]
@@ -27,7 +31,7 @@ public class ArrowScript : MonoBehaviour
     void Awake()
     {
         arrowTransform = this.transform;
-
+        lastArrowFill = new float[(int)maxArrows];
         playerController = GetComponentInParent<PlayerController>();
         SetLineRenderer();
     }
@@ -112,7 +116,8 @@ public class ArrowScript : MonoBehaviour
 
         float drag = Vector3.Distance(originalMousePos, playerMousePos);
         int arrowCount = (int)Mathf.Clamp(Mathf.FloorToInt(drag / 30f), 1f, maxArrows);
-
+        
+        
         Vector3 direction = (playerMousePos - originalMousePos).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
@@ -130,6 +135,7 @@ public class ArrowScript : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(drawOrigin, -direction, rayDistance, bounceLayers);
         float maxDist = hit.collider != null ? hit.distance : float.MaxValue;
 
+       
         bool clamped = false;
         for (int i = 0; i < arrowCount; i++)
         {
@@ -143,7 +149,17 @@ public class ArrowScript : MonoBehaviour
                 arrows[i].rotation = Quaternion.Euler(0, 0, angle);
                 float totalFillProgress = drag / arrowDragDistance;
                 float arrowFillAmount = Mathf.Clamp01(totalFillProgress - i);
-
+                
+                if (lastArrowFill[i] != 1 && arrowFillAmount == 1)
+                {
+                    AudioManager.Instance.PlayFillArrow();
+                }
+                else if ((lastArrowFill[i] > 0 && arrowFillAmount <= 0) || lastArrowCount > arrowCount)
+                {
+                    AudioManager.Instance.PlayFillArrow();
+                    lastArrowCount = arrowCount;
+                }
+                lastArrowFill[i] = arrowFillAmount;
                 arrows[i].GetComponent<ArrowUIScript>().SetFillAmount(arrowFillAmount);
             }
             else
@@ -162,9 +178,13 @@ public class ArrowScript : MonoBehaviour
             UpdateBounceTrajectory(Vector3.zero, Vector3.zero, false);
         }
 
+        lastArrowCount = arrowCount;
+
         for (int i = arrowCount; i < arrows.Length; i++)
         {
             arrows[i].gameObject.SetActive(false);
         }
+
+        
     }
 }
