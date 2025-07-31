@@ -60,10 +60,19 @@ public class GameManagerScript : MonoBehaviour
     }
 
     private GameObject[] zooKeepers;
+    private Transform[] zooKeeperTransforms;
 
     void Start()
     {
         zooKeepers = GameObject.FindGameObjectsWithTag("Zookeeper");
+        zooKeeperTransforms = new Transform[zooKeepers.Length];
+        for (int i = 0; i < zooKeepers.Length; i++)
+        {
+            if (zooKeepers[i] != null)
+            {
+                zooKeeperTransforms[i] = zooKeepers[i].transform;
+            }
+        }
         zookeeperCount = zooKeepers.Length;
         originalCount = zooKeepers.Length;
         OriginalPos = player.transform.position;
@@ -199,10 +208,24 @@ public class GameManagerScript : MonoBehaviour
     public void decrementZookeeper()
     {
         zookeeperCount -= 1;
-        if (zookeeperCount == 0)
+        zooKeepers = GameObject.FindGameObjectsWithTag("Zookeeper");
+        zooKeeperTransforms = new Transform[zooKeepers.Length];
+        for (int i = 0; i < zooKeepers.Length; i++)
+        {
+            if (zooKeepers[i] != null)
+            {
+                zooKeeperTransforms[i] = zooKeepers[i].transform;
+            }
+        }
+            if (zookeeperCount == 0)
         {
             WinGame();
         }
+    }
+
+    public Transform[] GetZookeeperList()
+    {
+        return zooKeeperTransforms;
     }
 
     public GameObject getGameScreen()
