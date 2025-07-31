@@ -165,10 +165,10 @@ public class PlayerController : MonoBehaviour
             }
             currentGrace = gracePeriod;
         }
-        else if (launched && !stretching)
+        else if (launched)
         {
             currentGrace -= Time.deltaTime;
-            Debug.Log(currentGrace.ToString());
+            //Debug.Log(currentGrace.ToString());
             if (!tutorialTwo && currentGrace <= 0) {
                 GameManagerScript.Instance.LoseGame();
                 playerRb.linearVelocity = Vector2.zero;
@@ -196,7 +196,7 @@ public class PlayerController : MonoBehaviour
             aboveWall = false;
         }
 
-        Debug.Log("Current speed: " + currentSpeed);
+        //Debug.Log("Current speed: " + currentSpeed);
     }
 
     IEnumerator MonkeyThrow()
@@ -232,6 +232,7 @@ public class PlayerController : MonoBehaviour
             {
                 SlowMotion();
             }
+            AudioManager.Instance.PlayPull();
             stretching = true;
             cancelled = false;
         }
@@ -243,24 +244,26 @@ public class PlayerController : MonoBehaviour
 
             float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
             float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
-            Debug.Log("Expected launch angle: " + Mathf.Atan2(yChange, xChange));
+            //Debug.Log("Expected launch angle: " + Mathf.Atan2(yChange, xChange));
         }
         if (Input.GetMouseButton(1))
         {
             cancelled = true;
             EndSlowMotion();
             stretching = false;
+            AudioManager.Instance.StopPull();
         }
         if (Input.GetMouseButtonUp(0))
         {
             if (!cancelled)
             {
+                AudioManager.Instance.StopPull();
                 EndSlowMotion();
                 stretching = false;
                 AudioManager.Instance.PlayRelease();
                 float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
                 float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
-                Debug.Log(Mathf.Atan2(yChange, xChange));
+                //Debug.Log(Mathf.Atan2(yChange, xChange));
                 playerRb.linearVelocity = new Vector2(xChange, yChange);
                 if (playerRb.linearVelocity.magnitude > maxLaunchSpeed)
                 {
@@ -278,7 +281,7 @@ public class PlayerController : MonoBehaviour
 
                     Vector2 final = playerRb.linearVelocity.normalized;
                     final = final * mag;
-                    Debug.Log("Min launch angle: " + Mathf.Atan2(final.y, final.x));
+                    //Debug.Log("Min launch angle: " + Mathf.Atan2(final.y, final.x));
                     playerRb.linearVelocity = final;
                     spriteRenderer.sprite = postLaunchSprite;
                 }
@@ -330,19 +333,30 @@ public class PlayerController : MonoBehaviour
         if ((bounceLayers.value & (1 << collision.gameObject.layer)) > 0)
         {
             ray = Physics2D.Raycast(transform.position, direction, 4f, bounceLayers.value);
+            Vector2 contactVector = new Vector2(transform.position.x - contact.point.x, transform.position.y - contact.point.y);
             if (ray)
             {
-                reflectedVector = UnityEngine.Vector2.Reflect(direction * currentSpeed, ray.normal);
+                reflectedVector = UnityEngine.Vector2.Reflect(direction * currentSpeed, contact.normal);
 
-                if (bounceImpulseActive)
-                {
-                    // give impulse to player, reset timer
-                    reflectedVector *= bounceForce;
-                    bounceTimer = 0f;
-                    bounceImpulseActive = false;
-                }
                 playerRb.linearVelocity = reflectedVector;
             }
+            else
+            {
+                Debug.Log("fallback logic used");
+                float angleToNormal = Vector2.Angle(direction, contact.normal);
+                Debug.Log("angle: " + angleToNormal);
+                
+                playerRb.linearVelocity = contactVector.normalized * currentSpeed;
+            }
+            
+            if (bounceImpulseActive)
+            {
+                // give impulse to player, reset timer
+                playerRb.linearVelocity *= bounceForce;
+                bounceTimer = 0f;
+                bounceImpulseActive = false;
+            }
+
         }
 
         if ((elephantLayer.value & (1 << collision.gameObject.layer)) > 0)
@@ -382,7 +396,7 @@ public class PlayerController : MonoBehaviour
         Vector2 normal = contact.normal;
         if (Mathf.Abs(normal.y) > 0.5)
         {
-            flip = flip * -1;
+            flip *= -1;
         }
 
         AudioManager.Instance.PlayBounce();
@@ -553,5 +567,22 @@ public class PlayerController : MonoBehaviour
     {
         if (stamina < maxStamina) stamina++;
         GameManagerScript.Instance.UpdateStaminaBar(stamina);
+    }
+
+    public Transform GetClosestZookeeper(Transform[] zookeepers)
+    {
+        Transform tMin = null;
+        float minDist = Mathf.Infinity;
+        Vector3 currentPos = transform.position;
+        foreach (Transform t in zookeepers)
+        {
+            float dist = Vector3.Distance(t.position, currentPos);
+            if (dist < minDist)
+            {
+                tMin = t;
+                minDist = dist;
+            }
+        }
+        return tMin;
     }
 }
