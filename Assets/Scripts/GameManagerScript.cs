@@ -80,16 +80,7 @@ public class GameManagerScript : MonoBehaviour
     {
         if (pause == false)
         {
-            if (player.slowMotion)
-            {
-                timer += Time.deltaTime / player.slowDownAmount;
-            }
-            else
-            {
-                timer += Time.deltaTime;
-            }
-
-
+            timer += Time.unscaledDeltaTime;
         }
         if (Input.GetKeyDown(KeyCode.Escape) && !win && !loss)
         {
