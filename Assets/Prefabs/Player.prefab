@@ -106,7 +106,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -5026,11 +5026,12 @@ MonoBehaviour:
   initialSprite: {fileID: 5117515885611587728, guid: 221f89fea38feeb49a56158b00827c98, type: 3}
   postLaunchSprite: {fileID: 7502086667154341395, guid: 20bfc828519460c488bf4210ae74a7c8, type: 3}
   animator: {fileID: 4199128376377569001}
-  particleSystems:
+  particles:
   - {fileID: 1215696711643872257}
   - {fileID: 4888005402758687406}
   - {fileID: 8398468057656271908}
   - {fileID: 6211754161141434108}
+  currentState: 
 --- !u!50 &-1464496374494826900
 Rigidbody2D:
   serializedVersion: 5
@@ -5394,7 +5395,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -10233,7 +10234,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -15066,7 +15067,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
