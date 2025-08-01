@@ -6,6 +6,9 @@ public class ZookeeperController : MonoBehaviour
     private PlayerController player;
     [SerializeField] Animator animator;
 
+    private bool isFalling = false;
+    private float fallSpeed = 5f;
+
     void Start()
     {
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
@@ -21,12 +24,29 @@ public class ZookeeperController : MonoBehaviour
         {
             animator.SetBool("Highlight", false);
         }
+        if (isFalling)
+        {
+            transform.position += Vector3.down * fallSpeed * Time.deltaTime;
+
+            if (transform.position.y < -10f)
+            {
+                gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            animator.SetBool("Fallen", false);
+
+        }
     }
 
     private void destroyZookeeper()
     {
-        zooKeeper.SetActive(false);
         GameManagerScript.Instance.decrementZookeeper();
+        isFalling = true;
+        animator.SetBool("Fallen", true);
+
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

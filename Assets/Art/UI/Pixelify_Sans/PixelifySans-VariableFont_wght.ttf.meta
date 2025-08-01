@@ -3,14 +3,18 @@ guid: def7ffe9f64d09e46b0897a3bab0d7ef
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
-  fontSize: 16
+  fontSize: 32
   forceTextureCase: -2
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
   fontNames:
   - Pixelify Sans
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 0b0607f2667e98345a8cedccfd2f5ba7, type: 3}
+  - {fileID: 12800000, guid: 9442831b5faf9e847adc5b6dc5bde1ab, type: 3}
+  - {fileID: 12800000, guid: 2c46a3911967f6643841a18a93e8e502, type: 3}
+  - {fileID: 12800000, guid: bd24c0e09c8de2d4080257c214ff9b6c, type: 3}
   customCharacters: 
   fontRenderingMode: 1
   ascentCalculationMode: 1

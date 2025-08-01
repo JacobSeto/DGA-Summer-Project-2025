@@ -18,35 +18,44 @@ EditorBuildSettings:
     path: Assets/Scenes/Build Scenes/Tutorial Scenes/Tutorial - Relaunch.unity
     guid: b4963f1bf278c7748ac9cfd4dd77e94f
   - enabled: 1
-    path: Assets/Scenes/Build Scenes/Grassland 1.unity
-    guid: da070bc78fbef7e46ae897fde9d8f647
+    path: Assets/Scenes/1-1 Grassland.unity
+    guid: 72dd3cc973965fa4e9e9a364dbc4943d
   - enabled: 1
-    path: Assets/Scenes/Build Scenes/Grassland 2.unity
+    path: Assets/Scenes/Build Scenes/1-2 Grassland.unity
     guid: 94b2909bfeb46484eab2052debf1977a
   - enabled: 1
-    path: Assets/Scenes/Build Scenes/Cheetah Level.unity
+    path: Assets/Scenes/Build Scenes/1-3 Grassland.unity
     guid: 0d8f1a7f2dac8c64a8658f3a861139c0
   - enabled: 1
-    path: Assets/Scenes/Build Scenes/Ice Intro.unity
-    guid: 2ef7deb56a3e7234da7f80cc843fef3d
+    path: Assets/Scenes/Build Scenes/1-4 Grassland Final.unity
+    guid: 5f4bdf5f1451feb4ab0c875dd2a6ba86
   - enabled: 1
-    path: Assets/Scenes/Build Scenes/Ice Intro 2.unity
+    path: Assets/Scenes/Build Scenes/2-1 Polar.unity
     guid: 0f0ca8543c295f3469514d3257213e45
   - enabled: 1
-    path: Assets/Scenes/Build Scenes/Ice Level.unity
-    guid: 459eaf90302a48b489a7f7008fd6e4bd
+    path: Assets/Scenes/Build Scenes/2-2 Polar.unity
+    guid: 2ef7deb56a3e7234da7f80cc843fef3d
   - enabled: 1
-    path: Assets/Scenes/Build Scenes/Ice-Bug Level.unity
+    path: Assets/Scenes/Build Scenes/2-3 Polar.unity
     guid: 386a5f10a45353b479a9fa831cc27439
   - enabled: 1
-    path: Assets/Scenes/Build Scenes/Tropical 1.unity
+    path: Assets/Scenes/Build Scenes/2-4 Polar.unity
+    guid: 459eaf90302a48b489a7f7008fd6e4bd
+  - enabled: 1
+    path: Assets/Scenes/Build Scenes/3-1 Tropical.unity
     guid: a22009adb17a744499755d81321160d4
   - enabled: 1
-    path: Assets/Scenes/Build Scenes/Tropical 2.unity
-    guid: 6ec6202f1cf9bbf4ca059d1f069286b8
+    path: Assets/Scenes/Build Scenes/3-2 Tropical.unity
+    guid: ea32a7dabe3f74837975c77d9136e84b
   - enabled: 1
-    path: Assets/Scenes/Build Scenes/Jungle Level.unity
+    path: Assets/Scenes/Build Scenes/3-4 Tropical.unity
+    guid: 7c7a175ae85b54cfcb9d8181e01713a8
+  - enabled: 1
+    path: Assets/Scenes/Build Scenes/4-1 Jungle.unity
     guid: 3c13be7010af8a54a8e0685f8be1959e
+  - enabled: 1
+    path: Assets/Scenes/Build Scenes/4-2 Jungle Level (Elephant Intro).unity
+    guid: 4ced76f546ecd0d4d9f0649c4aa27269
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
