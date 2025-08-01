@@ -8,6 +8,13 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource pullAudio;
     [SerializeField] private AudioSource maxPullAudio;
     [SerializeField] private AudioSource fillArrowAudio;
+    [SerializeField] private AudioSource BugAudio;
+    [SerializeField] private AudioSource CheetahAudio;
+    [SerializeField] private AudioSource ElephantAudio;
+    [SerializeField] private AudioSource MonkeyAudio;
+    [SerializeField] private AudioSource ZookeeperAudio;
+
+
     public static AudioManager Instance;
 
     private void Awake() {
@@ -64,4 +71,25 @@ public class AudioManager : MonoBehaviour
         fillArrowAudio.PlayOneShot(fillArrowAudio.clip);
     }
     //topped a bar audio
+
+    public void PlayBug()
+    {
+        BugAudio.PlayOneShot(BugAudio.clip);
+    }
+    public void PlayCheetah()
+    {
+        CheetahAudio.PlayOneShot(CheetahAudio.clip);
+    }
+    public void PlayElephant()
+    {
+        ElephantAudio.PlayOneShot(ElephantAudio.clip);
+    }
+    public void PlayMonkey()
+    {
+        MonkeyAudio.PlayOneShot(MonkeyAudio.clip);
+    }
+    public void PlayZookeeper()
+    {
+        ZookeeperAudio.PlayOneShot(ZookeeperAudio.clip);
+    }
 }

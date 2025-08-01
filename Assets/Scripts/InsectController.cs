@@ -24,7 +24,7 @@ public class InsectController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-        
+                AudioManager.Instance.PlayBug();
                 Destroy(gameObject);
         
         }
