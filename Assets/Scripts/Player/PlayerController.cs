@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 inAirScale = new Vector3(2, 2, 2);
     private Vector3 defaultScale;
     private GameObject arrow;
+    private IEnumerator airTime;
     //float timeLeft;
 
     // acceleration variables 
@@ -180,16 +181,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (isInAir && !thrown)
-        {
-            thrown = true;
-            StartCoroutine(MonkeyThrow());
-        }
-        else if (isInAir && thrown)
-        {
-            thrown = false;
-        }
-
         if (aboveWall && !Physics2D.CircleCast(transform.position, 1f, Vector2.zero, Mathf.Infinity, wallLayer))
         {
             SetWallBounceActive(true);
@@ -197,28 +188,6 @@ public class PlayerController : MonoBehaviour
         }
 
         //Debug.Log("Current speed: " + currentSpeed);
-    }
-
-    IEnumerator MonkeyThrow()
-    {
-        float timer = 0f;
-
-        while (timer < 1)
-        {
-            spriteRenderer.transform.localScale = Vector3.Lerp(defaultScale, inAirScale, timer);
-            timer += Time.deltaTime;
-            yield return null;
-        }
-
-        timer = 0f;
-
-        while (timer < 1)
-        {
-            spriteRenderer.transform.localScale = Vector3.Lerp(inAirScale, defaultScale, timer);
-            timer += Time.deltaTime;
-            yield return null;
-        }
-        spriteRenderer.transform.localScale = new Vector3(1, 1, 1);
     }
 
     private void HandleLaunch()
@@ -288,6 +257,7 @@ public class PlayerController : MonoBehaviour
                 DecrementStamina();
                 animator.SetBool("Launch", true);
                 launched = true;
+                GameManagerScript.Instance.inGame = true;
             }
             
         }
@@ -407,8 +377,12 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void goInAir()
     {
-        SetWallBounceActive(false);
-        StartCoroutine(AirTime());
+        if (isInAir)
+        { 
+            StopCoroutine(airTime);
+        }
+        airTime = AirTime();
+        StartCoroutine(airTime);
     }
 
     /// <summary>
@@ -416,10 +390,28 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     IEnumerator AirTime()
     {
-        isInAir = true;
+        float timer = 0f;
+
+        spriteRenderer.transform.localScale = new Vector3(1, 1, 1);
         Physics2D.IgnoreLayerCollision(gameObject.layer, 7, true);
-        yield return new WaitForSeconds(2);
-        isInAir = false;
+        SetWallBounceActive(false);
+        isInAir = true;
+        while (timer < 1)
+        {
+            spriteRenderer.transform.localScale = Vector3.Lerp(defaultScale, inAirScale, timer);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        timer = 0f;
+
+        while (timer < 1)
+        {
+            spriteRenderer.transform.localScale = Vector3.Lerp(inAirScale, defaultScale, timer);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        spriteRenderer.transform.localScale = new Vector3(1, 1, 1);
         Physics2D.IgnoreLayerCollision(gameObject.layer, 7, false);
         if (Physics2D.CircleCast(transform.position, 1f, Vector2.zero, Mathf.Infinity, wallLayer))
         {
@@ -429,6 +421,7 @@ public class PlayerController : MonoBehaviour
         {
             SetWallBounceActive(true);
         }
+        isInAir = false;
     }
 
     /// <summary>
@@ -477,10 +470,6 @@ public class PlayerController : MonoBehaviour
                     }
                     playerRb.linearVelocity = reflectedVector * 8f;
             }
-        }
-        if (collision.gameObject.CompareTag("Monkey"))
-        {
-            goInAir();
         }
     }
 
