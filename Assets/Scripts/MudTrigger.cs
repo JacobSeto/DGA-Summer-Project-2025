@@ -22,13 +22,14 @@ public class MudTrigger : MonoBehaviour
 
     }
 
-    void OnTriggerStay2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     { // Possibly check if player is the one colliding?
         // other.attachedRigidbody.AddForce(-0.75f * other.attachedRigidbody.linearVelocity);
         if (other.CompareTag("Player"))
         {
             other.attachedRigidbody.linearDamping = mudDampeningValue;
             GameManagerScript.Instance.player.SetParticles(PlayerController.ParticleTypes.Mud, true);
+            GameManagerScript.Instance.player.SetParticles(PlayerController.ParticleTypes.Grass, false);
         }
 
     }
@@ -39,6 +40,7 @@ public class MudTrigger : MonoBehaviour
         {
             other.attachedRigidbody.linearDamping = defaultDampeningValue;
             GameManagerScript.Instance.player.SetParticles(PlayerController.ParticleTypes.Mud, false);
+            GameManagerScript.Instance.player.SetParticles(PlayerController.ParticleTypes.Grass, true);
         }
 
     }

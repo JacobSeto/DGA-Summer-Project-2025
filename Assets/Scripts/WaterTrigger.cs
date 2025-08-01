@@ -22,12 +22,13 @@ public class WaterTrigger : MonoBehaviour
        
     }
 
-    void OnTriggerStay2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     { // Possibly check if player is the one colliding?
         // other.attachedRigidbody.AddForce(-0.75f * other.attachedRigidbody.linearVelocity);
         if (other.CompareTag("Player"))
         {
             other.attachedRigidbody.linearDamping = waterDampeningValue;
+            GameManagerScript.Instance.player.SetParticles(PlayerController.ParticleTypes.Grass, false);
             GameManagerScript.Instance.player.SetParticles(PlayerController.ParticleTypes.Water, true);
         }
     }
@@ -38,6 +39,7 @@ public class WaterTrigger : MonoBehaviour
         {
             other.attachedRigidbody.linearDamping = defaultDampeningValue; // Note: Janky if immediately entering a special tile upon exiting water 
             GameManagerScript.Instance.player.SetParticles(PlayerController.ParticleTypes.Water, false);
+            GameManagerScript.Instance.player.SetParticles(PlayerController.ParticleTypes.Grass, true);
         }
     
     }

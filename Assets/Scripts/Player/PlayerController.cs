@@ -220,6 +220,7 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
         spriteRenderer.transform.localScale = new Vector3(1, 1, 1);
+        //SetParticles(ParticleTypes.Grass, true);
     }
 
     private void HandleLaunch()
@@ -422,6 +423,7 @@ public class PlayerController : MonoBehaviour
     public void goInAir()
     {
         SetWallBounceActive(false);
+        SetParticles(ParticleTypes.Grass, false);
         StartCoroutine(AirTime());
     }
 

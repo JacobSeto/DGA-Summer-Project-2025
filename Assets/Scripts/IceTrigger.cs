@@ -29,6 +29,7 @@ public class IceTrigger : MonoBehaviour
         {
             other.attachedRigidbody.linearDamping = iceDampeningValue;
             GameManagerScript.Instance.player.SetParticles(PlayerController.ParticleTypes.Ice, true);
+            GameManagerScript.Instance.player.SetParticles(PlayerController.ParticleTypes.Grass, false);
         }
 
     }
@@ -39,6 +40,7 @@ public class IceTrigger : MonoBehaviour
         {
             other.attachedRigidbody.linearDamping = defaultDampeningValue;
             GameManagerScript.Instance.player.SetParticles(PlayerController.ParticleTypes.Ice, false);
+            GameManagerScript.Instance.player.SetParticles(PlayerController.ParticleTypes.Grass, true);
         }
 
     }
