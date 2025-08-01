@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: 17e598f5879f84be69557756b2bb034c
+guid: c8a0bb67d884242e8b0591d467b0afb9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6432487176237874188
-    second: Monkey Transition_0
-  - first:
-      213: 1132218750931407088
-    second: Monkey Transition_1
-  - first:
-      213: -2255544588691377927
-    second: Monkey Transition_2
-  - first:
-      213: -3651119660357205914
-    second: Monkey Transition_3
+      213: 541262736732243572
+    second: Zookeer Icon 2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Monkey Transition_0
+      name: Zookeer Icon 2_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 0
-        width: 35
-        height: 49
+        x: 0
+        y: 1
+        width: 32
+        height: 31
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,74 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4f306167ef63bb6a0800000000000000
-      internalID: -6432487176237874188
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Monkey Transition_1
-      rect:
-        serializedVersion: 2
-        x: 58
-        y: 0
-        width: 38
-        height: 47
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0f09d4984f276bf00800000000000000
-      internalID: 1132218750931407088
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Monkey Transition_2
-      rect:
-        serializedVersion: 2
-        x: 105
-        y: 0
-        width: 40
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9f0feff9522b2b0e0800000000000000
-      internalID: -2255544588691377927
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Monkey Transition_3
-      rect:
-        serializedVersion: 2
-        x: 149
-        y: 0
-        width: 46
-        height: 42
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 660c6fb630e945dc0800000000000000
-      internalID: -3651119660357205914
+      spriteID: 476c4116793f28700800000000000000
+      internalID: 541262736732243572
       vertices: []
       indices: 
       edges: []
@@ -210,10 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Monkey Transition_0: -6432487176237874188
-      Monkey Transition_1: 1132218750931407088
-      Monkey Transition_2: -2255544588691377927
-      Monkey Transition_3: -3651119660357205914
+      Zookeer Icon 2_0: 541262736732243572
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

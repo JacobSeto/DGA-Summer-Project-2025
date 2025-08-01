@@ -1,22 +1,19 @@
 fileFormatVersion: 2
-guid: e948f95aa495743aba8cc67431c17b55
+guid: 0155517814a02446e9790419a1bfcf8f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3561982192864413391
-    second: Elephant Bounce_0
+      213: -4073035383813389535
+    second: Elephant Use_0
   - first:
-      213: -6363063120076933499
-    second: Elephant Bounce_1
+      213: 7685194594175096221
+    second: Elephant Use_1
   - first:
-      213: -398652609251439581
-    second: Elephant Bounce_2
+      213: 7096143868728665268
+    second: Elephant Use_2
   - first:
-      213: 4452229324433703462
-    second: Elephant Bounce_3
-  - first:
-      213: 6411231337548846956
-    second: Elephant Bounce_4
+      213: 3370310655544454541
+    second: Elephant Use_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -112,32 +109,10 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Elephant Bounce_0
+      name: Elephant Use_0
       rect:
         serializedVersion: 2
-        x: 8
-        y: 6
-        width: 64
-        height: 50
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: fc643f5aee3be6130800000000000000
-      internalID: 3561982192864413391
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Elephant Bounce_1
-      rect:
-        serializedVersion: 2
-        x: 82
+        x: 10
         y: 6
         width: 61
         height: 51
@@ -149,17 +124,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 586fc642ecbd1b7a0800000000000000
-      internalID: -6363063120076933499
+      spriteID: 123c436f5eba977c0800000000000000
+      internalID: -4073035383813389535
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Elephant Bounce_2
+      name: Elephant Use_1
       rect:
         serializedVersion: 2
-        x: 145
+        x: 73
         y: 5
         width: 71
         height: 51
@@ -171,17 +146,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 32c09c46093b77af0800000000000000
-      internalID: -398652609251439581
+      spriteID: d951f87f3cb47aa60800000000000000
+      internalID: 7685194594175096221
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Elephant Bounce_3
+      name: Elephant Use_2
       rect:
         serializedVersion: 2
-        x: 223
+        x: 151
         y: 2
         width: 65
         height: 58
@@ -193,17 +168,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 622c27d4bfe79cd30800000000000000
-      internalID: 4452229324433703462
+      spriteID: 4b463aa60419a7260800000000000000
+      internalID: 7096143868728665268
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Elephant Bounce_4
+      name: Elephant Use_3
       rect:
         serializedVersion: 2
-        x: 296
+        x: 224
         y: 6
         width: 64
         height: 50
@@ -215,8 +190,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c67937feee449f850800000000000000
-      internalID: 6411231337548846956
+      spriteID: d8de07e3fafb5ce20800000000000000
+      internalID: 3370310655544454541
       vertices: []
       indices: 
       edges: []
@@ -235,11 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Elephant Bounce_0: 3561982192864413391
-      Elephant Bounce_1: -6363063120076933499
-      Elephant Bounce_2: -398652609251439581
-      Elephant Bounce_3: 4452229324433703462
-      Elephant Bounce_4: 6411231337548846956
+      Elephant Use_0: -4073035383813389535
+      Elephant Use_1: 7685194594175096221
+      Elephant Use_2: 7096143868728665268
+      Elephant Use_3: 3370310655544454541
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
