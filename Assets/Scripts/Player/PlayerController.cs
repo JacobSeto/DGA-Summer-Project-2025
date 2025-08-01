@@ -106,7 +106,6 @@ public class PlayerController : MonoBehaviour
         bounceLayers = wallLayer.value | boundaryLayer.value;
         defaultScale = spriteRenderer.transform.localScale;
         stamina = startingStamina;
-        airTime = AirTime();
         if(stamina == 0)
         {
             throw new System.Exception("Stamina is 0");
@@ -380,8 +379,8 @@ public class PlayerController : MonoBehaviour
         if (isInAir)
         { 
             StopCoroutine(airTime);
-            airTime = AirTime();
         }
+        airTime = AirTime();
         StartCoroutine(airTime);
     }
 
