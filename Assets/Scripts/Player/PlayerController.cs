@@ -381,7 +381,6 @@ public class PlayerController : MonoBehaviour
         { 
             StopCoroutine(airTime);
             airTime = AirTime();
-            Debug.Log("stop");
         }
         StartCoroutine(airTime);
     }
@@ -423,7 +422,6 @@ public class PlayerController : MonoBehaviour
             SetWallBounceActive(true);
         }
         isInAir = false;
-        Debug.Log("end");
     }
 
     /// <summary>
