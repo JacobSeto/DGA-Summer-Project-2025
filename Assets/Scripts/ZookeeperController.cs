@@ -53,6 +53,7 @@ public class ZookeeperController : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            AudioManager.Instance.PlayZookeeper();
             destroyZookeeper();
         }
     }

@@ -34,6 +34,7 @@ public class MonkeyController : MonoBehaviour
 
         if (collision.CompareTag("Player") && canThrow)
         {
+            AudioManager.Instance.PlayMonkey();
             canThrow = false;
             timer = coolDownTime;
         }

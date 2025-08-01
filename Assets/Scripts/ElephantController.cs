@@ -32,6 +32,7 @@ public class ElephantController : MonoBehaviour
         Debug.Log("collision");
         if (collision.gameObject.CompareTag("Player"))
         {
+            AudioManager.Instance.PlayElephant();
         
             if (animator != null)
             {
