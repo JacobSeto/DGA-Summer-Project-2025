@@ -29,13 +29,28 @@ public class MonkeyController : MonoBehaviour
         animator.SetBool("usable", canThrow);
     }
 
+    public bool inCooldown()
+    {
+        return !canThrow;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
         if (collision.CompareTag("Player") && canThrow)
         {
+            AudioManager.Instance.PlayMonkey();
+            
+            if(gameObject.transform.position.x > collision.transform.position.x){
+                animator.SetBool("throwRight", true);
+                Debug.Log("true");
+            }else {
+                animator.SetBool("throwRight", false);
+                Debug.Log("false");
+            }
             canThrow = false;
             timer = coolDownTime;
+            collision.gameObject.GetComponent<PlayerController>().goInAir();
         }
     }
 }

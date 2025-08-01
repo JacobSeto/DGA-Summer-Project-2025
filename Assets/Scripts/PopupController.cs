@@ -7,6 +7,7 @@ public class PopupController : MonoBehaviour
     [SerializeField] TMP_Text dialogueText;
     [SerializeField] Button nextButton;
 
+    [SerializeField] Button doneButton;
     [SerializeField] string[] text;
     private PlayerController player;
 
@@ -15,14 +16,16 @@ public class PopupController : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-
         dialogueText.text = text[currentIndex];
         nextButton.onClick.AddListener(NextMessage);
+        doneButton.onClick.AddListener(ClosePopup);
+        doneButton.gameObject.SetActive(false);
+        player.Freeze();
     }
 
     void Update()
     {
-        
+
     }
 
     void NextMessage()
@@ -31,13 +34,19 @@ public class PopupController : MonoBehaviour
 
         if (currentIndex < text.Length)
         {
-            player.Freeze();
+           player.Freeze();
             dialogueText.text = text[currentIndex];
         }
         else
         {
-            player.Unfreeze();
-            gameObject.SetActive(false); 
+            nextButton.gameObject.SetActive(false);
+            doneButton.gameObject.SetActive(true);
         }
+    }
+
+    void ClosePopup()
+    {
+        player.Unfreeze();
+        gameObject.SetActive(false);
     }
 }

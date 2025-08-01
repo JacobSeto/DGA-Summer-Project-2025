@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 /*
  * The Game Manager handles win and loss conditions alongside tracking the time elapsed in each level.
@@ -21,30 +22,42 @@ public class GameManagerScript : MonoBehaviour
     public static GameManagerScript Instance;
     [HideInInspector] public PlayerController player;
     private Vector3 OriginalPos;
-    private bool loss = false;
+    public bool loss { get; private set; } = false;
     private bool win = false;
     private bool pause = false;
     //placeholders for testing
     private int zookeeperCount = 0;
     private int originalCount = 0;
     private int originalStamina = 0;
-    private float timer = 0.0f;
-
-    public bool isPopupOpen => uiPopupScreen.activeSelf;
+    private String finalTime;
+    private String sceneName;
+    private float fastestTime;
+    private bool tutorial;
 
 
     [Header("Game Menu")]
     [SerializeField] MenuNavigation menuNavigation;
 
-    [SerializeField] GameObject uiPopupScreen;
-
     [SerializeField] GameObject gameMenu;
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject winScreen;
+    [SerializeField] GameObject winText;
     [SerializeField] GameObject loseScreen;
     [SerializeField] Image[] staminaBar;
+    [Header("World Settings")]
+    [SerializeField] private MusicType currentWorld;
+    public MusicType CurrentWorld => currentWorld;
 
+    [Header("UI Settings")]
     public Material greyscaleMat;
+
+    [Header("Game Time")]
+    float gameTime = 0;
+    [Tooltip("If the player is actively playing the game")]
+    [HideInInspector] public bool inGame = false;
+    bool gameEnded = false;
+    [SerializeField] TMP_Text timerText;
+
 
     void Awake()
     {
@@ -53,45 +66,43 @@ public class GameManagerScript : MonoBehaviour
     }
 
     private GameObject[] zooKeepers;
+    private Transform[] zooKeeperTransforms;
 
     void Start()
     {
         zooKeepers = GameObject.FindGameObjectsWithTag("Zookeeper");
+        zooKeeperTransforms = new Transform[zooKeepers.Length];
+        for (int i = 0; i < zooKeepers.Length; i++)
+        {
+            if (zooKeepers[i] != null)
+            {
+                zooKeeperTransforms[i] = zooKeepers[i].transform;
+            }
+        }
         zookeeperCount = zooKeepers.Length;
         originalCount = zooKeepers.Length;
         OriginalPos = player.transform.position;
         originalStamina = player.GetStaminaCount();
         Time.timeScale = 1.0f;
+
+        AudioManager.Instance.PlayMusic(currentWorld);
     }
 
     void Update()
     {
-        if (pause == false)
+        if (inGame)
         {
-            if (player.slowMotion)
-            {
-                timer += Time.deltaTime / player.slowDownAmount;
-            }
-            else
-            {
-                timer += Time.deltaTime;
-            }
-
-
+            gameTime += Time.unscaledDeltaTime;
+            timerText.text = TimeSpan.FromSeconds(gameTime).ToString("m\\:ss\\.ff");
         }
-        if (Input.GetKeyDown(KeyCode.Escape) && !win && !loss)
+        if (Input.GetKeyDown(KeyCode.Escape) && !gameEnded)
         {
             Pause();
         }
-        if (Input.GetKeyDown(KeyCode.R) && !win && !loss)
+        if (Input.GetKeyDown(KeyCode.R) && !gameEnded)
         {
             Reset();
         }
-    }
-
-    public void HideGameMenu()
-    {
-        menuNavigation.ChangeActiveScreen(uiPopupScreen);
     }
 
     public void DonePopup()
@@ -104,10 +115,15 @@ public class GameManagerScript : MonoBehaviour
     /// </summary>
     public void WinGame()
     {
-        win = true;
         Pause();
+        sceneName = SceneManager.GetActiveScene().name;
+        if (PlayerPrefs.GetFloat(sceneName, 0) == 0f || gameTime < PlayerPrefs.GetFloat(sceneName))
+        {
+            PlayerPrefs.SetFloat(sceneName, gameTime);
+        }
+        winText.GetComponent<TMP_Text>().SetText("You win!\n Time: " + TimeSpan.FromSeconds(gameTime).ToString("m\\:ss\\.ff"));
         menuNavigation.ChangeActiveScreen(winScreen);
-        //pull up menu
+        gameEnded = true;
     }
 
     /// <summary>
@@ -116,8 +132,10 @@ public class GameManagerScript : MonoBehaviour
     public void LoseGame()
     {
         loss = true;
+        AudioManager.Instance.StopPull();
         Pause();
         menuNavigation.ChangeActiveScreen(loseScreen);
+        gameEnded = true;
     }
 
     /// <summary>
@@ -126,6 +144,8 @@ public class GameManagerScript : MonoBehaviour
     public void Pause()
     {
         pause = !pause;
+        // inGame true when not paused and player has launched
+        inGame = !pause;
         player.enabled = !pause;
         if (pause)
         {
@@ -151,14 +171,6 @@ public class GameManagerScript : MonoBehaviour
     }
 
     /// <summary>
-    /// Returns current timer length
-    /// </summary>
-    public float GetTime()
-    {
-        return timer;
-    }
-
-    /// <summary>
     /// Number of active zookeepers
     /// </summary>
     public int numZookeepers()
@@ -169,20 +181,41 @@ public class GameManagerScript : MonoBehaviour
     /// <summary>
     /// Brings down zookeeper count.
     /// </summary>
-    public void decrementZookeeper()
+    public void decrementZookeeper(GameObject keeper)
     {
         zookeeperCount -= 1;
+        List<GameObject> tempList = new List<GameObject>(zooKeepers);
+        tempList.Remove(keeper);
+        zooKeepers = tempList.ToArray();
+        zooKeeperTransforms = new Transform[zooKeepers.Length];
+        for (int i = 0; i < zooKeepers.Length; i++)
+        {
+            if (zooKeepers[i] != null)
+            {
+                zooKeeperTransforms[i] = zooKeepers[i].transform;
+            }
+        }
         if (zookeeperCount == 0)
         {
             WinGame();
         }
     }
 
+    public Transform[] GetZookeeperList()
+    {
+        return zooKeeperTransforms;
+    }
+
     public GameObject getGameScreen()
     {
         return gameMenu;
     }
-    
+
+    public void Tutorial()
+    {
+        tutorial = true;
+    }
+
     public void UpdateStaminaBar(int stamina)
     {
         for (int i = 0; i < stamina; i++)

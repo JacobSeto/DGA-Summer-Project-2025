@@ -14,9 +14,6 @@ TextureImporter:
   - first:
       213: -3651119660357205914
     second: Monkey Transition_3
-  - first:
-      213: 1347863692529985353
-    second: Monkey Transition_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -199,28 +196,6 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: Monkey Transition_4
-      rect:
-        serializedVersion: 2
-        x: 198
-        y: 0
-        width: 47
-        height: 25
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 94765e613e294b210800000000000000
-      internalID: 1347863692529985353
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
@@ -239,7 +214,6 @@ TextureImporter:
       Monkey Transition_1: 1132218750931407088
       Monkey Transition_2: -2255544588691377927
       Monkey Transition_3: -3651119660357205914
-      Monkey Transition_4: 1347863692529985353
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

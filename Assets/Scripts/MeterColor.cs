@@ -1,52 +1,46 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MeterColor : MonoBehaviour
 {
-    GameObject normal;
-    GameObject current;
-    GameObject red;
-    GameObject yellow;
-    GameObject green;
-    PlayerController player;
+    [SerializeField] Image speedometerImage;
+    [SerializeField] Sprite red;
+    [SerializeField] Sprite yellow;
+    [SerializeField] Sprite green;
+    [SerializeField] Sprite blue;
     [SerializeField] Pivot pivot;
-    void Start()
-    {
-        normal = gameObject.transform.GetChild(0).gameObject;
-        red = gameObject.transform.GetChild(1).gameObject;
-        red.SetActive(false);
-        yellow = gameObject.transform.GetChild(2).gameObject;
-        yellow.SetActive(false);
-        green = gameObject.transform.GetChild(3).gameObject;
-        green.SetActive(false);
-        current = normal;
-        player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-    }
-
+    private float timeLeft = 0.5f;
     void Update()
     {
-        if (player.launched)
+        if (GameManagerScript.Instance.player.launched)
         {
             if (pivot.angle >= 35)
             {
-                //red highlight
-                current.SetActive(false);
-                red.SetActive(true);
-                current = red;
+                if (timeLeft > 0.25f)
+                {
+                    //red
+                    speedometerImage.sprite = red;
+                }
+                else if (timeLeft <= 0f)
+                {
+                    timeLeft = 0.5f;
+                }
+                else {
+                    //blue
+                    speedometerImage.sprite = blue;
+                }
+                timeLeft -= Time.deltaTime;
             }
-        else if (pivot.angle >= -35)
+            else if (pivot.angle >= -35)
             {
                 //yellow
-                current.SetActive(false);
-                yellow.SetActive(true);
-                current = yellow;
+                speedometerImage.sprite = yellow;
             }
-        else
+            else
             {
                 //green
-                current.SetActive(false);
-                green.SetActive(true);
-                current = green;
+                speedometerImage.sprite = green;
             }
         }
     }

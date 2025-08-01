@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
     public float currentSpeed;
     public bool tutorial = false;
     public bool tutorialTwo = false;
+    public bool popUp = false;
     Vector2 reflectedVector;
     RaycastHit2D ray;
     Vector2 direction;
@@ -55,8 +56,8 @@ public class PlayerController : MonoBehaviour
     private bool aboveWall;
     private Vector3 inAirScale = new Vector3(2, 2, 2);
     private Vector3 defaultScale;
-    float slowTime = 0.5f;
-    float timeLeft;
+    private IEnumerator airTime;
+    //float timeLeft;
 
     // acceleration variables 
     const int accelerationWindow = 10;
@@ -69,11 +70,14 @@ public class PlayerController : MonoBehaviour
     public Vector3 OriginalMousePos => originalPos;
     public Vector3 OriginalPlayerPos => originalPlayerPos;
 
+    bool cancelled  = false;
+    [SerializeField] float gracePeriod;
+    float currentGrace;
 
     [SerializeField] LayerMask wallLayer;
     [SerializeField] LayerMask boundaryLayer;
     [SerializeField] LayerMask elephantLayer;
-    LayerMask bounceLayers;
+    public LayerMask bounceLayers;
 
     // Sprites
 
@@ -86,6 +90,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Sprite postLaunchSprite;
 
     [SerializeField] Animator animator;
+    [SerializeField] GameObject arrow;
 
     public enum ParticleTypes
     {
@@ -110,9 +115,9 @@ public class PlayerController : MonoBehaviour
         slowMotion = false;
         stretching = false;
         bounceImpulseActive = true;
+        currentGrace = 3f;
         bounceLayers = wallLayer.value | boundaryLayer.value;
         defaultScale = spriteRenderer.transform.localScale;
-        timeLeft = slowTime;
         stamina = startingStamina;
         if(stamina == 0)
         {
@@ -138,41 +143,47 @@ public class PlayerController : MonoBehaviour
         else if (stamina > 0)
         {
             HandleLaunch();
-            if (Input.GetButtonDown("Slow"))
-            {
-                SlowMotion();
-            }
-            if (Input.GetButtonUp("Slow"))
-            {
-                EndSlowMotion();
-            }
+            //if (Input.GetButtonDown("Slow"))
+            //{
+            //    SlowMotion();
+            //}
+            //if (Input.GetButtonUp("Slow"))
+            //{
+            //    EndSlowMotion();
+            //}
         }
         if (tutorial) {
            if (stamina==0) {
                 stamina = stamina + 1;
             } 
         }
-        if (slowMotion)
-        {
-            timeLeft = timeLeft - Time.deltaTime;
-            if (timeLeft <= 0)
-            {
-                EndSlowMotion();
-            }
-        }
+        //if (slowMotion)
+        //{
+        //    timeLeft = timeLeft - Time.deltaTime;
+        //    if (timeLeft <= 0)
+        //    {
+        //        EndSlowMotion();
+        //    }
+        //}
         if (playerRb.linearVelocity.magnitude >= minSpeed)
         {
             direction = playerRb.linearVelocity.normalized;
             currentSpeed = playerRb.linearVelocity.magnitude;
-
-            //if (playerRb.linearVelocityX < 0)
-                //spriteObject.transform.Rotate(0, 0, currentSpeed * Time.deltaTime * rotateForce * flip);
-            //else if (playerRb.linearVelocityX > 0)
-               // spriteObject.transform.Rotate(0, 0, -currentSpeed * Time.deltaTime * rotateForce * flip);
+            if (playerRb.linearVelocityX < 0)
+            {
+                spriteObject.transform.Rotate(0, 0, currentSpeed * Time.deltaTime * rotateForce * flip);
+            }
+            else if (playerRb.linearVelocityX > 0)
+            {
+                spriteObject.transform.Rotate(0, 0, -currentSpeed * Time.deltaTime * rotateForce * flip);
+            }
+            currentGrace = gracePeriod;
         }
         else if (launched)
         {
-            if (!tutorialTwo) {
+            currentGrace -= Time.deltaTime;
+            //Debug.Log(currentGrace.ToString());
+            if (!tutorialTwo && currentGrace <= 0) {
                 GameManagerScript.Instance.LoseGame();
                 playerRb.linearVelocity = Vector2.zero;
             } else {
@@ -183,90 +194,90 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (isInAir && !thrown)
-        {
-            thrown = true;
-            StartCoroutine(MonkeyThrow());
-        }
-        else if (isInAir && thrown)
-        {
-            thrown = false;
-        }
-
         if (aboveWall && !Physics2D.CircleCast(transform.position, 1f, Vector2.zero, Mathf.Infinity, wallLayer))
         {
             SetWallBounceActive(true);
             aboveWall = false;
         }
-    }
 
-    IEnumerator MonkeyThrow()
-    {
-        float timer = 0f;
-
-        while (timer < 1)
-        {
-            spriteRenderer.transform.localScale = Vector3.Lerp(defaultScale, inAirScale, timer);
-            timer += Time.deltaTime;
-            yield return null;
-        }
-
-        timer = 0f;
-
-        while (timer < 1)
-        {
-            spriteRenderer.transform.localScale = Vector3.Lerp(inAirScale, defaultScale, timer);
-            timer += Time.deltaTime;
-            yield return null;
-        }
-        spriteRenderer.transform.localScale = new Vector3(1, 1, 1);
-        //SetParticles(ParticleTypes.Grass, true);
+        //Debug.Log("Current speed: " + currentSpeed);
     }
 
     private void HandleLaunch()
     {
+        Debug.Log(popUp);
         if (Input.GetMouseButtonDown(0))
         {
             originalPos = Input.mousePosition;
             originalPlayerPos = playerRb.transform.position;
             //store initial mouse location
-            AudioManager.Instance.PlayPull();
+            if (launched)
+            {
+                SlowMotion();
+            }
+            if (!popUp)
+            {
+               // Debug.Log("sound");
+                AudioManager.Instance.PlayPull();
+            }
             stretching = true;
+            cancelled = false;
         }
         if (stretching)
         {
             // for trajectory UI
             Vector3 currentMousePos = Input.mousePosition;
             dragDistance = Vector3.Distance(currentMousePos, originalPos);
+
+            float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
+            float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
+            //Debug.Log("Expected launch angle: " + Mathf.Atan2(yChange, xChange));
+        }
+        if (Input.GetMouseButton(1))
+        {
+            cancelled = true;
+            EndSlowMotion();
+            stretching = false;
+            AudioManager.Instance.StopPull();
         }
         if (Input.GetMouseButtonUp(0))
         {
-            stretching = false;
-            AudioManager.Instance.PlayRelease();
-            float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
-            float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
-            playerRb.linearVelocity = new Vector2(xChange, yChange);
-            if (playerRb.linearVelocity.magnitude > maxLaunchSpeed)
+            if (!cancelled)
             {
-                playerRb.linearVelocity = Vector2.ClampMagnitude(playerRb.linearVelocity, maxLaunchSpeed);
-                //spriteRenderer.sprite = postLaunchSprite;
-                PostLaunchUpdate(playerRb.linearVelocity.x, playerRb.linearVelocity.y);
+                AudioManager.Instance.StopPull();
+                EndSlowMotion();
+                stretching = false;
+                AudioManager.Instance.PlayRelease();
+                float xChange = -(Input.mousePosition.x - originalPos.x) / 10;
+                float yChange = -(Input.mousePosition.y - originalPos.y) / 10;
+                //Debug.Log(Mathf.Atan2(yChange, xChange));
+                playerRb.linearVelocity = new Vector2(xChange, yChange);
+                if (playerRb.linearVelocity.magnitude > maxLaunchSpeed)
+                {
+                    playerRb.linearVelocity = Vector2.ClampMagnitude(playerRb.linearVelocity, maxLaunchSpeed);
+                    spriteRenderer.sprite = postLaunchSprite;
+                }
+                else if (playerRb.linearVelocity.magnitude > 0.2 * maxLaunchSpeed)
+                {
+                    spriteRenderer.sprite = postLaunchSprite;
+                }
+                else
+                {
+                    float mag = playerRb.linearVelocity.magnitude;
+                    mag = Mathf.Clamp(mag, maxLaunchSpeed * 0.2f, maxLaunchSpeed);
+
+                    Vector2 final = playerRb.linearVelocity.normalized;
+                    final = final * mag;
+                    //Debug.Log("Min launch angle: " + Mathf.Atan2(final.y, final.x));
+                    playerRb.linearVelocity = final;
+                    spriteRenderer.sprite = postLaunchSprite;
+                }
+                DecrementStamina();
+                animator.SetBool("Launch", true);
+                launched = true;
+                GameManagerScript.Instance.inGame = true;
             }
-            else if (playerRb.linearVelocity.magnitude > 0.2 * maxLaunchSpeed)
-            {
-                //spriteRenderer.sprite = postLaunchSprite;
-                PostLaunchUpdate(playerRb.linearVelocity.x, playerRb.linearVelocity.y);
-            }
-            else
-            {
-                // launch force too low, enforce minimum launch speed
-                playerRb.linearVelocity = new Vector2(xChange + maxLaunchSpeed * 0.2f, yChange + maxLaunchSpeed * 0.2f);
-                //spriteRenderer.sprite = postLaunchSprite;
-                PostLaunchUpdate(playerRb.linearVelocity.x, playerRb.linearVelocity.y);
-            }
-            DecrementStamina();
-            animator.SetBool("Launch", true);
-            launched = true;
+            
         }
     }
 
@@ -318,7 +329,6 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 1;
         Time.fixedDeltaTime = 0.02F;
         slowMotion = false;
-        timeLeft = slowTime;
     }
 
     private void FixedUpdate()
@@ -347,20 +357,30 @@ public class PlayerController : MonoBehaviour
         if ((bounceLayers.value & (1 << collision.gameObject.layer)) > 0)
         {
             ray = Physics2D.Raycast(transform.position, direction, 4f, bounceLayers.value);
+            Vector2 contactVector = new Vector2(transform.position.x - contact.point.x, transform.position.y - contact.point.y);
             if (ray)
             {
-                reflectedVector = UnityEngine.Vector2.Reflect(direction * currentSpeed, ray.normal);
+                reflectedVector = UnityEngine.Vector2.Reflect(direction * currentSpeed, contact.normal);
 
-                if (bounceImpulseActive)
-                {
-                    // give impulse to player, reset timer
-                    reflectedVector *= bounceForce;
-                    bounceTimer = 0f;
-                    bounceImpulseActive = false;
-                }
                 playerRb.linearVelocity = reflectedVector;
             }
-            PostLaunchUpdate(playerRb.linearVelocity.x, playerRb.linearVelocity.y);
+            else
+            {
+                Debug.Log("fallback logic used");
+                float angleToNormal = Vector2.Angle(direction, contact.normal);
+                Debug.Log("angle: " + angleToNormal);
+                
+                playerRb.linearVelocity = contactVector.normalized * currentSpeed;
+            }
+            
+            if (bounceImpulseActive)
+            {
+                // give impulse to player, reset timer
+                playerRb.linearVelocity *= bounceForce;
+                bounceTimer = 0f;
+                bounceImpulseActive = false;
+            }
+
         }
 
         if ((elephantLayer.value & (1 << collision.gameObject.layer)) > 0)
@@ -391,27 +411,17 @@ public class PlayerController : MonoBehaviour
 
         // ElephantController elephant = collision.gameObject.GetComponent<ElephantController>();
         // elephant?.DecreaseHP();
-        if (collision.gameObject.CompareTag("Tranquilizer"))
-        {
-            DecrementStamina();
-        }
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            currentSpeed *= 0.5f;
-        }
-        // ElephantController elephant = collision.gameObject.GetComponent<ElephantController>();
-        // elephant?.DecreaseHP();
 
-        //if (collision.gameObject.CompareTag("Cheetah"))
-        //{
-        //    stamina++;
-        //}
+        // if (collision.gameObject.CompareTag("Cheetah"))
+        // {
+        //    playerRb.linearVelocity.magnitude *= 2f;
+        // }
 
         // Rotation logic
         Vector2 normal = contact.normal;
         if (Mathf.Abs(normal.y) > 0.5)
         {
-            flip = flip * -1;
+            flip *= -1;
         }
 
         AudioManager.Instance.PlayBounce();
@@ -422,9 +432,13 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void goInAir()
     {
-        SetWallBounceActive(false);
         SetParticles(ParticleTypes.Grass, false);
-        StartCoroutine(AirTime());
+        if (isInAir)
+        { 
+            StopCoroutine(airTime);
+        }
+        airTime = AirTime();
+        StartCoroutine(airTime);
     }
 
     /// <summary>
@@ -432,10 +446,28 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     IEnumerator AirTime()
     {
-        isInAir = true;
+        float timer = 0f;
+
+        spriteRenderer.transform.localScale = new Vector3(1, 1, 1);
         Physics2D.IgnoreLayerCollision(gameObject.layer, 7, true);
-        yield return new WaitForSeconds(2);
-        isInAir = false;
+        SetWallBounceActive(false);
+        isInAir = true;
+        while (timer < 1)
+        {
+            spriteRenderer.transform.localScale = Vector3.Lerp(defaultScale, inAirScale, timer);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        timer = 0f;
+
+        while (timer < 1)
+        {
+            spriteRenderer.transform.localScale = Vector3.Lerp(inAirScale, defaultScale, timer);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        spriteRenderer.transform.localScale = new Vector3(1, 1, 1);
         Physics2D.IgnoreLayerCollision(gameObject.layer, 7, false);
         if (Physics2D.CircleCast(transform.position, 1f, Vector2.zero, Mathf.Infinity, wallLayer))
         {
@@ -445,6 +477,7 @@ public class PlayerController : MonoBehaviour
         {
             SetWallBounceActive(true);
         }
+        isInAir = false;
     }
 
     /// <summary>
@@ -494,20 +527,20 @@ public class PlayerController : MonoBehaviour
                     playerRb.linearVelocity = reflectedVector * 8f;
             }
         }
-        if (collision.gameObject.CompareTag("Monkey"))
-        {
-            goInAir();
-        }
     }
 
-       public void Freeze()
+    public void Freeze()
     {
+        arrow.SetActive(false);
         enabled = false;
+        popUp = true;
     }
 
     public void Unfreeze()
     {
+        popUp = false;
         enabled = true;
+        arrow.SetActive(true);
     }
 
     /// <summary>
@@ -597,5 +630,21 @@ public class PlayerController : MonoBehaviour
         {
             particles[(int)particleType].Stop();
         }
+    }
+    public Transform GetClosestZookeeper(Transform[] zookeepers)
+    {
+        Transform tMin = null;
+        float minDist = Mathf.Infinity;
+        Vector3 currentPos = transform.position;
+        foreach (Transform t in zookeepers)
+        {
+            float dist = Vector3.Distance(t.position, currentPos);
+            if (dist < minDist)
+            {
+                tMin = t;
+                minDist = dist;
+            }
+        }
+        return tMin;
     }
 }
