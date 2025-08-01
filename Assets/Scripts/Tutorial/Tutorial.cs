@@ -5,7 +5,6 @@ using UnityEngine.UIElements;
 
 public class Tutorial : MonoBehaviour
 {
-    private int clicks = 0;
     private PlayerController player;
     private GameObject background;
     void Start()
@@ -15,21 +14,5 @@ public class Tutorial : MonoBehaviour
         background = gameObject.transform.parent.gameObject;
         player.tutorial = true;
         GameManagerScript.Instance.Tutorial();
-    }
-
-    void Update()
-    {
-        if (clicks == 0)
-        {
-            GameManagerScript.Instance.HideGameMenu();
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            clicks = clicks + 1;
-        }
-        if (clicks == 1)
-        {
-            background.SetActive(false);
-        }
     }
 }

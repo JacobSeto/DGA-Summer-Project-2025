@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coolDownTime: 10
+  timer: 2
 --- !u!95 &7439644815207804240
 Animator:
   serializedVersion: 7
