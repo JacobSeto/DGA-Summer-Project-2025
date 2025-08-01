@@ -47,11 +47,16 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] GameObject winScreen;
     [SerializeField] GameObject winText;
     [SerializeField] GameObject loseScreen;
-    [SerializeField] Image[] staminaBar;
-    [SerializeField] GameObject timerObject;
 
+    [Header("World Settings")]
+    [SerializeField] private MusicType currentWorld;
+    public MusicType CurrentWorld => currentWorld;
+
+    [Header("UI Settings")]
     public Material greyscaleMat;
     public float timer = 0.0f;
+    [SerializeField] Image[] staminaBar;
+    [SerializeField] GameObject timerObject;
 
     void Awake()
     {
@@ -78,6 +83,8 @@ public class GameManagerScript : MonoBehaviour
         OriginalPos = player.transform.position;
         originalStamina = player.GetStaminaCount();
         Time.timeScale = 1.0f;
+
+        AudioManager.Instance.PlayMusic(currentWorld);
     }
 
     void Update()
