@@ -34,13 +34,9 @@ public class GameManagerScript : MonoBehaviour
     private float fastestTime;
     private bool tutorial;
 
-    public bool isPopupOpen => uiPopupScreen.activeSelf;
-
 
     [Header("Game Menu")]
     [SerializeField] MenuNavigation menuNavigation;
-
-    [SerializeField] GameObject uiPopupScreen;
 
     [SerializeField] GameObject gameMenu;
     [SerializeField] GameObject pauseMenu;
@@ -84,16 +80,7 @@ public class GameManagerScript : MonoBehaviour
     {
         if (pause == false)
         {
-            if (player.slowMotion)
-            {
-                timer += Time.deltaTime / player.slowDownAmount;
-            }
-            else
-            {
-                timer += Time.deltaTime;
-            }
-
-
+            timer += Time.unscaledDeltaTime;
         }
         if (Input.GetKeyDown(KeyCode.Escape) && !win && !loss)
         {
@@ -103,11 +90,6 @@ public class GameManagerScript : MonoBehaviour
         {
             Reset();
         }
-    }
-
-    public void HideGameMenu()
-    {
-        menuNavigation.ChangeActiveScreen(uiPopupScreen);
     }
 
     public void DonePopup()
@@ -135,7 +117,7 @@ public class GameManagerScript : MonoBehaviour
                 }
             }
             PlayerPrefs.SetFloat(sceneName, fastestTime);
-            winText.GetComponent<TMP_Text>().SetText("You win! Time: " +
+            winText.GetComponent<TMP_Text>().SetText("You win!\n Time: " +
                 finalTime);
         }
         else
@@ -205,10 +187,12 @@ public class GameManagerScript : MonoBehaviour
     /// <summary>
     /// Brings down zookeeper count.
     /// </summary>
-    public void decrementZookeeper()
+    public void decrementZookeeper(GameObject keeper)
     {
         zookeeperCount -= 1;
-        zooKeepers = GameObject.FindGameObjectsWithTag("Zookeeper");
+        List<GameObject> tempList = new List<GameObject>(zooKeepers);
+        tempList.Remove(keeper);
+        zooKeepers = tempList.ToArray();
         zooKeeperTransforms = new Transform[zooKeepers.Length];
         for (int i = 0; i < zooKeepers.Length; i++)
         {

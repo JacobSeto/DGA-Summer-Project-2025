@@ -9,9 +9,12 @@ public class ZookeeperController : MonoBehaviour
     private bool isFalling = false;
     private float fallSpeed = 5f;
 
+    private BoxCollider2D boxCollider;
+
     void Start()
     {
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        boxCollider = GetComponent<BoxCollider2D>();
     }
 
     void Update()
@@ -42,9 +45,14 @@ public class ZookeeperController : MonoBehaviour
 
     private void destroyZookeeper()
     {
-        GameManagerScript.Instance.decrementZookeeper();
+        GameManagerScript.Instance.decrementZookeeper(gameObject);
         isFalling = true;
         animator.SetBool("Fallen", true);
+        if (boxCollider != null)
+        {
+            boxCollider.enabled = false;
+        }
+        
 
 
     }
