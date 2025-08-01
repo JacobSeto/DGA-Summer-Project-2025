@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -19,7 +20,8 @@ public class LevelScreen : MonoBehaviour
         if(PlayerPrefs.GetFloat(sceneName, 0) != 0)
         {
             completionText.color = completeColor;
-            completionText.text = "Time: " + PlayerPrefs.GetFloat(sceneName).ToString("mm\\:ss\\.ff");
+            TimeSpan time = TimeSpan.FromSeconds(PlayerPrefs.GetFloat(sceneName));
+            completionText.text = "Time: " + time.ToString("m\\:ss\\.ff");
         }
         else
         {
