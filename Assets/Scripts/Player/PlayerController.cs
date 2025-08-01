@@ -262,6 +262,7 @@ public class PlayerController : MonoBehaviour
                 DecrementStamina();
                 animator.SetBool("Launch", true);
                 launched = true;
+                GameManagerScript.Instance.inGame = true;
             }
             
         }
