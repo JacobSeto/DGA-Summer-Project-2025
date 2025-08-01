@@ -1916,8 +1916,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000015258789, y: 23.471}
-  m_SizeDelta: {x: 57.511, y: 26.9415}
+  m_AnchoredPosition: {x: 1.3995018, y: 22.3}
+  m_SizeDelta: {x: 54.7111, y: 25.98}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7998552910623350446
 CanvasRenderer:
@@ -1947,7 +1947,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 00:00
+  m_text: 0:00:00
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0d4738f5fca3f46498b8c9afafbf2a0c, type: 2}
   m_sharedMaterial: {fileID: 9170347423843607153, guid: 0d4738f5fca3f46498b8c9afafbf2a0c, type: 2}
@@ -1981,7 +1981,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -2278,7 +2278,6 @@ GameObject:
   - component: {fileID: 7610539171305039929}
   - component: {fileID: 4350420093873488442}
   - component: {fileID: 1909444004168794348}
-  - component: {fileID: 5484195359883587843}
   - component: {fileID: 6800753556991421533}
   m_Layer: 5
   m_Name: TimerCounter
@@ -2347,18 +2346,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5484195359883587843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5904123275828136097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3bd5a7be43e74c77b3dfd82574292df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6800753556991421533
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3121,9 +3108,9 @@ MonoBehaviour:
   - {fileID: 8997951718360367991}
   - {fileID: 2891286627681782643}
   - {fileID: 8730468845988595445}
-  timerObject: {fileID: 5904123275828136097}
   greyscaleMat: {fileID: 2100000, guid: 9351a3757453d4242bd4f9f3f3b9859c, type: 2}
-  timer: 0
+  inGame: 0
+  timerText: {fileID: 3231579684502968399}
 --- !u!1 &8380021242513430653
 GameObject:
   m_ObjectHideFlags: 0
