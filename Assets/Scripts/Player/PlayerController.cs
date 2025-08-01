@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
     public float currentSpeed;
     public bool tutorial = false;
     public bool tutorialTwo = false;
+    public bool popUp = false;
     Vector2 reflectedVector;
     RaycastHit2D ray;
     Vector2 direction;
@@ -55,7 +56,6 @@ public class PlayerController : MonoBehaviour
     private bool aboveWall;
     private Vector3 inAirScale = new Vector3(2, 2, 2);
     private Vector3 defaultScale;
-    private GameObject arrow;
     private IEnumerator airTime;
     //float timeLeft;
 
@@ -90,6 +90,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Sprite postLaunchSprite;
 
     [SerializeField] Animator animator;
+    [SerializeField] GameObject arrow;
 
     private bool wallBounce;
 
@@ -110,7 +111,6 @@ public class PlayerController : MonoBehaviour
         {
             throw new System.Exception("Stamina is 0");
         }
-        arrow = gameObject.transform.GetChild(1).gameObject;
         GameManagerScript.Instance.UpdateStaminaBar(stamina);
     }
 
@@ -192,6 +192,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleLaunch()
     {
+        Debug.Log(popUp);
         if (Input.GetMouseButtonDown(0))
         {
             originalPos = Input.mousePosition;
@@ -201,7 +202,11 @@ public class PlayerController : MonoBehaviour
             {
                 SlowMotion();
             }
-            AudioManager.Instance.PlayPull();
+            if (!popUp)
+            {
+               // Debug.Log("sound");
+                AudioManager.Instance.PlayPull();
+            }
             stretching = true;
             cancelled = false;
         }
@@ -477,11 +482,12 @@ public class PlayerController : MonoBehaviour
     {
         arrow.SetActive(false);
         enabled = false;
-        
+        popUp = true;
     }
 
     public void Unfreeze()
     {
+        popUp = false;
         enabled = true;
         arrow.SetActive(true);
     }
