@@ -169,7 +169,7 @@ MonoBehaviour:
   red: {fileID: 21300000, guid: 3223809b7c9594b57b6240de82e0c5bb, type: 3}
   yellow: {fileID: 21300000, guid: b667028d96a564f89b86dc4437975f9c, type: 3}
   green: {fileID: 21300000, guid: e27a6484b39cd42f4a14e8d63dd4a20d, type: 3}
-  blue: {fileID: 21300000, guid: a289a0bd042784e60bd3ecea3e41eaa7, type: 3}
+  blue: {fileID: 5771043171841904973, guid: a289a0bd042784e60bd3ecea3e41eaa7, type: 3}
   pivot: {fileID: 2304760803877951340}
 --- !u!1 &3370852474761778361
 GameObject:
