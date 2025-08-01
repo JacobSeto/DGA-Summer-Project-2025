@@ -12,8 +12,7 @@ public class MeterColor : MonoBehaviour
     GameObject blue;
     PlayerController player;
     [SerializeField] Pivot pivot;
-    private int redColor;
-    private Animator animator;
+    private float timeLeft = 0.5f;
     void Start()
     {
         normal = gameObject.transform.GetChild(0).gameObject;
@@ -27,7 +26,6 @@ public class MeterColor : MonoBehaviour
         blue.SetActive(false);
         current = normal;
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-        animator = gameObject.GetComponent<Animator>();
     }
 
     void Update()
@@ -36,7 +34,24 @@ public class MeterColor : MonoBehaviour
         {
             if (pivot.angle >= 35)
             {
-                animator.SetBool("Flashing", true);
+                if (timeLeft > 0.25f)
+                {
+                    //red
+                    current.SetActive(false);
+                    red.SetActive(true);
+                    current = red;
+                }
+                else if (timeLeft <= 0f)
+                {
+                    timeLeft = 0.5f;
+                }
+                else {
+                    //blue
+                    current.SetActive(false);
+                    blue.SetActive(true);
+                    current = blue;
+                }
+                timeLeft -= Time.deltaTime;
             }
             else if (pivot.angle >= -35)
             {
