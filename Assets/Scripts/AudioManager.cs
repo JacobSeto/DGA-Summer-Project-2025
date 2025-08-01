@@ -13,6 +13,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource ElephantAudio;
     [SerializeField] private AudioSource MonkeyAudio;
     [SerializeField] private AudioSource ZookeeperAudio;
+    [SerializeField] private AudioSource WinAudio;
+    [SerializeField] private AudioSource LoseAudio;
+    
 
     [SerializeField] private AudioSource MainMenu;
 
@@ -167,4 +170,14 @@ public class AudioManager : MonoBehaviour
     {
         ZookeeperAudio.PlayOneShot(ZookeeperAudio.clip);
     }
+   
+    public void PlayWin()
+    {
+        WinAudio.PlayOneShot(WinAudio.clip);
+    }
+    public void PlayLose()
+    {
+        LoseAudio.PlayOneShot(LoseAudio.clip);
+    }
+
 }

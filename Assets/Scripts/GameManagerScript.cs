@@ -121,6 +121,7 @@ public class GameManagerScript : MonoBehaviour
         {
             PlayerPrefs.SetFloat(sceneName, gameTime);
         }
+        AudioManager.Instance.PlayWin();
         winText.GetComponent<TMP_Text>().SetText("You win!\n Time: " + TimeSpan.FromSeconds(gameTime).ToString("m\\:ss\\.ff"));
         menuNavigation.ChangeActiveScreen(winScreen);
         gameEnded = true;
@@ -134,6 +135,7 @@ public class GameManagerScript : MonoBehaviour
         loss = true;
         AudioManager.Instance.StopPull();
         Pause();
+        AudioManager.Instance.PlayLose();
         menuNavigation.ChangeActiveScreen(loseScreen);
         gameEnded = true;
     }
