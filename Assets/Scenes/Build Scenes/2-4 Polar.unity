@@ -586,11 +586,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7213829802744064855, guid: 39b310945bc0d47158b22f634e2cf1f0, type: 3}
   m_PrefabInstance: {fileID: 575659519}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &588793715 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4555764993985496325, guid: bd501718f262e4ccf918307c30b06007, type: 3}
-  m_PrefabInstance: {fileID: 8638493402705387573}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &629002148
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -945,10 +940,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 6657906720841977185, guid: 33ab23f5c1400c74bae73e2161dc02d2, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 588793715}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33ab23f5c1400c74bae73e2161dc02d2, type: 3}
 --- !u!4 &1090240530 stripped
@@ -73174,127 +73166,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6429070103205560615, guid: 11a8e9665c8a3324fa863214bae7ac54, type: 3}
   m_PrefabInstance: {fileID: 1821737634}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &8638493402705387573
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1090240530}
-    m_Modifications:
-    - target: {fileID: 3149246339052960676, guid: bd501718f262e4ccf918307c30b06007, type: 3}
-      propertyPath: m_fontSize
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 3149246339052960676, guid: bd501718f262e4ccf918307c30b06007, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555764993985496325, guid: bd501718f262e4ccf918307c30b06007, type: 3}
-      propertyPath: m_Pivot.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555764993985496325, guid: bd501718f262e4ccf918307c30b06007, type: 3}
-      propertyPath: m_Pivot.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555764993985496325, guid: bd501718f262e4ccf918307c30b06007, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555764993985496325, guid: bd501718f262e4ccf918307c30b06007, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555764993985496325, guid: bd501718f262e4ccf918307c30b06007, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555764993985496325, guid: bd501718f262e4ccf918307c30b06007, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555764993985496325, guid: bd501718f262e4ccf918307c30b06007, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555764993985496325, guid: bd501718f262e4ccf918307c30b06007, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555764993985496325, guid: bd501718f262e4ccf918307c30b06007, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555764993985496325, guid: bd501718f262e4ccf918307c30b06007, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555764993985496325, guid: bd501718f262e4ccf918307c30b06007, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555764993985496325, guid: bd501718f262e4ccf918307c30b06007, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555764993985496325, guid: bd501718f262e4ccf918307c30b06007, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555764993985496325, guid: bd501718f262e4ccf918307c30b06007, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555764993985496325, guid: bd501718f262e4ccf918307c30b06007, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555764993985496325, guid: bd501718f262e4ccf918307c30b06007, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555764993985496325, guid: bd501718f262e4ccf918307c30b06007, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555764993985496325, guid: bd501718f262e4ccf918307c30b06007, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555764993985496325, guid: bd501718f262e4ccf918307c30b06007, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4555764993985496325, guid: bd501718f262e4ccf918307c30b06007, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5100847822193092885, guid: bd501718f262e4ccf918307c30b06007, type: 3}
-      propertyPath: text.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5100847822193092885, guid: bd501718f262e4ccf918307c30b06007, type: 3}
-      propertyPath: 'text.Array.data[0]'
-      value: Welcome to the Ice Level!
-      objectReference: {fileID: 0}
-    - target: {fileID: 5100847822193092885, guid: bd501718f262e4ccf918307c30b06007, type: 3}
-      propertyPath: 'text.Array.data[1]'
-      value: Bump into the penguins to gain speed on the ice!
-      objectReference: {fileID: 0}
-    - target: {fileID: 5100847822193092885, guid: bd501718f262e4ccf918307c30b06007, type: 3}
-      propertyPath: 'text.Array.data[2]'
-      value: Knock out all the zookeepers in your way!
-      objectReference: {fileID: 0}
-    - target: {fileID: 6863010015645781307, guid: bd501718f262e4ccf918307c30b06007, type: 3}
-      propertyPath: m_Name
-      value: PopUpPanel
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: bd501718f262e4ccf918307c30b06007, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
