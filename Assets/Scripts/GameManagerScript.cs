@@ -196,10 +196,12 @@ public class GameManagerScript : MonoBehaviour
     /// <summary>
     /// Brings down zookeeper count.
     /// </summary>
-    public void decrementZookeeper()
+    public void decrementZookeeper(GameObject keeper)
     {
         zookeeperCount -= 1;
-        zooKeepers = GameObject.FindGameObjectsWithTag("Zookeeper");
+        List<GameObject> tempList = new List<GameObject>(zooKeepers);
+        tempList.Remove(keeper);
+        zooKeepers = tempList.ToArray();
         zooKeeperTransforms = new Transform[zooKeepers.Length];
         for (int i = 0; i < zooKeepers.Length; i++)
         {
