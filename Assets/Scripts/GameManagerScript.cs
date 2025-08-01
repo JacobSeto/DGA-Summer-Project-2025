@@ -22,7 +22,7 @@ public class GameManagerScript : MonoBehaviour
     public static GameManagerScript Instance;
     [HideInInspector] public PlayerController player;
     private Vector3 OriginalPos;
-    private bool loss = false;
+    public bool loss { get; private set; } = false;
     private bool win = false;
     private bool pause = false;
     //placeholders for testing
@@ -134,6 +134,7 @@ public class GameManagerScript : MonoBehaviour
     public void LoseGame()
     {
         loss = true;
+        AudioManager.Instance.StopPull();
         Pause();
         menuNavigation.ChangeActiveScreen(loseScreen);
     }
