@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 17e598f5879f84be69557756b2bb034c
+guid: a7a07e50b552b47aabc0c94b72504ca0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6432487176237874188
-    second: Monkey Transition_0
+      213: 276852990039878420
+    second: Zookeeper Idle Outlined_0
   - first:
-      213: 1132218750931407088
-    second: Monkey Transition_1
+      213: 2474656512245671976
+    second: Zookeeper Idle Outlined_1
   - first:
-      213: -2255544588691377927
-    second: Monkey Transition_2
+      213: 7733684805118462998
+    second: Zookeeper Idle Outlined_2
   - first:
-      213: -3651119660357205914
-    second: Monkey Transition_3
+      213: 6594234321970373663
+    second: Zookeeper Idle Outlined_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,13 +109,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Monkey Transition_0
+      name: Zookeeper Idle Outlined_0
       rect:
         serializedVersion: 2
-        x: 7
+        x: 1
         y: 0
-        width: 35
-        height: 49
+        width: 29
+        height: 50
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4f306167ef63bb6a0800000000000000
-      internalID: -6432487176237874188
+      spriteID: 41be45ed35497d300800000000000000
+      internalID: 276852990039878420
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Monkey Transition_1
+      name: Zookeeper Idle Outlined_1
       rect:
         serializedVersion: 2
-        x: 58
+        x: 34
         y: 0
-        width: 38
-        height: 47
+        width: 29
+        height: 46
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -146,20 +146,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0f09d4984f276bf00800000000000000
-      internalID: 1132218750931407088
+      spriteID: 828a2819cfeb75220800000000000000
+      internalID: 2474656512245671976
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Monkey Transition_2
+      name: Zookeeper Idle Outlined_2
       rect:
         serializedVersion: 2
-        x: 105
+        x: 65
         y: 0
-        width: 40
-        height: 42
+        width: 30
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,20 +168,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9f0feff9522b2b0e0800000000000000
-      internalID: -2255544588691377927
+      spriteID: 61c0cedfa51935b60800000000000000
+      internalID: 7733684805118462998
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Monkey Transition_3
+      name: Zookeeper Idle Outlined_3
       rect:
         serializedVersion: 2
-        x: 149
+        x: 98
         y: 0
-        width: 46
-        height: 42
+        width: 29
+        height: 46
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -190,8 +190,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 660c6fb630e945dc0800000000000000
-      internalID: -3651119660357205914
+      spriteID: f14abb69d2d638b50800000000000000
+      internalID: 6594234321970373663
       vertices: []
       indices: 
       edges: []
@@ -210,10 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Monkey Transition_0: -6432487176237874188
-      Monkey Transition_1: 1132218750931407088
-      Monkey Transition_2: -2255544588691377927
-      Monkey Transition_3: -3651119660357205914
+      Zookeeper Idle Outlined_0: 276852990039878420
+      Zookeeper Idle Outlined_1: 2474656512245671976
+      Zookeeper Idle Outlined_2: 7733684805118462998
+      Zookeeper Idle Outlined_3: 6594234321970373663
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

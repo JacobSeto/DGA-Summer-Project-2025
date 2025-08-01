@@ -1,19 +1,16 @@
 fileFormatVersion: 2
-guid: b0f6c66aa2fcd43e5ae899a3ea2149f1
+guid: 5f6ab0e35b8de49b8a641071de7ae100
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7380667778181474788
-    second: Monkey Throw_0
+      213: -4431366400798178752
+    second: Monkey Use_0
   - first:
-      213: -6661507059690520018
-    second: Monkey Throw_1
+      213: 7241277494353920176
+    second: Monkey Use_1
   - first:
-      213: -4560718175980103490
-    second: Monkey Throw_2
-  - first:
-      213: 9019303499201598510
-    second: Monkey Throw_3
+      213: -2555676171149227438
+    second: Monkey Use_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -109,32 +106,10 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Monkey Throw_0
+      name: Monkey Use_0
       rect:
         serializedVersion: 2
         x: 6
-        y: 0
-        width: 35
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c16525c92c9929990800000000000000
-      internalID: -7380667778181474788
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Monkey Throw_1
-      rect:
-        serializedVersion: 2
-        x: 55
         y: 0
         width: 35
         height: 52
@@ -146,17 +121,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e22c3669f929d83a0800000000000000
-      internalID: -6661507059690520018
+      spriteID: 042c2d2acbf9082c0800000000000000
+      internalID: -4431366400798178752
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Monkey Throw_2
+      name: Monkey Use_1
       rect:
         serializedVersion: 2
-        x: 103
+        x: 54
         y: 0
         width: 45
         height: 46
@@ -168,17 +143,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: eb8d9009bf215b0c0800000000000000
-      internalID: -4560718175980103490
+      spriteID: 0b00ff2e38f2e7460800000000000000
+      internalID: 7241277494353920176
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Monkey Throw_3
+      name: Monkey Use_2
       rect:
         serializedVersion: 2
-        x: 153
+        x: 104
         y: 0
         width: 41
         height: 48
@@ -190,8 +165,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e2459570fb00b2d70800000000000000
-      internalID: 9019303499201598510
+      spriteID: 25a48b9101a688cd0800000000000000
+      internalID: -2555676171149227438
       vertices: []
       indices: 
       edges: []
@@ -210,10 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Monkey Throw_0: -7380667778181474788
-      Monkey Throw_1: -6661507059690520018
-      Monkey Throw_2: -4560718175980103490
-      Monkey Throw_3: 9019303499201598510
+      Monkey Use_0: -4431366400798178752
+      Monkey Use_1: 7241277494353920176
+      Monkey Use_2: -2555676171149227438
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
