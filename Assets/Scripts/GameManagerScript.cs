@@ -119,7 +119,7 @@ public class GameManagerScript : MonoBehaviour
         {
             PlayerPrefs.SetFloat(sceneName, gameTime);
         }
-        winText.GetComponent<TMP_Text>().SetText("You win!\n Time: " + gameTime);
+        winText.GetComponent<TMP_Text>().SetText("You win!\n Time: " + TimeSpan.FromSeconds(gameTime).ToString("m\\:ss\\.ff"));
         menuNavigation.ChangeActiveScreen(winScreen);
         gameEnded = true;
     }
