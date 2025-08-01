@@ -95,8 +95,8 @@ MonoBehaviour:
   nextButton: {fileID: 6448009467902783107}
   doneButton: {fileID: 6690032277729471241}
   text:
-  - Welcome to the Elephant enclosure
-  - 'Use the elephants to bounce off '
+  - You've entered your cheetah friends' pen
+  - Use their speed to help you roll faster!
 --- !u!1 &2589539438454375038
 GameObject:
   m_ObjectHideFlags: 0
