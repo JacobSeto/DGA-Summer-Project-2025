@@ -176,6 +176,7 @@ MonoBehaviour:
   currentSpeed: 0
   tutorial: 0
   tutorialTwo: 0
+  popUp: 0
   gracePeriod: 2
   wallLayer:
     serializedVersion: 2
@@ -194,6 +195,7 @@ MonoBehaviour:
   initialSprite: {fileID: 5117515885611587728, guid: 221f89fea38feeb49a56158b00827c98, type: 3}
   postLaunchSprite: {fileID: 7502086667154341395, guid: 20bfc828519460c488bf4210ae74a7c8, type: 3}
   animator: {fileID: 4199128376377569001}
+  arrow: {fileID: 4911713644797770755}
 --- !u!50 &-1464496374494826900
 Rigidbody2D:
   serializedVersion: 5
@@ -660,6 +662,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3cdba0b505134467a91785bf93a0ef05, type: 3}
+--- !u!1 &4911713644797770755 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 933437667292922760, guid: 3cdba0b505134467a91785bf93a0ef05, type: 3}
+  m_PrefabInstance: {fileID: 5250587029949579147}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5614411815724439517 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 375963541932877910, guid: 3cdba0b505134467a91785bf93a0ef05, type: 3}

@@ -16,11 +16,11 @@ public class PopupController : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-
         dialogueText.text = text[currentIndex];
         nextButton.onClick.AddListener(NextMessage);
         doneButton.onClick.AddListener(ClosePopup);
         doneButton.gameObject.SetActive(false);
+        player.Freeze();
     }
 
     void Update()
@@ -34,12 +34,11 @@ public class PopupController : MonoBehaviour
 
         if (currentIndex < text.Length)
         {
-            player.Freeze();
+           player.Freeze();
             dialogueText.text = text[currentIndex];
         }
         else
         {
-
             nextButton.gameObject.SetActive(false);
             doneButton.gameObject.SetActive(true);
         }
