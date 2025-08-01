@@ -45,7 +45,7 @@ public class ZookeeperController : MonoBehaviour
 
     private void destroyZookeeper()
     {
-        GameManagerScript.Instance.decrementZookeeper();
+        GameManagerScript.Instance.decrementZookeeper(gameObject);
         isFalling = true;
         animator.SetBool("Fallen", true);
         if (boxCollider != null)
