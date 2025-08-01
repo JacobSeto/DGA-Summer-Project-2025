@@ -22,6 +22,8 @@ public class GameManagerScript : MonoBehaviour
     public static GameManagerScript Instance;
     [HideInInspector] public PlayerController player;
     private Vector3 OriginalPos;
+    public bool loss { get; private set; } = false;
+    private bool win = false;
     private bool pause = false;
     //placeholders for testing
     private int zookeeperCount = 0;
@@ -123,6 +125,8 @@ public class GameManagerScript : MonoBehaviour
     /// </summary>
     public void LoseGame()
     {
+        loss = true;
+        AudioManager.Instance.StopPull();
         Pause();
         menuNavigation.ChangeActiveScreen(loseScreen);
         gameEnded = true;
