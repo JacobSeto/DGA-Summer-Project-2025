@@ -44,7 +44,11 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] GameObject winText;
     [SerializeField] GameObject loseScreen;
     [SerializeField] Image[] staminaBar;
+    [Header("World Settings")]
+    [SerializeField] private MusicType currentWorld;
+    public MusicType CurrentWorld => currentWorld;
 
+    [Header("UI Settings")]
     public Material greyscaleMat;
 
     [Header("Game Time")]
@@ -80,6 +84,8 @@ public class GameManagerScript : MonoBehaviour
         OriginalPos = player.transform.position;
         originalStamina = player.GetStaminaCount();
         Time.timeScale = 1.0f;
+
+        AudioManager.Instance.PlayMusic(currentWorld);
     }
 
     void Update()
@@ -115,7 +121,7 @@ public class GameManagerScript : MonoBehaviour
         {
             PlayerPrefs.SetFloat(sceneName, gameTime);
         }
-        winText.GetComponent<TMP_Text>().SetText("You win!\n Time: " + gameTime);
+        winText.GetComponent<TMP_Text>().SetText("You win!\n Time: " + TimeSpan.FromSeconds(gameTime).ToString("m\\:ss\\.ff"));
         menuNavigation.ChangeActiveScreen(winScreen);
         gameEnded = true;
     }

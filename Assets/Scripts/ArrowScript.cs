@@ -165,12 +165,13 @@ public class ArrowScript : MonoBehaviour
                 lastArrowFill[i] = arrowFillAmount;
                 arrows[i].GetComponent<ArrowUIScript>().SetFillAmount(arrowFillAmount);
             }
-            else
+            else if (!playerController.inAir())
             {
                 arrows[i].gameObject.SetActive(false);
                 clamped = true;
             }
         }
+        clamped = clamped && !playerController.inAir();
 
         if (hit.collider != null)
         {

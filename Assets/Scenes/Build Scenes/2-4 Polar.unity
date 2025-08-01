@@ -1276,6 +1276,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 586869068486766963, guid: cd81b424f06461d408267a195d2923be, type: 3}
+      propertyPath: currentWorld
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 586869068486766963, guid: cd81b424f06461d408267a195d2923be, type: 3}
       propertyPath: uiPopupScreen
       value: 
       objectReference: {fileID: 0}
