@@ -26782,7 +26782,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -6027955848104475147, guid: 33ab23f5c1400c74bae73e2161dc02d2, type: 3}
       propertyPath: boundaryLayer.m_Bits
-      value: 256
+      value: 1024
       objectReference: {fileID: 0}
     - target: {fileID: 3370301803755255998, guid: 33ab23f5c1400c74bae73e2161dc02d2, type: 3}
       propertyPath: m_Resource
