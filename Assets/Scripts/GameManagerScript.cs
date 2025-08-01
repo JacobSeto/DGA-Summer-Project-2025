@@ -34,13 +34,9 @@ public class GameManagerScript : MonoBehaviour
     private float fastestTime;
     private bool tutorial;
 
-    public bool isPopupOpen => uiPopupScreen.activeSelf;
-
 
     [Header("Game Menu")]
     [SerializeField] MenuNavigation menuNavigation;
-
-    [SerializeField] GameObject uiPopupScreen;
 
     [SerializeField] GameObject gameMenu;
     [SerializeField] GameObject pauseMenu;
@@ -105,11 +101,6 @@ public class GameManagerScript : MonoBehaviour
         }
     }
 
-    public void HideGameMenu()
-    {
-        menuNavigation.ChangeActiveScreen(uiPopupScreen);
-    }
-
     public void DonePopup()
     {
         menuNavigation.ChangeActiveScreen(gameMenu);
@@ -135,7 +126,7 @@ public class GameManagerScript : MonoBehaviour
                 }
             }
             PlayerPrefs.SetFloat(sceneName, fastestTime);
-            winText.GetComponent<TMP_Text>().SetText("You win! Time: " +
+            winText.GetComponent<TMP_Text>().SetText("You win!\n Time: " +
                 finalTime);
         }
         else
