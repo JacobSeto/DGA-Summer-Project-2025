@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Build Scenes/1-1 Grassland.unity
     guid: da070bc78fbef7e46ae897fde9d8f647
   - enabled: 0
-    path: Assets/Scenes/1-1 Grassland.unity
+    path: Assets/Scenes/Grassland Scenes/Grassland 2.unity
     guid: 72dd3cc973965fa4e9e9a364dbc4943d
   - enabled: 1
     path: Assets/Scenes/Build Scenes/1-2 Grassland.unity

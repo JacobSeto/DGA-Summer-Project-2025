@@ -5012,6 +5012,8 @@ MonoBehaviour:
   currentSpeed: 0
   tutorial: 0
   tutorialTwo: 0
+  popUp: 0
+  gracePeriod: 0
   wallLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -5021,11 +5023,15 @@ MonoBehaviour:
   elephantLayer:
     serializedVersion: 2
     m_Bits: 4096
+  bounceLayers:
+    serializedVersion: 2
+    m_Bits: 0
   spriteRenderer: {fileID: 3958427247207750238}
   spriteObject: {fileID: 2210973940943747788}
   initialSprite: {fileID: 5117515885611587728, guid: 221f89fea38feeb49a56158b00827c98, type: 3}
   postLaunchSprite: {fileID: 7502086667154341395, guid: 20bfc828519460c488bf4210ae74a7c8, type: 3}
   animator: {fileID: 4199128376377569001}
+  arrow: {fileID: 0}
   particles:
   - {fileID: 1215696711643872257}
   - {fileID: 4888005402758687406}
@@ -5202,7 +5208,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 98f5a4f766b8447b19c8129f05c59c72, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 98f5a4f766b8447b19c8129f05c59c72, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -19804,11 +19810,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 375963541932877910, guid: 3cdba0b505134467a91785bf93a0ef05, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.81524
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 375963541932877910, guid: 3cdba0b505134467a91785bf93a0ef05, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.1965103
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 375963541932877910, guid: 3cdba0b505134467a91785bf93a0ef05, type: 3}
       propertyPath: m_LocalPosition.z

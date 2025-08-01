@@ -90,7 +90,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Sprite postLaunchSprite;
 
     [SerializeField] Animator animator;
-    [SerializeField] GameObject arrow;
+
+    public string currentState;
 
     public enum ParticleTypes
     {
@@ -101,8 +102,6 @@ public class PlayerController : MonoBehaviour
     }
 
     [SerializeField] ParticleSystem[] particles;
-
-    public string currentState;
 
     private bool wallBounce;
 
@@ -531,7 +530,6 @@ public class PlayerController : MonoBehaviour
 
     public void Freeze()
     {
-        arrow.SetActive(false);
         enabled = false;
         popUp = true;
     }
@@ -540,7 +538,6 @@ public class PlayerController : MonoBehaviour
     {
         popUp = false;
         enabled = true;
-        arrow.SetActive(true);
     }
 
     /// <summary>
