@@ -29,13 +29,20 @@ public class MonkeyController : MonoBehaviour
         animator.SetBool("usable", canThrow);
     }
 
+    public bool inCooldown()
+    {
+        return !canThrow;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
         if (collision.CompareTag("Player") && canThrow)
         {
+            AudioManager.Instance.PlayMonkey();
             canThrow = false;
             timer = coolDownTime;
+            collision.gameObject.GetComponent<PlayerController>().goInAir();
         }
     }
 }

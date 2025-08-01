@@ -16,22 +16,24 @@ public class ElephantController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        animator.SetBool("usable", usable); 
+        
         if (!usable)
         {
-            timer -= Time.deltaTime;
+            timer -= Time.deltaTime * 2;
             if (timer <= 0f)
             {
                 timer = 1;
                 usable = true;
             }
         }
+        animator.SetBool("usable", usable); 
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log("collision");
         if (collision.gameObject.CompareTag("Player"))
         {
+            AudioManager.Instance.PlayElephant();
         
             if (animator != null)
             {
