@@ -22,7 +22,7 @@ public class GameManagerScript : MonoBehaviour
     public static GameManagerScript Instance;
     [HideInInspector] public PlayerController player;
     private Vector3 OriginalPos;
-    private bool loss = false;
+    public bool loss { get; private set; } = false;
     private bool win = false;
     private bool pause = false;
     //placeholders for testing
@@ -44,10 +44,20 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] GameObject winText;
     [SerializeField] GameObject loseScreen;
     [SerializeField] Image[] staminaBar;
-    [SerializeField] GameObject timerObject;
+    [Header("World Settings")]
+    [SerializeField] private MusicType currentWorld;
+    public MusicType CurrentWorld => currentWorld;
 
+    [Header("UI Settings")]
     public Material greyscaleMat;
-    public float timer = 0.0f;
+
+    [Header("Game Time")]
+    float gameTime = 0;
+    [Tooltip("If the player is actively playing the game")]
+    [HideInInspector] public bool inGame = false;
+    bool gameEnded = false;
+    [SerializeField] TMP_Text timerText;
+
 
     void Awake()
     {
@@ -74,19 +84,22 @@ public class GameManagerScript : MonoBehaviour
         OriginalPos = player.transform.position;
         originalStamina = player.GetStaminaCount();
         Time.timeScale = 1.0f;
+
+        AudioManager.Instance.PlayMusic(currentWorld);
     }
 
     void Update()
     {
-        if (pause == false)
+        if (inGame)
         {
-            timer += Time.unscaledDeltaTime;
+            gameTime += Time.unscaledDeltaTime;
+            timerText.text = TimeSpan.FromSeconds(gameTime).ToString("m\\:ss\\.ff");
         }
-        if (Input.GetKeyDown(KeyCode.Escape) && !win && !loss)
+        if (Input.GetKeyDown(KeyCode.Escape) && !gameEnded)
         {
             Pause();
         }
-        if (Input.GetKeyDown(KeyCode.R) && !win && !loss)
+        if (Input.GetKeyDown(KeyCode.R) && !gameEnded)
         {
             Reset();
         }
@@ -102,30 +115,15 @@ public class GameManagerScript : MonoBehaviour
     /// </summary>
     public void WinGame()
     {
-        win = true;
         Pause();
-        if (!tutorial)
+        sceneName = SceneManager.GetActiveScene().name;
+        if (PlayerPrefs.GetFloat(sceneName, 0) == 0f || gameTime < PlayerPrefs.GetFloat(sceneName))
         {
-            finalTime = timerObject.GetComponent<Timer>().GetFinalTime();
-            sceneName = SceneManager.GetActiveScene().name;
-            fastestTime = timerObject.GetComponent<Timer>().GetTimeFloat();
-            if (PlayerPrefs.GetFloat(sceneName) != 0f)
-            {
-                if (PlayerPrefs.GetFloat(sceneName) < fastestTime)
-                {
-                    fastestTime = PlayerPrefs.GetFloat(sceneName);
-                }
-            }
-            PlayerPrefs.SetFloat(sceneName, fastestTime);
-            winText.GetComponent<TMP_Text>().SetText("You win!\n Time: " +
-                finalTime);
+            PlayerPrefs.SetFloat(sceneName, gameTime);
         }
-        else
-        {
-            winText.GetComponent<TMP_Text>().SetText("You win!");
-        }
+        winText.GetComponent<TMP_Text>().SetText("You win!\n Time: " + TimeSpan.FromSeconds(gameTime).ToString("m\\:ss\\.ff"));
         menuNavigation.ChangeActiveScreen(winScreen);
-        //pull up menu
+        gameEnded = true;
     }
 
     /// <summary>
@@ -134,8 +132,10 @@ public class GameManagerScript : MonoBehaviour
     public void LoseGame()
     {
         loss = true;
+        AudioManager.Instance.StopPull();
         Pause();
         menuNavigation.ChangeActiveScreen(loseScreen);
+        gameEnded = true;
     }
 
     /// <summary>
@@ -144,6 +144,8 @@ public class GameManagerScript : MonoBehaviour
     public void Pause()
     {
         pause = !pause;
+        // inGame true when not paused and player has launched
+        inGame = !pause;
         player.enabled = !pause;
         if (pause)
         {
@@ -166,14 +168,6 @@ public class GameManagerScript : MonoBehaviour
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentSceneName);
-    }
-
-    /// <summary>
-    /// Returns current timer length
-    /// </summary>
-    public float GetTime()
-    {
-        return timer;
     }
 
     /// <summary>
@@ -201,7 +195,7 @@ public class GameManagerScript : MonoBehaviour
                 zooKeeperTransforms[i] = zooKeepers[i].transform;
             }
         }
-            if (zookeeperCount == 0)
+        if (zookeeperCount == 0)
         {
             WinGame();
         }
@@ -221,7 +215,7 @@ public class GameManagerScript : MonoBehaviour
     {
         tutorial = true;
     }
-    
+
     public void UpdateStaminaBar(int stamina)
     {
         for (int i = 0; i < stamina; i++)

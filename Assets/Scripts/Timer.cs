@@ -22,12 +22,12 @@ public class Timer : MonoBehaviour
     {
         if (player.launched && firstLaunch)
         {
-            timerGap = (float)Math.Round(GameManagerScript.Instance.timer, 0);
+            //timerGap = (float)Math.Round(GameManagerScript.Instance.timer, 0);
             firstLaunch = false;
         }
         else if (player.launched && !firstLaunch)
         {
-            timer = (float)Math.Round(GameManagerScript.Instance.timer, 0) - timerGap;
+            //timer = (float)Math.Round(GameManagerScript.Instance.timer, 0) - timerGap;
             if (timer / 60 >= 1)
             {
                 minutes = timer / 60;

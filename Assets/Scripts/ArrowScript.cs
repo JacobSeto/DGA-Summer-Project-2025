@@ -149,25 +149,29 @@ public class ArrowScript : MonoBehaviour
                 arrows[i].rotation = Quaternion.Euler(0, 0, angle);
                 float totalFillProgress = drag / arrowDragDistance;
                 float arrowFillAmount = Mathf.Clamp01(totalFillProgress - i);
+                if (!GameManagerScript.Instance.loss)
+                {
+                    if (lastArrowFill[i] != 1 && arrowFillAmount == 1)
+                    {
+                        AudioManager.Instance.PlayFillArrow();
+                    }
+                    else if ((lastArrowFill[i] > 0 && arrowFillAmount <= 0) || lastArrowCount > arrowCount)
+                    {
+                        AudioManager.Instance.PlayFillArrow();
+                        lastArrowCount = arrowCount;
+                    }
+                }
                 
-                if (lastArrowFill[i] != 1 && arrowFillAmount == 1)
-                {
-                    AudioManager.Instance.PlayFillArrow();
-                }
-                else if ((lastArrowFill[i] > 0 && arrowFillAmount <= 0) || lastArrowCount > arrowCount)
-                {
-                    AudioManager.Instance.PlayFillArrow();
-                    lastArrowCount = arrowCount;
-                }
                 lastArrowFill[i] = arrowFillAmount;
                 arrows[i].GetComponent<ArrowUIScript>().SetFillAmount(arrowFillAmount);
             }
-            else
+            else if (!playerController.inAir())
             {
                 arrows[i].gameObject.SetActive(false);
                 clamped = true;
             }
         }
+        clamped = clamped && !playerController.inAir();
 
         if (hit.collider != null)
         {

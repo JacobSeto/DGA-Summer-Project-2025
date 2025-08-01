@@ -1,37 +1,37 @@
 fileFormatVersion: 2
-guid: aa96479d19ff548bc8f715e225d6489a
+guid: ce032b8b6f54341c2873805264eea95a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8517529682053971341
-    second: Cheetah Speed_0
+      213: -2936597296093866312
+    second: Cheetah Use_0
   - first:
-      213: 4116423214849931314
-    second: Cheetah Speed_1
+      213: -2316548097813987392
+    second: Cheetah Use_1
   - first:
-      213: 6265780395191898426
-    second: Cheetah Speed_2
+      213: 8681595986921547374
+    second: Cheetah Use_2
   - first:
-      213: 6784705236327766971
-    second: Cheetah Speed_3
+      213: 6669586313362337051
+    second: Cheetah Use_3
   - first:
-      213: 6560161372312260950
-    second: Cheetah Speed_4
+      213: 427377263714013626
+    second: Cheetah Use_4
   - first:
-      213: -7980583045286749352
-    second: Cheetah Speed_5
+      213: -6784242511690303099
+    second: Cheetah Use_5
   - first:
-      213: -5782857951231123234
-    second: Cheetah Speed_6
+      213: -9161423604288299189
+    second: Cheetah Use_6
   - first:
-      213: 5134054755872120661
-    second: Cheetah Speed_7
+      213: -7665410752412966725
+    second: Cheetah Use_7
   - first:
-      213: -6057649826959088497
-    second: Cheetah Speed_8
+      213: -3950043921342871342
+    second: Cheetah Use_8
   - first:
-      213: -8716916492835131473
-    second: Cheetah Speed_9
+      213: -2590388690762278606
+    second: Cheetah Use_9
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -127,7 +127,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Cheetah Speed_0
+      name: Cheetah Use_0
       rect:
         serializedVersion: 2
         x: 0
@@ -142,14 +142,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 372c359c1e7abc980800000000000000
-      internalID: -8517529682053971341
+      spriteID: 8b6d3f5615c1f37d0800000000000000
+      internalID: -2936597296093866312
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cheetah Speed_1
+      name: Cheetah Use_1
       rect:
         serializedVersion: 2
         x: 48
@@ -164,14 +164,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2383d4aaa19702930800000000000000
-      internalID: 4116423214849931314
+      spriteID: 0cfb0b457c7f9dfd0800000000000000
+      internalID: -2316548097813987392
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cheetah Speed_2
+      name: Cheetah Use_2
       rect:
         serializedVersion: 2
         x: 96
@@ -186,14 +186,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a311508621684f650800000000000000
-      internalID: 6265780395191898426
+      spriteID: e666ae39d893b7870800000000000000
+      internalID: 8681595986921547374
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cheetah Speed_3
+      name: Cheetah Use_3
       rect:
         serializedVersion: 2
         x: 144
@@ -208,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bbb9c0d277d182e50800000000000000
-      internalID: 6784705236327766971
+      spriteID: b1de4ce3a612f8c50800000000000000
+      internalID: 6669586313362337051
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cheetah Speed_4
+      name: Cheetah Use_4
       rect:
         serializedVersion: 2
         x: 192
@@ -230,14 +230,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 65159e9c2006a0b50800000000000000
-      internalID: 6560161372312260950
+      spriteID: ab190c46b595ee500800000000000000
+      internalID: 427377263714013626
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cheetah Speed_5
+      name: Cheetah Use_5
       rect:
         serializedVersion: 2
         x: 240
@@ -252,14 +252,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 85b9d25d0064f3190800000000000000
-      internalID: -7980583045286749352
+      spriteID: 589789c416789d1a0800000000000000
+      internalID: -6784242511690303099
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cheetah Speed_6
+      name: Cheetah Use_6
       rect:
         serializedVersion: 2
         x: 288
@@ -274,14 +274,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ed0635e05592fbfa0800000000000000
-      internalID: -5782857951231123234
+      spriteID: b4f548d65c51cd080800000000000000
+      internalID: -9161423604288299189
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Cheetah Speed_7
+      name: Cheetah Use_7
       rect:
         serializedVersion: 2
         x: 336
@@ -296,8 +296,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 55f992d5993df3740800000000000000
-      internalID: 5134054755872120661
+      spriteID: bb027f4a88dfe9590800000000000000
+      internalID: -7665410752412966725
       vertices: []
       indices: 
       edges: []
@@ -306,7 +306,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 447a1b4bd5e2d4f968128f9416933ee8
+    spriteID: c5837028ca7eb443194f05f058718229
     internalID: 0
     vertices: []
     indices: 
@@ -318,14 +318,14 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":8.0,"y":1.0},"gridSpriteSize":{"x":48.0,"y":48.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Cheetah Speed_0: -8517529682053971341
-      Cheetah Speed_1: 4116423214849931314
-      Cheetah Speed_2: 6265780395191898426
-      Cheetah Speed_3: 6784705236327766971
-      Cheetah Speed_4: 6560161372312260950
-      Cheetah Speed_5: -7980583045286749352
-      Cheetah Speed_6: -5782857951231123234
-      Cheetah Speed_7: 5134054755872120661
+      Cheetah Use_0: -2936597296093866312
+      Cheetah Use_1: -2316548097813987392
+      Cheetah Use_2: 8681595986921547374
+      Cheetah Use_3: 6669586313362337051
+      Cheetah Use_4: 427377263714013626
+      Cheetah Use_5: -6784242511690303099
+      Cheetah Use_6: -9161423604288299189
+      Cheetah Use_7: -7665410752412966725
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
