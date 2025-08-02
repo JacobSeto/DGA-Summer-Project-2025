@@ -422,30 +422,6 @@ public class PlayerController : MonoBehaviour
             }
             PostLaunchUpdate(playerRb.linearVelocity.x, playerRb.linearVelocity.y);
         }
-        
-
-        // Animal Controller Collisions
-        //if (collision.gameObject.CompareTag("Insect"))
-        //{
-        //    currentSpeed *= 2f;
-        //}
-
-        // ElephantController elephant = collision.gameObject.GetComponent<ElephantController>();
-        // elephant?.DecreaseHP();
-
-        // if (collision.gameObject.CompareTag("Cheetah"))
-        // {
-        //    playerRb.linearVelocity.magnitude *= 2f;
-        // }
-
-        // Rotation logic
-        //Vector2 normal = contact.normal;
-        //if (Mathf.Abs(normal.y) > 0.5)
-        //{
-        //    flip *= -1;
-        //}
-
-        //AudioManager.Instance.PlayBounce();
     }
 
     /// <summary>
@@ -488,6 +464,7 @@ public class PlayerController : MonoBehaviour
             timer += Time.deltaTime;
             yield return null;
         }
+
         spriteRenderer.transform.localScale = new Vector3(1, 1, 1);
         Physics2D.IgnoreLayerCollision(gameObject.layer, 7, false);
         if (Physics2D.CircleCast(transform.position, 1f, Vector2.zero, Mathf.Infinity, wallLayer))
@@ -665,5 +642,11 @@ public class PlayerController : MonoBehaviour
             }
         }
         return tMin;
+    }
+
+    private void OnDestroy()
+    {
+        Physics2D.IgnoreLayerCollision(gameObject.layer, 7, false);
+        SetWallBounceActive(true);
     }
 }
