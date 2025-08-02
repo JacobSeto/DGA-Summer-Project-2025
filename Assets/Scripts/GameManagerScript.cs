@@ -121,6 +121,7 @@ public class GameManagerScript : MonoBehaviour
         {
             PlayerPrefs.SetFloat(sceneName, gameTime);
         }
+        AudioManager.Instance.PlayWin();
         winText.SetText("Time: " + TimeSpan.FromSeconds(gameTime).ToString("m\\:ss\\.ff"));
         winBackground.sprite = winScreensprites[(int)currentWorld];
         menuNavigation.ChangeActiveScreen(winScreen);
@@ -134,6 +135,7 @@ public class GameManagerScript : MonoBehaviour
     {
         AudioManager.Instance.StopPull();
         Pause();
+        AudioManager.Instance.PlayLose();
         menuNavigation.ChangeActiveScreen(loseScreen);
         gameEnded = true;
     }
@@ -166,6 +168,7 @@ public class GameManagerScript : MonoBehaviour
     /// </summary>
     public void Reset()
     {
+        AudioManager.Instance.SetIgnoreNextMusicChange();
         string currentSceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentSceneName);
     }

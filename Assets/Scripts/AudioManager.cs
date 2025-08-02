@@ -13,6 +13,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource ElephantAudio;
     [SerializeField] private AudioSource MonkeyAudio;
     [SerializeField] private AudioSource ZookeeperAudio;
+    [SerializeField] private AudioSource WinAudio;
+    [SerializeField] private AudioSource LoseAudio;
+    
 
     [SerializeField] private AudioSource MainMenu;
 
@@ -26,9 +29,16 @@ public class AudioManager : MonoBehaviour
 
     private AudioSource[] songs;
 
-    [SerializeField] public MusicType currentWorld;
+    private MusicType currentWorld;
 
     public static AudioManager Instance;
+    
+    private bool ignoreNextMusicChange = false;
+
+    public void SetIgnoreNextMusicChange()
+    {
+        ignoreNextMusicChange = true;
+    }
 
     private void Awake()
     {
@@ -40,7 +50,7 @@ public class AudioManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(this.gameObject);
 
-        songs = new AudioSource[] {  GrasslandsMusic,  IceMusic, TropicMusic, JungleMusic, MainMenu };
+        songs = new AudioSource[] { GrasslandsMusic, IceMusic, TropicMusic, JungleMusic, MainMenu };
         foreach (AudioSource song in songs)
         {
             if (song != null)
@@ -60,8 +70,15 @@ public class AudioManager : MonoBehaviour
 
     public void PlayMusic(MusicType world)
     {
-        Debug.Log("Play music: " + world);
-        if (world != currentWorld)
+        Debug.Log($"PlayMusic called: {world}, currentWorld: {currentWorld}");
+        Debug.Log($"Stack trace: {System.Environment.StackTrace}");
+        if (ignoreNextMusicChange)
+        {
+            ignoreNextMusicChange = false;
+            Debug.Log("Ignoring music change due to reset");
+            return;
+        }
+        if (world != currentWorld && !songs[(int)world].isPlaying)
         {
             StopAllMusic();
             if (songs[(int)world] != null)
@@ -167,4 +184,13 @@ public class AudioManager : MonoBehaviour
     {
         ZookeeperAudio.PlayOneShot(ZookeeperAudio.clip);
     }
+    public void PlayWin()
+    {
+        WinAudio.PlayOneShot(WinAudio.clip);
+    }
+    public void PlayLose()
+    {
+        LoseAudio.PlayOneShot(LoseAudio.clip);
+    }
+
 }
