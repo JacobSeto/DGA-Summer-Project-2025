@@ -207,6 +207,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5126204963262104434, guid: 47111aa160a0b0a4c9391d59d58722b4, type: 3}
+      propertyPath: levelName
+      value: Ring of Fire
+      objectReference: {fileID: 0}
+    - target: {fileID: 5126204963262104434, guid: 47111aa160a0b0a4c9391d59d58722b4, type: 3}
+      propertyPath: sceneName
+      value: 4-3 Jungle
+      objectReference: {fileID: 0}
     - target: {fileID: 6563475874307810260, guid: 47111aa160a0b0a4c9391d59d58722b4, type: 3}
       propertyPath: m_Name
       value: Level Screen (2)
@@ -3962,7 +3970,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5126204963262104434, guid: 47111aa160a0b0a4c9391d59d58722b4, type: 3}
       propertyPath: levelName
-      value: Ace
+      value: Snowman
       objectReference: {fileID: 0}
     - target: {fileID: 5126204963262104434, guid: 47111aa160a0b0a4c9391d59d58722b4, type: 3}
       propertyPath: sceneName
@@ -4494,6 +4502,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5126204963262104434, guid: 47111aa160a0b0a4c9391d59d58722b4, type: 3}
+      propertyPath: levelName
+      value: End Game
+      objectReference: {fileID: 0}
+    - target: {fileID: 5126204963262104434, guid: 47111aa160a0b0a4c9391d59d58722b4, type: 3}
+      propertyPath: sceneName
+      value: 4-4 Jungle Final
+      objectReference: {fileID: 0}
     - target: {fileID: 6563475874307810260, guid: 47111aa160a0b0a4c9391d59d58722b4, type: 3}
       propertyPath: m_Name
       value: Level Screen (3)
@@ -4598,7 +4614,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5126204963262104434, guid: 47111aa160a0b0a4c9391d59d58722b4, type: 3}
       propertyPath: levelName
-      value: "\xC9l\xE9phant"
+      value: Elephant In Da Room
       objectReference: {fileID: 0}
     - target: {fileID: 5126204963262104434, guid: 47111aa160a0b0a4c9391d59d58722b4, type: 3}
       propertyPath: sceneName
@@ -4855,7 +4871,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5126204963262104434, guid: 47111aa160a0b0a4c9391d59d58722b4, type: 3}
       propertyPath: levelName
-      value: First Frost
+      value: Frosty
       objectReference: {fileID: 0}
     - target: {fileID: 5126204963262104434, guid: 47111aa160a0b0a4c9391d59d58722b4, type: 3}
       propertyPath: sceneName
@@ -4965,7 +4981,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5126204963262104434, guid: 47111aa160a0b0a4c9391d59d58722b4, type: 3}
       propertyPath: levelName
-      value: Welcome to The Jungle
+      value: Jungle Into The Mud
       objectReference: {fileID: 0}
     - target: {fileID: 5126204963262104434, guid: 47111aa160a0b0a4c9391d59d58722b4, type: 3}
       propertyPath: sceneName
@@ -5158,6 +5174,14 @@ PrefabInstance:
     - target: {fileID: 1984821591458685186, guid: 47111aa160a0b0a4c9391d59d58722b4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5126204963262104434, guid: 47111aa160a0b0a4c9391d59d58722b4, type: 3}
+      propertyPath: levelName
+      value: Island Works
+      objectReference: {fileID: 0}
+    - target: {fileID: 5126204963262104434, guid: 47111aa160a0b0a4c9391d59d58722b4, type: 3}
+      propertyPath: sceneName
+      value: 3-3 Tropical 3
       objectReference: {fileID: 0}
     - target: {fileID: 6563475874307810260, guid: 47111aa160a0b0a4c9391d59d58722b4, type: 3}
       propertyPath: m_Name
