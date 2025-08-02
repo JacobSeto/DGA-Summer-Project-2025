@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -100,6 +101,8 @@ public class PlayerController : MonoBehaviour
         Mud,
         Ice
     }
+    [SerializeField] Transform particleTransform;
+    [SerializeField] Vector3[] particleRotations;
 
     [SerializeField] ParticleSystem[] particles;
 
@@ -308,6 +311,22 @@ public class PlayerController : MonoBehaviour
             {
                 UpdateAnimation(currentState, "Front");
             }
+        }
+
+        switch (currentState)
+        {
+            case "Right":
+                particleTransform.localEulerAngles = particleRotations[0];
+                break;
+            case "Left":
+                particleTransform.localEulerAngles = particleRotations[1];
+                break;
+            case "Back":
+                particleTransform.localEulerAngles = particleRotations[2];
+                break;
+            case "Front":
+                particleTransform.localEulerAngles = particleRotations[3];
+                break;
         }
     }
 
