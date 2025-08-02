@@ -40,7 +40,7 @@ public class AudioManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(this.gameObject);
 
-        songs = new AudioSource[] {  GrasslandsMusic,  IceMusic, TropicMusic, JungleMusic, MainMenu };
+        songs = new AudioSource[] { MainMenu, GrasslandsMusic, IceMusic, TropicMusic, JungleMusic };
         foreach (AudioSource song in songs)
         {
             if (song != null)
@@ -55,7 +55,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlayMainMenu()
     {
-        songs[4].Play();
+        songs[0].Play();
     }
 
     public void PlayMusic(MusicType world)
