@@ -2900,18 +2900,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2068563284}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: Load
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1097810340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4655,6 +4643,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1731763652}
   - component: {fileID: 1731763651}
+  - component: {fileID: 1731763653}
   m_Layer: 5
   m_Name: Volume Slider
   m_TagString: Untagged
@@ -4688,7 +4677,7 @@ MonoBehaviour:
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
+    m_ColorMultiplier: 2.16
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
@@ -4713,8 +4702,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2068563284}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+      - m_Target: {fileID: 1731763653}
+        m_TargetAssemblyTypeName: VolumeSlider, Assembly-CSharp
         m_MethodName: ChangeVolume
         m_Mode: 1
         m_Arguments:
@@ -4747,6 +4736,19 @@ RectTransform:
   m_AnchoredPosition: {x: -40, y: 0}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1731763653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1731763650}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a1c61b55b9fc9d46abf02f56bd5bb12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  volumeSlider: {fileID: 1731763651}
 --- !u!1001 &1741308699
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5570,17 +5572,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1984821591458685186, guid: 47111aa160a0b0a4c9391d59d58722b4, type: 3}
   m_PrefabInstance: {fileID: 2068484313}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2068563284 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5388363072977784228, guid: 3d218a13950af4a7da50f645153eb143, type: 3}
-  m_PrefabInstance: {fileID: 454912126}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e77b2047729464fa8a66f6a046e885c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2140600801
 GameObject:
   m_ObjectHideFlags: 0
