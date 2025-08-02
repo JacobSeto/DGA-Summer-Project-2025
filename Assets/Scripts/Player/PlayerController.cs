@@ -168,14 +168,14 @@ public class PlayerController : MonoBehaviour
         {
             direction = playerRb.linearVelocity.normalized;
             currentSpeed = playerRb.linearVelocity.magnitude;
-            if (playerRb.linearVelocityX < 0)
-            {
-                spriteObject.transform.Rotate(0, 0, currentSpeed * Time.deltaTime * rotateForce * flip);
-            }
-            else if (playerRb.linearVelocityX > 0)
-            {
-                spriteObject.transform.Rotate(0, 0, -currentSpeed * Time.deltaTime * rotateForce * flip);
-            }
+            //if (playerRb.linearVelocityX < 0)
+            //{
+            //    spriteObject.transform.Rotate(0, 0, currentSpeed * Time.deltaTime * rotateForce * flip);
+            //}
+            //else if (playerRb.linearVelocityX > 0)
+            //{
+            //    spriteObject.transform.Rotate(0, 0, -currentSpeed * Time.deltaTime * rotateForce * flip);
+            //}
             currentGrace = gracePeriod;
         }
         else if (launched)
@@ -254,11 +254,13 @@ public class PlayerController : MonoBehaviour
                 if (playerRb.linearVelocity.magnitude > maxLaunchSpeed)
                 {
                     playerRb.linearVelocity = Vector2.ClampMagnitude(playerRb.linearVelocity, maxLaunchSpeed);
-                    spriteRenderer.sprite = postLaunchSprite;
+                    //spriteRenderer.sprite = postLaunchSprite;
+                    PostLaunchUpdate(playerRb.linearVelocity.x, playerRb.linearVelocity.y);
                 }
                 else if (playerRb.linearVelocity.magnitude > 0.2 * maxLaunchSpeed)
                 {
-                    spriteRenderer.sprite = postLaunchSprite;
+                    //spriteRenderer.sprite = postLaunchSprite;
+                    PostLaunchUpdate(playerRb.linearVelocity.x, playerRb.linearVelocity.y);
                 }
                 else
                 {
@@ -269,7 +271,8 @@ public class PlayerController : MonoBehaviour
                     final = final * mag;
                     //Debug.Log("Min launch angle: " + Mathf.Atan2(final.y, final.x));
                     playerRb.linearVelocity = final;
-                    spriteRenderer.sprite = postLaunchSprite;
+                    //spriteRenderer.sprite = postLaunchSprite;
+                    PostLaunchUpdate(playerRb.linearVelocity.x, playerRb.linearVelocity.y);
                 }
                 DecrementStamina();
                 animator.SetBool("Launch", true);
@@ -379,7 +382,7 @@ public class PlayerController : MonoBehaviour
                 bounceTimer = 0f;
                 bounceImpulseActive = false;
             }
-
+            PostLaunchUpdate(playerRb.linearVelocity.x, playerRb.linearVelocity.y);
         }
 
         if ((elephantLayer.value & (1 << collision.gameObject.layer)) > 0)
@@ -417,13 +420,13 @@ public class PlayerController : MonoBehaviour
         // }
 
         // Rotation logic
-        Vector2 normal = contact.normal;
-        if (Mathf.Abs(normal.y) > 0.5)
-        {
-            flip *= -1;
-        }
+        //Vector2 normal = contact.normal;
+        //if (Mathf.Abs(normal.y) > 0.5)
+        //{
+        //    flip *= -1;
+        //}
 
-        AudioManager.Instance.PlayBounce();
+        //AudioManager.Instance.PlayBounce();
     }
 
     /// <summary>
