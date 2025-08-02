@@ -103,7 +103,7 @@ public class AudioManager : MonoBehaviour
         int x = Random.Range(0, 5);
         for (int i = 0; i < x; i++)
         {
-            bounceAudio.pitch *= 1.059463f;
+            releaseAudio.pitch *= 1.059463f;
         }
         releaseAudio.PlayOneShot(releaseAudio.clip);
     }
