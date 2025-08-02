@@ -39,7 +39,7 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject winScreen;
     [SerializeField] Image winBackground;
-    [SerializeField] GameObject winText;
+    [SerializeField] TMP_Text winText;
     [SerializeField] GameObject loseScreen;
     [SerializeField] Image[] staminaBar;
     [Header("World Settings")]
@@ -121,7 +121,7 @@ public class GameManagerScript : MonoBehaviour
         {
             PlayerPrefs.SetFloat(sceneName, gameTime);
         }
-        winText.GetComponent<TMP_Text>().SetText("You win!\n Time: " + TimeSpan.FromSeconds(gameTime).ToString("m\\:ss\\.ff"));
+        winText.SetText("Time: " + TimeSpan.FromSeconds(gameTime).ToString("m\\:ss\\.ff"));
         winBackground.sprite = winScreensprites[(int)currentWorld];
         menuNavigation.ChangeActiveScreen(winScreen);
         gameEnded = true;
