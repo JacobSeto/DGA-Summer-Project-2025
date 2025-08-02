@@ -22,8 +22,6 @@ public class GameManagerScript : MonoBehaviour
     public static GameManagerScript Instance;
     [HideInInspector] public PlayerController player;
     private Vector3 OriginalPos;
-    public bool loss { get; private set; } = false;
-    private bool win = false;
     private bool pause = false;
     //placeholders for testing
     private int zookeeperCount = 0;
@@ -32,7 +30,6 @@ public class GameManagerScript : MonoBehaviour
     private String finalTime;
     private String sceneName;
     private float fastestTime;
-    private bool tutorial;
 
 
     [Header("Game Menu")]
@@ -42,7 +39,7 @@ public class GameManagerScript : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject winScreen;
     [SerializeField] Image winBackground;
-    [SerializeField] GameObject winText;
+    [SerializeField] TMP_Text winText;
     [SerializeField] GameObject loseScreen;
     [SerializeField] Image[] staminaBar;
     [Header("World Settings")]
@@ -124,7 +121,7 @@ public class GameManagerScript : MonoBehaviour
         {
             PlayerPrefs.SetFloat(sceneName, gameTime);
         }
-        winText.GetComponent<TMP_Text>().SetText("You win!\n Time: " + TimeSpan.FromSeconds(gameTime).ToString("m\\:ss\\.ff"));
+        winText.SetText("Time: " + TimeSpan.FromSeconds(gameTime).ToString("m\\:ss\\.ff"));
         winBackground.sprite = winScreensprites[(int)currentWorld];
         menuNavigation.ChangeActiveScreen(winScreen);
         gameEnded = true;
@@ -135,7 +132,6 @@ public class GameManagerScript : MonoBehaviour
     /// </summary>
     public void LoseGame()
     {
-        loss = true;
         AudioManager.Instance.StopPull();
         Pause();
         menuNavigation.ChangeActiveScreen(loseScreen);
@@ -213,11 +209,6 @@ public class GameManagerScript : MonoBehaviour
     public GameObject getGameScreen()
     {
         return gameMenu;
-    }
-
-    public void Tutorial()
-    {
-        tutorial = true;
     }
 
     public void UpdateStaminaBar(int stamina)
