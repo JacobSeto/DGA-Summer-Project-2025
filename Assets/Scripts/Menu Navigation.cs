@@ -10,10 +10,6 @@ public class MenuNavigation : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        if (AudioManager.Instance != null)
-        {
-            AudioManager.Instance.PlayMusic(MusicType.MainMenu);
-        }
     }
 
     /// <summary>
