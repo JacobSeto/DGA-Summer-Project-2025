@@ -20,9 +20,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Build Scenes/1-1 Grassland.unity
     guid: da070bc78fbef7e46ae897fde9d8f647
-  - enabled: 0
-    path: Assets/Scenes/Grassland Scenes/Grassland 2.unity
-    guid: 72dd3cc973965fa4e9e9a364dbc4943d
   - enabled: 1
     path: Assets/Scenes/Build Scenes/1-2 Grassland.unity
     guid: 94b2909bfeb46484eab2052debf1977a
@@ -51,6 +48,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Build Scenes/3-2 Tropical.unity
     guid: ea32a7dabe3f74837975c77d9136e84b
   - enabled: 1
+    path: Assets/Scenes/Build Scenes/3-3 Tropical 3.unity
+    guid: 5ba9e202263ef6240b2e301c5d164d70
+  - enabled: 1
     path: Assets/Scenes/Build Scenes/3-4 Tropical.unity
     guid: 7c7a175ae85b54cfcb9d8181e01713a8
   - enabled: 1
@@ -59,6 +59,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Build Scenes/4-2 Jungle Level (Elephant Intro).unity
     guid: 4ced76f546ecd0d4d9f0649c4aa27269
+  - enabled: 1
+    path: Assets/Scenes/Build Scenes/4-3 Jungle.unity
+    guid: 9d23694fd8570154d90bc0dce6b2c185
+  - enabled: 1
+    path: Assets/Scenes/Build Scenes/4-4 Jungle Final.unity
+    guid: 1cc7ad6f2867f4f48bd35eba11a3aca9
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
