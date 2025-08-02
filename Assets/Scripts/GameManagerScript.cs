@@ -22,8 +22,6 @@ public class GameManagerScript : MonoBehaviour
     public static GameManagerScript Instance;
     [HideInInspector] public PlayerController player;
     private Vector3 OriginalPos;
-    public bool loss { get; private set; } = false;
-    private bool win = false;
     private bool pause = false;
     //placeholders for testing
     private int zookeeperCount = 0;
@@ -32,7 +30,6 @@ public class GameManagerScript : MonoBehaviour
     private String finalTime;
     private String sceneName;
     private float fastestTime;
-    private bool tutorial;
 
 
     [Header("Game Menu")]
@@ -135,7 +132,6 @@ public class GameManagerScript : MonoBehaviour
     /// </summary>
     public void LoseGame()
     {
-        loss = true;
         AudioManager.Instance.StopPull();
         Pause();
         menuNavigation.ChangeActiveScreen(loseScreen);
@@ -213,11 +209,6 @@ public class GameManagerScript : MonoBehaviour
     public GameObject getGameScreen()
     {
         return gameMenu;
-    }
-
-    public void Tutorial()
-    {
-        tutorial = true;
     }
 
     public void UpdateStaminaBar(int stamina)
