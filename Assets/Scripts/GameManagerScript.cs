@@ -168,6 +168,7 @@ public class GameManagerScript : MonoBehaviour
     /// </summary>
     public void Reset()
     {
+        AudioManager.Instance.SetIgnoreNextMusicChange();
         string currentSceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(currentSceneName);
     }
