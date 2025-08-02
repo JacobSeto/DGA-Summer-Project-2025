@@ -6,6 +6,8 @@ public class IceTrigger : MonoBehaviour
     [SerializeField] private float iceDampeningValue;
     Rigidbody2D playerBody;
     private float defaultDampeningValue;
+    private GameObject iceParticlesObj;
+    private GameObject grassParticlesObj;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -20,12 +22,14 @@ public class IceTrigger : MonoBehaviour
 
     }
 
-    void OnTriggerStay2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     { // Possibly check if player is the one colliding?
         // other.attachedRigidbody.AddForce(-0.75f * other.attachedRigidbody.linearVelocity);
         if (other.CompareTag("Player"))
         {
-            other.attachedRigidbody.linearDamping = iceDampeningValue; 
+            other.attachedRigidbody.linearDamping = iceDampeningValue;
+            GameManagerScript.Instance.player.SetParticles(PlayerController.ParticleTypes.Ice, true);
+            GameManagerScript.Instance.player.SetParticles(PlayerController.ParticleTypes.Grass, false);
         }
 
     }
@@ -35,6 +39,8 @@ public class IceTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.attachedRigidbody.linearDamping = defaultDampeningValue;
+            GameManagerScript.Instance.player.SetParticles(PlayerController.ParticleTypes.Ice, false);
+            GameManagerScript.Instance.player.SetParticles(PlayerController.ParticleTypes.Grass, true);
         }
 
     }

@@ -1293,7 +1293,7 @@ GameObject:
   - component: {fileID: 2601561235930211953}
   - component: {fileID: 1337894583500065182}
   m_Layer: 5
-  m_Name: Pause Background
+  m_Name: Win Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2637,7 +2637,7 @@ GameObject:
   - component: {fileID: 7088764064709961864}
   - component: {fileID: 5736857581289857956}
   m_Layer: 5
-  m_Name: Pause Background
+  m_Name: Lose Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2690,7 +2690,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7c8c752c48fc73b48b6aad9e14f01e22, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6db7fc278fa0b074eacf072d3a3fbd9e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3101,6 +3101,7 @@ MonoBehaviour:
   gameMenu: {fileID: 6172991957283706989}
   pauseMenu: {fileID: 4747576535336511266}
   winScreen: {fileID: 9096940041729674530}
+  winBackground: {fileID: 1337894583500065182}
   winText: {fileID: 8555406242972585838}
   loseScreen: {fileID: 5305311707963755795}
   staminaBar:
@@ -3108,6 +3109,12 @@ MonoBehaviour:
   - {fileID: 8997951718360367991}
   - {fileID: 2891286627681782643}
   - {fileID: 8730468845988595445}
+  currentWorld: 0
+  winScreensprites:
+  - {fileID: 21300000, guid: 7a5eec8a13f5f444f81c25875463001f, type: 3}
+  - {fileID: 21300000, guid: e068044e7ea2bff4c893bd1859ccbaea, type: 3}
+  - {fileID: 21300000, guid: 249c77582f98a81468ca7df7464df0c3, type: 3}
+  - {fileID: 21300000, guid: 82bc2061591e7334692038ae2f1b0c6d, type: 3}
   greyscaleMat: {fileID: 2100000, guid: 9351a3757453d4242bd4f9f3f3b9859c, type: 2}
   inGame: 0
   timerText: {fileID: 3231579684502968399}

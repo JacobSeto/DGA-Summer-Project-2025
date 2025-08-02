@@ -1,8 +1,8 @@
 public enum MusicType
 {
-    MainMenu,
     Grasslands,
-    Ice,
+    Polar,
     Tropic,
-    Jungle
+    Jungle,
+    MainMenu
 }

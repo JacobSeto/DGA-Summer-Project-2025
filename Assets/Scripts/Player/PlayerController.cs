@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -90,7 +91,20 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Sprite postLaunchSprite;
 
     [SerializeField] Animator animator;
-    [SerializeField] GameObject arrow;
+
+    public string currentState;
+
+    public enum ParticleTypes
+    {
+        Grass = 0,
+        Water,
+        Mud,
+        Ice
+    }
+    [SerializeField] Transform particleTransform;
+    [SerializeField] Vector3[] particleRotations;
+
+    [SerializeField] ParticleSystem[] particles;
 
     private bool wallBounce;
 
@@ -111,6 +125,7 @@ public class PlayerController : MonoBehaviour
         {
             throw new System.Exception("Stamina is 0");
         }
+        currentState = "Idle";
         GameManagerScript.Instance.UpdateStaminaBar(stamina);
     }
 
@@ -156,14 +171,14 @@ public class PlayerController : MonoBehaviour
         {
             direction = playerRb.linearVelocity.normalized;
             currentSpeed = playerRb.linearVelocity.magnitude;
-            if (playerRb.linearVelocityX < 0)
-            {
-                spriteObject.transform.Rotate(0, 0, currentSpeed * Time.deltaTime * rotateForce * flip);
-            }
-            else if (playerRb.linearVelocityX > 0)
-            {
-                spriteObject.transform.Rotate(0, 0, -currentSpeed * Time.deltaTime * rotateForce * flip);
-            }
+            //if (playerRb.linearVelocityX < 0)
+            //{
+            //    spriteObject.transform.Rotate(0, 0, currentSpeed * Time.deltaTime * rotateForce * flip);
+            //}
+            //else if (playerRb.linearVelocityX > 0)
+            //{
+            //    spriteObject.transform.Rotate(0, 0, -currentSpeed * Time.deltaTime * rotateForce * flip);
+            //}
             currentGrace = gracePeriod;
         }
         else if (launched)
@@ -242,11 +257,13 @@ public class PlayerController : MonoBehaviour
                 if (playerRb.linearVelocity.magnitude > maxLaunchSpeed)
                 {
                     playerRb.linearVelocity = Vector2.ClampMagnitude(playerRb.linearVelocity, maxLaunchSpeed);
-                    spriteRenderer.sprite = postLaunchSprite;
+                    //spriteRenderer.sprite = postLaunchSprite;
+                    PostLaunchUpdate(playerRb.linearVelocity.x, playerRb.linearVelocity.y);
                 }
                 else if (playerRb.linearVelocity.magnitude > 0.2 * maxLaunchSpeed)
                 {
-                    spriteRenderer.sprite = postLaunchSprite;
+                    //spriteRenderer.sprite = postLaunchSprite;
+                    PostLaunchUpdate(playerRb.linearVelocity.x, playerRb.linearVelocity.y);
                 }
                 else
                 {
@@ -257,7 +274,8 @@ public class PlayerController : MonoBehaviour
                     final = final * mag;
                     //Debug.Log("Min launch angle: " + Mathf.Atan2(final.y, final.x));
                     playerRb.linearVelocity = final;
-                    spriteRenderer.sprite = postLaunchSprite;
+                    //spriteRenderer.sprite = postLaunchSprite;
+                    PostLaunchUpdate(playerRb.linearVelocity.x, playerRb.linearVelocity.y);
                 }
                 DecrementStamina();
                 animator.SetBool("Launch", true);
@@ -266,6 +284,58 @@ public class PlayerController : MonoBehaviour
             }
             
         }
+    }
+
+    public void PostLaunchUpdate(float velocityX, float velocityY)
+    {
+        if (Mathf.Abs(velocityX) >= Mathf.Abs(velocityY))
+        {
+            //velocityX > 0.1f ? animator.SetBool("Right", true) : animator.SetBool("Left", true);
+            if (velocityX > 0.1f)
+            {
+                UpdateAnimation(currentState, "Right");
+            }
+            else if (velocityX < -0.1f)
+            {
+                UpdateAnimation(currentState, "Left");
+            }
+        }
+        else if (Mathf.Abs(velocityY) > Mathf.Abs(velocityX))
+        {
+            //velocityY > 0.1f ? animator.SetBool("Back", true) : animator.SetBool("Front", true);
+            if (velocityY > 0.1f)
+            {
+                UpdateAnimation(currentState, "Back");
+            }
+            else if (velocityY < -0.1f)
+            {
+                UpdateAnimation(currentState, "Front");
+            }
+        }
+
+        switch (currentState)
+        {
+            case "Right":
+                particleTransform.localEulerAngles = particleRotations[0];
+                break;
+            case "Left":
+                particleTransform.localEulerAngles = particleRotations[1];
+                break;
+            case "Back":
+                particleTransform.localEulerAngles = particleRotations[2];
+                break;
+            case "Front":
+                particleTransform.localEulerAngles = particleRotations[3];
+                break;
+        }
+    }
+
+
+    public void UpdateAnimation(string oldState, string newState)
+    {
+        animator.SetBool(oldState, false);
+        animator.SetBool(newState, true);
+        currentState = newState;
     }
 
     private void SlowMotion()
@@ -331,7 +401,7 @@ public class PlayerController : MonoBehaviour
                 bounceTimer = 0f;
                 bounceImpulseActive = false;
             }
-
+            PostLaunchUpdate(playerRb.linearVelocity.x, playerRb.linearVelocity.y);
         }
 
         if ((elephantLayer.value & (1 << collision.gameObject.layer)) > 0)
@@ -350,6 +420,7 @@ public class PlayerController : MonoBehaviour
                     }
                     playerRb.linearVelocity = reflectedVector * 8f;
             }
+            PostLaunchUpdate(playerRb.linearVelocity.x, playerRb.linearVelocity.y);
         }
         
 
@@ -368,13 +439,13 @@ public class PlayerController : MonoBehaviour
         // }
 
         // Rotation logic
-        Vector2 normal = contact.normal;
-        if (Mathf.Abs(normal.y) > 0.5)
-        {
-            flip *= -1;
-        }
+        //Vector2 normal = contact.normal;
+        //if (Mathf.Abs(normal.y) > 0.5)
+        //{
+        //    flip *= -1;
+        //}
 
-        AudioManager.Instance.PlayBounce();
+        //AudioManager.Instance.PlayBounce();
     }
 
     /// <summary>
@@ -382,6 +453,7 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void goInAir()
     {
+        SetParticles(ParticleTypes.Grass, false);
         if (isInAir)
         { 
             StopCoroutine(airTime);
@@ -480,7 +552,6 @@ public class PlayerController : MonoBehaviour
 
     public void Freeze()
     {
-        arrow.SetActive(false);
         enabled = false;
         popUp = true;
     }
@@ -489,7 +560,6 @@ public class PlayerController : MonoBehaviour
     {
         popUp = false;
         enabled = true;
-        arrow.SetActive(true);
     }
 
     /// <summary>
@@ -563,7 +633,23 @@ public class PlayerController : MonoBehaviour
         if (stamina < maxStamina) stamina++;
         GameManagerScript.Instance.UpdateStaminaBar(stamina);
     }
+    /// <summary>
+    /// Given a particle type, play or stop playing that particle system
+    /// </summary>
+    /// <param name="particleType">The particle type</param>
+    /// <param name="playParticle">true plays particle, false stops particles</param>
+    public void SetParticles(ParticleTypes particleType, bool playParticle)
+    {
 
+        if (playParticle)
+        {
+            particles[(int)particleType].Play();
+        }
+        else
+        {
+            particles[(int)particleType].Stop();
+        }
+    }
     public Transform GetClosestZookeeper(Transform[] zookeepers)
     {
         Transform tMin = null;
