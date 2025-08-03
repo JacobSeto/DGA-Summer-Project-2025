@@ -14,7 +14,7 @@ public class LevelScreen : MonoBehaviour
     [SerializeField] Color incompleteColor;
     [SerializeField] Color completeColor;
 
-    private void Start()
+    public void UpdateScreen(CompletionTracker completionTracker)
     {
         levelNameText.text = levelName;
         if(PlayerPrefs.GetFloat(sceneName, 0) != 0)
@@ -22,10 +22,12 @@ public class LevelScreen : MonoBehaviour
             completionText.color = completeColor;
             TimeSpan time = TimeSpan.FromSeconds(PlayerPrefs.GetFloat(sceneName));
             completionText.text = "Time: " + time.ToString("m\\:ss\\.ff");
+            completionTracker.UpdateTracker(true, PlayerPrefs.GetFloat(sceneName));
         }
         else
         {
             completionText.color = incompleteColor;
+            completionTracker.UpdateTracker(false, 0);
             completionText.text = "Incomplete";
         }
     }
